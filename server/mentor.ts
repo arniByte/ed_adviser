@@ -1,9 +1,9 @@
-import { getCard, getCase, getMistake, getScenario, isScenarioId } from '../core/knowledge'
-import { LIMITS, type ChatTurn, type MentorRequest } from '../core/protocol'
-import { search } from '../core/search'
-import type { Card, Mistake } from '../core/types'
-import type { Message } from './openrouter'
-import { askPrompt, caseContext, debriefPrompt, probeContext, reviewPrompt } from './prompts'
+import { getCard, getCase, getMistake, getScenario, isScenarioId } from '../core/knowledge.js'
+import { LIMITS, type ChatTurn, type MentorRequest } from '../core/protocol.js'
+import { search } from '../core/search.js'
+import type { Card, Mistake } from '../core/types.js'
+import type { Message } from './openrouter.js'
+import { askPrompt, caseContext, debriefPrompt, probeContext, reviewPrompt } from './prompts.js'
 
 export class BadRequest extends Error {}
 

@@ -2,8 +2,8 @@
  * Память тренажёра и адаптивный подбор заданий. Чистые функции:
  * хранение и интерфейс живут отдельно, поэтому логику легко проверить тестами.
  */
-import { cases, getCase, getMistake, mistakes } from './knowledge'
-import type { Case, Mistake, ScenarioId } from './types'
+import { cases, getCase, getMistake, mistakes } from './knowledge.js'
+import type { Case, Mistake, ScenarioId } from './types.js'
 
 export interface ReviewRecord {
   kind: 'case' | 'probe'

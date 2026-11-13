@@ -1,15 +1,13 @@
-import { LIMITS } from '../core/protocol'
-import { errorResponse, json, readJson } from '../server/http'
-import { BadRequest } from '../server/mentor'
-import { complete, MODELS } from '../server/openrouter'
-
-export const config = { runtime: 'edge' }
+import { LIMITS } from '../core/protocol.js'
+import { errorResponse, json, readJson } from '../server/http.js'
+import { BadRequest } from '../server/mentor.js'
+import { complete, MODELS } from '../server/openrouter.js'
 
 const INSTRUCTION =
   'Запиши дословно, что говорит человек на этой записи. Язык — русский. Расставь знаки препинания. Верни только текст речи без пояснений и кавычек. Если речи нет, верни пустую строку.'
 
 /** Принимает запись голоса в WAV (base64) и возвращает текст. */
-export default async function handler(request: Request): Promise<Response> {
+async function handle(request: Request): Promise<Response> {
   try {
     const { audio } = await readJson<{ audio?: string }>(request, LIMITS.audioBytes)
     if (typeof audio !== 'string' || audio.length < 1000)
@@ -34,3 +32,5 @@ export default async function handler(request: Request): Promise<Response> {
     return errorResponse(error)
   }
 }
+
+export default { fetch: handle }

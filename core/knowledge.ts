@@ -1,14 +1,14 @@
-import scenariosData from '../knowledge/scenarios.json'
-import admissionCards from '../knowledge/admission/cards.json'
-import admissionMistakes from '../knowledge/admission/mistakes.json'
-import admissionCases from '../knowledge/admission/cases.json'
-import jobCards from '../knowledge/job/cards.json'
-import jobMistakes from '../knowledge/job/mistakes.json'
-import jobCases from '../knowledge/job/cases.json'
-import onboardingCards from '../knowledge/onboarding/cards.json'
-import onboardingMistakes from '../knowledge/onboarding/mistakes.json'
-import onboardingCases from '../knowledge/onboarding/cases.json'
-import type { Card, Case, Mistake, Scenario, ScenarioId } from './types'
+import scenariosData from '../knowledge/scenarios.json' with { type: 'json' }
+import admissionCards from '../knowledge/admission/cards.json' with { type: 'json' }
+import admissionMistakes from '../knowledge/admission/mistakes.json' with { type: 'json' }
+import admissionCases from '../knowledge/admission/cases.json' with { type: 'json' }
+import jobCards from '../knowledge/job/cards.json' with { type: 'json' }
+import jobMistakes from '../knowledge/job/mistakes.json' with { type: 'json' }
+import jobCases from '../knowledge/job/cases.json' with { type: 'json' }
+import onboardingCards from '../knowledge/onboarding/cards.json' with { type: 'json' }
+import onboardingMistakes from '../knowledge/onboarding/mistakes.json' with { type: 'json' }
+import onboardingCases from '../knowledge/onboarding/cases.json' with { type: 'json' }
+import type { Card, Case, Mistake, Scenario, ScenarioId } from './types.js'
 
 function tag<T>(scenario: ScenarioId, items: unknown): T[] {
   return (items as Omit<T, 'scenario'>[]).map((item) => ({ ...item, scenario }) as T)

@@ -2,7 +2,7 @@
  * Проверяет целостность базы знаний: уникальность id, ссылки между карточками,
  * кейсами и ошибками. С флагом --links дополнительно запрашивает каждый источник.
  */
-import { cards, cases, mistakes, scenarios, getCard, getMistake } from '../core/knowledge'
+import { cards, cases, mistakes, scenarios, getCard, getMistake } from '../core/knowledge.js'
 
 const problems: string[] = []
 const fail = (message: string) => problems.push(message)

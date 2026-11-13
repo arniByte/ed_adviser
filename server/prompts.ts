@@ -1,5 +1,5 @@
-import { getCard, getScenario, zoneTitle } from '../core/knowledge'
-import { KIND_LABEL, type Card, type Case, type Mistake, type Scenario } from '../core/types'
+import { getCard, getScenario, zoneTitle } from '../core/knowledge.js'
+import { KIND_LABEL, type Card, type Case, type Mistake, type Scenario } from '../core/types.js'
 
 const persona = (
   role: string,

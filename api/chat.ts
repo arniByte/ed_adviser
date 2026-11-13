@@ -1,12 +1,10 @@
-import { LIMITS, type MentorRequest, type StreamEvent } from '../core/protocol'
-import { errorResponse, readJson } from '../server/http'
-import { prepare } from '../server/mentor'
-import { streamChat } from '../server/openrouter'
-
-export const config = { runtime: 'edge' }
+import { LIMITS, type MentorRequest, type StreamEvent } from '../core/protocol.js'
+import { errorResponse, readJson } from '../server/http.js'
+import { prepare } from '../server/mentor.js'
+import { streamChat } from '../server/openrouter.js'
 
 /** Отвечает потоком событий, по одному JSON в строке. */
-export default async function handler(request: Request): Promise<Response> {
+async function handle(request: Request): Promise<Response> {
   try {
     const body = await readJson<MentorRequest>(request, LIMITS.bodyBytes)
     const { cards, messages, maxTokens, temperature } = prepare(body)
@@ -43,3 +41,5 @@ export default async function handler(request: Request): Promise<Response> {
     return errorResponse(error)
   }
 }
+
+export default { fetch: handle }

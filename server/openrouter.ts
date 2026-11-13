@@ -2,7 +2,7 @@ const ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
 export const MODELS = {
   mentor: process.env.MENTOR_MODEL || 'anthropic/claude-haiku-5.5',
-  fallback: 'openai/gpt-6-luna',
+  fallback: 'openai/gpt-5.6-luna',
   transcribe: process.env.TRANSCRIBE_MODEL || 'google/gemini-3.1-flash-lite',
 }
 

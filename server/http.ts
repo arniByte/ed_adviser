@@ -1,5 +1,5 @@
-import { BadRequest } from './mentor'
-import { UpstreamError } from './openrouter'
+import { BadRequest } from './mentor.js'
+import { UpstreamError } from './openrouter.js'
 
 export async function readJson<T>(request: Request, maxBytes: number): Promise<T> {
   if (request.method !== 'POST') throw new BadRequest('Нужен POST-запрос')
