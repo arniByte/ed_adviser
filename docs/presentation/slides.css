@@ -3,8 +3,8 @@
 :root {
   --paper: #f2f2ef;
   --ink: #121214;
-  --ink-soft: rgba(18, 18, 20, 0.64);
-  --ink-faint: rgba(18, 18, 20, 0.42);
+  --ink-soft: rgba(18, 18, 20, 0.72);
+  --ink-faint: rgba(18, 18, 20, 0.6);
   --line: rgba(18, 18, 20, 0.12);
   --blue: #3377ff;
   --warm: #e8873a;
