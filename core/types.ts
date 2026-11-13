@@ -22,6 +22,8 @@ export interface Source {
   publisher: string
   url: string
   year?: number
+  /** Дословная фраза со страницы источника; проверяется скриптом пруфов. Для DOI не нужна. */
+  quote?: string
 }
 
 export interface Card {
