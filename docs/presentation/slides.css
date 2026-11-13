@@ -1,7 +1,7 @@
 /* Слайды 16:9 в визуальном языке продукта. Печать: один слайд — одна страница. */
 
 :root {
-  --paper: #f2f2ef;
+  --paper: #f3f3f0;
   --ink: #121214;
   --ink-soft: rgba(18, 18, 20, 0.72);
   --ink-faint: rgba(18, 18, 20, 0.6);
@@ -55,12 +55,9 @@ body {
   }
 }
 
-.label {
-  font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
-  font-size: 12px;
+.eyebrow {
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
   color: var(--ink-faint);
 }
 
@@ -101,25 +98,12 @@ h3 {
   max-width: 640px;
 }
 
-.mark {
-  display: flex;
-  align-items: center;
-  margin-top: 28px;
-  font-size: 104px;
-  font-weight: 600;
+.mark-title {
+  margin-top: 24px;
+  font-size: 112px;
+  font-weight: 650;
   line-height: 1;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.mark__ring {
-  width: 0.76em;
-  height: 0.76em;
-  margin: 0 0.06em;
-  border: 0.16em solid var(--ink);
-  border-radius: 50%;
-  filter: blur(3.5px);
-  opacity: 0.82;
+  letter-spacing: -0.045em;
 }
 
 .lead {
@@ -130,10 +114,10 @@ h3 {
   color: var(--ink-soft);
 }
 
-.orb {
-  width: 440px;
-  height: 440px;
-  margin-right: -20px;
+.mark {
+  width: 400px;
+  height: 400px;
+  margin-right: 10px;
 }
 
 .foot {
@@ -169,7 +153,7 @@ h3 {
   color: var(--ink-soft);
 }
 
-.card .label {
+.card .eyebrow {
   margin-top: auto;
   padding-top: 8px;
 }
@@ -209,7 +193,6 @@ h3 {
 
 .steps .step-number {
   margin: 0 0 14px;
-  font-family: 'JetBrains Mono Variable', monospace;
   font-size: 13px;
   letter-spacing: 0.09em;
   color: var(--ink-faint);
@@ -356,7 +339,7 @@ h3 {
   color: var(--ink-soft);
 }
 
-.kinds .label {
+.kinds .eyebrow {
   margin-bottom: 8px;
   color: var(--ink);
 }
@@ -373,6 +356,10 @@ h3 {
   font-size: 20px;
 }
 
+.flow b {
+  font-weight: 600;
+}
+
 .flow li {
   position: relative;
   padding: 13px 0 13px 44px;
@@ -385,7 +372,6 @@ h3 {
   position: absolute;
   left: 0;
   top: 15px;
-  font-family: 'JetBrains Mono Variable', monospace;
   font-size: 13px;
   color: var(--ink-faint);
 }
@@ -411,7 +397,7 @@ h3 {
   line-height: 1.35;
 }
 
-.arch__box .label {
+.arch__box .eyebrow {
   margin-bottom: 6px;
 }
 
