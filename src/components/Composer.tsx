@@ -16,6 +16,9 @@ interface Props {
   docked?: boolean
 }
 
+/** На сенсорном экране автофокус поднял бы клавиатуру поверх вопроса. */
+const HAS_KEYBOARD = typeof matchMedia === 'function' && matchMedia('(pointer: fine)').matches
+
 type Voice =
   { state: 'off' } | { state: 'on'; recording: Recording; seconds: number } | { state: 'reading' }
 
@@ -108,7 +111,7 @@ export function Composer({
           maxLength={LIMITS.messageChars}
           placeholder={placeholder}
           aria-label={placeholder}
-          autoFocus={autoFocus}
+          autoFocus={autoFocus && HAS_KEYBOARD}
           onChange={(event) => setText(event.target.value)}
           onKeyDown={onKeyDown}
         />

@@ -35,6 +35,7 @@ export function useRoute(): Route {
 }
 
 export function go(path: string) {
+  if (window.location.hash === `#${path}`) return
   window.location.hash = path
   window.scrollTo({ top: 0 })
 }

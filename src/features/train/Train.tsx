@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { getScenario, zoneTitle } from '../../../core/knowledge'
 import {
   knownMistakeIds,
@@ -51,17 +51,12 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
   const [index, setIndex] = useState(0)
   const [attempts, setAttempts] = useState<Attempt[]>([])
   const [records, setRecords] = useState<ReviewRecord[]>([])
-  const bottom = useRef<HTMLDivElement>(null)
 
   const item = items[index]
   const last = attempts[attempts.length - 1]
   const busy = last?.status === 'waiting' || last?.status === 'streaming'
   const reviewed = last?.status === 'done'
   const canRetry = attempts.length < MAX_ATTEMPTS || last?.status === 'failed'
-
-  useEffect(() => {
-    if (attempts.length > 0) bottom.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-  }, [attempts.length, reviewed])
 
   const answer = async (text: string) => {
     const done = attempts.filter((a) => a.status === 'done')
@@ -139,8 +134,8 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
 
   return (
     <main className="page train">
-      <Step item={item} position={index + 1} total={items.length} attempts={attempts} />
-      <div ref={bottom} className="train__dock">
+      <Step key={index} item={item} position={index + 1} total={items.length} attempts={attempts} />
+      <div className="train__dock">
         {reviewed && (
           <div className="train__actions focus-in">
             <button className="chip chip--solid" onClick={next}>
@@ -157,11 +152,7 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
             busy={busy}
             autoFocus={attempts.length === 0}
             placeholder={
-              busy
-                ? 'Наставник разбирает ответ…'
-                : attempts.length === 0
-                  ? 'Твой ответ…'
-                  : 'Вторая попытка…'
+              busy ? 'Разбираю ответ…' : attempts.length === 0 ? 'Твой ответ…' : 'Вторая попытка…'
             }
             onSubmit={answer}
           />

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { getCard, getMistake, zoneTitle } from '../../../core/knowledge'
 import { citedIds, parseMeta, parseSections } from '../../../core/protocol'
 import type { SessionItem } from '../../../core/progress'
@@ -53,6 +54,12 @@ export function readReview(raw: string, fallbackCards: string[]) {
 }
 
 function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards: string[] }) {
+  const top = useRef<HTMLDivElement>(null)
+  // Новый разбор подъезжает к верху экрана: читать его удобно сверху вниз, пока он пишется.
+  useEffect(() => {
+    top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
   const review = readReview(attempt.raw, fallbackCards)
   const numbers = new Map(review.cards.map((card, index) => [card.id, index + 1]))
   const streaming = attempt.status === 'streaming'
@@ -67,7 +74,7 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
     : null
 
   return (
-    <div className="feedback">
+    <div ref={top} className="feedback">
       <p className="feedback__answer">
         <span className="label">твой ответ</span>
         {attempt.answer}
@@ -139,7 +146,7 @@ export function Step({ item, position, total, attempts }: Props) {
   const followup = last?.status === 'done' ? readReview(last.raw, []).meta?.next : ''
 
   return (
-    <article className="step" key={position}>
+    <article className="step">
       <header className="step__head">
         <p className="label">
           {item.kind === 'probe' ? 'возврат к ошибке' : `кейс ${position} из ${total}`} ·{' '}

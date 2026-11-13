@@ -123,6 +123,7 @@
 /* Разбор */
 
 .feedback {
+  scroll-margin-top: 3.5rem;
   display: grid;
   gap: 1.75rem;
   margin-top: 2.25rem;
