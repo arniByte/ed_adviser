@@ -132,7 +132,13 @@
   background: color-mix(in srgb, var(--paper) 72%, transparent);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  animation: menu-in 0.3s var(--ease) both;
+  animation: voice-in 0.3s var(--ease) backwards;
+}
+
+@keyframes voice-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .voice__orb {
