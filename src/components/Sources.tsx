@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import type { WebCheck } from '../../core/proof'
 import { KIND_LABEL, type Card } from '../../core/types'
+import { useMine } from '../lib/mine'
 import { useProofs, type ProofState } from '../lib/proofs'
 import { Check, Chevron, External } from './icons'
 import './Sources.css'
@@ -31,6 +33,8 @@ export function ProofBadge({ state, onClick }: { state: ProofState; onClick: () 
 interface Props {
   cards: Card[]
   title?: string
+  /** Пруфы сервера для карточек, найденных в интернете. */
+  checks?: Record<string, WebCheck>
   onProof: (card: Card) => void
 }
 
@@ -38,8 +42,20 @@ interface Props {
  * Карточки, на которые сослался наставник. Свёрнуты в одну строку: сам ответ важнее,
  * а пруф каждой сноски открывается и прямо из текста.
  */
-export function Sources({ cards, title = 'Источники', onProof }: Props) {
-  const states = useProofs(cards.map((card) => card.id))
+export function Sources({ cards, title = 'Источники', checks, onProof }: Props) {
+  const mine = useMine()
+  const base = useProofs(cards.filter((card) => card.kind !== 'web').map((card) => card.id))
+  // Карточку из интернета подтверждает пруф сервера: из этого ответа или сохранённый в базе.
+  const states = Object.fromEntries(
+    cards.map((card): [string, ProofState] => [
+      card.id,
+      card.kind !== 'web'
+        ? base[card.id]
+        : checks?.[card.id] || mine.some((item) => item.card.id === card.id)
+          ? 'verified'
+          : 'unchecked',
+    ]),
+  )
   const [expanded, setExpanded] = useState(false)
 
   if (cards.length === 0) return null

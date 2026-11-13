@@ -2,20 +2,31 @@
  * Договор между клиентом и сервером: формат запроса, события потока
  * и разметка, которой модель делит ответ на блоки.
  */
-import type { ScenarioId } from './types.js'
+import type { Profile } from './profile.js'
+import type { WebCheck } from './proof.js'
+import type { Card, ScenarioId } from './types.js'
 
 export interface ChatTurn {
   role: 'user' | 'assistant'
   content: string
 }
 
-export interface AskRequest {
+/** Общее для всех запросов: то, что пользователь рассказал о себе. */
+interface Personal {
+  profile?: Profile
+}
+
+export interface AskRequest extends Personal {
   mode: 'ask'
   scenario?: ScenarioId
   turns: ChatTurn[]
+  /** Искать в интернете, даже если в базе что-то нашлось. */
+  web?: boolean
+  /** Карточки из личной базы пользователя: найденное раньше и сохранённое им. */
+  mine?: Card[]
 }
 
-export interface ReviewRequest {
+export interface ReviewRequest extends Personal {
   mode: 'review'
   /** Кейс из базы или контрольный вопрос по прошлой ошибке — одно из двух. */
   caseId?: string
@@ -27,7 +38,7 @@ export interface ReviewRequest {
   knownMistakes?: string[]
 }
 
-export interface DebriefRequest {
+export interface DebriefRequest extends Personal {
   mode: 'debrief'
   scenario: ScenarioId
   results: { title: string; zone: string; score: number; mistakes: string[] }[]
@@ -39,11 +50,17 @@ export type StreamEvent =
   | { type: 'cards'; ids: string[] }
   | { type: 'text'; value: string }
   | { type: 'error'; message: string }
+  /** Что наставник делает до ответа: ищет в интернете, проверяет цитаты. */
+  | { type: 'status'; value: string }
+  /** Карточки из интернета, чьи цитаты сервер нашёл на живых страницах. */
+  | { type: 'found'; cards: Card[]; checks: Record<string, WebCheck>; looked: number }
 
 export const LIMITS = {
   messageChars: 2000,
   turns: 12,
-  bodyBytes: 32_000,
+  bodyBytes: 64_000,
+  mineCards: 24,
+  aboutChars: 300,
   audioBytes: 3_500_000,
 } as const
 
@@ -128,13 +145,13 @@ export function parseMeta(text: string | undefined): ReviewMeta | null {
   }
 }
 
-const CITATION = /\[((?:adm|job|onb)-[a-z0-9-]+)\]/g
+const CITATION = /\[((?:adm|job|onb|web)-[a-z0-9-]+)\]/g
 /** id типовой ошибки — у них всегда «-m-»; в тексте для пользователя им не место. */
 const MISTAKE_TAG = /\s*\[(?:adm|job|onb)-m-[^\]\n]*\]/g
 /** Метка карточки с припиской внутри скобок: «[job-star, см. ниже]». */
-const NOISY_TAG = /\[((?:adm|job|onb)-[a-z0-9-]+)[^\]\na-z0-9-][^\]\n]*\]/g
+const NOISY_TAG = /\[((?:adm|job|onb|web)-[a-z0-9-]+)[^\]\na-z0-9-][^\]\n]*\]/g
 /** Метка в круглых скобках: «(…[job-star])». */
-const WRAPPED_TAG = /\(\s*(\[(?:adm|job|onb)-[a-z0-9-]+\])\s*\)/g
+const WRAPPED_TAG = /\(\s*(\[(?:adm|job|onb|web)-[a-z0-9-]+\])\s*\)/g
 
 /**
  * Приводит служебные метки в ответе модели к одному виду: убирает id ошибок,

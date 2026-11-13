@@ -33,9 +33,18 @@ interface Options {
   temperature?: number
   model?: string
   stream?: boolean
+  /** Подключить поиск OpenRouter по интернету: сколько страниц прочитать. */
+  webResults?: number
 }
 
-async function request({ messages, maxTokens, temperature = 0.5, model, stream = false }: Options) {
+async function request({
+  messages,
+  maxTokens,
+  temperature = 0.5,
+  model,
+  stream = false,
+  webResults,
+}: Options) {
   const key = process.env.OPENROUTER_API_KEY
   if (!key) throw new UpstreamError('Не задан OPENROUTER_API_KEY', 500)
 
@@ -57,6 +66,7 @@ async function request({ messages, maxTokens, temperature = 0.5, model, stream =
       reasoning: { enabled: false },
       // Из нескольких площадок, где запущена модель, берём ту, что отвечает быстрее.
       provider: { sort: 'latency' },
+      ...(webResults ? { plugins: [{ id: 'web', max_results: webResults }] } : {}),
     }),
   })
   if (!response.ok) {

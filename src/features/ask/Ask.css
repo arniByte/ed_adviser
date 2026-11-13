@@ -81,3 +81,26 @@
   align-items: center;
   gap: 0.625rem;
 }
+
+.exchange__web {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: -0.75rem;
+}
+
+.exchange__web svg,
+.exchange__search svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+.exchange__search {
+  justify-self: start;
+}
+
+/* Смена статуса поиска проявляется из размытия, как слова ответа. */
+.thinking {
+  animation: word-in 0.5s var(--ease) backwards;
+}

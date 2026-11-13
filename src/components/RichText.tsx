@@ -13,7 +13,7 @@ interface Props {
   className?: string
 }
 
-const INLINE = /\*\*(.+?)\*\*|\[((?:adm|job|onb)-[a-z0-9-]+)\]/g
+const INLINE = /\*\*(.+?)\*\*|\[((?:adm|job|onb|web)-[a-z0-9-]+)\]/g
 const BULLET = /^\s*[-•*]\s+/
 const ORDERED = /^\s*\d+[.)]\s+/
 

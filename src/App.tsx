@@ -2,7 +2,7 @@ import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from '
 import type { ChatTurn } from '../core/protocol'
 import { parseSections } from '../core/protocol'
 import { tabOf, TopBar } from './components/TopBar'
-import { Ask, type Exchange } from './features/ask/Ask'
+import { Ask, type AskHandler, type Exchange } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
 import { askMentor } from './lib/api'
@@ -36,8 +36,8 @@ export function App() {
   }, [route, tab])
 
   // Диалог справки живёт здесь, чтобы не теряться при переходе между разделами.
-  const ask = useCallback(
-    async (question: string) => {
+  const ask: AskHandler = useCallback(
+    async (question, options) => {
       const id = nextId.current++
       const patch = (change: Partial<Exchange>) =>
         setExchanges((list) => list.map((e) => (e.id === id ? { ...e, ...change } : e)))
@@ -51,12 +51,17 @@ export function App() {
         ])
       turns.push({ role: 'user', content: question })
 
-      setExchanges((list) => [...list, { id, question, raw: '', status: 'waiting' }])
+      const web = options?.web === true
+      setExchanges((list) => [...list, { id, question, raw: '', status: 'waiting', web }])
       go('/ask')
       try {
         const raw = await askMentor(
-          { mode: 'ask', turns },
-          { onText: (text) => patch({ raw: text, status: 'streaming' }) },
+          { mode: 'ask', turns, web },
+          {
+            onStatus: (progress) => patch({ progress }),
+            onFound: (found) => patch({ found }),
+            onText: (text) => patch({ raw: text, status: 'streaming' }),
+          },
         )
         patch({ raw, status: 'done' })
       } catch (error) {

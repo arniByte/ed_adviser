@@ -1,7 +1,10 @@
 export type ScenarioId = 'admission' | 'job' | 'onboarding'
 
-/** Тип источника: закон или официальный ресурс, наука, СМИ, живой опыт. */
-export type SourceKind = 'official' | 'research' | 'media' | 'voice'
+/**
+ * Тип источника: закон или официальный ресурс, наука, СМИ, живой опыт —
+ * и страница, которую наставник нашёл в интернете во время разговора.
+ */
+export type SourceKind = 'official' | 'research' | 'media' | 'voice' | 'web'
 
 export interface Zone {
   id: string
@@ -68,4 +71,5 @@ export const KIND_LABEL: Record<SourceKind, string> = {
   research: 'Исследование',
   media: 'Разбор в СМИ',
   voice: 'Живой опыт',
+  web: 'Из интернета',
 }
