@@ -31,8 +31,14 @@ function text(value: unknown, what: string): string {
 function turns(value: unknown): ChatTurn[] {
   if (!Array.isArray(value) || value.length === 0) throw new BadRequest('Нет сообщений')
   return value.slice(-LIMITS.turns).map((turn) => {
-    const role = turn?.role === 'assistant' ? 'assistant' : 'user'
-    return { role, content: text(turn?.content, 'сообщение') }
+    // Свои прошлые ответы наставник получает обрезанными: их длина не повод отклонять вопрос.
+    if (turn?.role === 'assistant') {
+      return {
+        role: 'assistant',
+        content: String(turn.content ?? '').slice(0, LIMITS.messageChars),
+      }
+    }
+    return { role: 'user', content: text(turn?.content, 'сообщение') }
   })
 }
 
