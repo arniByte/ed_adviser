@@ -2,7 +2,7 @@
  * Договор между клиентом и сервером: формат запроса, события потока
  * и разметка, которой модель делит ответ на блоки.
  */
-import type { ScenarioId } from './types'
+import type { ScenarioId } from './types.js'
 
 export interface ChatTurn {
   role: 'user' | 'assistant'
@@ -47,10 +47,23 @@ export const LIMITS = {
   audioBytes: 3_500_000,
 } as const
 
-export type SectionName =
-  'right' | 'improve' | 'example' | 'meta' | 'followups' | 'summary' | 'plan'
+const SECTION_NAMES = [
+  'right',
+  'improve',
+  'example',
+  'meta',
+  'followups',
+  'summary',
+  'plan',
+] as const
+export type SectionName = (typeof SECTION_NAMES)[number]
 
 const MARKER = /^@@([a-z]+)[ \t]*$/
+
+function markerOf(line: string): SectionName | null {
+  const name = MARKER.exec(line)?.[1] as SectionName | undefined
+  return name && SECTION_NAMES.includes(name) ? name : null
+}
 
 export interface Parsed {
   /** Текст до первой метки. */
@@ -65,7 +78,7 @@ export interface Parsed {
 export function parseSections(raw: string): Parsed {
   const lines = raw.split('\n')
   const last = lines[lines.length - 1]
-  if (last.startsWith('@') && !MARKER.test(last)) lines.pop()
+  if (last.startsWith('@') && !markerOf(last)) lines.pop()
 
   const result: Parsed = { lead: '', sections: {} }
   let current: SectionName | null = null
@@ -78,10 +91,10 @@ export function parseSections(raw: string): Parsed {
   }
 
   for (const line of lines) {
-    const match = MARKER.exec(line)
-    if (match) {
+    const marker = markerOf(line)
+    if (marker) {
       flush()
-      current = match[1] as SectionName
+      current = marker
     } else {
       buffer.push(line)
     }
