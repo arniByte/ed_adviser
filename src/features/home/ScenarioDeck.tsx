@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { cases, scenarios } from '../../../core/knowledge'
 import { Aura } from '../../components/Aura'
 import { ArrowRight } from '../../components/icons'
+import type { ScenarioId } from '../../../core/types'
 import { SCENARIO_PALETTE } from '../../lib/aura'
 import { CASES, plural } from '../../lib/plural'
 import './ScenarioDeck.css'
@@ -12,7 +13,7 @@ const count = (id: string) => cases.filter((c) => c.scenario === id).length
  * Сценарии — колода карточек на цилиндре: листаешь свайпом, карточка в центре
  * стоит прямо, соседние поворачиваются и уходят вглубь.
  */
-export function ScenarioDeck() {
+export function ScenarioDeck({ first }: { first?: ScenarioId }) {
   const track = useRef<HTMLDivElement>(null)
   const [current, setCurrent] = useState(0)
 
@@ -38,11 +39,14 @@ export function ScenarioDeck() {
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
     }
-    // На широком экране начинаем со средней карточки, на телефоне — с первой.
-    if (element.scrollWidth > element.clientWidth && element.clientWidth > 600) {
-      const middle = element.children[1] as HTMLElement
-      element.scrollLeft = middle.offsetLeft + middle.offsetWidth / 2 - element.clientWidth / 2
-    }
+    // Начинаем со сценария из знакомства; без него на широком экране — со средней карточки.
+    const index = first
+      ? scenarios.findIndex((scenario) => scenario.id === first)
+      : element.clientWidth > 600
+        ? 1
+        : 0
+    const start = element.children[Math.max(0, index)] as HTMLElement
+    element.scrollLeft = start.offsetLeft + start.offsetWidth / 2 - element.clientWidth / 2
     update()
     element.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
@@ -51,7 +55,7 @@ export function ScenarioDeck() {
       element.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [])
+  }, [first])
 
   const goTo = (index: number) => {
     const card = track.current!.children[index] as HTMLElement

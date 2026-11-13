@@ -4,6 +4,7 @@ import { AuraMark } from '../../components/AuraMark'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
+import { useProfile } from '../../lib/profile'
 import { ScenarioDeck } from './ScenarioDeck'
 import './Home.css'
 
@@ -36,6 +37,7 @@ function reminder(memory: Memory) {
 
 export function Home({ memory, onAsk }: Props) {
   const back = reminder(memory)
+  const profile = useProfile()
 
   return (
     <main className="page home">
@@ -63,7 +65,7 @@ export function Home({ memory, onAsk }: Props) {
       )}
 
       <div className="home__deck rise" style={{ '--i': 3 } as React.CSSProperties}>
-        <ScenarioDeck />
+        <ScenarioDeck first={profile?.goals?.[0]} />
       </div>
 
       <div className="home__ask rise" style={{ '--i': 6 } as React.CSSProperties}>

@@ -7,9 +7,11 @@ import { ProofSheet } from '../../components/ProofSheet'
 import { ProofBadge } from '../../components/Sources'
 import { useProofs } from '../../lib/proofs'
 import { plural } from '../../lib/plural'
+import { MyBase } from './MyBase'
 import './Library.css'
 
-const KINDS = Object.keys(KIND_LABEL) as SourceKind[]
+// Найденное в интернете живёт в личной базе, в общей таких карточек нет.
+const KINDS = (Object.keys(KIND_LABEL) as SourceKind[]).filter((kind) => kind !== 'web')
 const sourceCount = new Set(cards.map((card) => card.source.url)).size
 const allIds = cards.map((card) => card.id)
 
@@ -47,6 +49,8 @@ export function Library() {
         {verified > 0 ? `Пруфы сошлись у ${verified} из ${cards.length}` : 'Проверяю пруфы…'} ·{' '}
         <a href="#/proofs">как это работает</a>
       </p>
+
+      <MyBase onProof={setOpen} />
 
       <input
         className="library__search"

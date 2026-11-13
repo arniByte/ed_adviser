@@ -7,7 +7,9 @@ import {
   type ZoneLevel,
 } from '../../../core/progress'
 import { ArrowRight } from '../../components/icons'
+import { STAGES } from '../../../core/profile'
 import { clearMemory } from '../../lib/memory'
+import { useProfile } from '../../lib/profile'
 import { plural } from '../../lib/plural'
 import { formatDate } from '../report/notes'
 import './Progress.css'
@@ -22,6 +24,11 @@ const LEVEL_TEXT: Record<ZoneLevel, string> = {
 export function Progress({ memory }: { memory: Memory }) {
   const open = openMistakes(memory)
   const hasData = memory.sessions.length > 0 || Object.keys(memory.zones).length > 0
+  const profile = useProfile()
+  const about = [
+    profile?.stage && STAGES[profile.stage],
+    ...(profile?.goals ?? []).map((id) => getScenario(id)?.title),
+  ].filter(Boolean)
 
   const erase = () => {
     if (window.confirm('Стереть весь прогресс и разборы в этом браузере?')) clearMemory()
@@ -32,6 +39,10 @@ export function Progress({ memory }: { memory: Memory }) {
       <h1 className="display rise">Что уже в фокусе</h1>
       <p className="lead progress__lead rise" style={{ '--i': 1 } as React.CSSProperties}>
         Размытая точка — зона, где ответы пока плавают. Тренируешься — она обретает резкость.
+      </p>
+      <p className="caption progress__about rise" style={{ '--i': 2 } as React.CSSProperties}>
+        {about.length > 0 ? `О тебе: ${about.join(' · ')}` : 'Наставник пока не знает о тебе'} ·{' '}
+        <a href="#/hello">{about.length > 0 ? 'изменить' : 'рассказать'}</a>
       </p>
 
       {scenarios.map((scenario) => (
