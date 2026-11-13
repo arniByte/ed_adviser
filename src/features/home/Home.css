@@ -1,0 +1,93 @@
+.home {
+  padding-bottom: 2rem;
+}
+
+.home__hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: -0.5rem auto 0;
+  width: min(72vw, 19rem);
+}
+
+.home__orb,
+.home__tag {
+  grid-area: 1 / 1;
+}
+
+.home__tag {
+  text-align: center;
+  line-height: 1.6;
+  max-width: 9rem;
+}
+
+.home__title {
+  margin-top: 0.25rem;
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.home__lead {
+  max-width: 30rem;
+  margin: 0.875rem auto 0;
+  font-size: var(--text-body);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+.home__back {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1.75rem;
+  padding: 1rem 1.125rem;
+  text-align: left;
+}
+
+.home__back svg {
+  flex: none;
+  color: var(--ink-faint);
+}
+
+.home__back-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.home__section {
+  margin-top: 2.25rem;
+}
+
+.home__section > .label {
+  margin-bottom: 0.75rem;
+}
+
+.home__scenario {
+  display: block;
+  font-size: var(--text-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.home__scenario-lead {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--text-small);
+  color: var(--ink-soft);
+}
+
+.home__footer {
+  margin-top: auto;
+  padding-top: 2.5rem;
+  text-align: center;
+}

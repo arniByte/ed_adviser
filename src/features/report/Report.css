@@ -1,0 +1,207 @@
+.report {
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+
+.report__missing {
+  margin: 3rem 0 1.5rem;
+  font-size: var(--text-read);
+}
+
+.report__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.75rem;
+}
+
+.report__note {
+  flex-basis: 100%;
+  font-size: var(--text-small);
+  color: var(--ink-soft);
+}
+
+.sheet {
+  --text-read: 1.125rem;
+}
+
+.sheet__title {
+  margin-top: 0.5rem;
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.sheet__meta {
+  margin-top: 0.375rem;
+  color: var(--ink-soft);
+}
+
+.sheet__summary {
+  margin-top: 1.5rem;
+}
+
+.sheet__section {
+  margin-top: 2.25rem;
+}
+
+.sheet__section > .label {
+  margin-bottom: 0.75rem;
+}
+
+.sheet__plan {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.sheet__plan li {
+  position: relative;
+  padding-left: 1.75rem;
+  line-height: 1.45;
+}
+
+/* Пустой квадрат: план распечатывают и отмечают ручкой. */
+.sheet__plan li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.22em;
+  width: 0.9em;
+  height: 0.9em;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+}
+
+.sheet__case {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.sheet__case-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sheet__case-title {
+  margin-top: 0.5rem;
+  font-size: var(--text-lead);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.sheet__situation {
+  margin-top: 0.5rem;
+  font-size: var(--text-small);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.sheet__part {
+  margin-top: 1.25rem;
+  break-inside: avoid;
+}
+
+.sheet__part > .label {
+  margin-bottom: 0.25rem;
+}
+
+.sheet__answer {
+  line-height: 1.5;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+}
+
+.sheet__part--example {
+  padding: 0.875rem 1rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-small);
+}
+
+.sheet__sources {
+  display: grid;
+  gap: 0.625rem;
+  font-size: var(--text-small);
+  line-height: 1.5;
+}
+
+.sheet__sources li {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  break-inside: avoid;
+}
+
+.sheet__source-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--ink-faint);
+  padding-top: 0.2em;
+}
+
+.sheet__sources a {
+  overflow-wrap: anywhere;
+}
+
+.sheet__foot {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+@page {
+  size: A4;
+  margin: 16mm 18mm;
+}
+
+@media print {
+  :root {
+    --paper: #fff;
+    --text-body: 10.5pt;
+    --text-small: 9pt;
+    --text-label: 7pt;
+    --text-lead: 13pt;
+    --text-display: 22pt;
+  }
+
+  body::before,
+  .topbar,
+  .report__tools,
+  .sheet__sources svg {
+    display: none;
+  }
+
+  .page {
+    max-width: none;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .sheet {
+    --text-read: 10.5pt;
+  }
+
+  .sheet__case {
+    margin-top: 16pt;
+    padding-top: 12pt;
+  }
+
+  .sheet__case-title {
+    break-after: avoid;
+  }
+
+  .score__dot {
+    filter: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cite {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

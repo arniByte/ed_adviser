@@ -1,0 +1,315 @@
+.train {
+  padding-top: 1.5rem;
+}
+
+/* Вступление */
+
+.intro {
+  margin: auto 0;
+  padding-bottom: 4rem;
+}
+
+.intro__title {
+  margin-top: 0.75rem;
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.intro__lead {
+  max-width: 34rem;
+  margin-top: 1rem;
+  font-size: var(--text-read);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.intro__memory {
+  margin-top: 1.5rem;
+  padding: 1rem 1.125rem;
+  line-height: 1.4;
+}
+
+.intro__memory .label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.intro__zones {
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+
+.intro__start {
+  min-height: 3rem;
+  margin-top: 1.75rem;
+  padding: 0 1.375rem;
+}
+
+/* Кейс */
+
+.step {
+  flex: 1;
+}
+
+.step__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.step__progress {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.step__progress span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--ink);
+  transition:
+    filter 0.4s,
+    opacity 0.4s;
+}
+
+.step__progress [data-state='next'] {
+  opacity: 0.22;
+  filter: blur(2px);
+}
+
+.step__progress [data-state='now'] {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lavender) 70%, transparent);
+}
+
+.step__situation {
+  font-size: var(--text-body);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.step__question {
+  margin-top: 0.875rem;
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.125rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.step__followup {
+  margin-top: 2rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--lavender);
+}
+
+.step__followup-text {
+  margin-top: 0.375rem;
+  font-size: var(--text-lead);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+/* Разбор */
+
+.feedback {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.feedback__answer {
+  color: var(--ink-soft);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.feedback__answer .label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.feedback__waiting {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.feedback__orb {
+  width: 2.75rem;
+  margin: -0.5rem 0 -0.5rem -0.6rem;
+}
+
+.feedback__error {
+  color: var(--warm);
+}
+
+.block__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--ink-soft);
+}
+
+/* Цветная точка из аэрографа помечает тон блока. */
+.block__label::before {
+  content: '';
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--tone);
+  filter: blur(1.5px);
+}
+
+.block[data-tone='good'] {
+  --tone: var(--good);
+}
+
+.block[data-tone='warm'] {
+  --tone: var(--warm);
+}
+
+.block[data-tone='blue'] {
+  --tone: var(--blue);
+}
+
+.block--example {
+  padding: 1.125rem 1.25rem 1.25rem;
+}
+
+.feedback__after {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.score__dots {
+  display: inline-flex;
+  gap: 0.375rem;
+}
+
+.score__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.2;
+  filter: blur(3px);
+}
+
+.score__dot[data-on='true'] {
+  opacity: 1;
+  filter: none;
+}
+
+.score__verdict {
+  color: var(--ink-soft);
+}
+
+.mistake {
+  padding: 0.875rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--warm) 38%, transparent);
+  border-radius: var(--radius-small);
+  background: color-mix(in srgb, var(--warm) 6%, transparent);
+}
+
+.mistake summary {
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.mistake summary::-webkit-details-marker {
+  display: none;
+}
+
+.mistake .label {
+  display: block;
+  margin-bottom: 0.125rem;
+  color: var(--warm);
+}
+
+.mistake p {
+  margin-top: 0.625rem;
+  font-size: var(--text-small);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.mistake .mistake__better {
+  color: var(--ink);
+}
+
+/* Низ экрана: действия и поле ответа */
+
+.train__dock {
+  margin-top: 2rem;
+}
+
+.train__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.train__actions .chip {
+  min-height: 2.75rem;
+  padding: 0 1.125rem;
+}
+
+/* Итог */
+
+.debrief {
+  padding-bottom: 3rem;
+}
+
+.debrief > .rich {
+  margin-top: 1.25rem;
+}
+
+.debrief__plan,
+.debrief__cases {
+  margin-top: 2.25rem;
+}
+
+.debrief__plan .label,
+.debrief__cases > .label {
+  margin-bottom: 0.75rem;
+}
+
+.debrief__case:hover {
+  padding-left: 0;
+}
+
+.debrief__case-title {
+  display: block;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.debrief__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 2.25rem;
+}
+
+.debrief__actions .chip {
+  min-height: 2.75rem;
+}
