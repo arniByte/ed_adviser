@@ -4,7 +4,7 @@ AI-тренажёр для абитуриента и стажёра. Наста�
 
 Кейс «Цифровое наставничество и AI-менторство», Софтлайн Решения. Категория Lead: этапы 1–4.
 
-[Открыть приложение](https://chernovik-hellowrld.vercel.app) · [Ролик, 1 мин](docs/media/promo.mp4) · [Демо, 3 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
+[Открыть приложение](https://chernovik-hellowrld.vercel.app) · [Ролик, 1 мин](docs/media/promo.mp4) · [Демо, 4 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
 
 ![Экраны: главная, ответ с фактами из интернета, пруф найденной страницы, разбор ответа](docs/media/screens.jpg)
 
