@@ -14,6 +14,12 @@ export interface Prepared {
   temperature: number
 }
 
+/**
+ * Потолок длины ответа в токенах. Кириллица у выбранной модели стоит около
+ * токена за символ, поэтому запас считается от символов, а не от слов.
+ */
+const OUTPUT_BUDGET = { ask: 2400, review: 2600, debrief: 1400 }
+
 const present = <T>(value: T | undefined): value is T => value !== undefined
 
 function text(value: unknown, what: string): string {
@@ -50,7 +56,7 @@ function prepareAsk(body: Extract<MentorRequest, { mode: 'ask' }>): Prepared {
       { role: 'system', content: askPrompt(scenario && getScenario(scenario), cards) },
       ...history,
     ],
-    maxTokens: 900,
+    maxTokens: OUTPUT_BUDGET.ask,
     temperature: 0.4,
   }
 }
@@ -99,7 +105,7 @@ function prepareReview(body: Extract<MentorRequest, { mode: 'review' }>): Prepar
       },
       { role: 'user', content: answer },
     ],
-    maxTokens: 900,
+    maxTokens: OUTPUT_BUDGET.review,
     temperature: 0.5,
   }
 }
@@ -121,7 +127,7 @@ function prepareDebrief(body: Extract<MentorRequest, { mode: 'debrief' }>): Prep
       { role: 'system', content: debriefPrompt(scenario, results) },
       { role: 'user', content: 'Подведи итог тренировки.' },
     ],
-    maxTokens: 450,
+    maxTokens: OUTPUT_BUDGET.debrief,
     temperature: 0.5,
   }
 }

@@ -17,7 +17,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     const text = await complete({
       model: MODELS.transcribe,
-      maxTokens: 700,
+      maxTokens: 2400,
       temperature: 0,
       messages: [
         {
