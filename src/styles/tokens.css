@@ -2,8 +2,9 @@
   --paper: #f2f2ef;
   --paper-raised: rgba(255, 255, 255, 0.58);
   --ink: #121214;
-  --ink-soft: rgba(18, 18, 20, 0.64);
-  --ink-faint: rgba(18, 18, 20, 0.4);
+  /* Оба серых проходят WCAG AA на бумаге: 7:1 и 4,7:1. */
+  --ink-soft: rgba(18, 18, 20, 0.72);
+  --ink-faint: rgba(18, 18, 20, 0.6);
   --line: rgba(18, 18, 20, 0.1);
   --line-strong: rgba(18, 18, 20, 0.22);
 
