@@ -6,7 +6,11 @@
 
 .intro {
   margin: auto 0;
-  padding-bottom: 4rem;
+  padding-bottom: 3rem;
+}
+
+.train > .disclaimer {
+  padding-bottom: 1.5rem;
 }
 
 .intro__title {
