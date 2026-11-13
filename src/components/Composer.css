@@ -8,7 +8,26 @@
   z-index: 10;
   margin: 0 calc(var(--gutter) * -1);
   padding: 1.5rem var(--gutter) max(1rem, env(safe-area-inset-bottom));
-  background: linear-gradient(transparent, var(--paper) 1.75rem);
+}
+
+/*
+ * Под полем — не плашка, а размытие на всю ширину окна: текст уходит под него
+ * плавно, и нет краёв, которые видно на широком экране.
+ */
+.composer--docked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  z-index: -1;
+  transform: translateX(-50%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(transparent, #000 60%);
+  -webkit-mask-image: linear-gradient(transparent, #000 60%);
+  pointer-events: none;
 }
 
 /* Лавандовое свечение у нижнего края появляется, когда поле в фокусе. */
@@ -129,10 +148,10 @@
   place-content: center;
   justify-items: center;
   text-align: center;
-  background: color-mix(in srgb, var(--paper) 72%, transparent);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  animation: voice-in 0.3s var(--ease) backwards;
+  background: color-mix(in srgb, var(--paper) 58%, transparent);
+  backdrop-filter: blur(48px) saturate(1.3);
+  -webkit-backdrop-filter: blur(48px) saturate(1.3);
+  animation: voice-in 0.4s var(--ease) backwards;
 }
 
 @keyframes voice-in {
@@ -142,7 +161,16 @@
 }
 
 .voice__orb {
-  width: min(76vw, 21rem);
+  width: min(88vw, 26rem);
+  filter: blur(5px);
+  animation: orb-in 0.7s var(--ease-spring) backwards;
+}
+
+@keyframes orb-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }
 
 .voice__status {

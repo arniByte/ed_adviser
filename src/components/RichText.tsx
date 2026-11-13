@@ -55,15 +55,29 @@ function inline(text: string, numbers: Props['numbers'], ctx: Words): ReactNode[
     const number = cardId ? numbers?.get(cardId) : undefined
     // Пробел перед скрытой или надстрочной меткой убираем, чтобы не висел перед точкой.
     if (cardId) before = before.replace(/\s+$/, '')
-    if (before) nodes.push(...words(before, ctx))
-    if (bold) nodes.push(<strong key={`${ctx.key}-b${match.index}`}>{words(bold, ctx)}</strong>)
-    else if (number) {
-      const props = { key: `${ctx.key}-c${match.index}`, className: ctx.reveal ? 'cite w' : 'cite' }
-      const onCite = ctx.onCite
-      nodes.push(
-        onCite ? (
+    if (bold) {
+      if (before) nodes.push(...words(before, ctx))
+      nodes.push(<strong key={`${ctx.key}-b${match.index}`}>{words(bold, ctx)}</strong>)
+      continue
+    }
+    if (!number) {
+      if (before) nodes.push(...words(before, ctx))
+      continue
+    }
+    // Последнее слово, сноска и знак после неё не разрываются переносом строки.
+    const [, head, tail] = before.match(/^([\s\S]*?)(\S*)$/)!
+    const punctuation = text.slice(cursor).match(/^[.,;:!?»)]+/)?.[0] ?? ''
+    cursor += punctuation.length
+    if (head) nodes.push(...words(head, ctx))
+    const key = `${ctx.key}-c${match.index}`
+    const className = ctx.reveal ? 'cite w' : 'cite'
+    const onCite = ctx.onCite
+    nodes.push(
+      <span key={key} className="nobr">
+        {tail && words(tail, ctx)}
+        {onCite ? (
           <button
-            {...props}
+            className={className}
             type="button"
             aria-label={`Источник ${number}: открыть пруф`}
             onClick={() => onCite(cardId, number)}
@@ -71,10 +85,11 @@ function inline(text: string, numbers: Props['numbers'], ctx: Words): ReactNode[
             {number}
           </button>
         ) : (
-          <sup {...props}>{number}</sup>
-        ),
-      )
-    }
+          <sup className={className}>{number}</sup>
+        )}
+        {punctuation && words(punctuation, ctx)}
+      </span>,
+    )
   }
   nodes.push(...words(text.slice(cursor), ctx))
   return nodes

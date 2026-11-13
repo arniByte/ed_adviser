@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { getCard } from '../../../core/knowledge'
 import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
-import { AsciiMark } from '../../components/AsciiMark'
+import { Mark } from '../../components/Mark'
 import { AuraMark } from '../../components/AuraMark'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
@@ -38,7 +38,7 @@ interface Props {
 export function Thinking({ text }: { text: string }) {
   return (
     <p className="thinking caption">
-      <AsciiMark size={44} mood="thinking" />
+      <Mark size={44} mood="thinking" />
       {text}
     </p>
   )

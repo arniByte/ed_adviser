@@ -103,3 +103,7 @@ button.cite:hover {
 .cite.w {
   display: inline-block;
 }
+
+.nobr {
+  white-space: nowrap;
+}
