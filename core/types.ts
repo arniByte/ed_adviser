@@ -64,8 +64,8 @@ export interface Case {
 }
 
 export const KIND_LABEL: Record<SourceKind, string> = {
-  official: 'официальный источник',
-  research: 'исследование',
-  media: 'разбор в СМИ',
-  voice: 'живой опыт',
+  official: 'Официальный источник',
+  research: 'Исследование',
+  media: 'Разбор в СМИ',
+  voice: 'Живой опыт',
 }

@@ -1,55 +1,48 @@
-.train {
-  padding-top: 1.5rem;
-}
-
 /* Вступление */
 
 .intro {
-  margin: auto 0;
-  padding-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.train > .disclaimer {
-  padding-bottom: 1.5rem;
+.intro__eyebrow {
+  margin-top: 1rem;
 }
 
 .intro__title {
-  margin-top: 0.75rem;
-  font-size: var(--text-display);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  margin-top: 0.5rem;
 }
 
 .intro__lead {
-  max-width: 34rem;
-  margin-top: 1rem;
-  font-size: var(--text-read);
-  line-height: 1.45;
-  color: var(--ink-soft);
-  text-wrap: pretty;
+  max-width: 30rem;
+  margin-top: 0.875rem;
+  text-wrap: balance;
 }
 
 .intro__memory {
+  display: grid;
+  gap: 0.25rem;
+  max-width: 28rem;
   margin-top: 1.5rem;
-  padding: 1rem 1.125rem;
+  padding: 0.875rem 1.25rem;
+  font-weight: 500;
   line-height: 1.4;
 }
 
-.intro__memory .label {
-  display: block;
-  margin-bottom: 0.25rem;
+.intro__start {
+  min-height: 3.25rem;
+  margin-top: 1.75rem;
+  padding: 0 1.75rem;
 }
 
 .intro__zones {
-  margin-top: 1.5rem;
-  line-height: 1.7;
+  margin-top: 1rem;
 }
 
-.intro__start {
-  min-height: 3rem;
-  margin-top: 1.75rem;
-  padding: 0 1.375rem;
+.intro__foot {
+  margin-top: auto;
+  padding-top: 2.5rem;
 }
 
 /* Кейс */
@@ -63,7 +56,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .step__progress {
@@ -72,89 +65,72 @@
 }
 
 .step__progress span {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
+  width: 1.5rem;
+  height: 0.25rem;
+  border-radius: 999px;
   background: var(--ink);
-  transition:
-    filter 0.4s,
-    opacity 0.4s;
+  transition: opacity var(--medium) var(--ease);
 }
 
 .step__progress [data-state='next'] {
-  opacity: 0.22;
-  filter: blur(2px);
+  opacity: 0.14;
 }
 
-.step__progress [data-state='now'] {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lavender) 70%, transparent);
+.step__progress [data-state='past'] {
+  opacity: 0.45;
 }
 
 .step__situation {
-  font-size: var(--text-body);
-  line-height: 1.55;
   color: var(--ink-soft);
+  line-height: 1.55;
   text-wrap: pretty;
 }
 
 .step__question {
-  margin-top: 0.875rem;
-  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.125rem);
+  margin-top: 0.75rem;
+  font-size: var(--text-title);
   font-weight: 600;
-  line-height: 1.14;
+  line-height: 1.16;
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 .step__followup {
   margin-top: 2rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--lavender);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  background: rgba(201, 184, 255, 0.18);
 }
 
 .step__followup-text {
-  margin-top: 0.375rem;
-  font-size: var(--text-lead);
-  font-weight: 500;
-  line-height: 1.25;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 560;
+  line-height: 1.3;
   letter-spacing: -0.015em;
 }
 
 /* Разбор */
 
 .feedback {
-  scroll-margin-top: 3.5rem;
   display: grid;
   gap: 1.75rem;
-  margin-top: 2.25rem;
+  margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
+  scroll-margin-top: calc(var(--bar) + 0.5rem);
 }
 
 .feedback__answer {
+  display: grid;
+  gap: 0.25rem;
   color: var(--ink-soft);
   line-height: 1.5;
   white-space: pre-wrap;
 }
 
-.feedback__answer .label {
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.feedback__waiting {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.feedback__orb {
-  width: 2.75rem;
-  margin: -0.5rem 0 -0.5rem -0.6rem;
-}
-
 .feedback__error {
-  color: var(--warm);
+  color: var(--warm-ink);
 }
 
 .block__label {
@@ -162,6 +138,8 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+  font-size: var(--text-caption);
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
@@ -172,7 +150,7 @@
   height: 0.625rem;
   border-radius: 50%;
   background: var(--tone);
-  filter: blur(1.5px);
+  box-shadow: 0 0 10px 1px var(--tone);
 }
 
 .block[data-tone='good'] {
@@ -193,7 +171,7 @@
 
 .feedback__after {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .score {
@@ -212,29 +190,30 @@
   height: 0.75rem;
   border-radius: 50%;
   background: var(--ink);
-  opacity: 0.2;
-  filter: blur(3px);
+  opacity: 0.16;
 }
 
 .score__dot[data-on='true'] {
   opacity: 1;
-  filter: none;
 }
 
 .score__verdict {
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
 .mistake {
-  padding: 0.875rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--warm) 38%, transparent);
+  padding: 0.875rem 1.125rem;
   border-radius: var(--radius-small);
-  background: color-mix(in srgb, var(--warm) 6%, transparent);
+  background: rgba(232, 135, 58, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(232, 135, 58, 0.26);
 }
 
 .mistake summary {
+  display: grid;
+  gap: 0.125rem;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 560;
   line-height: 1.35;
   list-style: none;
 }
@@ -243,10 +222,10 @@
   display: none;
 }
 
-.mistake .label {
-  display: block;
-  margin-bottom: 0.125rem;
-  color: var(--warm);
+.mistake__kind {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--warm-ink);
 }
 
 .mistake p {
@@ -257,6 +236,8 @@
 }
 
 .mistake .mistake__better {
+  display: grid;
+  gap: 0.125rem;
   color: var(--ink);
 }
 
@@ -273,19 +254,10 @@
   gap: 0.75rem 1rem;
 }
 
-.train__actions .chip {
-  min-height: 2.75rem;
-  padding: 0 1.125rem;
-}
-
 /* Итог */
 
-.debrief {
-  padding-bottom: 3rem;
-}
-
-.debrief > .rich {
-  margin-top: 1.25rem;
+.debrief__score {
+  margin: 0.25rem 0 1.25rem;
 }
 
 .debrief__plan,
@@ -293,19 +265,9 @@
   margin-top: 2.25rem;
 }
 
-.debrief__plan .label,
-.debrief__cases > .label {
+.debrief__plan > .caption,
+.debrief__cases > .caption {
   margin-bottom: 0.75rem;
-}
-
-.debrief__case:hover {
-  padding-left: 0;
-}
-
-.debrief__case-title {
-  display: block;
-  font-weight: 500;
-  line-height: 1.3;
 }
 
 .debrief__actions {
@@ -313,8 +275,4 @@
   flex-wrap: wrap;
   gap: 0.625rem;
   margin-top: 2.25rem;
-}
-
-.debrief__actions .chip {
-  min-height: 2.75rem;
 }

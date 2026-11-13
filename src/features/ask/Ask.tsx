@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react'
 import { getCard } from '../../../core/knowledge'
 import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
+import { AsciiMark } from '../../components/AsciiMark'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
-import { ArrowRight } from '../../components/icons'
-import { Orb } from '../../components/Orb'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
+import { useSmoothText } from '../../lib/useSmoothText'
 import './Ask.css'
 
 export interface Exchange {
@@ -21,16 +21,25 @@ export interface Exchange {
 
 const STARTERS = [
   'Как расставить приоритеты, если боюсь не пройти на мечту?',
-  'Что писать в резюме, если опыта работы нет?',
-  'Меня спросили про слабые стороны. Что отвечать?',
+  'Что писать в резюме без опыта?',
+  'Меня спросят про слабые стороны. Что отвечать?',
   'Как понять, что вакансия — развод?',
   'Что спросить у руководителя в первый день?',
-  'Могут ли уволить на испытательном сроке без объяснений?',
+  'Могут ли уволить на испытательном сроке?',
 ]
 
 interface Props {
   exchanges: Exchange[]
   onAsk: (question: string) => void
+}
+
+export function Thinking({ text }: { text: string }) {
+  return (
+    <p className="thinking caption">
+      <AsciiMark size={44} mood="thinking" />
+      {text}
+    </p>
+  )
 }
 
 function Answer({
@@ -42,7 +51,9 @@ function Answer({
   onAsk: Props['onAsk']
   isLast: boolean
 }) {
-  const { lead, sections } = parseSections(exchange.raw)
+  const streaming = exchange.status === 'streaming'
+  const raw = useSmoothText(exchange.raw, streaming)
+  const { lead, sections } = parseSections(raw)
   const cited = citedIds(lead)
     .map(getCard)
     .filter((card): card is Card => !!card)
@@ -56,37 +67,33 @@ function Answer({
 
   return (
     <article className="exchange">
-      <h2 className="exchange__question">{exchange.question}</h2>
+      <p className="exchange__question">{exchange.question}</p>
 
-      {exchange.status === 'waiting' && (
-        <p className="exchange__waiting label">
-          <Orb className="exchange__orb" mood="thinking" /> ищу в базе знаний
-        </p>
-      )}
+      {exchange.status === 'waiting' && <Thinking text="Ищу в базе знаний" />}
       {exchange.status === 'failed' && (
         <p className="exchange__error" role="alert">
           {exchange.error}
         </p>
       )}
-      {lead && (
-        <RichText text={lead} numbers={numbers} streaming={exchange.status === 'streaming'} />
-      )}
+      {lead && <RichText text={lead} numbers={numbers} streaming={streaming} />}
 
       {done && (
-        <div className="exchange__after focus-in">
-          <Sources cards={cited} />
+        <div className="exchange__after">
+          <div className="rise">
+            <Sources cards={cited} />
+          </div>
           {isLast && followups.length > 0 && (
-            <section>
-              <h3 className="label">спросить дальше</h3>
-              <div className="rows exchange__followups">
-                {followups.map((question) => (
-                  <button key={question} className="row" onClick={() => onAsk(question)}>
-                    {question}
-                    <ArrowRight />
-                  </button>
-                ))}
-              </div>
-            </section>
+            <div className="exchange__followups rise" style={{ '--i': 1 } as React.CSSProperties}>
+              {followups.map((question) => (
+                <button
+                  key={question}
+                  className="btn btn--glass btn--small chip-question"
+                  onClick={() => onAsk(question)}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
           )}
         </div>
       )}
@@ -107,16 +114,24 @@ export function Ask({ exchanges, onAsk }: Props) {
     <main className="page ask">
       {count === 0 ? (
         <section className="ask__empty">
-          <p className="label">справка</p>
-          <h1 className="ask__title">
-            Спроси про поступление, первую работу или первый месяц в компании.
+          <div className="rise">
+            <AsciiMark size={96} playful />
+          </div>
+          <h1 className="title ask__title rise" style={{ '--i': 1 } as React.CSSProperties}>
+            О чём спросить?
           </h1>
-          <p className="ask__lead">Отвечаю по базе знаний и показываю, откуда каждый факт.</p>
-          <div className="rows ask__starters">
-            {STARTERS.map((question) => (
-              <button key={question} className="row" onClick={() => onAsk(question)}>
+          <p className="caption rise" style={{ '--i': 2 } as React.CSSProperties}>
+            Отвечаю по базе знаний, у каждого факта есть пруф
+          </p>
+          <div className="ask__starters">
+            {STARTERS.map((question, index) => (
+              <button
+                key={question}
+                className="btn btn--glass btn--small chip-question rise"
+                style={{ '--i': 3 + index } as React.CSSProperties}
+                onClick={() => onAsk(question)}
+              >
                 {question}
-                <ArrowRight />
               </button>
             ))}
           </div>

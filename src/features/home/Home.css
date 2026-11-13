@@ -1,93 +1,113 @@
 .home {
-  padding-bottom: 2rem;
+  align-items: center;
+  text-align: center;
 }
 
 .home__hero {
   position: relative;
   display: grid;
   place-items: center;
-  margin: -0.5rem auto 0;
-  width: min(72vw, 19rem);
+  margin: 0.5rem 0 1.25rem;
 }
 
-.home__orb,
-.home__tag {
-  grid-area: 1 / 1;
-}
-
-.home__tag {
-  text-align: center;
-  line-height: 1.6;
-  max-width: 9rem;
+/* Мягкая лавандовая засветка за кругом — тот самый аэрограф. */
+.home__glow {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(201, 184, 255, 0.55), transparent);
+  filter: blur(28px);
+  pointer-events: none;
 }
 
 .home__title {
-  margin-top: 0.25rem;
-  font-size: var(--text-display);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-align: center;
+  max-width: 14ch;
 }
 
 .home__lead {
   max-width: 30rem;
-  margin: 0.875rem auto 0;
-  font-size: var(--text-body);
-  line-height: 1.5;
-  text-align: center;
-  color: var(--ink-soft);
+  margin-top: 0.875rem;
   text-wrap: balance;
 }
 
 .home__back {
+  max-width: 100%;
+  margin-top: 1.75rem;
+  white-space: normal;
+  text-align: left;
+}
+
+.home__back-dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--warm);
+  box-shadow: 0 0 0 4px rgba(232, 135, 58, 0.18);
+}
+
+.home__scenarios {
+  display: grid;
+  gap: 0.625rem;
+  width: 100%;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.home__scenario {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: 100%;
-  margin-top: 1.75rem;
-  padding: 1rem 1.125rem;
-  text-align: left;
+  padding: 1.125rem 1.25rem;
+  text-decoration: none;
+  transition:
+    transform var(--fast) var(--ease),
+    background-color var(--fast),
+    box-shadow var(--medium) var(--ease);
 }
 
-.home__back svg {
+.home__scenario > span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.home__scenario > svg {
   flex: none;
   color: var(--ink-faint);
+  transition:
+    color var(--fast),
+    transform var(--medium) var(--ease);
 }
 
-.home__back-text {
-  display: block;
-  margin-top: 0.25rem;
-  font-weight: 500;
-  line-height: 1.35;
+.home__scenario:active {
+  transform: scale(0.985);
 }
 
-.home__section {
-  margin-top: 2.25rem;
+@media (hover: hover) {
+  .home__scenario:hover {
+    background: var(--glass-strong);
+  }
+
+  .home__scenario:hover > svg {
+    color: var(--ink);
+    transform: translateX(3px);
+  }
 }
 
-.home__section > .label {
-  margin-bottom: 0.75rem;
-}
-
-.home__scenario {
-  display: block;
-  font-size: var(--text-lead);
-  font-weight: 500;
-  line-height: 1.2;
+.home__scenario-title {
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.home__scenario-lead {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: var(--text-small);
-  color: var(--ink-soft);
+.home__ask {
+  width: 100%;
+  margin-top: 1.25rem;
+  text-align: left;
 }
 
 .home__footer {
   margin-top: auto;
   padding-top: 2.5rem;
-  text-align: center;
 }
