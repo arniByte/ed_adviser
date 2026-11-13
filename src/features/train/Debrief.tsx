@@ -4,9 +4,10 @@ import { saveSession, type ReviewRecord, type SessionRecord } from '../../../cor
 import { parseSections } from '../../../core/protocol'
 import type { Scenario } from '../../../core/types'
 import { ArrowRight } from '../../components/icons'
-import { Orb } from '../../components/Orb'
 import { RichText } from '../../components/RichText'
+import { Thinking } from '../ask/Ask'
 import { askMentor } from '../../lib/api'
+import { useSmoothText } from '../../lib/useSmoothText'
 import { updateMemory } from '../../lib/memory'
 import { go } from '../../lib/route'
 import { ScoreDots } from './ScoreDots'
@@ -65,42 +66,34 @@ export function Debrief({ scenario, records }: { scenario: Scenario; records: Re
       .catch(() => finish(''))
   }, [records, scenario, sessionId])
 
-  const { sections } = parseSections(raw)
+  const shown = useSmoothText(raw, status === 'streaming')
+  const { sections } = parseSections(shown)
   const total = records.reduce((sum, r) => sum + r.score, 0)
 
   return (
     <main className="page train debrief">
-      <p className="label">итог · {scenario.title}</p>
-      <h1 className="intro__title">
+      <p className="caption rise">Итог · {scenario.title}</p>
+      <h1 className="display debrief__score rise" style={{ '--i': 1 } as React.CSSProperties}>
         {total} из {records.length * 3}
       </h1>
 
-      {status === 'waiting' && (
-        <p className="feedback__waiting label">
-          <Orb className="feedback__orb" mood="thinking" /> подвожу итог
-        </p>
-      )}
-      {sections.summary && (
-        <RichText
-          text={sections.summary}
-          streaming={status === 'streaming' && sections.plan === undefined}
-        />
-      )}
+      {status === 'waiting' && <Thinking text="Подвожу итог" />}
+      {sections.summary && <RichText text={sections.summary} reveal />}
       {sections.plan && (
         <section className="debrief__plan">
-          <h2 className="label">что сделать до настоящего</h2>
-          <RichText text={sections.plan} streaming={status === 'streaming'} />
+          <h2 className="caption">Что сделать до настоящего</h2>
+          <RichText text={sections.plan} reveal />
         </section>
       )}
 
       <section className="debrief__cases">
-        <h2 className="label">кейсы</h2>
+        <h2 className="caption">Кейсы</h2>
         <ul className="rows">
           {records.map((record, index) => (
             <li key={index} className="row debrief__case">
               <span>
-                <span className="debrief__case-title">{record.title}</span>
-                <span className="label">{zoneTitle(record.scenario, record.zone)}</span>
+                <span className="row__title">{record.title}</span>
+                <span className="caption">{zoneTitle(record.scenario, record.zone)}</span>
               </span>
               <ScoreDots score={record.score} withVerdict={false} />
             </li>
@@ -109,14 +102,14 @@ export function Debrief({ scenario, records }: { scenario: Scenario; records: Re
       </section>
 
       {status === 'done' && (
-        <div className="debrief__actions focus-in">
-          <button className="chip chip--solid" onClick={() => go(`/report/${sessionId}`)}>
+        <div className="debrief__actions rise">
+          <button className="btn btn--primary" onClick={() => go(`/report/${sessionId}`)}>
             Сохранить разбор <ArrowRight />
           </button>
-          <button className="chip" onClick={() => go('/progress')}>
+          <button className="btn btn--glass" onClick={() => go('/progress')}>
             Карта прогресса
           </button>
-          <button className="chip" onClick={() => go('/')}>
+          <button className="btn btn--glass" onClick={() => go('/')}>
             На главную
           </button>
         </div>

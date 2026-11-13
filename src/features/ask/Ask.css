@@ -1,68 +1,83 @@
-.ask__empty,
-.ask__thread {
+.ask__empty {
   flex: 1;
-  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0 2rem;
+  text-align: center;
 }
 
 .ask__title {
   margin-top: 0.75rem;
-  font-size: var(--text-display);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-.ask__lead {
-  margin-top: 0.875rem;
-  color: var(--ink-soft);
 }
 
 .ask__starters {
-  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 36rem;
+  margin-top: 1.25rem;
+}
+
+/* Подсказка-вопрос: в несколько строк, если не помещается. */
+.chip-question {
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.3;
+  font-size: var(--text-small);
+  font-weight: 500;
 }
 
 .ask__thread {
+  flex: 1;
   display: grid;
   align-content: start;
   gap: 3.5rem;
-  padding-bottom: 1rem;
+  padding: 0.5rem 0 1rem;
 }
 
 .ask__anchor {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: calc(var(--bar) + 0.5rem);
 }
 
+/* Вопрос пользователя — справа, как реплика в разговоре. */
 .exchange__question {
-  margin-bottom: 1.25rem;
-  font-size: var(--text-lead);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-.exchange__waiting {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.exchange__orb {
-  width: 2.75rem;
-  margin: -0.5rem 0 -0.5rem -0.6rem;
+  width: fit-content;
+  max-width: 85%;
+  margin: 0 0 1.5rem auto;
+  padding: 0.75rem 1.125rem;
+  border-radius: 1.25rem 1.25rem 0.375rem 1.25rem;
+  background: var(--ink);
+  color: #fff;
+  font-size: var(--text-small);
+  font-weight: 500;
+  line-height: 1.4;
+  animation: rise 0.36s var(--ease) backwards;
 }
 
 .exchange__error {
-  color: var(--warm);
+  color: var(--warm-ink);
 }
 
 .exchange__after {
   display: grid;
-  gap: 2rem;
+  gap: 1.75rem;
   margin-top: 2rem;
 }
 
 .exchange__followups {
-  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.thinking {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
 }

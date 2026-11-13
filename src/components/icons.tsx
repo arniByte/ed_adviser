@@ -34,3 +34,28 @@ export const External = () => (
     <path d="M8 4H4v12h12v-4M11 3h6v6M17 3l-8 8" />
   </svg>
 )
+
+export const Chevron = () => (
+  <svg {...base}>
+    <path d="M6 8l4 4 4-4" />
+  </svg>
+)
+
+export const Close = () => (
+  <svg {...base}>
+    <path d="M5 5l10 10M15 5L5 15" />
+  </svg>
+)
+
+export const Check = () => (
+  <svg {...base}>
+    <path d="M4.5 10.5l3.5 3.5 7.5-8" />
+  </svg>
+)
+
+export const Seal = () => (
+  <svg {...base}>
+    <path d="M10 2.5l2 1.6 2.5-.2.9 2.4 2.1 1.4-.8 2.4.8 2.4-2.1 1.4-.9 2.4-2.5-.2-2 1.6-2-1.6-2.5.2-.9-2.4-2.1-1.4.8-2.4-.8-2.4 2.1-1.4.9-2.4 2.5.2z" />
+    <path d="M7.2 10.2l1.9 1.9 3.8-4" />
+  </svg>
+)

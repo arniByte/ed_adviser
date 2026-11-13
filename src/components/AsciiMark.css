@@ -1,0 +1,6 @@
+.mark {
+  display: block;
+  flex: none;
+  color: var(--ink);
+  touch-action: manipulation;
+}

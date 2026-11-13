@@ -8,11 +8,13 @@ export type Route =
   | { view: 'train'; scenario: ScenarioId }
   | { view: 'progress' }
   | { view: 'library' }
+  | { view: 'proofs' }
   | { view: 'report'; session: string }
 
 function parse(hash: string): Route {
   const [view, argument] = hash.replace(/^#\/?/, '').split('/')
-  if (view === 'ask' || view === 'progress' || view === 'library') return { view }
+  if (view === 'ask' || view === 'progress' || view === 'library' || view === 'proofs')
+    return { view }
   if (view === 'train' && isScenarioId(argument)) return { view, scenario: argument }
   if (view === 'report' && argument) return { view, session: argument }
   return { view: 'home' }

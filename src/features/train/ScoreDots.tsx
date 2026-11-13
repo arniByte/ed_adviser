@@ -1,4 +1,4 @@
-const VERDICT = ['пока мимо', 'направление верное', 'хороший ответ', 'сильный ответ']
+const VERDICT = ['Пока мимо', 'Направление верное', 'Хороший ответ', 'Сильный ответ']
 
 /** Оценка из трёх точек: набранные — резкие, остальные — в расфокусе. */
 export function ScoreDots({ score, withVerdict = true }: { score: number; withVerdict?: boolean }) {
@@ -9,7 +9,7 @@ export function ScoreDots({ score, withVerdict = true }: { score: number; withVe
           <span key={n} className="score__dot" data-on={n <= score} />
         ))}
       </span>
-      {withVerdict && <span className="label score__verdict">{VERDICT[score]}</span>}
+      {withVerdict && <span className="caption score__verdict">{VERDICT[score]}</span>}
     </span>
   )
 }

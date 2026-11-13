@@ -22,6 +22,8 @@ export interface Source {
   publisher: string
   url: string
   year?: number
+  /** Дословная фраза со страницы источника; проверяется скриптом пруфов. Для DOI не нужна. */
+  quote?: string
 }
 
 export interface Card {
@@ -62,8 +64,8 @@ export interface Case {
 }
 
 export const KIND_LABEL: Record<SourceKind, string> = {
-  official: 'официальный источник',
-  research: 'исследование',
-  media: 'разбор в СМИ',
-  voice: 'живой опыт',
+  official: 'Официальный источник',
+  research: 'Исследование',
+  media: 'Разбор в СМИ',
+  voice: 'Живой опыт',
 }

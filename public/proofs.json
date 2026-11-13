@@ -1,0 +1,2212 @@
+{
+ "version": 1,
+ "scheme": "sha256; leaf = H(\"leaf:\" + canonical JSON); node = H(\"node:\" + left + right)",
+ "root": "2ae71bdccbda8c49e04933039b80509905773e93f05a0b9401db8c128305ff20",
+ "builtAt": "2026-11-13",
+ "cards": {
+  "adm-admission-quality": {
+   "hash": "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf",
+   "path": [
+    [
+     "r",
+     "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809"
+    ],
+    [
+     "r",
+     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
+    ],
+    [
+     "r",
+     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-choice-difficulties": {
+   "hash": "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809",
+   "path": [
+    [
+     "l",
+     "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf"
+    ],
+    [
+     "r",
+     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
+    ],
+    [
+     "r",
+     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «A taxonomy of difficulties in career decision making.», Gati и др., 1996, Journal of Counseling Psychology"
+   }
+  },
+  "adm-choice-overload": {
+   "hash": "382f2f5d88069cdad3b20fbc8fd01b4feb9ce20cbe651dfa4be8407c5dfc35bf",
+   "path": [
+    [
+     "r",
+     "e8a6210578126bb1488ae89a8d6127dc0d8c840be12e0ceba92ffa2b050ed5a3"
+    ],
+    [
+     "l",
+     "07d70e81c8db8afc33a7918bf331e1065b81f828fe78f13d49d6a8c9e994cadc"
+    ],
+    [
+     "r",
+     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "382f2f5d88069cdad3b20fbc8fd01b4feb9ce20cbe651dfa4be8407c5dfc35bf",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «When choice is demotivating: Can one desire too much of a good thing?», Iyengar и др., 2000, Journal of Personality and Social Psychology"
+   }
+  },
+  "adm-college-average": {
+   "hash": "e8a6210578126bb1488ae89a8d6127dc0d8c840be12e0ceba92ffa2b050ed5a3",
+   "path": [
+    [
+     "l",
+     "382f2f5d88069cdad3b20fbc8fd01b4feb9ce20cbe651dfa4be8407c5dfc35bf"
+    ],
+    [
+     "l",
+     "07d70e81c8db8afc33a7918bf331e1065b81f828fe78f13d49d6a8c9e994cadc"
+    ],
+    [
+     "r",
+     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "e8a6210578126bb1488ae89a8d6127dc0d8c840be12e0ceba92ffa2b050ed5a3",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-college-competition": {
+   "hash": "41425b02eec8fe23202d356e45f83864fb516aa4c3aa2e1e77c4828485a0bd4c",
+   "path": [
+    [
+     "r",
+     "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5"
+    ],
+    [
+     "r",
+     "c13b5f5e2508dd07066bac52d49151ea19fdcca628bcd42441ac0b436a9cc3d1"
+    ],
+    [
+     "l",
+     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "41425b02eec8fe23202d356e45f83864fb516aa4c3aa2e1e77c4828485a0bd4c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-diploma-region": {
+   "hash": "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5",
+   "path": [
+    [
+     "l",
+     "41425b02eec8fe23202d356e45f83864fb516aa4c3aa2e1e77c4828485a0bd4c"
+    ],
+    [
+     "r",
+     "c13b5f5e2508dd07066bac52d49151ea19fdcca628bcd42441ac0b436a9cc3d1"
+    ],
+    [
+     "l",
+     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-graduates-rating": {
+   "hash": "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7",
+   "path": [
+    [
+     "r",
+     "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12"
+    ],
+    [
+     "l",
+     "b5c6d4584823abf36bf27fc75ea67564af648cdb446df8f98f3c84b2dd53a0b8"
+    ],
+    [
+     "l",
+     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-lists-inflated": {
+   "hash": "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12",
+   "path": [
+    [
+     "l",
+     "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7"
+    ],
+    [
+     "l",
+     "b5c6d4584823abf36bf27fc75ea67564af648cdb446df8f98f3c84b2dd53a0b8"
+    ],
+    [
+     "l",
+     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+    ],
+    [
+     "r",
+     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-olympiad-first": {
+   "hash": "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba",
+   "path": [
+    [
+     "r",
+     "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43"
+    ],
+    [
+     "r",
+     "36f05276de60105c375ba43892347b985048f3953634d32e1b502ec942a64a97"
+    ],
+    [
+     "r",
+     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-ovp-vpp": {
+   "hash": "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43",
+   "path": [
+    [
+     "l",
+     "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba"
+    ],
+    [
+     "r",
+     "36f05276de60105c375ba43892347b985048f3953634d32e1b502ec942a64a97"
+    ],
+    [
+     "r",
+     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-paid-early": {
+   "hash": "b163c3b51704a7f177aecaef4c70935e6cd476aa12a7e9593730c9ca20b279c7",
+   "path": [
+    [
+     "r",
+     "82a79e5936763f5358da7db3a1760d31d8acddc71296b052737b1f700fbd2979"
+    ],
+    [
+     "l",
+     "e4c9b04cbf72fc72a5af8043099e8ddc4dc7609b0ee9e2ed5a537b9b1ace8f7e"
+    ],
+    [
+     "r",
+     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "b163c3b51704a7f177aecaef4c70935e6cd476aa12a7e9593730c9ca20b279c7",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-planned-happenstance": {
+   "hash": "82a79e5936763f5358da7db3a1760d31d8acddc71296b052737b1f700fbd2979",
+   "path": [
+    [
+     "l",
+     "b163c3b51704a7f177aecaef4c70935e6cd476aa12a7e9593730c9ca20b279c7"
+    ],
+    [
+     "l",
+     "e4c9b04cbf72fc72a5af8043099e8ddc4dc7609b0ee9e2ed5a537b9b1ace8f7e"
+    ],
+    [
+     "r",
+     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "82a79e5936763f5358da7db3a1760d31d8acddc71296b052737b1f700fbd2979",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Planned Happenstance: Constructing Unexpected Career Opportunities», Mitchell и др., 1999, Journal of Counseling & Development"
+   }
+  },
+  "adm-priority-order": {
+   "hash": "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa",
+   "path": [
+    [
+     "r",
+     "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9"
+    ],
+    [
+     "r",
+     "8ba81b1d84dd43fae5b39fd80d8aadefca1c2bbe8594e783ca097bc4884b48ae"
+    ],
+    [
+     "l",
+     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-programs-limit": {
+   "hash": "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9",
+   "path": [
+    [
+     "l",
+     "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa"
+    ],
+    [
+     "r",
+     "8ba81b1d84dd43fae5b39fd80d8aadefca1c2bbe8594e783ca097bc4884b48ae"
+    ],
+    [
+     "l",
+     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-rules-change": {
+   "hash": "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1",
+   "path": [
+    [
+     "r",
+     "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19"
+    ],
+    [
+     "l",
+     "be62f6d6c8c6962d2264de2019f01f12fcf8bd8430984beba50b0df0bdb41bc7"
+    ],
+    [
+     "l",
+     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-rules-january": {
+   "hash": "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19",
+   "path": [
+    [
+     "l",
+     "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1"
+    ],
+    [
+     "l",
+     "be62f6d6c8c6962d2264de2019f01f12fcf8bd8430984beba50b0df0bdb41bc7"
+    ],
+    [
+     "l",
+     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+    ],
+    [
+     "l",
+     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+    ],
+    [
+     "r",
+     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-rumors": {
+   "hash": "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686",
+   "path": [
+    [
+     "r",
+     "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e"
+    ],
+    [
+     "r",
+     "17d4a8694c3b019fe2a404bbe3522b11daeeb087d06dd4ad7f93fe60a01c4336"
+    ],
+    [
+     "r",
+     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-story-last-day": {
+   "hash": "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e",
+   "path": [
+    [
+     "l",
+     "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686"
+    ],
+    [
+     "r",
+     "17d4a8694c3b019fe2a404bbe3522b11daeeb087d06dd4ad7f93fe60a01c4336"
+    ],
+    [
+     "r",
+     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-target-obligations": {
+   "hash": "a39f1b3f636437a72da1bc2e2064aae499e33b53c4a7fd809317a3275fc118bd",
+   "path": [
+    [
+     "r",
+     "19d3d2816ff46586cdefeffe58638530b881fc2993186156d5fa55841e4b828f"
+    ],
+    [
+     "l",
+     "20bab6a388cdfff0beac38d64a882d63db5916ba271aa1d703bf59b2f651949e"
+    ],
+    [
+     "r",
+     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "a39f1b3f636437a72da1bc2e2064aae499e33b53c4a7fd809317a3275fc118bd",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-target-offers": {
+   "hash": "19d3d2816ff46586cdefeffe58638530b881fc2993186156d5fa55841e4b828f",
+   "path": [
+    [
+     "l",
+     "a39f1b3f636437a72da1bc2e2064aae499e33b53c4a7fd809317a3275fc118bd"
+    ],
+    [
+     "l",
+     "20bab6a388cdfff0beac38d64a882d63db5916ba271aa1d703bf59b2f651949e"
+    ],
+    [
+     "r",
+     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "19d3d2816ff46586cdefeffe58638530b881fc2993186156d5fa55841e4b828f",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-want-can-need": {
+   "hash": "f4f1d2137db3d4e102f9e392a5ff976a48b1a8a1a19f4c9227f908209287dd6a",
+   "path": [
+    [
+     "r",
+     "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0"
+    ],
+    [
+     "r",
+     "16386fe55c30e77bbb0c4f2143d19a51d4f0701115850edc51d3a4f888157631"
+    ],
+    [
+     "l",
+     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "f4f1d2137db3d4e102f9e392a5ff976a48b1a8a1a19f4c9227f908209287dd6a",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-contract-written": {
+   "hash": "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0",
+   "path": [
+    [
+     "l",
+     "f4f1d2137db3d4e102f9e392a5ff976a48b1a8a1a19f4c9227f908209287dd6a"
+    ],
+    [
+     "r",
+     "16386fe55c30e77bbb0c4f2143d19a51d4f0701115850edc51d3a4f888157631"
+    ],
+    [
+     "l",
+     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-entry-market": {
+   "hash": "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a",
+   "path": [
+    [
+     "r",
+     "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942"
+    ],
+    [
+     "l",
+     "86be520020d414d677e0a4358e204ae29ae585a9bf708f2c5ebe9667943e1e0a"
+    ],
+    [
+     "l",
+     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-expectation-gap": {
+   "hash": "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942",
+   "path": [
+    [
+     "l",
+     "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a"
+    ],
+    [
+     "l",
+     "86be520020d414d677e0a4358e204ae29ae585a9bf708f2c5ebe9667943e1e0a"
+    ],
+    [
+     "l",
+     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+    ],
+    [
+     "r",
+     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-first-minutes": {
+   "hash": "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6",
+   "path": [
+    [
+     "r",
+     "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb"
+    ],
+    [
+     "r",
+     "a5e394d1af2f5c6b69e20ec64f4df5e7bf89fec7386072de3de65a38f14cef42"
+    ],
+    [
+     "r",
+     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Initial evaluations in the interview: Relationships with subsequent interviewer evaluations and employment offers.», Barrick и др., 2010, Journal of Applied Psychology"
+   }
+  },
+  "job-internship-early": {
+   "hash": "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb",
+   "path": [
+    [
+     "l",
+     "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6"
+    ],
+    [
+     "r",
+     "a5e394d1af2f5c6b69e20ec64f4df5e7bf89fec7386072de3de65a38f14cef42"
+    ],
+    [
+     "r",
+     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-minors": {
+   "hash": "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194",
+   "path": [
+    [
+     "r",
+     "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9"
+    ],
+    [
+     "l",
+     "520732acb5285c4f64dffb0f2de6ec8a3b3bb0ec382486ed1f5fde7255f3e6f4"
+    ],
+    [
+     "r",
+     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-refusal-reason": {
+   "hash": "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9",
+   "path": [
+    [
+     "l",
+     "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194"
+    ],
+    [
+     "l",
+     "520732acb5285c4f64dffb0f2de6ec8a3b3bb0ec382486ed1f5fde7255f3e6f4"
+    ],
+    [
+     "r",
+     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-resume-own-part": {
+   "hash": "40bf8ad757bfc6215e703a42fa3135c4f576d8227967a7568c6d9579b7c17e77",
+   "path": [
+    [
+     "r",
+     "e0d6438b503070138f60b523f7c532fe98d1bbd6e8e75b1788ad31f19e08faf2"
+    ],
+    [
+     "r",
+     "5a42ebe135d993575bd88c9d8631e0e3303ffb0d9adfd9e71862c14c474de93c"
+    ],
+    [
+     "l",
+     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "40bf8ad757bfc6215e703a42fa3135c4f576d8227967a7568c6d9579b7c17e77",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-resume-projects": {
+   "hash": "e0d6438b503070138f60b523f7c532fe98d1bbd6e8e75b1788ad31f19e08faf2",
+   "path": [
+    [
+     "l",
+     "40bf8ad757bfc6215e703a42fa3135c4f576d8227967a7568c6d9579b7c17e77"
+    ],
+    [
+     "r",
+     "5a42ebe135d993575bd88c9d8631e0e3303ffb0d9adfd9e71862c14c474de93c"
+    ],
+    [
+     "l",
+     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "e0d6438b503070138f60b523f7c532fe98d1bbd6e8e75b1788ad31f19e08faf2",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-salary-question": {
+   "hash": "ac4980ea7a27bba5983b55151a241e743fbd98495561c35216a0f46ed713b60a",
+   "path": [
+    [
+     "r",
+     "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a"
+    ],
+    [
+     "l",
+     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
+    ],
+    [
+     "l",
+     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "ac4980ea7a27bba5983b55151a241e743fbd98495561c35216a0f46ed713b60a",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-scam-pay-first": {
+   "hash": "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a",
+   "path": [
+    [
+     "l",
+     "ac4980ea7a27bba5983b55151a241e743fbd98495561c35216a0f46ed713b60a"
+    ],
+    [
+     "l",
+     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
+    ],
+    [
+     "l",
+     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
+    ],
+    [
+     "l",
+     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+    ],
+    [
+     "l",
+     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+    ],
+    [
+     "r",
+     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-scam-schemes": {
+   "hash": "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038",
+   "path": [
+    [
+     "r",
+     "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240"
+    ],
+    [
+     "r",
+     "18ce5a29e987ada93470900077f291d1cd9def5407584f4c3abf72d5781341d6"
+    ],
+    [
+     "r",
+     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-scam-story": {
+   "hash": "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240",
+   "path": [
+    [
+     "l",
+     "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038"
+    ],
+    [
+     "r",
+     "18ce5a29e987ada93470900077f291d1cd9def5407584f4c3abf72d5781341d6"
+    ],
+    [
+     "r",
+     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-search-targeted": {
+   "hash": "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d",
+   "path": [
+    [
+     "r",
+     "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c"
+    ],
+    [
+     "l",
+     "4ff72bf717a0db1e3cf5d8ceb6590bf54223d84de3c5a7b24132a7c0c424c83a"
+    ],
+    [
+     "r",
+     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-selection-validity": {
+   "hash": "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c",
+   "path": [
+    [
+     "l",
+     "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d"
+    ],
+    [
+     "l",
+     "4ff72bf717a0db1e3cf5d8ceb6590bf54223d84de3c5a7b24132a7c0c424c83a"
+    ],
+    [
+     "r",
+     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «The validity and utility of selection methods in personnel psychology: Practical and theoretical implications of 85 years of research findings.», Schmidt и др., 1998, Psychological Bulletin"
+   }
+  },
+  "job-star": {
+   "hash": "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55",
+   "path": [
+    [
+     "r",
+     "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611"
+    ],
+    [
+     "r",
+     "1794e8380b5b0ab0351aff9493eb630f4578dfc01f8bb998131f558f365ce3f0"
+    ],
+    [
+     "l",
+     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-strengths-facts": {
+   "hash": "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611",
+   "path": [
+    [
+     "l",
+     "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55"
+    ],
+    [
+     "r",
+     "1794e8380b5b0ab0351aff9493eb630f4578dfc01f8bb998131f558f365ce3f0"
+    ],
+    [
+     "l",
+     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-structured-interview": {
+   "hash": "41fd0c2e964eff6c3c33ce9d31229e72638fd8b824e2efda2692e7b1c2da5b27",
+   "path": [
+    [
+     "r",
+     "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157"
+    ],
+    [
+     "l",
+     "5bb3d9724d0d9aa5e0f04945c13310cc0723e4135c463b447ea84dc6cc133e0f"
+    ],
+    [
+     "l",
+     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "41fd0c2e964eff6c3c33ce9d31229e72638fd8b824e2efda2692e7b1c2da5b27",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «The Structured Employment Interview: Narrative and Quantitative Review of the Research Literature», Levashina и др., 2014, Personnel Psychology"
+   }
+  },
+  "job-weak-ties": {
+   "hash": "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157",
+   "path": [
+    [
+     "l",
+     "41fd0c2e964eff6c3c33ce9d31229e72638fd8b824e2efda2692e7b1c2da5b27"
+    ],
+    [
+     "l",
+     "5bb3d9724d0d9aa5e0f04945c13310cc0723e4135c463b447ea84dc6cc133e0f"
+    ],
+    [
+     "l",
+     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+    ],
+    [
+     "r",
+     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «The Strength of Weak Ties», Granovetter, 1973, American Journal of Sociology"
+   }
+  },
+  "job-weaknesses-why": {
+   "hash": "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c",
+   "path": [
+    [
+     "r",
+     "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961"
+    ],
+    [
+     "r",
+     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
+    ],
+    [
+     "r",
+     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-why-you": {
+   "hash": "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961",
+   "path": [
+    [
+     "l",
+     "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c"
+    ],
+    [
+     "r",
+     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
+    ],
+    [
+     "r",
+     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-adjustment": {
+   "hash": "5395de5c7bae2d2573f654c477535714b518fbf35b64708762dcf2c7f1cd0d05",
+   "path": [
+    [
+     "r",
+     "196d27cba8e462621c5332e2df70e5ea95a93b29daf154dec1acb8c9fc86b3ca"
+    ],
+    [
+     "l",
+     "406195dea0f937d1b40762e0100cc61413a7fa090599451facb7ba801c1d3d91"
+    ],
+    [
+     "r",
+     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "5395de5c7bae2d2573f654c477535714b518fbf35b64708762dcf2c7f1cd0d05",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Newcomer adjustment during organizational socialization: A meta-analytic review of antecedents, outcomes, and methods.», Bauer и др., 2007, Journal of Applied Psychology"
+   }
+  },
+  "onb-company-invested": {
+   "hash": "196d27cba8e462621c5332e2df70e5ea95a93b29daf154dec1acb8c9fc86b3ca",
+   "path": [
+    [
+     "l",
+     "5395de5c7bae2d2573f654c477535714b518fbf35b64708762dcf2c7f1cd0d05"
+    ],
+    [
+     "l",
+     "406195dea0f937d1b40762e0100cc61413a7fa090599451facb7ba801c1d3d91"
+    ],
+    [
+     "r",
+     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "196d27cba8e462621c5332e2df70e5ea95a93b29daf154dec1acb8c9fc86b3ca",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-dunning-kruger": {
+   "hash": "3a1cb5f7edd38a1d11ed076f6befdf28c1492c9f9c38bc10e09d7c85d14d46ed",
+   "path": [
+    [
+     "r",
+     "154110ce7287b823e6c8abbba695d3f439c24657aeadd6c545cb5d9070e78c9d"
+    ],
+    [
+     "r",
+     "c13accb74e84dbfcac048983d58426ca8262d3b17b335d9439763488b7e1a309"
+    ],
+    [
+     "l",
+     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "3a1cb5f7edd38a1d11ed076f6befdf28c1492c9f9c38bc10e09d7c85d14d46ed",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Unskilled and unaware of it: How difficulties in recognizing one's own incompetence lead to inflated self-assessments.», Kruger и др., 1999, Journal of Personality and Social Psychology"
+   }
+  },
+  "onb-feedback-task": {
+   "hash": "154110ce7287b823e6c8abbba695d3f439c24657aeadd6c545cb5d9070e78c9d",
+   "path": [
+    [
+     "l",
+     "3a1cb5f7edd38a1d11ed076f6befdf28c1492c9f9c38bc10e09d7c85d14d46ed"
+    ],
+    [
+     "r",
+     "c13accb74e84dbfcac048983d58426ca8262d3b17b335d9439763488b7e1a309"
+    ],
+    [
+     "l",
+     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "154110ce7287b823e6c8abbba695d3f439c24657aeadd6c545cb5d9070e78c9d",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «The effects of feedback interventions on performance: A historical review, a meta-analysis, and a preliminary feedback intervention theory.», Kluger и др., 1996, Psychological Bulletin"
+   }
+  },
+  "onb-four-c": {
+   "hash": "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f",
+   "path": [
+    [
+     "r",
+     "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b"
+    ],
+    [
+     "l",
+     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
+    ],
+    [
+     "l",
+     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-if-then": {
+   "hash": "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b",
+   "path": [
+    [
+     "l",
+     "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f"
+    ],
+    [
+     "l",
+     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
+    ],
+    [
+     "l",
+     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
+    ],
+    [
+     "l",
+     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+    ],
+    [
+     "r",
+     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Implementation intentions: Strong effects of simple plans.», Gollwitzer, 1999, American Psychologist"
+   }
+  },
+  "onb-impostor": {
+   "hash": "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9",
+   "path": [
+    [
+     "r",
+     "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541"
+    ],
+    [
+     "r",
+     "6aac1d53c96b512fe30cc224dc3371ea70d18256ecfb5f8db5e9505b97b53a9b"
+    ],
+    [
+     "r",
+     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «The imposter phenomenon in high achieving women: Dynamics and therapeutic intervention.», Clance и др., 1978, Psychotherapy: Theory, Research & Practice"
+   }
+  },
+  "onb-information-seeking": {
+   "hash": "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541",
+   "path": [
+    [
+     "l",
+     "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9"
+    ],
+    [
+     "r",
+     "6aac1d53c96b512fe30cc224dc3371ea70d18256ecfb5f8db5e9505b97b53a9b"
+    ],
+    [
+     "r",
+     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Longitudinal study of the effects of information seeking on newcomer socialization.», Morrison, 1993, Journal of Applied Psychology"
+   }
+  },
+  "onb-late-feedback": {
+   "hash": "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b",
+   "path": [
+    [
+     "r",
+     "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e"
+    ],
+    [
+     "l",
+     "fb59543f7ea217d1eaef66ddc23668b6fc00f43ccde8eab7aa2032403b46a5dc"
+    ],
+    [
+     "r",
+     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-mentoring-law": {
+   "hash": "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e",
+   "path": [
+    [
+     "l",
+     "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b"
+    ],
+    [
+     "l",
+     "fb59543f7ea217d1eaef66ddc23668b6fc00f43ccde8eab7aa2032403b46a5dc"
+    ],
+    [
+     "r",
+     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-proactivity": {
+   "hash": "d657da9d7a5663c098c23552823cb51341dc10a0b285ea835b05a83469991643",
+   "path": [
+    [
+     "r",
+     "7703fb18c2c595ac828899cefc42e690c37e504a37acc47eb6bd9cdf2ff1a3ef"
+    ],
+    [
+     "r",
+     "3fc12398ba5733288125c04ac12c99683521eb10f2a6841b69f1e09b4588afb6"
+    ],
+    [
+     "l",
+     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "d657da9d7a5663c098c23552823cb51341dc10a0b285ea835b05a83469991643",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Proactivity during organizational entry: The role of desire for control.», Ashford и др., 1996, Journal of Applied Psychology"
+   }
+  },
+  "onb-probation-exit": {
+   "hash": "7703fb18c2c595ac828899cefc42e690c37e504a37acc47eb6bd9cdf2ff1a3ef",
+   "path": [
+    [
+     "l",
+     "d657da9d7a5663c098c23552823cb51341dc10a0b285ea835b05a83469991643"
+    ],
+    [
+     "r",
+     "3fc12398ba5733288125c04ac12c99683521eb10f2a6841b69f1e09b4588afb6"
+    ],
+    [
+     "l",
+     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "7703fb18c2c595ac828899cefc42e690c37e504a37acc47eb6bd9cdf2ff1a3ef",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-law": {
+   "hash": "f7dbe5dafcb74f4c93367c08e73fe5a2617fc2ac2fbbb64a1a554aa2c5137469",
+   "path": [
+    [
+     "r",
+     "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8"
+    ],
+    [
+     "l",
+     "67562c4336ab1c775826f010ae5ca5eb4e62ea4e21ba02f5ea771b1b2fbfc5ac"
+    ],
+    [
+     "l",
+     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "f7dbe5dafcb74f4c93367c08e73fe5a2617fc2ac2fbbb64a1a554aa2c5137469",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-patterns": {
+   "hash": "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8",
+   "path": [
+    [
+     "l",
+     "f7dbe5dafcb74f4c93367c08e73fe5a2617fc2ac2fbbb64a1a554aa2c5137469"
+    ],
+    [
+     "l",
+     "67562c4336ab1c775826f010ae5ca5eb4e62ea4e21ba02f5ea771b1b2fbfc5ac"
+    ],
+    [
+     "l",
+     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+    ],
+    [
+     "r",
+     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-signals": {
+   "hash": "acaf9fe47cbc325bff2136e45b94ac2ebbddf66eb2c5693a15459f3a7c864688",
+   "path": [
+    [
+     "r",
+     "090b2e1b309718b296f5400fcfba0d7939cb56bf3e99b21ba5826e6272cb2470"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "acaf9fe47cbc325bff2136e45b94ac2ebbddf66eb2c5693a15459f3a7c864688",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-stats": {
+   "hash": "090b2e1b309718b296f5400fcfba0d7939cb56bf3e99b21ba5826e6272cb2470",
+   "path": [
+    [
+     "l",
+     "acaf9fe47cbc325bff2136e45b94ac2ebbddf66eb2c5693a15459f3a7c864688"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "090b2e1b309718b296f5400fcfba0d7939cb56bf3e99b21ba5826e6272cb2470",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-psych-safety": {
+   "hash": "0837d6f41bfb84bf7bf4f342ce22b82a523e7914b8ee99dfa708b10dd7486c85",
+   "path": [
+    [
+     "r",
+     "a1a843036ca0dc7740134fb98784560929258d6186084c43a48dc0fac036ef2f"
+    ],
+    [
+     "l",
+     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+    ],
+    [
+     "l",
+     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "0837d6f41bfb84bf7bf4f342ce22b82a523e7914b8ee99dfa708b10dd7486c85",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Psychological Safety and Learning Behavior in Work Teams», Edmondson, 1999, Administrative Science Quarterly"
+   }
+  },
+  "onb-testing-effect": {
+   "hash": "a1a843036ca0dc7740134fb98784560929258d6186084c43a48dc0fac036ef2f",
+   "path": [
+    [
+     "l",
+     "0837d6f41bfb84bf7bf4f342ce22b82a523e7914b8ee99dfa708b10dd7486c85"
+    ],
+    [
+     "l",
+     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+    ],
+    [
+     "l",
+     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+    ],
+    [
+     "l",
+     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+    ],
+    [
+     "l",
+     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+    ]
+   ],
+   "check": {
+    "kind": "doi",
+    "checkedAt": "2026-11-13",
+    "checkedHash": "a1a843036ca0dc7740134fb98784560929258d6186084c43a48dc0fac036ef2f",
+    "status": 200,
+    "ok": true,
+    "detail": "Crossref: «Test-Enhanced Learning», Roediger и др., 2006, Psychological Science"
+   }
+  }
+ }
+}

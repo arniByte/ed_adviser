@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getScenario, zoneTitle } from '../../../core/knowledge'
+import { getScenario } from '../../../core/knowledge'
 import {
   knownMistakeIds,
   planSession,
@@ -9,9 +9,12 @@ import {
 } from '../../../core/progress'
 import type { ScenarioId } from '../../../core/types'
 import { Composer } from '../../components/Composer'
+import { AuraMark } from '../../components/AuraMark'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
 import { askMentor } from '../../lib/api'
+import { SCENARIO_PALETTE } from '../../lib/aura'
+import { CASES, plural } from '../../lib/plural'
 import { getMemory, updateMemory } from '../../lib/memory'
 import { Debrief } from './Debrief'
 import { itemFacts, readReview, Step, type Attempt } from './Step'
@@ -98,34 +101,36 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
 
   if (phase === 'intro') {
     const probe = items.find((i) => i.kind === 'probe')
-    const zones = [...new Set(items.map((i) => zoneTitle(scenarioId, itemFacts(i).zone)))]
     return (
-      <main className="page train">
-        <section className="intro focus-in">
-          <p className="label">тренажёр · {scenario.title}</p>
-          <h1 className="intro__title">
-            {items.length === 4 ? 'Четыре кейса' : `Кейсов: ${items.length}`}.
-            <br />
-            Отвечай как вживую.
-          </h1>
-          <p className="intro__lead">
-            Я дам ситуацию и вопрос с подвохом. Ответь текстом или голосом — разберу, что верно, что
-            улучшить, и покажу удачный пример. В конце соберу итог и план, его можно сохранить в
-            PDF.
+      <main className="page train intro">
+        <div className="rise">
+          <AuraMark size={128} palette={SCENARIO_PALETTE[scenarioId]} />
+        </div>
+        <p className="caption intro__eyebrow rise" style={{ '--i': 1 } as React.CSSProperties}>
+          {scenario.title} · {items.length} {plural(items.length, CASES)} · около 5 минут
+        </p>
+        <h1 className="display intro__title rise" style={{ '--i': 2 } as React.CSSProperties}>
+          Отвечай как вживую
+        </h1>
+        <p className="lead intro__lead rise" style={{ '--i': 3 } as React.CSSProperties}>
+          Ситуация с подвохом, твой ответ&nbsp;— и честный разбор с примером.
+        </p>
+        {probe?.kind === 'probe' && (
+          <p className="intro__memory surface rise" style={{ '--i': 4 } as React.CSSProperties}>
+            <span className="caption">Помню с прошлого раза</span>
+            Начнём с ошибки: {probe.mistake.title.toLowerCase()}
           </p>
-          {probe?.kind === 'probe' && (
-            <p className="intro__memory glass">
-              <span className="label">помню с прошлого раза</span>
-              Начнём с возврата к ошибке: {probe.mistake.title.toLowerCase()}. Проверим, что она
-              ушла.
-            </p>
-          )}
-          <p className="intro__zones label">в этой тренировке: {zones.join(' · ')}</p>
-          <button className="chip chip--solid intro__start" onClick={() => setPhase('steps')}>
-            Начать <ArrowRight />
-          </button>
-        </section>
-        <Disclaimer />
+        )}
+        <button
+          className="btn btn--primary intro__start rise"
+          style={{ '--i': 5 } as React.CSSProperties}
+          onClick={() => setPhase('steps')}
+        >
+          Начать <ArrowRight />
+        </button>
+        <footer className="intro__foot">
+          <Disclaimer />
+        </footer>
       </main>
     )
   }
@@ -137,12 +142,12 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
       <Step key={index} item={item} position={index + 1} total={items.length} attempts={attempts} />
       <div className="train__dock">
         {reviewed && (
-          <div className="train__actions focus-in">
-            <button className="chip chip--solid" onClick={next}>
+          <div className="train__actions rise">
+            <button className="btn btn--primary" onClick={next}>
               {index + 1 < items.length ? 'Следующий кейс' : 'К итогам'} <ArrowRight />
             </button>
             {attempts.length < MAX_ATTEMPTS && (
-              <span className="label">или ответь ещё раз — сравню с первой попыткой</span>
+              <span className="caption">Или ответь ещё раз — сравню с первой попыткой</span>
             )}
           </div>
         )}

@@ -3,9 +3,11 @@ import { getCard, getMistake, zoneTitle } from '../../../core/knowledge'
 import { citedIds, parseMeta, parseSections } from '../../../core/protocol'
 import type { SessionItem } from '../../../core/progress'
 import type { Card, Mistake } from '../../../core/types'
-import { Orb } from '../../components/Orb'
+import { useProofSheet } from '../../components/ProofSheet'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
+import { useSmoothText } from '../../lib/useSmoothText'
+import { Thinking } from '../ask/Ask'
 import { ScoreDots } from './ScoreDots'
 
 export interface Attempt {
@@ -60,31 +62,24 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
     top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
 
-  const review = readReview(attempt.raw, fallbackCards)
-  const numbers = new Map(review.cards.map((card, index) => [card.id, index + 1]))
   const streaming = attempt.status === 'streaming'
-  const { sections } = parseSections(attempt.raw)
-  // Курсор стоит в том блоке, который пишется прямо сейчас.
-  const writing = streaming
-    ? sections.example !== undefined
-      ? 'example'
-      : sections.improve !== undefined
-        ? 'improve'
-        : 'right'
-    : null
+  const raw = useSmoothText(attempt.raw, streaming)
+  const review = readReview(raw, fallbackCards)
+  const numbers = new Map(review.cards.map((card, index) => [card.id, index + 1]))
+  const [sheet, showProof] = useProofSheet()
+  const proveCited = (id: string) => {
+    const card = review.cards.find((item) => item.id === id)
+    if (card) showProof(card)
+  }
 
   return (
     <div ref={top} className="feedback">
       <p className="feedback__answer">
-        <span className="label">твой ответ</span>
+        <span className="caption">Твой ответ</span>
         {attempt.answer}
       </p>
 
-      {attempt.status === 'waiting' && (
-        <p className="feedback__waiting label">
-          <Orb className="feedback__orb" mood="thinking" /> разбираю ответ
-        </p>
-      )}
+      {attempt.status === 'waiting' && <Thinking text="Разбираю ответ" />}
       {attempt.status === 'failed' && (
         <p className="feedback__error" role="alert">
           {attempt.error}
@@ -93,42 +88,43 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
 
       {review.right && (
         <section className="block" data-tone="good">
-          <h3 className="label block__label">это верно</h3>
-          <RichText text={review.right} numbers={numbers} streaming={writing === 'right'} />
+          <h3 className="block__label">Это верно</h3>
+          <RichText text={review.right} numbers={numbers} reveal onCite={proveCited} />
         </section>
       )}
       {review.improve && (
         <section className="block" data-tone="warm">
-          <h3 className="label block__label">что улучшить</h3>
-          <RichText text={review.improve} numbers={numbers} streaming={writing === 'improve'} />
+          <h3 className="block__label">Что улучшить</h3>
+          <RichText text={review.improve} numbers={numbers} reveal onCite={proveCited} />
         </section>
       )}
       {review.example && (
-        <section className="block block--example glass" data-tone="blue">
-          <h3 className="label block__label">удачный пример ответа</h3>
-          <RichText text={review.example} streaming={writing === 'example'} />
+        <section className="block block--example surface" data-tone="blue">
+          <h3 className="block__label">Удачный пример ответа</h3>
+          <RichText text={review.example} reveal />
         </section>
       )}
 
       {attempt.status === 'done' && (
-        <div className="feedback__after focus-in">
+        <div className="feedback__after rise">
           {review.meta && <ScoreDots score={review.meta.score} />}
           {review.mistakes.map((mistake) => (
             <details key={mistake.id} className="mistake">
               <summary>
-                <span className="label">типовая ошибка</span>
+                <span className="mistake__kind">Типовая ошибка</span>
                 {mistake.title}
               </summary>
               <p>{mistake.why}</p>
               <p className="mistake__better">
-                <span className="label">как сказать иначе</span>
+                <span className="caption">Как сказать иначе</span>
                 {mistake.better}
               </p>
             </details>
           ))}
-          <Sources cards={review.cards} title="на что опирается разбор" />
+          <Sources cards={review.cards} title="На что опирается разбор" onProof={showProof} />
         </div>
       )}
+      {sheet}
     </div>
   )
 }
@@ -148,8 +144,8 @@ export function Step({ item, position, total, attempts }: Props) {
   return (
     <article className="step">
       <header className="step__head">
-        <p className="label">
-          {item.kind === 'probe' ? 'возврат к ошибке' : `кейс ${position} из ${total}`} ·{' '}
+        <p className="caption">
+          {item.kind === 'probe' ? 'Возврат к ошибке' : `Кейс ${position} из ${total}`} ·{' '}
           {zoneTitle(facts.scenario, facts.zone)}
         </p>
         <div className="step__progress" aria-hidden="true">
@@ -162,7 +158,7 @@ export function Step({ item, position, total, attempts }: Props) {
         </div>
       </header>
 
-      <div className="focus-in">
+      <div className="rise">
         {facts.situation && <p className="step__situation">{facts.situation}</p>}
         <h1 className="step__question">{facts.question}</h1>
       </div>
@@ -172,8 +168,8 @@ export function Step({ item, position, total, attempts }: Props) {
       ))}
 
       {followup && attempts.length === 1 && (
-        <section className="step__followup focus-in">
-          <p className="label">наставник уточняет</p>
+        <section className="step__followup rise">
+          <p className="caption">Наставник уточняет</p>
           <p className="step__followup-text">{followup}</p>
         </section>
       )}

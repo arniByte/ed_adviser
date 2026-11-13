@@ -76,6 +76,9 @@ void main() {
 }
 `
 
+/** Доля от CSS-размера, в которой считается шейдер. Браузер растянет картинку сам. */
+const RENDER_SCALE = 0.6
+
 const MOODS: Record<OrbMood, { color: [number, number, number]; speed: number; energy: number }> = {
   idle: { color: [0.2, 0.2, 0.22], speed: 1, energy: 0 },
   listening: { color: [0.2, 0.47, 1], speed: 1.6, energy: 0.3 },
@@ -125,8 +128,8 @@ export function Orb({ mood = 'idle', level, className = '' }: Props) {
     const uEnergy = uniform('uEnergy')
 
     const resize = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2)
-      const size = Math.round(canvas.clientWidth * ratio)
+      // Кольцо размытое по замыслу: полного разрешения экрана ему не нужно.
+      const size = Math.round(canvas.clientWidth * RENDER_SCALE)
       if (canvas.width === size) return
       canvas.width = size
       canvas.height = size

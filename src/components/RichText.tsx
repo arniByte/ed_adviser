@@ -6,8 +6,10 @@ interface Props {
   text: string
   /** Номера источников по id карточки. Метки без номера не показываются. */
   numbers?: Map<string, number>
-  /** Курсор в конце, пока ответ ещё пишется. */
-  streaming?: boolean
+  /** Каждое слово проявляется из размытия, когда появляется впервые. */
+  reveal?: boolean
+  /** Нажатие на сноску. Без обработчика сноска просто показывает номер. */
+  onCite?: (cardId: string, number: number) => void
   className?: string
 }
 
@@ -15,7 +17,35 @@ const INLINE = /\*\*(.+?)\*\*|\[((?:adm|job|onb)-[a-z0-9-]+)\]/g
 const BULLET = /^\s*[-•*]\s+/
 const ORDERED = /^\s*\d+[.)]\s+/
 
-function inline(text: string, numbers: Props['numbers'], key: string): ReactNode[] {
+/** Счётчик слов внутри блока: ключ слова не меняется, пока текст дописывается. */
+interface Words {
+  key: string
+  count: number
+  reveal: boolean
+  onCite?: Props['onCite']
+}
+
+/**
+ * Делит текст на слова. Ключ слова — его порядковый номер в блоке, поэтому React
+ * монтирует только новые слова, и анимация проигрывается у каждого один раз.
+ */
+function words(text: string, ctx: Words): ReactNode[] {
+  if (!ctx.reveal) return [text]
+  return text
+    .split(/(\s+)/)
+    .filter(Boolean)
+    .map((part) =>
+      /^\s+$/.test(part) ? (
+        part
+      ) : (
+        <span key={`${ctx.key}-${ctx.count++}`} className="w">
+          {part}
+        </span>
+      ),
+    )
+}
+
+function inline(text: string, numbers: Props['numbers'], ctx: Words): ReactNode[] {
   const nodes: ReactNode[] = []
   let cursor = 0
   for (const match of text.matchAll(INLINE)) {
@@ -25,21 +55,28 @@ function inline(text: string, numbers: Props['numbers'], key: string): ReactNode
     const number = cardId ? numbers?.get(cardId) : undefined
     // Пробел перед скрытой или надстрочной меткой убираем, чтобы не висел перед точкой.
     if (cardId) before = before.replace(/\s+$/, '')
-    if (before) nodes.push(before)
-    if (bold) nodes.push(<strong key={`${key}-${match.index}`}>{bold}</strong>)
-    else if (number)
+    if (before) nodes.push(...words(before, ctx))
+    if (bold) nodes.push(<strong key={`${ctx.key}-b${match.index}`}>{words(bold, ctx)}</strong>)
+    else if (number) {
+      const props = { key: `${ctx.key}-c${match.index}`, className: ctx.reveal ? 'cite w' : 'cite' }
+      const onCite = ctx.onCite
       nodes.push(
-        <a
-          key={`${key}-${match.index}`}
-          className="cite"
-          href={`#source-${number}`}
-          aria-label={`Источник ${number}`}
-        >
-          {number}
-        </a>,
+        onCite ? (
+          <button
+            {...props}
+            type="button"
+            aria-label={`Источник ${number}: открыть пруф`}
+            onClick={() => onCite(cardId, number)}
+          >
+            {number}
+          </button>
+        ) : (
+          <sup {...props}>{number}</sup>
+        ),
       )
+    }
   }
-  nodes.push(text.slice(cursor))
+  nodes.push(...words(text.slice(cursor), ctx))
   return nodes
 }
 
@@ -63,18 +100,15 @@ function toBlocks(text: string): Block[] {
   return blocks
 }
 
-export function RichText({ text, numbers, streaming, className = '' }: Props) {
+export function RichText({ text, numbers, reveal = false, onCite, className = '' }: Props) {
   const blocks = toBlocks(cleanCitations(text))
-  const caret = streaming ? <span className="rich__caret" aria-hidden="true" /> : null
   return (
     <div className={`rich ${className}`}>
       {blocks.map((block, index) => {
-        const isLast = index === blocks.length - 1
         if (block.type === 'p') {
           return (
             <p key={index}>
-              {inline(block.text, numbers, `${index}`)}
-              {isLast && caret}
+              {inline(block.text, numbers, { key: `${index}`, count: 0, reveal, onCite })}
             </p>
           )
         }
@@ -83,14 +117,12 @@ export function RichText({ text, numbers, streaming, className = '' }: Props) {
           <List key={index}>
             {block.items.map((item, i) => (
               <li key={i}>
-                {inline(item, numbers, `${index}-${i}`)}
-                {isLast && i === block.items.length - 1 && caret}
+                {inline(item, numbers, { key: `${index}-${i}`, count: 0, reveal, onCite })}
               </li>
             ))}
           </List>
         )
       })}
-      {blocks.length === 0 && caret}
     </div>
   )
 }

@@ -21,6 +21,8 @@ for (const item of [...cards, ...cases, ...mistakes]) {
 for (const card of cards) {
   if (!/^https:\/\//.test(card.source.url)) fail(`${card.id}: источник без https-ссылки`)
   if (card.text.length < 120) fail(`${card.id}: слишком короткий текст`)
+  const isDoi = card.source.url.startsWith('https://doi.org/')
+  if (!isDoi && !card.source.quote) fail(`${card.id}: нет дословной цитаты из источника`)
 }
 
 for (const mistake of mistakes) {

@@ -1,10 +1,12 @@
-import { scenarios, zoneTitle } from '../../../core/knowledge'
+import { cases, scenarios, zoneTitle } from '../../../core/knowledge'
 import { mastery, openMistakes, type Memory } from '../../../core/progress'
+import { AuraMark } from '../../components/AuraMark'
+import { Aura } from '../../components/Aura'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
-import { Orb } from '../../components/Orb'
-import { go } from '../../lib/route'
+import { SCENARIO_PALETTE } from '../../lib/aura'
+import { CASES, plural } from '../../lib/plural'
 import './Home.css'
 
 interface Props {
@@ -18,7 +20,7 @@ function reminder(memory: Memory) {
   if (first) {
     return {
       scenario: first.mistake.scenario,
-      text: `Осталась незакрытая ошибка: ${first.mistake.title.toLowerCase()}. Начнём с неё?`,
+      text: `Вернёмся к ошибке: ${first.mistake.title.toLowerCase()}`,
     }
   }
   const weakest = scenarios
@@ -30,55 +32,70 @@ function reminder(memory: Memory) {
   if (!weakest) return null
   return {
     scenario: weakest.scenario,
-    text: `Слабее всего пока зона «${zoneTitle(weakest.scenario, weakest.zone)}». Подтянем?`,
+    text: `Подтянем зону «${zoneTitle(weakest.scenario, weakest.zone)}»`,
   }
 }
+
+const count = (id: string) => cases.filter((c) => c.scenario === id).length
 
 export function Home({ memory, onAsk }: Props) {
   const back = reminder(memory)
 
   return (
     <main className="page home">
-      <div className="home__hero">
-        <Orb className="home__orb" />
-        <p className="label home__tag">// тренажёр перед настоящим</p>
+      <div className="home__hero rise">
+        <AuraMark size={208} />
       </div>
 
-      <h1 className="home__title">Сначала — начерно.</h1>
-      <p className="home__lead">
-        Наставник задаст неудобные вопросы раньше приёмной комиссии и рекрутера, разберёт твой ответ
-        и покажет, как сказать лучше.
+      <h1 className="display home__title rise" style={{ '--i': 1 } as React.CSSProperties}>
+        Сначала — начерно
+      </h1>
+      <p className="lead home__lead rise" style={{ '--i': 2 } as React.CSSProperties}>
+        Отрепетируй поступление, собеседование и первый месяц на работе.
       </p>
 
       {back && (
-        <button className="home__back glass focus-in" onClick={() => go(`/train/${back.scenario}`)}>
-          <span>
-            <span className="label">с прошлого раза</span>
-            <span className="home__back-text">{back.text}</span>
-          </span>
+        <a
+          className="home__back btn btn--glass rise"
+          style={{ '--i': 3 } as React.CSSProperties}
+          href={`#/train/${back.scenario}`}
+        >
+          <span className="home__back-dot" aria-hidden="true" />
+          {back.text}
           <ArrowRight />
-        </button>
+        </a>
       )}
 
-      <section className="home__section">
-        <h2 className="label">тренажёр · выбери сценарий</h2>
-        <div className="rows">
-          {scenarios.map((scenario) => (
-            <a key={scenario.id} className="row" href={`#/train/${scenario.id}`}>
-              <span>
-                <span className="home__scenario">{scenario.title}</span>
-                <span className="home__scenario-lead">{scenario.lead}</span>
+      <nav className="home__scenarios" aria-label="Сценарии тренажёра">
+        {scenarios.map((scenario, index) => (
+          <a
+            key={scenario.id}
+            className="home__scenario surface rise"
+            style={{ '--i': 3 + index } as React.CSSProperties}
+            href={`#/train/${scenario.id}`}
+          >
+            <Aura
+              className="home__scenario-aura"
+              palette={SCENARIO_PALETTE[scenario.id]}
+              seed={index + 1}
+              round
+              bands={5}
+              fps={16}
+            />
+            <span className="home__scenario-text">
+              <span className="home__scenario-title">{scenario.title}</span>
+              <span className="caption">
+                {count(scenario.id)} {plural(count(scenario.id), CASES)}
               </span>
-              <ArrowRight />
-            </a>
-          ))}
-        </div>
-      </section>
+            </span>
+            <ArrowRight />
+          </a>
+        ))}
+      </nav>
 
-      <section className="home__section">
-        <h2 className="label">справка · спроси что угодно по теме</h2>
-        <Composer placeholder="Например: как расставить приоритеты?" onSubmit={onAsk} />
-      </section>
+      <div className="home__ask rise" style={{ '--i': 6 } as React.CSSProperties}>
+        <Composer placeholder="Спроси наставника что угодно…" onSubmit={onAsk} />
+      </div>
 
       <footer className="home__footer">
         <Disclaimer />

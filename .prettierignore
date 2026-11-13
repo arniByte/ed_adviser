@@ -1,3 +1,7 @@
 dist
 node_modules
 package-lock.json
+
+# Сгенерированные файлы: их пишут скрипты, а не люди
+public/proofs.json
+docs/knowledge-base.md
