@@ -23,6 +23,8 @@ export async function startRecording(): Promise<Recording> {
     audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 },
   })
   const context = new AudioContext()
+  // Safari создаёт контекст приостановленным, если между нажатием и созданием была пауза.
+  void context.resume()
   const analyser = context.createAnalyser()
   analyser.fftSize = 512
   context.createMediaStreamSource(stream).connect(analyser)
