@@ -14,6 +14,8 @@ export interface Attempt {
   error?: string
 }
 
+const lowerFirst = (text: string) => text.charAt(0).toLowerCase() + text.slice(1)
+
 export const itemFacts = (item: SessionItem) =>
   item.kind === 'case'
     ? {
@@ -27,7 +29,7 @@ export const itemFacts = (item: SessionItem) =>
     : {
         scenario: item.mistake.scenario,
         zone: item.mistake.zone,
-        title: `Возврат: ${item.mistake.title.toLowerCase()}`,
+        title: `Возврат к ошибке: ${lowerFirst(item.mistake.title)}`,
         situation: undefined,
         question: item.mistake.probe,
         fallbackCards: [item.mistake.card],

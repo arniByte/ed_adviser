@@ -121,7 +121,7 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
           {probe?.kind === 'probe' && (
             <p className="intro__memory glass">
               <span className="label">помню с прошлого раза</span>
-              Начнём с возврата к ошибке «{probe.mistake.title.toLowerCase()}» — проверим, что она
+              Начнём с возврата к ошибке: {probe.mistake.title.toLowerCase()}. Проверим, что она
               ушла.
             </p>
           )}
