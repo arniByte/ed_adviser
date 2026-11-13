@@ -12,7 +12,9 @@
     "test": "vitest run",
     "check:knowledge": "tsx scripts/check-knowledge.ts",
     "docs:knowledge": "tsx scripts/knowledge-doc.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "proofs": "tsx scripts/proofs.ts",
+    "proofs:check": "tsx scripts/proofs.ts --check"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
