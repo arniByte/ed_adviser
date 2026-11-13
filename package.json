@@ -17,7 +17,6 @@
     "proofs:check": "tsx scripts/proofs.ts --check"
   },
   "dependencies": {
-    "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/onest": "^5.3.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

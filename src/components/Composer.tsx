@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
+import { createPortal } from 'react-dom'
 import { LIMITS } from '../../core/protocol'
 import { transcribe } from '../lib/api'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../lib/voice'
@@ -140,30 +141,35 @@ export function Composer({
         </p>
       )}
 
-      {voice.state !== 'off' && (
-        <div className="voice" role="dialog" aria-label="Запись голоса">
-          <Orb
-            className="voice__orb"
-            mood={voice.state === 'on' ? 'listening' : 'thinking'}
-            level={voice.state === 'on' ? voice.recording.level : undefined}
-          />
-          <p className="label voice__status" aria-live="polite">
-            {voice.state === 'on'
-              ? `говори · ${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
-              : 'расшифровываю'}
-          </p>
-          {voice.state === 'on' && (
-            <div className="voice__actions">
-              <button type="button" className="chip" onClick={cancel}>
-                Отмена
-              </button>
-              <button type="button" className="chip chip--solid" onClick={finish}>
-                Готово
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+      {voice.state !== 'off' &&
+        createPortal(
+          <div className="voice" role="dialog" aria-label="Запись голоса">
+            <Orb
+              className="voice__orb"
+              mood={voice.state === 'on' ? 'listening' : 'thinking'}
+              level={voice.state === 'on' ? voice.recording.level : undefined}
+            />
+            <p className="voice__status" aria-live="polite">
+              {voice.state === 'on' ? 'Говори, я слушаю' : 'Расшифровываю…'}
+            </p>
+            <p className="caption voice__time">
+              {voice.state === 'on'
+                ? `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+                : '\u00a0'}
+            </p>
+            {voice.state === 'on' && (
+              <div className="voice__actions">
+                <button type="button" className="btn btn--glass" onClick={cancel}>
+                  Отмена
+                </button>
+                <button type="button" className="btn btn--primary" onClick={finish}>
+                  Готово
+                </button>
+              </div>
+            )}
+          </div>,
+          document.body,
+        )}
     </form>
   )
 }

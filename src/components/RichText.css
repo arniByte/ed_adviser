@@ -46,9 +46,10 @@
   content: counter(item);
   position: absolute;
   left: 0;
-  top: 0.32em;
-  font-family: var(--font-mono);
-  font-size: 0.62em;
+  top: 0.2em;
+  font-size: 0.7em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   color: var(--ink-faint);
 }
 
@@ -58,15 +59,15 @@
   margin: 0 0.1em 0 0.2em;
   padding: 0 0.3em;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-  font-family: var(--font-mono);
-  font-size: 0.56em;
-  font-weight: 500;
+  background: rgba(47, 158, 107, 0.13);
+  font-size: 0.58em;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
   line-height: 1.45em;
   text-align: center;
   text-decoration: none;
   vertical-align: 0.42em;
-  color: var(--ink-soft);
+  color: var(--good-ink);
   transition:
     background-color 0.2s,
     color 0.2s;
