@@ -19,6 +19,7 @@ async function clip(name, fn, { state = false } = {}) {
     viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, permissions: ['microphone'],
     ...(state ? { storageState: STATE } : {}),
   })
+  await context.addInitScript(() => { if (!localStorage.getItem('chernovik:profile:v1')) localStorage.setItem('chernovik:profile:v1', JSON.stringify({ stage: 'student', goals: ['job'] })) })
   const page = await context.newPage()
   page.on('pageerror', (e) => console.log(name, 'error', e.message))
   // Скринкаст CDP отдаёт кадры в физических пикселях, в отличие от recordVideo.
@@ -55,8 +56,14 @@ const smoothScroll = (page, to, ms) => page.evaluate(async ([to, ms]) => {
 ;(async () => {
   await clip('home', async (page) => {
     await page.goto('http://localhost:5173/')
-    await page.waitForTimeout(3200)
-    await page.locator('.home__scenario', { hasText: 'Первая работа' }).click()
+    await page.waitForTimeout(1600)
+    await page.mouse.move(195, 200)
+    await page.waitForTimeout(500)
+    await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: 280, behavior: 'smooth' }))
+    await page.waitForTimeout(1300)
+    await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: -280, behavior: 'smooth' }))
+    await page.waitForTimeout(1300)
+    await page.locator('.deck__card', { hasText: 'Первая работа' }).click()
     await page.waitForTimeout(2200)
     await page.getByRole('button', { name: /Начать/ }).click()
     await page.waitForTimeout(2600)
@@ -88,6 +95,21 @@ const smoothScroll = (page, to, ms) => page.evaluate(async ([to, ms]) => {
     await page.waitForTimeout(900)
     await page.locator('button.cite').first().click()
     await page.waitForTimeout(3600)
+  })
+
+  await clip('web', async (page) => {
+    await page.goto('http://localhost:5173/#/ask')
+    await page.waitForTimeout(900)
+    await page.locator('.composer__field').pressSequentially('хочу поступить в мпгу в ставрополе, что нужно сделать?', { delay: 30 })
+    await page.locator('.composer__field').press('Enter')
+    await page.waitForSelector('.exchange__after', { timeout: 90000 })
+    await page.waitForTimeout(600)
+    await page.evaluate(() => scrollTo({ top: 0 }))
+    await page.waitForTimeout(400)
+    await page.locator('button.cite').first().click()
+    await page.waitForTimeout(2600)
+    await page.getByRole('button', { name: 'Сохранить в мою базу' }).click()
+    await page.waitForTimeout(1600)
   })
 
   await clip('memory', async (page) => {

@@ -4,6 +4,7 @@ const { chromium } = require('playwright')
   const [state, wav] = process.argv.slice(2)
   const browser = await chromium.launch({ args: ['--enable-unsafe-swiftshader', '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream', `--use-file-for-fake-audio-capture=${wav}%noloop`] })
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, storageState: state, permissions: ['microphone'] })
+  await context.addInitScript(() => { if (!localStorage.getItem('chernovik:profile:v1')) localStorage.setItem('chernovik:profile:v1', JSON.stringify({ stage: 'student', goals: ['job'] })) })
   const page = await context.newPage()
   page.on('pageerror', (e) => console.log('page error:', e.message))
   const go = async (hash, wait = 1400) => { await page.goto('http://localhost:5173/#' + hash); await page.waitForTimeout(wait) }

@@ -1,0 +1,11 @@
+const { chromium } = require('playwright')
+;(async () => {
+  const b = await chromium.launch()
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })
+  await c.addInitScript(() => localStorage.setItem('chernovik:profile:v1', JSON.stringify({ stage: 'school', goals: ['admission'] })))
+  const p = await c.newPage()
+  await p.goto('http://localhost:5173/'); await p.waitForTimeout(1500)
+  await p.mouse.move(330, 420); await p.waitForTimeout(900)
+  await p.screenshot({ path: 'demo/hi/home-new.png' })
+  await b.close()
+})()

@@ -16,7 +16,7 @@ import {
 } from 'remotion'
 
 export const FPS = 30
-export const DURATION = 64
+export const DURATION = 74
 
 const PAPER = '#f3f3f0'
 const NIGHT = '#0c0c0f'
@@ -285,7 +285,7 @@ function Scenarios() {
         <Words text="Первая работа." at={0.7} size={92} />
         <Words text="Первый месяц." at={1.1} size={92} />
       </Left>
-      <Phone clip="home" from={0.2} rate={1.25} x={470} y={10} />
+      <Phone clip="home" from={0.6} rate={1.1} x={470} y={10} />
     </Scene>
   )
 }
@@ -346,7 +346,39 @@ function Proofs() {
   )
 }
 
-/* 38–46 с: память */
+/* 38–48 с: интернет с пруфами */
+function Web() {
+  return (
+    <Scene>
+      <Glow name="aura-thermal.png" size={1600} x={-520} y={300} opacity={0.5} spin={10} />
+      <Left top={250}>
+        <Eyebrow>Интернет с пруфами</Eyebrow>
+        <Words text="Нет в базе —" at={0.3} size={88} />
+        <Words text="найдёт и докажет." at={0.8} size={88} />
+        <div style={{ display: 'grid', gap: 18, marginTop: 40 }}>
+          <Step text="Ищет в интернете" at={2.0} />
+          <Step text="Сам открывает каждую страницу" at={4.0} />
+          <Step text="Оставляет только найденные цитаты" at={6.6} />
+        </div>
+      </Left>
+      <Phone clip="web" from={1.0} rate={2.25} x={480} y={10} />
+    </Scene>
+  )
+}
+
+function Step({ text, at }: { text: string; at: number }) {
+  const frame = useCurrentFrame()
+  const { fps } = useVideoConfig()
+  const p = spring({ frame: frame - s(at), fps, config: { damping: 16 } })
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 22, opacity: p, transform: `translateX(${(1 - p) * -40}px)`, filter: `blur(${(1 - p) * 10}px)` }}>
+      <span style={{ display: 'grid', placeItems: 'center', width: 52, height: 52, borderRadius: 26, background: INK, color: '#fff', fontSize: 28, transform: `scale(${0.6 + 0.4 * p})` }}>✓</span>
+      <span style={{ fontFamily: TEXT, fontSize: 38, fontWeight: 500, color: INK, letterSpacing: '-0.015em' }}>{text}</span>
+    </div>
+  )
+}
+
+/* 48–56 с: память */
 function Memory() {
   return (
     <Scene>
@@ -361,7 +393,7 @@ function Memory() {
   )
 }
 
-/* 46–50 с: голос */
+/* 56–60 с: голос */
 function Voice() {
   return (
     <Scene>
@@ -370,7 +402,7 @@ function Voice() {
         <Eyebrow>Голос</Eyebrow>
         <Words text="Отвечай вслух." at={0.2} size={104} />
       </Left>
-      <Phone clip="voice" from={1.4} rate={1.2} x={470} y={10} enter="up" />
+      <Phone clip="voice" from={3.0} rate={1.0} x={470} y={10} enter="up" />
     </Scene>
   )
 }
@@ -387,7 +419,7 @@ function Stat({ value, label, at }: { value: string; label: string; at: number }
   )
 }
 
-/* 50–56 с: цифры */
+/* 60–66 с: цифры */
 function Numbers() {
   return (
     <Scene dark>
@@ -401,7 +433,7 @@ function Numbers() {
   )
 }
 
-/* 56–64 с: финал */
+/* 66–74 с: финал */
 function Outro() {
   const frame = useCurrentFrame()
   const { fps, durationInFrames } = useVideoConfig()
@@ -427,10 +459,11 @@ const SCENES: [number, number, () => ReactNode][] = [
   [10, 16, Scenarios],
   [16, 30, Review],
   [30, 38, Proofs],
-  [38, 46, Memory],
-  [46, 50, Voice],
-  [50, 56, Numbers],
-  [56, 64, Outro],
+  [38, 48, Web],
+  [48, 56, Memory],
+  [56, 60, Voice],
+  [60, 66, Numbers],
+  [66, 74, Outro],
 ]
 
 export function Promo() {

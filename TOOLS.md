@@ -22,7 +22,7 @@ work/
 | `tools/deck.cjs`      | Презентация → PDF и проверка переполнения слайдов                                           |
 | `tools/slides.cjs`    | PNG каждого слайда в `out/`                                                                 |
 | `tools/record.cjs`    | Живые клипы приложения для ролика через CDP-скринкаст в двойной плотности (`video/public/clips/`) |
-| `tools/music.py`      | Саундтрек 64 с, 120 BPM: пэд, бас, бочка, хэты, арпеджио, свиши, удары, щелчки — только numpy |
+| `tools/music.py`      | Саундтрек 74 с, 120 BPM: пэд, бас, бочка, хэты, арпеджио, свиши, удары, щелчки — только numpy |
 | `tools/video/`        | Remotion-проект ролика (`Promo.tsx`): сцены, 3D-телефоны, кинетический текст                |
 
 Ролик:
@@ -36,4 +36,4 @@ npx remotion render src/index.ts Promo out/promo.mp4 --codec=h264 --crf=18 \
   --browser-executable=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
 ```
 
-Склейки сцен стоят на сильных долях трека: 6, 10, 16, 30, 38, 46, 50, 56 с. Меняешь сцены в `Promo.tsx` — сдвинь звуковые акценты в `music.py`.
+Склейки сцен стоят на сильных долях трека: 6, 10, 16, 30, 38, 48, 56, 60, 66 с. Меняешь сцены в `Promo.tsx` — сдвинь звуковые акценты в `music.py`.

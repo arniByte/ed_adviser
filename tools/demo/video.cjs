@@ -43,7 +43,14 @@ const SIZE = { width: 1280, height: 720 }
   const reviewed = (count) => page.waitForFunction((c) => document.querySelectorAll('.feedback__after').length === c, count, { timeout: 70000 })
   const next = () => page.getByRole('button', { name: /Следующий кейс|К итогам/ }).click()
 
-  await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await pause(4200)
+  await caption('Знакомство', 'три вопроса — и советы под тебя'); await pause(2600)
+  await page.getByRole('button', { name: 'Студент' }).click(); await pause(900)
+  await page.getByRole('button', { name: 'Первая работа' }).click(); await pause(900)
+  await page.locator('.welcome__about').pressSequentially('3 курс, Ставрополь, ищу первую стажировку', { delay: 22 }); await pause(900)
+  await page.getByRole('button', { name: /Готово/ }).click(); await pause(1200)
+  await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await page.mouse.move(640, 200); await pause(3400)
+  await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: 300, behavior: 'smooth' })); await pause(1400)
+  await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: -300, behavior: 'smooth' })); await pause(1400)
 
   await caption('Справка', 'вопрос голосом')
   await page.locator('.tabs__tab', { hasText: 'Справка' }).click(); await pause(2200)
@@ -58,9 +65,19 @@ const SIZE = { width: 1280, height: 720 }
   await page.keyboard.press('Escape'); await pause(900)
   await scrollTo('.sources', 1800); await page.locator('.sources__head').click(); await pause(2600)
 
+  await caption('Интернет', 'нет в базе — найдёт и проверит цитаты')
+  await type('Хочу поступить в МПГУ в Ставрополе. Что для этого нужно сделать?')
+  await page.waitForFunction(() => document.querySelectorAll('.exchange__after').length === 2, null, { timeout: 90000 }); await pause(1500)
+  await scrollTo('.ask__anchor:last-child', 1600); await pause(3000)
+  await caption('Пруф из интернета', 'сервер нашёл цитату на странице')
+  await page.locator('.ask__anchor:last-child button.cite').first().click(); await pause(4200)
+  await caption('Моя база', 'сохраняем — наставник будет опираться дальше')
+  await page.getByRole('button', { name: 'Сохранить в мою базу' }).click().catch(() => log('no save button')); await pause(2200)
+  await page.keyboard.press('Escape'); await pause(800)
+
   await caption('Тренажёр', 'сценарий «Первая работа»')
   await page.goto('http://localhost:5173/#/'); await pause(1600)
-  await page.locator('.home__scenario', { hasText: 'Первая работа' }).click(); await pause(3800)
+  await page.locator('.deck__card', { hasText: 'Первая работа' }).click(); await pause(3800)
   await page.getByRole('button', { name: /Начать/ }).click(); await pause(600)
   const total = await page.locator('.step__progress span').count()
   for (let i = 0; i < total; i++) {
@@ -104,7 +121,7 @@ const SIZE = { width: 1280, height: 720 }
   await page.locator('a.row[href^="#/report/"]').first().click(); await pause(3200); await scrollTo('.doc__case', 2600); await pause(2400); await scrollTo('.doc__sources', 4200); await pause(2600)
 
   await caption('Пруфы', 'проверка всей базы')
-  await page.locator('.tabs__tab', { hasText: 'База' }).click(); await pause(2200)
+  await page.locator('.tabs__tab', { hasText: 'База' }).click(); await pause(3200)
   await page.getByRole('link', { name: 'как это работает' }).click(); await pause(2400)
   await page.getByRole('button', { name: 'Проверить всю базу' }).click(); await pause(3600)
 
