@@ -1,0 +1,10 @@
+const { chromium } = require('playwright')
+;(async () => {
+  const b = await chromium.launch()
+  const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 })
+  await p.goto('http://localhost:5173/')
+  await p.addStyleTag({ content: 'html,body{background:transparent!important}body::before{display:none!important}.aura-mark__glow{display:none}' })
+  await p.waitForTimeout(2600)
+  await p.locator('.aura-mark canvas.mark').screenshot({ path: process.argv[2], omitBackground: true })
+  await b.close()
+})()
