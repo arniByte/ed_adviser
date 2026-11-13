@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "check:knowledge": "tsx scripts/check-knowledge.ts",
+    "docs:knowledge": "tsx scripts/knowledge-doc.ts",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -29,5 +30,6 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.0"
-  }
+  },
+  "license": "MIT"
 }
