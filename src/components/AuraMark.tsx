@@ -1,5 +1,5 @@
 import type { Palette } from '../lib/aura'
-import { AsciiMark } from './AsciiMark'
+import { Mark } from './Mark'
 import { Aura } from './Aura'
 import './AuraMark.css'
 
@@ -8,7 +8,7 @@ export function AuraMark({ size, palette = 'thermal' }: { size: number; palette?
   return (
     <div className="aura-mark" style={{ width: size, height: size }}>
       <Aura className="aura-mark__glow" palette={palette} round bands={6} />
-      <AsciiMark size={size} playful tint />
+      <Mark size={size} />
     </div>
   )
 }

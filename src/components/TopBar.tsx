@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import type { Route } from '../lib/route'
-import { AsciiMark } from './AsciiMark'
+import { Mark } from './Mark'
 import './TopBar.css'
 
 export const TABS = [
@@ -47,7 +47,7 @@ export function TopBar({ route }: { route: Route }) {
   return (
     <header className="topbar">
       <a className="logo" href="#/" aria-label="Черновик — на главную">
-        <AsciiMark size={28} face={false} />
+        <Mark size={28} eyes={false} />
         <span className="logo__word">черновик</span>
       </a>
       <nav className="tabs glass" aria-label="Разделы">

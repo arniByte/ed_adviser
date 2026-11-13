@@ -33,66 +33,8 @@
   box-shadow: 0 0 0 4px rgba(232, 135, 58, 0.18);
 }
 
-.home__scenarios {
-  display: grid;
-  gap: 0.625rem;
+.home__deck {
   width: 100%;
-  margin-top: 2rem;
-  text-align: left;
-}
-
-.home__scenario {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  padding: 0.875rem 1.25rem 0.875rem 0.875rem;
-  text-decoration: none;
-  transition:
-    transform var(--fast) var(--ease),
-    background-color var(--fast),
-    box-shadow var(--medium) var(--ease);
-}
-
-.home__scenario-aura {
-  flex: none;
-  width: 2.75rem;
-  height: 2.75rem;
-  filter: blur(1.5px);
-}
-
-.home__scenario-text {
-  flex: 1;
-  display: grid;
-  gap: 0.125rem;
-}
-
-.home__scenario > svg {
-  flex: none;
-  color: var(--ink-faint);
-  transition:
-    color var(--fast),
-    transform var(--medium) var(--ease);
-}
-
-.home__scenario:active {
-  transform: scale(0.985);
-}
-
-@media (hover: hover) {
-  .home__scenario:hover {
-    background: var(--glass-strong);
-  }
-
-  .home__scenario:hover > svg {
-    color: var(--ink);
-    transform: translateX(3px);
-  }
-}
-
-.home__scenario-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
 .home__ask {

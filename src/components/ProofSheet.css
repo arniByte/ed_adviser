@@ -129,3 +129,14 @@
   line-height: 1.5;
   animation: rise 0.36s var(--ease) backwards;
 }
+
+.sheet__step[data-state='wait'] .sheet__tick {
+  background: var(--line);
+  color: var(--ink-soft);
+}
+
+.sheet__save {
+  width: 100%;
+  margin-top: 1.25rem;
+  animation: rise 0.36s var(--ease) backwards;
+}

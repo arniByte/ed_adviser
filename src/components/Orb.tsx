@@ -16,8 +16,9 @@ void main() { gl_Position = vec4(position, 0.0, 1.0); }
 `
 
 /**
- * Кольцо из аэрографа: гауссов профиль вместо жёсткой линии, нажим меняется
- * по окружности, сверху зерно. От голоса расходится рябь внутри.
+ * Голос рисует узор, как песок на звучащей пластине: стоячие волны по радиусу и по
+ * кругу складываются, и там, где они гасят друг друга, остаются светлые линии.
+ * Чем громче голос, тем гуще и сложнее узор и тем шире диск.
  */
 const FRAGMENT = `
 precision highp float;
@@ -36,53 +37,39 @@ float noise(vec2 p) {
              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
 }
 
-float fbm(vec2 p) {
-  float value = 0.0, amplitude = 0.5;
-  for (int i = 0; i < 4; i++) { value += amplitude * noise(p); p *= 2.03; amplitude *= 0.5; }
-  return value;
-}
-
-float soft(float distance, float width) { return exp(-pow(distance / width, 2.0)); }
-
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uSize) / min(uSize.x, uSize.y);
   float radius = length(uv);
   float angle = atan(uv.y, uv.x);
-  vec2 around = vec2(cos(angle), sin(angle));
+  float loud = clamp(uLevel * 1.6, 0.0, 1.0);
 
-  float wobble = fbm(around * 1.4 + uTime * 0.11) - 0.5;
-  float ringRadius = 0.32 + wobble * (0.045 + 0.06 * uLevel + 0.03 * uEnergy);
+  // Край диска дышит: шумом по окружности и громкостью.
+  float edge = 0.3 + 0.07 * loud + 0.025 * (noise(vec2(angle * 1.5, uTime * 0.6)) - 0.5);
+  float body = exp(-pow(radius / edge, 4.0));
 
-  // Нажим: с одной стороны кольцо плотное, с другой почти исчезает.
-  float pressure = fbm(around * 0.85 - uTime * 0.06 + 7.3);
-  float width = mix(0.012, 0.062, clamp(pressure * 1.7 - 0.35, 0.0, 1.0)) * (1.0 + 0.5 * uLevel);
+  float density = 11.0 + 16.0 * loud + 4.0 * uEnergy;
+  float a = cos(density * radius - uTime * 1.2) * cos(6.0 * angle + uTime * 0.25);
+  float b = cos((density * 0.62) * radius + uTime * 0.8) * cos((4.0 + 4.0 * loud) * angle - uTime * 0.4);
+  float pattern = mix(a, a + b, 0.35 + 0.65 * loud);
 
-  float distanceToRing = radius - ringRadius;
-  float ink = soft(distanceToRing, width) * (0.55 + 0.6 * pressure) + 0.16 * soft(distanceToRing, 0.1);
-
-  float ripples = 0.0;
-  for (int i = 1; i <= 3; i++) {
-    float n = float(i);
-    float r = ringRadius * 0.27 * n + 0.014 * sin(angle * (4.0 + 2.0 * n) + uTime * (1.3 + 0.35 * n));
-    ripples += soft(radius - r, 0.032) * (0.6 - 0.12 * n);
-  }
-  ink += ripples * uLevel;
-
-  ink *= 0.8 + 0.35 * fbm(uv * 7.0 + uTime * 0.05);
-  float grain = hash(gl_FragCoord.xy + fract(uTime) * 61.0) - 0.5;
-  float alpha = clamp(ink * (1.0 + grain * 0.4), 0.0, 1.0) * 0.7;
+  // Узловые линии светлые, пучности — насыщенные.
+  float fill = smoothstep(0.05, 0.75, abs(pattern));
+  float core = exp(-pow(radius / 0.05, 2.0)) * (0.5 + loud);
+  float ink = body * (0.28 + 0.72 * fill) + core;
+  ink *= 0.85 + 0.3 * noise(uv * 9.0 + uTime * 0.2);
+  float alpha = clamp(ink, 0.0, 1.0) * (0.55 + 0.35 * loud);
 
   gl_FragColor = vec4(uColor * alpha, alpha);
 }
 `
 
 /** Доля от CSS-размера, в которой считается шейдер. Браузер растянет картинку сам. */
-const RENDER_SCALE = 0.6
+const RENDER_SCALE = 0.5
 
 const MOODS: Record<OrbMood, { color: [number, number, number]; speed: number; energy: number }> = {
   idle: { color: [0.2, 0.2, 0.22], speed: 1, energy: 0 },
-  listening: { color: [0.2, 0.47, 1], speed: 1.6, energy: 0.3 },
-  thinking: { color: [0.36, 0.33, 0.52], speed: 5, energy: 1 },
+  listening: { color: [0.2, 0.47, 1], speed: 1.4, energy: 0.2 },
+  thinking: { color: [0.45, 0.38, 0.95], speed: 3, energy: 1 },
 }
 
 function compile(gl: WebGLRenderingContext, type: number, source: string) {
@@ -128,7 +115,7 @@ export function Orb({ mood = 'idle', level, className = '' }: Props) {
     const uEnergy = uniform('uEnergy')
 
     const resize = () => {
-      // Кольцо размытое по замыслу: полного разрешения экрана ему не нужно.
+      // Узор размытый по замыслу: полного разрешения экрана ему не нужно.
       const size = Math.round(canvas.clientWidth * RENDER_SCALE)
       if (canvas.width === size) return
       canvas.width = size

@@ -2,13 +2,17 @@ import { useEffect, useRef } from 'react'
 import { getCard } from '../../../core/knowledge'
 import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
-import { AsciiMark } from '../../components/AsciiMark'
+import { Mark } from '../../components/Mark'
 import { AuraMark } from '../../components/AuraMark'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { useProofSheet } from '../../components/ProofSheet'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
+import { Globe } from '../../components/icons'
+import type { Found } from '../../lib/api'
+import { useMine } from '../../lib/mine'
+import { plural } from '../../lib/plural'
 import { useSmoothText } from '../../lib/useSmoothText'
 import './Ask.css'
 
@@ -19,7 +23,14 @@ export interface Exchange {
   raw: string
   status: 'waiting' | 'streaming' | 'done' | 'failed'
   error?: string
+  /** Пользователь сам попросил поискать в интернете. */
+  web?: boolean
+  /** Что наставник делает до ответа. */
+  progress?: string
+  found?: Found
 }
+
+export type AskHandler = (question: string, options?: { web?: boolean }) => void
 
 const STARTERS = [
   'Как расставить приоритеты, если боюсь не пройти на мечту?',
@@ -32,13 +43,25 @@ const STARTERS = [
 
 interface Props {
   exchanges: Exchange[]
-  onAsk: (question: string) => void
+  onAsk: AskHandler
+}
+
+const SOURCES: [string, string, string] = ['источник', 'источника', 'источников']
+const PAGES: [string, string, string] = ['страницу', 'страницы', 'страниц']
+
+/** Что получилось у поиска в интернете — одной строкой под ответом. */
+function webSummary(found: Found): string {
+  const n = found.cards.length
+  if (n > 0) return `Нашёл в интернете и сверил цитаты: ${n} ${plural(n, SOURCES)}`
+  if (found.looked > 0)
+    return `Открыл ${found.looked} ${plural(found.looked, PAGES)}, но цитаты не подтвердились — на них не опирался`
+  return 'В интернете не нашлось страниц с подтверждаемыми фактами'
 }
 
 export function Thinking({ text }: { text: string }) {
   return (
     <p className="thinking caption">
-      <AsciiMark size={44} mood="thinking" />
+      <Mark size={44} mood="thinking" />
       {text}
     </p>
   )
@@ -56,8 +79,16 @@ function Answer({
   const streaming = exchange.status === 'streaming'
   const raw = useSmoothText(exchange.raw, streaming)
   const { lead, sections } = parseSections(raw)
+  const mine = useMine()
+  // Сноска может вести в общую базу, в найденное сейчас или в личную базу пользователя.
+  const pool = new Map(
+    [...(exchange.found?.cards ?? []), ...mine.map((item) => item.card)].map((card) => [
+      card.id,
+      card,
+    ]),
+  )
   const cited = citedIds(lead)
-    .map(getCard)
+    .map((id) => getCard(id) ?? pool.get(id))
     .filter((card): card is Card => !!card)
   const numbers = new Map(cited.map((card, index) => [card.id, index + 1]))
   const followups = (sections.followups ?? '')
@@ -66,7 +97,8 @@ function Answer({
     .filter(Boolean)
     .slice(0, 3)
   const done = exchange.status === 'done'
-  const [sheet, showProof] = useProofSheet()
+  const [sheet, showProof] = useProofSheet(exchange.found?.checks)
+  const usedWeb = cited.some((card) => card.kind === 'web')
   const proveCited = (id: string) => {
     const card = cited.find((item) => item.id === id)
     if (card) showProof(card)
@@ -76,7 +108,9 @@ function Answer({
     <article className="exchange">
       <p className="exchange__question">{exchange.question}</p>
 
-      {exchange.status === 'waiting' && <Thinking text="Ищу в базе знаний" />}
+      {exchange.status === 'waiting' && (
+        <Thinking key={exchange.progress} text={exchange.progress ?? 'Ищу в базе знаний'} />
+      )}
       {exchange.status === 'failed' && (
         <p className="exchange__error" role="alert">
           {exchange.error}
@@ -87,8 +121,21 @@ function Answer({
       {done && (
         <div className="exchange__after">
           <div className="rise">
-            <Sources cards={cited} onProof={showProof} />
+            <Sources cards={cited} checks={exchange.found?.checks} onProof={showProof} />
           </div>
+          {exchange.found && (
+            <p className="exchange__web caption rise">
+              <Globe /> {webSummary(exchange.found)}
+            </p>
+          )}
+          {!exchange.web && !usedWeb && (
+            <button
+              className="btn btn--glass btn--small exchange__search rise"
+              onClick={() => onAsk(exchange.question, { web: true })}
+            >
+              <Globe /> Поискать свежее в интернете
+            </button>
+          )}
           {isLast && followups.length > 0 && (
             <div className="exchange__followups rise" style={{ '--i': 1 } as React.CSSProperties}>
               {followups.map((question) => (
@@ -129,7 +176,7 @@ export function Ask({ exchanges, onAsk }: Props) {
             О чём спросить?
           </h1>
           <p className="caption rise" style={{ '--i': 2 } as React.CSSProperties}>
-            Отвечаю по базе знаний, у каждого факта есть пруф
+            Отвечаю по базе и по интернету, у каждого факта есть пруф
           </p>
           <div className="ask__starters">
             {STARTERS.map((question, index) => (

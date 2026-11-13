@@ -41,6 +41,13 @@ export const Chevron = () => (
   </svg>
 )
 
+export const Globe = () => (
+  <svg {...base}>
+    <circle cx="10" cy="10" r="6.5" />
+    <path d="M3.5 10h13M10 3.5c-2 2-2.8 4.2-2.8 6.5s.8 4.5 2.8 6.5c2-2 2.8-4.2 2.8-6.5S12 5.5 10 3.5z" />
+  </svg>
+)
+
 export const Close = () => (
   <svg {...base}>
     <path d="M5 5l10 10M15 5L5 15" />

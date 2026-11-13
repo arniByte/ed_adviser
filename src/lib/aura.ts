@@ -7,7 +7,7 @@
 type Rgba = [number, number, number, number]
 type Stop = [position: number, color: Rgba]
 
-export type Palette = 'thermal' | 'pastel' | 'mint' | 'dusk' | 'ink'
+export type Palette = 'thermal' | 'pastel' | 'mint' | 'dusk'
 
 const PALETTES: Record<Palette, Stop[]> = {
   thermal: [
@@ -32,14 +32,6 @@ const PALETTES: Record<Palette, Stop[]> = {
     [0.55, [130, 222, 196, 1]],
     [0.8, [104, 170, 250, 1]],
     [1, [92, 92, 230, 1]],
-  ],
-  /* Без прозрачных и светлых цветов: этой палитрой красятся буквы знака на бумаге. */
-  ink: [
-    [0, [40, 56, 150, 1]],
-    [0.3, [112, 64, 206, 1]],
-    [0.55, [218, 58, 140, 1]],
-    [0.78, [232, 92, 48, 1]],
-    [1, [18, 132, 138, 1]],
   ],
   dusk: [
     [0, [16, 30, 40, 1]],

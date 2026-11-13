@@ -17,6 +17,7 @@ const persona = (
 - после утверждения из карточки ставь её метку в квадратных скобках, например [adm-priority-order]. Метки не выдумывай и не объединяй в одни скобки;
 - метка — единственная ссылка на источник: не пиши в тексте слова «карточка» и «метка», не называй авторов и годы в скобках, пользователь видит номер источника рядом с фразой;
 - если в карточках ответа нет, честно скажи, что в базе этого нет, и подскажи, где проверить: сайт вуза, приёмная комиссия, текст закона, HR компании. Не заполняй пробел догадками;
+- о конкретных вузах, колледжах, компаниях и городах говори только то, что есть в карточках. Не утверждай по памяти, где они находятся, есть ли у них филиалы и какие у них правила, и не спорь с карточками: если карточка говорит о филиале, он есть;
 - правила приёма и законы меняются. Когда речь о сроках, баллах и нормах, напоминай свериться с официальным источником.
 
 Границы:
@@ -28,6 +29,9 @@ const DEFAULT_ROLE =
   'наставник, который помогает разобраться с поступлением, первой работой и первыми неделями в компании'
 
 function formatCard(card: Card): string {
+  if (card.kind === 'web') {
+    return `[${card.id}] (Найдено в интернете только что, цитата подтверждена на странице ${card.source.url}) ${card.title}. ${card.text} Цитата: «${card.source.quote}» Источник: ${card.source.publisher}.`
+  }
   const where = `${getScenario(card.scenario)?.title}, ${zoneTitle(card.scenario, card.zone)}`
   const year = card.source.year ? `, ${card.source.year}` : ''
   return `[${card.id}] (${KIND_LABEL[card.kind]}; ${where}) ${card.title}. ${card.text} Источник: ${card.source.publisher}${year}.`
@@ -35,18 +39,40 @@ function formatCard(card: Card): string {
 
 function cardsBlock(cards: Card[]): string {
   if (cards.length === 0) return 'По этому запросу в базе знаний карточек не нашлось.'
-  return `Карточки базы знаний:\n${cards.map(formatCard).join('\n')}`
+  return `Карточки:\n${cards.map(formatCard).join('\n')}`
+}
+
+/** Что пользователь рассказал о себе; добавляется к любому системному промпту. */
+export function profileNote(description: string | undefined): string {
+  if (!description) return ''
+  return `
+
+О пользователе — он рассказал сам: ${description}.
+Подстрой под это примеры, акценты и порядок советов. Не пересказывай ему его же слова и не додумывай о нём лишнего.`
 }
 
 function formatMistake(mistake: Mistake): string {
   return `${mistake.id} — ${mistake.title}. Как звучит: ${mistake.sounds.map((s) => `«${s}»`).join(', ')}. Почему мешает: ${mistake.why} Как лучше: ${mistake.better}`
 }
 
-export function askPrompt(scenario: Scenario | undefined, cards: Card[]): string {
+/** Что сказать модели про поиск в интернете, если он был. */
+function webNote(cards: Card[], searched: boolean): string {
+  if (!searched) return ''
+  if (cards.some((card) => card.kind === 'web')) {
+    return `
+Часть карточек найдена в интернете под этот вопрос: их цитаты сервер нашёл на живых страницах. Опирайся на них так же, как на базу, и ставь их метки. Если факт про конкретный вуз или компанию, скажи, откуда он: «на сайте института», «по данным приёмной комиссии».
+`
+  }
+  return `
+Поиск в интернете тоже не дал фактов с подтверждённой цитатой. Скажи об этом прямо и подскажи, где проверить самому. О конкретных вузах, компаниях и городах из вопроса ничего не утверждай по памяти — ни где они находятся, ни есть ли у них филиалы.
+`
+}
+
+export function askPrompt(scenario: Scenario | undefined, cards: Card[], searched = false): string {
   return `${persona(scenario?.role ?? DEFAULT_ROLE)}
 
 Режим: справка. Ответь на вопрос пользователя.
-
+${webNote(cards, searched)}
 Формат:
 - два-три коротких абзаца обычным текстом, всего 80–140 слов; самое важное — в первом предложении;
 - каждый абзац опирается на карточку и заканчивается её меткой. Общие советы, которых нет в карточках, не добавляй;

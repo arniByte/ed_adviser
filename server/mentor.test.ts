@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LIMITS, type MentorRequest } from '../core/protocol.js'
-import { BadRequest, prepare } from './mentor.js'
+import { BadRequest, planAsk, prepare } from './mentor.js'
 
 const system = (request: MentorRequest) => String(prepare(request).messages[0].content)
 
@@ -93,4 +93,63 @@ describe('prepare: итог', () => {
 
 it('отклоняет неизвестный режим', () => {
   expect(() => prepare({ mode: 'hack' } as unknown as MentorRequest)).toThrow(BadRequest)
+})
+
+describe('planAsk: личная база и интернет', () => {
+  const saved = {
+    id: 'web-0123456789',
+    scenario: 'admission',
+    zone: 'web',
+    kind: 'web',
+    title: 'Сроки приёма в педагогический институт Ставрополя',
+    text: 'Приём документов в институт начинается 20 июня.',
+    source: {
+      title: 'Сроки',
+      publisher: 'Институт',
+      url: 'https://example.ru',
+      quote: 'Приём документов начинается 20 июня.',
+    },
+  }
+
+  it('берёт из личной базы карточку, близкую к вопросу', () => {
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [
+        { role: 'user', content: 'Когда начинается приём документов в институт в Ставрополе?' },
+      ],
+      mine: [saved as never],
+    })
+    expect(plan.cards.map((card) => card.id)).toContain('web-0123456789')
+  })
+
+  it('отбрасывает карточки чужой формы', () => {
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Приём документов в институт Ставрополя' }],
+      mine: [
+        { ...saved, id: 'adm-fake' } as never,
+        { ...saved, source: { url: 'javascript:1' } } as never,
+      ],
+    })
+    expect(plan.cards.some((card) => card.kind === 'web')).toBe(false)
+  })
+
+  it('идёт в интернет по просьбе пользователя', () => {
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
+      web: true,
+    })
+    expect(plan.web).toBe(true)
+  })
+
+  it('добавляет профиль в системный промпт', () => {
+    const text = system({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
+      profile: { stage: 'school', about: 'Ставрополь' },
+    })
+    expect(text).toContain('сейчас: школа')
+    expect(text).toContain('«Ставрополь»')
+  })
 })

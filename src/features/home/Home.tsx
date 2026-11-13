@@ -1,12 +1,11 @@
-import { cases, scenarios, zoneTitle } from '../../../core/knowledge'
+import { scenarios, zoneTitle } from '../../../core/knowledge'
 import { mastery, openMistakes, type Memory } from '../../../core/progress'
 import { AuraMark } from '../../components/AuraMark'
-import { Aura } from '../../components/Aura'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
-import { SCENARIO_PALETTE } from '../../lib/aura'
-import { CASES, plural } from '../../lib/plural'
+import { useProfile } from '../../lib/profile'
+import { ScenarioDeck } from './ScenarioDeck'
 import './Home.css'
 
 interface Props {
@@ -36,15 +35,14 @@ function reminder(memory: Memory) {
   }
 }
 
-const count = (id: string) => cases.filter((c) => c.scenario === id).length
-
 export function Home({ memory, onAsk }: Props) {
   const back = reminder(memory)
+  const profile = useProfile()
 
   return (
     <main className="page home">
       <div className="home__hero rise">
-        <AuraMark size={208} />
+        <AuraMark size={184} />
       </div>
 
       <h1 className="display home__title rise" style={{ '--i': 1 } as React.CSSProperties}>
@@ -66,32 +64,9 @@ export function Home({ memory, onAsk }: Props) {
         </a>
       )}
 
-      <nav className="home__scenarios" aria-label="Сценарии тренажёра">
-        {scenarios.map((scenario, index) => (
-          <a
-            key={scenario.id}
-            className="home__scenario surface rise"
-            style={{ '--i': 3 + index } as React.CSSProperties}
-            href={`#/train/${scenario.id}`}
-          >
-            <Aura
-              className="home__scenario-aura"
-              palette={SCENARIO_PALETTE[scenario.id]}
-              seed={index + 1}
-              round
-              bands={5}
-              fps={16}
-            />
-            <span className="home__scenario-text">
-              <span className="home__scenario-title">{scenario.title}</span>
-              <span className="caption">
-                {count(scenario.id)} {plural(count(scenario.id), CASES)}
-              </span>
-            </span>
-            <ArrowRight />
-          </a>
-        ))}
-      </nav>
+      <div className="home__deck rise" style={{ '--i': 3 } as React.CSSProperties}>
+        <ScenarioDeck first={profile?.goals?.[0]} />
+      </div>
 
       <div className="home__ask rise" style={{ '--i': 6 } as React.CSSProperties}>
         <Composer placeholder="Спроси наставника что угодно…" onSubmit={onAsk} />

@@ -2,11 +2,12 @@ import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from '
 import type { ChatTurn } from '../core/protocol'
 import { parseSections } from '../core/protocol'
 import { tabOf, TopBar } from './components/TopBar'
-import { Ask, type Exchange } from './features/ask/Ask'
+import { Ask, type AskHandler, type Exchange } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
 import { askMentor } from './lib/api'
 import { useMemory } from './lib/memory'
+import { useProfile } from './lib/profile'
 import { go, useRoute } from './lib/route'
 
 // Редкие экраны грузятся отдельно: главная и тренажёр открываются быстрее.
@@ -18,10 +19,16 @@ const Progress = lazy(() =>
 )
 const Report = lazy(() => import('./features/report/Report').then((m) => ({ default: m.Report })))
 const Proofs = lazy(() => import('./features/proofs/Proofs').then((m) => ({ default: m.Proofs })))
+const Welcome = lazy(() =>
+  import('./features/welcome/Welcome').then((m) => ({ default: m.Welcome })),
+)
 
 export function App() {
   const route = useRoute()
   const memory = useMemory()
+  const profile = useProfile()
+  // Пока не познакомились, главная начинается со знакомства.
+  const greet = route.view === 'hello' || (route.view === 'home' && profile === null)
   const [exchanges, setExchanges] = useState<Exchange[]>([])
   const nextId = useRef(1)
 
@@ -36,8 +43,8 @@ export function App() {
   }, [route, tab])
 
   // Диалог справки живёт здесь, чтобы не теряться при переходе между разделами.
-  const ask = useCallback(
-    async (question: string) => {
+  const ask: AskHandler = useCallback(
+    async (question, options) => {
       const id = nextId.current++
       const patch = (change: Partial<Exchange>) =>
         setExchanges((list) => list.map((e) => (e.id === id ? { ...e, ...change } : e)))
@@ -51,12 +58,17 @@ export function App() {
         ])
       turns.push({ role: 'user', content: question })
 
-      setExchanges((list) => [...list, { id, question, raw: '', status: 'waiting' }])
+      const web = options?.web === true
+      setExchanges((list) => [...list, { id, question, raw: '', status: 'waiting', web }])
       go('/ask')
       try {
         const raw = await askMentor(
-          { mode: 'ask', turns },
-          { onText: (text) => patch({ raw: text, status: 'streaming' }) },
+          { mode: 'ask', turns, web },
+          {
+            onStatus: (progress) => patch({ progress }),
+            onFound: (found) => patch({ found }),
+            onText: (text) => patch({ raw: text, status: 'streaming' }),
+          },
         )
         patch({ raw, status: 'done' })
       } catch (error) {
@@ -69,7 +81,7 @@ export function App() {
   return (
     <>
       <TopBar route={route} />
-      {route.view === 'home' && <Home memory={memory} onAsk={ask} />}
+      {route.view === 'home' && !greet && <Home memory={memory} onAsk={ask} />}
       {route.view === 'ask' && <Ask exchanges={exchanges} onAsk={ask} />}
       {route.view === 'train' && <Train key={route.scenario} scenario={route.scenario} />}
       <Suspense fallback={<main className="page" />}>
@@ -77,6 +89,7 @@ export function App() {
         {route.view === 'library' && <Library />}
         {route.view === 'proofs' && <Proofs />}
         {route.view === 'report' && <Report memory={memory} sessionId={route.session} />}
+        {greet && <Welcome />}
       </Suspense>
     </>
   )
