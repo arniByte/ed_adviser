@@ -2,7 +2,7 @@ const ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
 export const MODELS = {
   mentor: process.env.MENTOR_MODEL || 'anthropic/claude-haiku-5.5',
-  fallback: 'openai/gpt-5.6-luna',
+  fallback: 'google/gemini-3.1-flash-lite',
   transcribe: process.env.TRANSCRIBE_MODEL || 'google/gemini-3.1-flash-lite',
 }
 
@@ -53,6 +53,10 @@ async function request({ messages, maxTokens, temperature = 0.5, model, stream =
       max_tokens: maxTokens,
       temperature,
       stream,
+      // Скрытое размышление удваивает время до первого слова и цену, а разбору кейса не нужно.
+      reasoning: { enabled: false },
+      // Из нескольких площадок, где запущена модель, берём ту, что отвечает быстрее.
+      provider: { sort: 'latency' },
     }),
   })
   if (!response.ok) {
