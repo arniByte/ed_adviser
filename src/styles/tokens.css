@@ -1,0 +1,39 @@
+:root {
+  --paper: #f2f2ef;
+  --paper-raised: rgba(255, 255, 255, 0.58);
+  --ink: #121214;
+  --ink-soft: rgba(18, 18, 20, 0.64);
+  --ink-faint: rgba(18, 18, 20, 0.4);
+  --line: rgba(18, 18, 20, 0.1);
+  --line-strong: rgba(18, 18, 20, 0.22);
+
+  --blue: #3377ff;
+  --lavender: #cbb8ff;
+  --good: #2f9e6b;
+  --warm: #e8873a;
+
+  --font-sans: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-label: 0.6875rem;
+  --text-small: 0.875rem;
+  --text-body: 1.0625rem;
+  --text-read: 1.25rem;
+  --text-lead: 1.5rem;
+  --text-display: clamp(1.75rem, 1.2rem + 2.6vw, 2.5rem);
+
+  --column: 44rem;
+  --gutter: clamp(1.125rem, 4vw, 2rem);
+  --radius: 1.125rem;
+  --radius-small: 0.625rem;
+
+  --ease: cubic-bezier(0.22, 0.8, 0.26, 1);
+  --blur-glass: blur(22px) saturate(1.5);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --text-read: 1.375rem;
+    --text-lead: 1.625rem;
+  }
+}

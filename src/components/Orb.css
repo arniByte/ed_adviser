@@ -1,0 +1,18 @@
+.orb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+/* Без WebGL кольцо рисуется градиентом: тот же силуэт, только неподвижный. */
+.orb[data-fallback] {
+  background: radial-gradient(
+    closest-side,
+    transparent 46%,
+    rgba(40, 40, 44, 0.42) 58%,
+    rgba(40, 40, 44, 0.5) 62%,
+    transparent 78%
+  );
+  filter: blur(6px);
+}

@@ -1,0 +1,49 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 3.5rem;
+  padding: 0 var(--gutter);
+  background: linear-gradient(var(--paper) 55%, transparent);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* Буква «о» в названии — то же аэрографное кольцо, только маленькое. */
+.wordmark__ring {
+  width: 0.78em;
+  height: 0.78em;
+  margin: 0 0.07em;
+  border: 0.17em solid var(--ink);
+  border-radius: 50%;
+  filter: blur(0.7px);
+  opacity: 0.8;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: clamp(0.875rem, 3.5vw, 1.5rem);
+}
+
+.topbar__link {
+  padding: 0.75rem 0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.topbar__link:hover,
+.topbar__link[aria-current='page'] {
+  color: var(--ink);
+}
