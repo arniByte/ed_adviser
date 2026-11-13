@@ -7,6 +7,7 @@ import { ArrowRight } from '../../components/icons'
 import { RichText } from '../../components/RichText'
 import { Thinking } from '../ask/Ask'
 import { askMentor } from '../../lib/api'
+import { useSmoothText } from '../../lib/useSmoothText'
 import { updateMemory } from '../../lib/memory'
 import { go } from '../../lib/route'
 import { ScoreDots } from './ScoreDots'
@@ -65,7 +66,8 @@ export function Debrief({ scenario, records }: { scenario: Scenario; records: Re
       .catch(() => finish(''))
   }, [records, scenario, sessionId])
 
-  const { sections } = parseSections(raw)
+  const shown = useSmoothText(raw, status === 'streaming')
+  const { sections } = parseSections(shown)
   const total = records.reduce((sum, r) => sum + r.score, 0)
 
   return (
@@ -76,16 +78,11 @@ export function Debrief({ scenario, records }: { scenario: Scenario; records: Re
       </h1>
 
       {status === 'waiting' && <Thinking text="Подвожу итог" />}
-      {sections.summary && (
-        <RichText
-          text={sections.summary}
-          streaming={status === 'streaming' && sections.plan === undefined}
-        />
-      )}
+      {sections.summary && <RichText text={sections.summary} reveal />}
       {sections.plan && (
         <section className="debrief__plan">
           <h2 className="caption">Что сделать до настоящего</h2>
-          <RichText text={sections.plan} streaming={status === 'streaming'} />
+          <RichText text={sections.plan} reveal />
         </section>
       )}
 

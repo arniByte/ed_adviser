@@ -1,0 +1,15 @@
+.aura-mark {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.aura-mark__glow {
+  position: absolute;
+  inset: -6%;
+  width: 112%;
+  height: 112%;
+  opacity: 0.42;
+  filter: blur(22px);
+}

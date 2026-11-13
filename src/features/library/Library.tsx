@@ -41,7 +41,7 @@ export function Library() {
         {sourceCount % 10 === 1 && sourceCount % 100 !== 11
           ? 'открытого источника'
           : 'открытых источников'}
-        . На них опирается наставник.
+        .
       </p>
       <p className="caption rise" style={{ '--i': 2 } as React.CSSProperties}>
         {verified > 0 ? `Пруфы сошлись у ${verified} из ${cards.length}` : 'Проверяю пруфы…'} ·{' '}

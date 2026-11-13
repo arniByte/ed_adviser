@@ -5,15 +5,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   height: var(--bar);
   padding: 0 var(--gutter);
   /* Текст под шапкой расплывается, а не обрезается по линии. */
   background: color-mix(in srgb, var(--paper) 70%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  mask-image: linear-gradient(#000 70%, transparent);
-  -webkit-mask-image: linear-gradient(#000 70%, transparent);
+  mask-image: linear-gradient(#000 72%, transparent);
+  -webkit-mask-image: linear-gradient(#000 72%, transparent);
 }
 
 .logo {
@@ -26,140 +26,76 @@
 }
 
 .logo__word {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 650;
   letter-spacing: -0.03em;
 }
 
-.topbar__menu {
+/* Вкладки: стеклянная капсула и белая подложка, которая переезжает под выбранную. */
+
+.tabs {
+  flex: none;
+  padding: 0.1875rem;
+  border-radius: 999px;
+}
+
+.tabs__list {
   position: relative;
-  z-index: 60;
-  padding: 0 1rem 0 0.75rem;
-}
-
-/* Меню */
-
-html.menu-open {
-  overflow: hidden;
-}
-
-/* Шапка остаётся над меню: кнопка «Закрыть» на месте кнопки «Меню». */
-html.menu-open .topbar {
-  z-index: 60;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.menu {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  background: color-mix(in srgb, var(--paper) 62%, transparent);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
-  animation: menu-in 0.24s var(--ease) both;
-}
-
-@keyframes menu-in {
-  from {
-    opacity: 0;
-  }
-}
-
-.menu__body {
-  max-width: calc(var(--column) + var(--gutter) * 2);
-  min-height: 100%;
-  margin: 0 auto;
-  padding: calc(var(--bar) + 1.5rem) var(--gutter) 2rem;
   display: flex;
-  flex-direction: column;
 }
 
-.menu__eyebrow {
-  margin-bottom: 0.75rem;
-}
-
-.menu__scenarios {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.625rem;
-}
-
-@media (max-width: 30rem) {
-  .menu__scenarios {
-    grid-template-columns: 1fr;
-  }
-}
-
-.menu__scenario {
-  display: grid;
-  gap: 0.25rem;
-  padding: 1rem 1.125rem;
-  text-decoration: none;
+.tabs__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(17, 17, 19, 0.08),
+    0 6px 16px -8px rgba(17, 17, 19, 0.3);
   transition:
-    transform var(--fast) var(--ease),
-    background-color var(--fast);
+    transform 0.5s var(--ease-spring),
+    width 0.5s var(--ease-spring);
 }
 
-.menu__scenario:active {
-  transform: scale(0.98);
-}
-
-.menu__scenario[aria-current='page'] {
-  background: var(--glass-strong);
-}
-
-.menu__scenario-title {
-  font-size: 1.1875rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.menu__list {
-  margin-top: 2rem;
-}
-
-.menu__link {
-  display: grid;
-  gap: 0.125rem;
-  padding: 0.875rem 0;
-  border-top: 1px solid var(--line);
+.tabs__tab {
+  position: relative;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  font-size: var(--text-caption);
+  font-weight: 560;
+  line-height: 1.2;
+  color: var(--ink-soft);
   text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--medium) var(--ease);
 }
 
-.menu__title {
-  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.25rem);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-  transition: opacity var(--fast);
-}
-
-.menu__link[aria-current='page'] .menu__title::after {
-  content: '';
-  display: inline-block;
-  width: 0.4rem;
-  height: 0.4rem;
-  margin-left: 0.5rem;
-  vertical-align: 0.5em;
-  border-radius: 50%;
-  background: var(--ink);
+.tabs__tab[aria-current='page'] {
+  color: var(--ink);
 }
 
 @media (hover: hover) {
-  .menu__list:hover .menu__title {
-    opacity: 0.45;
-  }
-
-  .menu__list .menu__link:hover .menu__title {
-    opacity: 1;
+  .tabs__tab:hover {
+    color: var(--ink);
   }
 }
 
-.menu__foot {
-  margin-top: auto;
-  padding-top: 2rem;
+/* На телефоне вкладкам нужна вся ширина: от логотипа остаётся только знак. */
+@media (max-width: 34rem) {
+  .logo__word {
+    display: none;
+  }
+
+  .tabs__tab {
+    padding: 0.5rem 0.625rem;
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .tabs__tab {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+  }
 }

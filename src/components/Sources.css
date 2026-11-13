@@ -1,11 +1,43 @@
 .sources__head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: inherit;
-  font-weight: inherit;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2.75rem;
+  text-align: left;
+}
+
+.sources__head > svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-left: auto;
+  color: var(--ink-faint);
+  transition: transform var(--medium) var(--ease);
+}
+
+.sources[data-expanded='true'] .sources__head > svg {
+  transform: rotate(180deg);
+}
+
+/* Раскрытие по высоте содержимого: строки сетки умеют анимироваться от 0fr к 1fr. */
+.sources__fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--medium) var(--ease),
+    opacity var(--medium) var(--ease);
+}
+
+.sources[data-expanded='true'] .sources__fold {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.sources__fold > ol {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .sources__all {
@@ -33,11 +65,6 @@
   gap: 0.25rem 0.5rem;
   padding: 0.875rem 0;
   border-bottom: 1px solid var(--line);
-  scroll-margin-top: 5rem;
-}
-
-.source:target .source__title {
-  color: var(--blue);
 }
 
 .source__number {

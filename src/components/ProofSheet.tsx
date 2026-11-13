@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { shortHash } from '../../core/proof'
 import { KIND_LABEL, type Card } from '../../core/types'
@@ -37,11 +37,11 @@ export function ProofSheet({ card, onClose }: { card: Card; onClose: () => void 
       if (event.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', onKey)
-    document.documentElement.classList.add('menu-open')
+    document.documentElement.classList.add('locked')
     close.current?.focus({ preventScroll: true })
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.documentElement.classList.remove('menu-open')
+      document.documentElement.classList.remove('locked')
     }
   }, [onClose])
 
@@ -143,4 +143,11 @@ export function ProofSheet({ card, onClose }: { card: Card; onClose: () => void 
     </div>,
     document.body,
   )
+}
+
+/** Шторка с пруфом для экрана: её открывают и сноски в тексте, и список источников. */
+export function useProofSheet(): [sheet: ReactNode, show: (card: Card) => void] {
+  const [card, setCard] = useState<Card | null>(null)
+  const close = useCallback(() => setCard(null), [])
+  return [card && <ProofSheet card={card} onClose={close} />, setCard]
 }

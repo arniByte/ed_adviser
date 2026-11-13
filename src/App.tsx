@@ -1,7 +1,7 @@
-import { lazy, Suspense, useCallback, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from 'react'
 import type { ChatTurn } from '../core/protocol'
 import { parseSections } from '../core/protocol'
-import { TopBar } from './components/TopBar'
+import { tabOf, TopBar } from './components/TopBar'
 import { Ask, type Exchange } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
@@ -24,6 +24,16 @@ export function App() {
   const memory = useMemory()
   const [exchanges, setExchanges] = useState<Exchange[]>([])
   const nextId = useRef(1)
+
+  // Страница въезжает с той стороны, где стоит её вкладка.
+  const tab = tabOf(route)
+  const lastTab = useRef(tab)
+  useLayoutEffect(() => {
+    const root = document.documentElement
+    if (tab !== lastTab.current) root.dataset.dir = tab > lastTab.current ? 'next' : 'back'
+    else delete root.dataset.dir
+    lastTab.current = tab
+  }, [route, tab])
 
   // Диалог справки живёт здесь, чтобы не теряться при переходе между разделами.
   const ask = useCallback(

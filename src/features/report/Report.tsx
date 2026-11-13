@@ -10,6 +10,12 @@ import { DISCLAIMER, exportNotes, formatDate, sessionCards } from './notes'
 import './Report.css'
 
 /** Разбор сессии в виде документа: читается с экрана и печатается в PDF. */
+/** В отчёте сноска ведёт к списку источников внизу этого же листа. */
+const jumpToSource = (_: string, number: number) =>
+  document
+    .getElementById(`source-${number}`)
+    ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
 export function Report({ memory, sessionId }: { memory: Memory; sessionId: string }) {
   const session = memory.sessions.find((s) => s.id === sessionId)
   const [note, setNote] = useState('')
@@ -99,13 +105,13 @@ export function Report({ memory, sessionId }: { memory: Memory; sessionId: strin
             {item.right && (
               <div className="doc__part">
                 <h3 className="caption">Это верно</h3>
-                <RichText text={item.right} numbers={numbers} />
+                <RichText text={item.right} numbers={numbers} onCite={jumpToSource} />
               </div>
             )}
             {item.improve && (
               <div className="doc__part">
                 <h3 className="caption">Что улучшить</h3>
-                <RichText text={item.improve} numbers={numbers} />
+                <RichText text={item.improve} numbers={numbers} onCite={jumpToSource} />
               </div>
             )}
             {item.example && (

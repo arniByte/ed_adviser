@@ -1,0 +1,8 @@
+/* Холст 48×48 растягивается браузером: плавное масштабирование и есть размытие. */
+.aura {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+  pointer-events: none;
+}

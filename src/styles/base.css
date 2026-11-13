@@ -22,7 +22,8 @@ body {
   font-family: var(--font);
   font-size: var(--text-body);
   line-height: 1.5;
-  font-feature-settings: 'ss01', 'cv11';
+  letter-spacing: -0.011em;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -238,6 +239,34 @@ a:hover {
     opacity: 0;
     transform: translateY(10px);
   }
+}
+
+html[data-dir='next'] .page {
+  animation-name: page-next;
+}
+
+html[data-dir='back'] .page {
+  animation-name: page-back;
+}
+
+@keyframes page-next {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+    filter: blur(6px);
+  }
+}
+
+@keyframes page-back {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+    filter: blur(6px);
+  }
+}
+
+html.locked {
+  overflow: hidden;
 }
 
 .rise {

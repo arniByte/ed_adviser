@@ -1,128 +1,76 @@
-import { useEffect, useRef, useState } from 'react'
-import { cases, scenarios } from '../../core/knowledge'
+import { useLayoutEffect, useRef, useState } from 'react'
 import type { Route } from '../lib/route'
 import { AsciiMark } from './AsciiMark'
-import { CASES, plural } from '../lib/plural'
-import { Close, MenuIcon } from './icons'
 import './TopBar.css'
 
-const SECTIONS: { view: Route['view']; href: string; title: string; note: string }[] = [
-  { view: 'ask', href: '#/ask', title: 'Справка', note: 'Спроси наставника' },
-  { view: 'progress', href: '#/progress', title: 'Прогресс', note: 'Где уверенно, а где плаваешь' },
-  { view: 'library', href: '#/library', title: 'База знаний', note: 'Карточки с источниками' },
-  { view: 'proofs', href: '#/proofs', title: 'Пруфы', note: 'Как проверяются источники' },
-]
+export const TABS = [
+  { href: '#/', title: 'Тренажёр' },
+  { href: '#/ask', title: 'Справка' },
+  { href: '#/progress', title: 'Прогресс' },
+  { href: '#/library', title: 'База' },
+] as const
 
-const countCases = (id: string) => cases.filter((item) => item.scenario === id).length
-
-export function Logo() {
-  return (
-    <a className="logo" href="#/" aria-label="Черновик — на главную">
-      <AsciiMark size={28} face={false} />
-      <span className="logo__word">черновик</span>
-    </a>
-  )
+/** Номер вкладки для экрана: вложенные экраны подсвечивают своего «родителя». */
+export function tabOf(route: Route): number {
+  switch (route.view) {
+    case 'ask':
+      return 1
+    case 'progress':
+    case 'report':
+      return 2
+    case 'library':
+    case 'proofs':
+      return 3
+    default:
+      return 0
+  }
 }
 
 export function TopBar({ route }: { route: Route }) {
-  const [open, setOpen] = useState(false)
-  const toggle = useRef<HTMLButtonElement>(null)
-  const panel = useRef<HTMLDivElement>(null)
+  const active = tabOf(route)
+  const list = useRef<HTMLDivElement>(null)
+  const [thumb, setThumb] = useState<{ x: number; width: number } | null>(null)
 
-  // Любой переход закрывает меню.
-  const key = route.view === 'train' ? `train/${route.scenario}` : route.view
-  useEffect(() => setOpen(false), [key])
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
+  // Подложка едет под активную вкладку. Меряем после раскладки и при смене шрифта или ширины.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const link = list.current?.children[active + 1] as HTMLElement | undefined
+      if (link) setThumb({ x: link.offsetLeft, width: link.offsetWidth })
     }
-    document.addEventListener('keydown', onKey)
-    document.documentElement.classList.add('menu-open')
-    panel.current?.querySelector<HTMLElement>('a')?.focus({ preventScroll: true })
-    const button = toggle.current
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.documentElement.classList.remove('menu-open')
-      button?.focus({ preventScroll: true })
-    }
-  }, [open])
-
-  let index = 0
-  const step = () => ({ '--i': index++ }) as React.CSSProperties
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(list.current!)
+    document.fonts?.ready.then(measure)
+    return () => observer.disconnect()
+  }, [active])
 
   return (
-    <>
-      <header className="topbar">
-        <Logo />
-        <button
-          ref={toggle}
-          className="btn btn--glass btn--small topbar__menu"
-          aria-expanded={open}
-          aria-controls="menu"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <Close /> : <MenuIcon />}
-          {open ? 'Закрыть' : 'Меню'}
-        </button>
-      </header>
-
-      {open && (
-        <div
-          id="menu"
-          ref={panel}
-          className="menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Меню"
-        >
-          <nav className="menu__body">
-            <p className="caption menu__eyebrow rise" style={step()}>
-              Тренажёр
-            </p>
-            <div className="menu__scenarios">
-              {scenarios.map((scenario) => (
-                <a
-                  key={scenario.id}
-                  className="menu__scenario surface rise"
-                  style={step()}
-                  href={`#/train/${scenario.id}`}
-                  aria-current={key === `train/${scenario.id}` ? 'page' : undefined}
-                >
-                  <span className="menu__scenario-title">{scenario.title}</span>
-                  <span className="caption">
-                    {countCases(scenario.id)} {plural(countCases(scenario.id), CASES)}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            <ul className="menu__list">
-              {SECTIONS.map((section) => (
-                <li key={section.view} className="rise" style={step()}>
-                  <a
-                    className="menu__link"
-                    href={section.href}
-                    aria-current={route.view === section.view ? 'page' : undefined}
-                  >
-                    <span className="menu__title">{section.title}</span>
-                    <span className="caption">{section.note}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <p className="disclaimer menu__foot rise" style={step()}>
-              Советы носят информационный характер и не заменяют официальные требования вузов и
-              работодателей.{' '}
-              <a href="https://github.com/arniByte/ed_adviser" target="_blank" rel="noreferrer">
-                Код на GitHub
-              </a>
-            </p>
-          </nav>
+    <header className="topbar">
+      <a className="logo" href="#/" aria-label="Черновик — на главную">
+        <AsciiMark size={28} face={false} />
+        <span className="logo__word">черновик</span>
+      </a>
+      <nav className="tabs glass" aria-label="Разделы">
+        <div ref={list} className="tabs__list">
+          <span
+            className="tabs__thumb"
+            aria-hidden="true"
+            style={
+              thumb ? { transform: `translateX(${thumb.x}px)`, width: thumb.width } : { opacity: 0 }
+            }
+          />
+          {TABS.map((tab, index) => (
+            <a
+              key={tab.href}
+              className="tabs__tab"
+              href={tab.href}
+              aria-current={index === active ? 'page' : undefined}
+            >
+              {tab.title}
+            </a>
+          ))}
         </div>
-      )}
-    </>
+      </nav>
+    </header>
   )
 }

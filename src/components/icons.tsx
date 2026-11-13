@@ -35,9 +35,9 @@ export const External = () => (
   </svg>
 )
 
-export const MenuIcon = () => (
+export const Chevron = () => (
   <svg {...base}>
-    <path d="M4 7.5h12M4 12.5h12" />
+    <path d="M6 8l4 4 4-4" />
   </svg>
 )
 

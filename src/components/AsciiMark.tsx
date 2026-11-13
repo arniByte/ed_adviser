@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { AURA_SIZE, paintAura } from '../lib/aura'
 import './AsciiMark.css'
 
 export type MarkMood = 'idle' | 'thinking' | 'happy'
@@ -11,6 +12,8 @@ interface Props {
   face?: boolean
   /** Улыбается при наведении и нажатии. */
   playful?: boolean
+  /** Красить буквы плывущим градиентом вместо цвета текста. */
+  tint?: boolean
   className?: string
   label?: string
 }
@@ -84,6 +87,7 @@ export function AsciiMark({
   mood = 'idle',
   face = true,
   playful = false,
+  tint = false,
   className = '',
   label,
 }: Props) {
@@ -106,6 +110,12 @@ export function AsciiMark({
     const faceFont = `600 ${size * 0.105 * ratio}px ui-monospace, Menlo, Consolas, monospace`
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const fps = dots ? 15 : 30
+
+    // Градиент считается на крошечном холсте и растягивается поверх букв.
+    const paint = tint ? document.createElement('canvas') : null
+    const paintContext = paint?.getContext('2d')
+    const paintImage = paintContext?.createImageData(AURA_SIZE, AURA_SIZE)
+    if (paint) paint.width = paint.height = AURA_SIZE
 
     let energy = 0
     let visible = true
@@ -154,7 +164,7 @@ export function AsciiMark({
           } else {
             if (value < 0.06) continue
             const index = value < 0.32 ? 0 : letterAt(x, y, t, energy, cols)
-            context.globalAlpha = 0.16 + 0.7 * value
+            context.globalAlpha = (tint ? 0.3 : 0.16) + 0.7 * value
             context.drawImage(
               atlas!,
               index * side,
@@ -168,6 +178,15 @@ export function AsciiMark({
             )
           }
         }
+      }
+
+      if (paint && paintContext && paintImage) {
+        paintAura(paintImage, t, { palette: 'ink', bands: 0, energy })
+        paintContext.putImageData(paintImage, 0, 0)
+        context.globalAlpha = 1
+        context.globalCompositeOperation = 'source-in'
+        context.drawImage(paint, 0, 0, canvas.width, canvas.height)
+        context.globalCompositeOperation = 'source-over'
       }
 
       if (showFace) {
@@ -210,7 +229,7 @@ export function AsciiMark({
       observer.disconnect()
       document.removeEventListener('visibilitychange', run)
     }
-  }, [size, face])
+  }, [size, face, tint])
 
   const hover = (value: boolean) => () => {
     if (playful) hoverRef.current = value

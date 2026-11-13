@@ -4,20 +4,7 @@
 }
 
 .home__hero {
-  position: relative;
-  display: grid;
-  place-items: center;
   margin: 0.5rem 0 1.25rem;
-}
-
-/* Мягкая лавандовая засветка за кругом — тот самый аэрограф. */
-.home__glow {
-  position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(201, 184, 255, 0.55), transparent);
-  filter: blur(28px);
-  pointer-events: none;
 }
 
 .home__title {
@@ -57,9 +44,8 @@
 .home__scenario {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.125rem 1.25rem;
+  gap: 0.875rem;
+  padding: 0.875rem 1.25rem 0.875rem 0.875rem;
   text-decoration: none;
   transition:
     transform var(--fast) var(--ease),
@@ -67,9 +53,17 @@
     box-shadow var(--medium) var(--ease);
 }
 
-.home__scenario > span {
+.home__scenario-aura {
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  filter: blur(1.5px);
+}
+
+.home__scenario-text {
+  flex: 1;
   display: grid;
-  gap: 0.2rem;
+  gap: 0.125rem;
 }
 
 .home__scenario > svg {

@@ -73,23 +73,33 @@
     color 0.2s;
 }
 
-.cite:hover {
+button.cite {
+  border: 0;
+  cursor: pointer;
+}
+
+button.cite:hover {
   background: var(--ink);
   color: var(--paper);
 }
 
-.rich__caret {
+/* Слово проявляется из полупрозрачного размытия и чуть всплывает. */
+.w {
   display: inline-block;
-  width: 0.5em;
-  height: 1em;
-  margin-left: 0.12em;
-  vertical-align: -0.14em;
-  background: var(--ink);
-  animation: caret-blink 1s steps(2, start) infinite;
+  animation: word-in 0.55s var(--ease) backwards;
 }
 
-@keyframes caret-blink {
-  to {
-    visibility: hidden;
+@keyframes word-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.18em);
   }
+  60% {
+    opacity: 0.85;
+  }
+}
+
+.cite.w {
+  display: inline-block;
 }

@@ -3,8 +3,10 @@ import { getCard } from '../../../core/knowledge'
 import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
 import { AsciiMark } from '../../components/AsciiMark'
+import { AuraMark } from '../../components/AuraMark'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
+import { useProofSheet } from '../../components/ProofSheet'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
 import { useSmoothText } from '../../lib/useSmoothText'
@@ -64,6 +66,11 @@ function Answer({
     .filter(Boolean)
     .slice(0, 3)
   const done = exchange.status === 'done'
+  const [sheet, showProof] = useProofSheet()
+  const proveCited = (id: string) => {
+    const card = cited.find((item) => item.id === id)
+    if (card) showProof(card)
+  }
 
   return (
     <article className="exchange">
@@ -75,12 +82,12 @@ function Answer({
           {exchange.error}
         </p>
       )}
-      {lead && <RichText text={lead} numbers={numbers} streaming={streaming} />}
+      {lead && <RichText text={lead} numbers={numbers} reveal onCite={proveCited} />}
 
       {done && (
         <div className="exchange__after">
           <div className="rise">
-            <Sources cards={cited} />
+            <Sources cards={cited} onProof={showProof} />
           </div>
           {isLast && followups.length > 0 && (
             <div className="exchange__followups rise" style={{ '--i': 1 } as React.CSSProperties}>
@@ -97,6 +104,7 @@ function Answer({
           )}
         </div>
       )}
+      {sheet}
     </article>
   )
 }
@@ -115,7 +123,7 @@ export function Ask({ exchanges, onAsk }: Props) {
       {count === 0 ? (
         <section className="ask__empty">
           <div className="rise">
-            <AsciiMark size={96} playful />
+            <AuraMark size={112} palette="pastel" />
           </div>
           <h1 className="title ask__title rise" style={{ '--i': 1 } as React.CSSProperties}>
             О чём спросить?

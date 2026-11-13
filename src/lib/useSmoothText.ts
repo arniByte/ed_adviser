@@ -5,7 +5,7 @@ const CATCH_UP_FRAMES = 6
 
 /**
  * Модель присылает текст неровными кусками. Пока ответ пишется, хук выдаёт его
- * равномерно, по нескольку символов за кадр, и догоняет поток без задержки в конце.
+ * равномерно и только целыми словами: каждое новое слово проявляется отдельно.
  */
 export function useSmoothText(target: string, streaming: boolean): string {
   const [shown, setShown] = useState(streaming ? 0 : target.length)
@@ -32,5 +32,8 @@ export function useSmoothText(target: string, streaming: boolean): string {
   }, [streaming])
 
   if (!streaming) return target
-  return target.slice(0, shown)
+  const visible = target.slice(0, shown)
+  // Недописанное слово ждёт, пока придёт целиком.
+  const cut = Math.max(visible.lastIndexOf(' '), visible.lastIndexOf('\n'))
+  return shown >= target.length ? visible : visible.slice(0, cut + 1)
 }

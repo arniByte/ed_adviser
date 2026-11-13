@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getScenario, zoneTitle } from '../../../core/knowledge'
+import { getScenario } from '../../../core/knowledge'
 import {
   knownMistakeIds,
   planSession,
@@ -9,10 +9,11 @@ import {
 } from '../../../core/progress'
 import type { ScenarioId } from '../../../core/types'
 import { Composer } from '../../components/Composer'
-import { AsciiMark } from '../../components/AsciiMark'
+import { AuraMark } from '../../components/AuraMark'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
 import { askMentor } from '../../lib/api'
+import { SCENARIO_PALETTE } from '../../lib/aura'
 import { CASES, plural } from '../../lib/plural'
 import { getMemory, updateMemory } from '../../lib/memory'
 import { Debrief } from './Debrief'
@@ -100,11 +101,10 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
 
   if (phase === 'intro') {
     const probe = items.find((i) => i.kind === 'probe')
-    const zones = [...new Set(items.map((i) => zoneTitle(scenarioId, itemFacts(i).zone)))]
     return (
       <main className="page train intro">
         <div className="rise">
-          <AsciiMark size={88} playful />
+          <AuraMark size={128} palette={SCENARIO_PALETTE[scenarioId]} />
         </div>
         <p className="caption intro__eyebrow rise" style={{ '--i': 1 } as React.CSSProperties}>
           {scenario.title} · {items.length} {plural(items.length, CASES)} · около 5 минут
@@ -113,8 +113,7 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
           Отвечай как вживую
         </h1>
         <p className="lead intro__lead rise" style={{ '--i': 3 } as React.CSSProperties}>
-          Дам ситуацию с подвохом. Отвечай текстом или голосом — разберу, что верно, что улучшить, и
-          покажу удачный пример.
+          Ситуация с подвохом, твой ответ&nbsp;— и честный разбор с примером.
         </p>
         {probe?.kind === 'probe' && (
           <p className="intro__memory surface rise" style={{ '--i': 4 } as React.CSSProperties}>
@@ -129,9 +128,6 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
         >
           Начать <ArrowRight />
         </button>
-        <p className="caption intro__zones rise" style={{ '--i': 6 } as React.CSSProperties}>
-          {zones.join(' · ')}
-        </p>
         <footer className="intro__foot">
           <Disclaimer />
         </footer>

@@ -1,4 +1,4 @@
-import '@fontsource-variable/onest'
+import '@fontsource-variable/inter/opsz.css'
 import './styles/tokens.css'
 import './styles/base.css'
 import { StrictMode } from 'react'

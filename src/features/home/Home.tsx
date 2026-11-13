@@ -1,9 +1,11 @@
 import { cases, scenarios, zoneTitle } from '../../../core/knowledge'
 import { mastery, openMistakes, type Memory } from '../../../core/progress'
-import { AsciiMark } from '../../components/AsciiMark'
+import { AuraMark } from '../../components/AuraMark'
+import { Aura } from '../../components/Aura'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
+import { SCENARIO_PALETTE } from '../../lib/aura'
 import { CASES, plural } from '../../lib/plural'
 import './Home.css'
 
@@ -42,16 +44,14 @@ export function Home({ memory, onAsk }: Props) {
   return (
     <main className="page home">
       <div className="home__hero rise">
-        <span className="home__glow" aria-hidden="true" />
-        <AsciiMark size={208} playful />
+        <AuraMark size={208} />
       </div>
 
       <h1 className="display home__title rise" style={{ '--i': 1 } as React.CSSProperties}>
         Сначала — начерно
       </h1>
       <p className="lead home__lead rise" style={{ '--i': 2 } as React.CSSProperties}>
-        Отрепетируй поступление, собеседование и первый месяц на работе — до того, как это случится
-        по-настоящему.
+        Отрепетируй поступление, собеседование и первый месяц на работе.
       </p>
 
       {back && (
@@ -74,10 +74,18 @@ export function Home({ memory, onAsk }: Props) {
             style={{ '--i': 3 + index } as React.CSSProperties}
             href={`#/train/${scenario.id}`}
           >
-            <span>
+            <Aura
+              className="home__scenario-aura"
+              palette={SCENARIO_PALETTE[scenario.id]}
+              seed={index + 1}
+              round
+              bands={5}
+              fps={16}
+            />
+            <span className="home__scenario-text">
               <span className="home__scenario-title">{scenario.title}</span>
               <span className="caption">
-                {scenario.lead} · {count(scenario.id)} {plural(count(scenario.id), CASES)}
+                {count(scenario.id)} {plural(count(scenario.id), CASES)}
               </span>
             </span>
             <ArrowRight />

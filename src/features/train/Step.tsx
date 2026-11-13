@@ -3,6 +3,7 @@ import { getCard, getMistake, zoneTitle } from '../../../core/knowledge'
 import { citedIds, parseMeta, parseSections } from '../../../core/protocol'
 import type { SessionItem } from '../../../core/progress'
 import type { Card, Mistake } from '../../../core/types'
+import { useProofSheet } from '../../components/ProofSheet'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
 import { useSmoothText } from '../../lib/useSmoothText'
@@ -65,15 +66,11 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
   const raw = useSmoothText(attempt.raw, streaming)
   const review = readReview(raw, fallbackCards)
   const numbers = new Map(review.cards.map((card, index) => [card.id, index + 1]))
-  const { sections } = parseSections(raw)
-  // Курсор стоит в том блоке, который пишется прямо сейчас.
-  const writing = streaming
-    ? sections.example !== undefined
-      ? 'example'
-      : sections.improve !== undefined
-        ? 'improve'
-        : 'right'
-    : null
+  const [sheet, showProof] = useProofSheet()
+  const proveCited = (id: string) => {
+    const card = review.cards.find((item) => item.id === id)
+    if (card) showProof(card)
+  }
 
   return (
     <div ref={top} className="feedback">
@@ -92,19 +89,19 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
       {review.right && (
         <section className="block" data-tone="good">
           <h3 className="block__label">Это верно</h3>
-          <RichText text={review.right} numbers={numbers} streaming={writing === 'right'} />
+          <RichText text={review.right} numbers={numbers} reveal onCite={proveCited} />
         </section>
       )}
       {review.improve && (
         <section className="block" data-tone="warm">
           <h3 className="block__label">Что улучшить</h3>
-          <RichText text={review.improve} numbers={numbers} streaming={writing === 'improve'} />
+          <RichText text={review.improve} numbers={numbers} reveal onCite={proveCited} />
         </section>
       )}
       {review.example && (
         <section className="block block--example surface" data-tone="blue">
           <h3 className="block__label">Удачный пример ответа</h3>
-          <RichText text={review.example} streaming={writing === 'example'} />
+          <RichText text={review.example} reveal />
         </section>
       )}
 
@@ -124,9 +121,10 @@ function Feedback({ attempt, fallbackCards }: { attempt: Attempt; fallbackCards:
               </p>
             </details>
           ))}
-          <Sources cards={review.cards} title="На что опирается разбор" />
+          <Sources cards={review.cards} title="На что опирается разбор" onProof={showProof} />
         </div>
       )}
+      {sheet}
     </div>
   )
 }
