@@ -31,12 +31,11 @@ export function Progress({ memory }: { memory: Memory }) {
     <main className="page progress">
       <h1 className="display rise">Что уже в фокусе</h1>
       <p className="lead progress__lead rise" style={{ '--i': 1 } as React.CSSProperties}>
-        Размытая точка — зона, где ответы пока плавают. Чем увереннее ты отвечаешь, тем резче она
-        становится.
+        Размытая точка — зона, где ответы пока плавают. Тренируешься — она обретает резкость.
       </p>
 
       {scenarios.map((scenario) => (
-        <section key={scenario.id} className="map">
+        <section key={scenario.id} className="map" data-scenario={scenario.id}>
           <header className="map__head">
             <h2 className="map__title">{scenario.title}</h2>
             <a className="btn btn--glass btn--small" href={`#/train/${scenario.id}`}>

@@ -40,13 +40,37 @@
   gap: 0.25rem;
 }
 
+.map[data-scenario='admission'] {
+  --dot-a: #7aa6ff;
+  --dot-b: #c4b0ff;
+  --dot-c: #ffb2d6;
+}
+
+.map[data-scenario='job'] {
+  --dot-a: #24347a;
+  --dot-b: #ee54a0;
+  --dot-c: #ffb0a0;
+}
+
+.map[data-scenario='onboarding'] {
+  --dot-a: #5c5ce6;
+  --dot-b: #68aafa;
+  --dot-c: #82dec4;
+}
+
 /* Резкость точки и есть показатель: расфокус уходит по мере тренировок. */
 .zone__dot {
   width: 3.25rem;
   height: 3.25rem;
   margin-bottom: 0.625rem;
   border-radius: 50%;
-  background: var(--ink);
+  /* Цвета те же, что у сценария на главной. */
+  background: radial-gradient(
+    circle at 35% 35%,
+    var(--dot-a) 0 30%,
+    var(--dot-b) 62%,
+    var(--dot-c)
+  );
   transition:
     filter 0.8s var(--ease),
     opacity 0.8s,
@@ -54,7 +78,7 @@
 }
 
 .zone[data-level='unknown'] .zone__dot {
-  opacity: 0.16;
+  opacity: 0.32;
   filter: blur(12px);
   transform: scale(0.85);
 }
