@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { citedIds, parseMeta, parseSections } from './protocol.js'
+import { citedIds, cleanCitations, parseMeta, parseSections } from './protocol.js'
 
 describe('parseSections', () => {
   it('делит ответ на блоки по меткам', () => {
@@ -57,5 +57,27 @@ describe('citedIds', () => {
 
   it('не считает меткой обычные скобки', () => {
     expect(citedIds('Смотри [1] и [пример].')).toEqual([])
+  })
+})
+
+describe('cleanCitations', () => {
+  it('убирает id типовых ошибок вместе с припиской', () => {
+    expect(
+      cleanCitations('Ответ не закрывает вопрос [job-m-no-weakness не применяй к тексту]. Дальше.'),
+    ).toBe('Ответ не закрывает вопрос. Дальше.')
+  })
+
+  it('оставляет от метки с припиской только саму карточку', () => {
+    expect(cleanCitations('Факт [job-star, см. ниже].')).toBe('Факт [job-star].')
+  })
+
+  it('снимает круглые скобки вокруг метки', () => {
+    expect(cleanCitations('Факт ([job-star]).')).toBe('Факт [job-star].')
+  })
+
+  it('не трогает обычные метки и карточку job-minors', () => {
+    expect(cleanCitations('Норма [job-minors] и [onb-probation-law].')).toBe(
+      'Норма [job-minors] и [onb-probation-law].',
+    )
   })
 })

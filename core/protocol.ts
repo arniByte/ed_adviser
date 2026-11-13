@@ -129,10 +129,22 @@ export function parseMeta(text: string | undefined): ReviewMeta | null {
 }
 
 const CITATION = /\[((?:adm|job|onb)-[a-z0-9-]+)\]/g
+/** id типовой ошибки — у них всегда «-m-»; в тексте для пользователя им не место. */
+const MISTAKE_TAG = /\s*\[(?:adm|job|onb)-m-[^\]\n]*\]/g
+/** Метка карточки с припиской внутри скобок: «[job-star, см. ниже]». */
+const NOISY_TAG = /\[((?:adm|job|onb)-[a-z0-9-]+)[^\]\na-z0-9-][^\]\n]*\]/g
+/** Метка в круглых скобках: «(…[job-star])». */
+const WRAPPED_TAG = /\(\s*(\[(?:adm|job|onb)-[a-z0-9-]+\])\s*\)/g
+
+/**
+ * Приводит служебные метки в ответе модели к одному виду: убирает id ошибок,
+ * обрезает приписки внутри скобок и лишние круглые скобки вокруг меток.
+ */
+export function cleanCitations(text: string): string {
+  return text.replace(MISTAKE_TAG, '').replace(NOISY_TAG, '[$1]').replace(WRAPPED_TAG, '$1')
+}
 
 /** Метки карточек в порядке первого упоминания. */
 export function citedIds(text: string): string[] {
   return [...new Set([...text.matchAll(CITATION)].map((match) => match[1]))]
 }
-
-export { CITATION }

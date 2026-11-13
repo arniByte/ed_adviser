@@ -1,5 +1,6 @@
 import { getCard, getMistake, getScenario, zoneTitle } from '../../../core/knowledge'
 import type { SessionRecord } from '../../../core/progress'
+import { cleanCitations } from '../../../core/protocol'
 
 export const DISCLAIMER =
   'Советы носят информационный характер и не заменяют официальные требования вузов и работодателей.'
@@ -13,7 +14,10 @@ export function sessionCards(session: SessionRecord) {
   return ids.map(getCard).filter((card) => card !== undefined)
 }
 
-const plain = (text: string) => text.replace(/\s*\[(?:adm|job|onb)-[a-z0-9-]+\]/g, '').trim()
+const plain = (text: string) =>
+  cleanCitations(text)
+    .replace(/\s*\[(?:adm|job|onb)-[a-z0-9-]+\]/g, '')
+    .trim()
 
 /** Разбор в формате Markdown: его понимают заметки на телефоне, Notion и Obsidian. */
 export function toMarkdown(session: SessionRecord): string {

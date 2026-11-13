@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cleanCitations } from '../../core/protocol'
 import './RichText.css'
 
 interface Props {
@@ -11,8 +12,6 @@ interface Props {
 }
 
 const INLINE = /\*\*(.+?)\*\*|\[((?:adm|job|onb)-[a-z0-9-]+)\]/g
-/** Модель иногда берёт метку в скобки — «(…[id])»; номеру источника они не нужны. */
-const WRAPPED = /\(\s*(\[(?:adm|job|onb)-[a-z0-9-]+\])\s*\)/g
 const BULLET = /^\s*[-•*]\s+/
 const ORDERED = /^\s*\d+[.)]\s+/
 
@@ -65,7 +64,7 @@ function toBlocks(text: string): Block[] {
 }
 
 export function RichText({ text, numbers, streaming, className = '' }: Props) {
-  const blocks = toBlocks(text.replace(WRAPPED, '$1'))
+  const blocks = toBlocks(cleanCitations(text))
   const caret = streaming ? <span className="rich__caret" aria-hidden="true" /> : null
   return (
     <div className={`rich ${className}`}>
