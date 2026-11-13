@@ -16,8 +16,9 @@
 
 **Проверено:** prettier, typecheck, 65 тестов, check:knowledge, proofs:check, build; Playwright-скриншоты всех экранов на 390 и 1280, живой поток ответа, шторка пруфа по сноске, вкладки.
 
+**Деплой:** https://chernovik-hellowrld.vercel.app — проект `chernovik` в команде `hellowrld`, пуш в `main` выкатывается сам (см. `DEPLOY.md`).
+
 **Дальше / идеи**
 
-- Деплой на Vercel по `DEPLOY.md` и ссылка на живую версию в README.
 - Профили вузов и компаний, голосовой наставник, Telegram-бот на тех же функциях `api/`.
 - Не трогать формат `public/proofs.json` без пересборки пруфов и обновления CI.

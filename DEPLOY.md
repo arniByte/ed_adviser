@@ -31,4 +31,4 @@
 
 - Команда Vercel `hellowrld`, проект `chernovik`, привязан к `arniByte/ed_adviser`, продакшен — ветка `main`.
 - Адрес: https://chernovik-hellowrld.vercel.app
-- Нужно в панели: Settings → Deployment Protection → Vercel Authentication выключить (иначе сайт только для членов команды), Settings → Environment Variables → `OPENROUTER_API_KEY`, затем Redeploy.
+- Vercel Authentication выключена, `OPENROUTER_API_KEY` задан для Production и Preview. Живая проверка 13.11: справка и разбор ~3,3 с, пруфы 60 из 60, ошибок в консоли нет.
