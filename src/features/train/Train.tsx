@@ -156,7 +156,13 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
             docked
             busy={busy}
             autoFocus={attempts.length === 0}
-            placeholder={attempts.length === 0 ? 'Твой ответ…' : 'Вторая попытка…'}
+            placeholder={
+              busy
+                ? 'Наставник разбирает ответ…'
+                : attempts.length === 0
+                  ? 'Твой ответ…'
+                  : 'Вторая попытка…'
+            }
             onSubmit={answer}
           />
         )}
