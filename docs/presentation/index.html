@@ -127,13 +127,54 @@
         <ul class="list">
           <li>Понимает «собес» и «испыталку»</li>
           <li>Цифра у фразы открывает пруф источника</li>
-          <li>Нет ответа в базе — так и скажет</li>
+          <li>Нет в базе — поищет в интернете</li>
           <li>Три уточняющих вопроса продолжают разговор</li>
         </ul>
       </div>
       <div class="pair">
         <figure class="phone"><img src="img/ask-answer.jpg" alt="Ответ справки" /></figure>
         <figure class="phone"><img src="img/sheet.jpg" alt="Пруф источника" /></figure>
+      </div>
+    </section>
+
+    <section class="slide slide--split slide--dark">
+      <img class="dark__aura" src="img/aura-thermal.png" alt="" />
+      <div class="text">
+        <p class="eyebrow">Интернет с пруфами</p>
+        <h2>Нет в базе — найдёт в интернете и докажет</h2>
+        <ol class="flow">
+          <li>Маленькая модель за полсекунды решает, нужен ли поиск</li>
+          <li>Поиск находит страницы и выписывает дословные цитаты</li>
+          <li>Сервер сам открывает каждую страницу и ищет цитату</li>
+          <li>Подтверждённое — с отпечатком SHA-256, остальное отбрасывается</li>
+        </ol>
+        <p class="note">
+          Обычный чат-бот приходится перепроверять. Здесь у каждой сноски уже есть цитата и
+          проверка.
+        </p>
+      </div>
+      <div class="pair">
+        <figure class="phone">
+          <img src="img/web-answer.jpg" alt="Ответ с фактами из интернета" />
+        </figure>
+        <figure class="phone"><img src="img/web-proof.jpg" alt="Пруф найденной страницы" /></figure>
+      </div>
+    </section>
+
+    <section class="slide slide--split">
+      <div class="text">
+        <p class="eyebrow">Личное</p>
+        <h2>Знакомится и запоминает найденное</h2>
+        <ul class="list">
+          <li>Три вопроса при первом входе — советы под тебя</li>
+          <li>Найденное в интернете сохраняется в «Мою базу»</li>
+          <li>У личной базы свой корень Меркла</li>
+          <li>Наставник опирается на неё в следующих ответах</li>
+        </ul>
+      </div>
+      <div class="pair">
+        <figure class="phone"><img src="img/welcome.jpg" alt="Знакомство" /></figure>
+        <figure class="phone"><img src="img/mybase.jpg" alt="Моя база" /></figure>
       </div>
     </section>
 
@@ -256,7 +297,7 @@
         <p><b>0,7 с</b> до первых слов разбора</p>
         <p><b>3 с</b> весь разбор</p>
         <p><b>$0,003</b> тренировка целиком</p>
-        <p><b>65</b> тестов и проверки в CI</p>
+        <p><b>74</b> теста и проверки в CI</p>
       </div>
     </section>
 
@@ -270,11 +311,11 @@
         </article>
         <article>
           <h3>Без выдумок</h3>
-          <p>Цифры и нормы — только из карточек. Пробел в базе наставник называет прямо.</p>
+          <p>Цифры и нормы — только из карточек и страниц с подтверждённой цитатой.</p>
         </article>
         <article>
           <h3>Без личных данных</h3>
-          <p>Аккаунтов нет. Прогресс хранится в браузере и стирается одной кнопкой.</p>
+          <p>Аккаунтов нет. Профиль, прогресс и личная база — только в браузере.</p>
         </article>
         <article>
           <h3>Оговорка на виду</h3>
@@ -288,7 +329,7 @@
 
     <section class="slide slide--dark slide--closing">
       <img class="dark__aura dark__aura--center" src="img/aura-thermal.png" alt="" />
-      <img class="closing__mark" src="img/mark.png" alt="" />
+      <img class="closing__mark" src="img/mark-light.png" alt="" />
       <h2>Сначала — начерно</h2>
       <p class="lead">
         Дальше: профили вузов и компаний, наставник, который спрашивает голосом, и Telegram-бот на

@@ -6,7 +6,7 @@ AI-тренажёр для абитуриента и стажёра. Наста�
 
 [Открыть приложение](https://chernovik-hellowrld.vercel.app) · [Ролик, 1 мин](docs/media/promo.mp4) · [Демо, 3 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
 
-![Экраны: главная, разбор ответа, возвращение, карта прогресса](docs/media/screens.jpg)
+![Экраны: главная, ответ с фактами из интернета, пруф найденной страницы, разбор ответа](docs/media/screens.jpg)
 
 ## Что умеет
 
