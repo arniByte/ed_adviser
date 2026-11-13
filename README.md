@@ -4,7 +4,7 @@ AI-тренажёр для абитуриента и стажёра. Наста�
 
 Кейс «Цифровое наставничество и AI-менторство», Софтлайн Решения. Категория Lead: этапы 1–4.
 
-[Видео-демонстрация](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
+[Ролик, 1 мин](docs/media/promo.mp4) · [Демо, 3 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
 
 ![Экраны: главная, разбор ответа, возвращение, карта прогресса](docs/media/screens.jpg)
 
