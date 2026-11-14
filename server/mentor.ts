@@ -115,6 +115,8 @@ const WEB_WORDS = /интернет|в сети|онлайн|гугл|поищи
 export interface AskPlan {
   history: ChatTurn[]
   question: string
+  /** Предыдущий вопрос передаётся отдельно как контекст уточнения. */
+  previousQuestion?: string
   scenario?: ScenarioId
   profile?: string
   cards: Card[]
@@ -125,9 +127,10 @@ export interface AskPlan {
 export function planAsk(body: AskRequest): AskPlan {
   const history = turns(body.turns)
   const scenario = isScenarioId(body.scenario) ? body.scenario : undefined
-  // В запрос к поиску идут два последних вопроса: уточнение без контекста часто слишком короткое.
-  const query = history
-    .filter((turn) => turn.role === 'user')
+  const questions = history.filter((turn) => turn.role === 'user')
+  const question = text(questions.at(-1)?.content, 'вопрос')
+  // Поиск по базе учитывает прошлую реплику, а веб-поиск получает текущую тему отдельно.
+  const query = questions
     .slice(-2)
     .map((turn) => turn.content)
     .join(' ')
@@ -136,12 +139,12 @@ export function planAsk(body: AskRequest): AskPlan {
   const cards = [...base, ...mine]
   return {
     history,
-    question: query,
+    question,
+    previousQuestion: questions.at(-2)?.content,
     scenario,
     profile: profileOf(body),
     cards,
-    web:
-      body.web === true || WEB_WORDS.test(history[history.length - 1].content) || cards.length < 2,
+    web: body.web === true || WEB_WORDS.test(question) || cards.length < 2,
   }
 }
 

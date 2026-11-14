@@ -21,6 +21,7 @@
 }
 
 body {
+  counter-reset: slide;
   background: #d9d9d5;
   color: var(--ink);
   font-family: 'Inter Variable', system-ui, sans-serif;
@@ -34,6 +35,7 @@ body {
 
 .slide {
   position: relative;
+  counter-increment: slide;
   isolation: isolate;
   width: 1280px;
   height: 720px;
@@ -646,4 +648,98 @@ h3 {
 
 .facts b {
   font-size: 40px;
+}
+
+/* Тихий фолио помогает ориентироваться в длинной презентации. */
+.slide::after {
+  content: 'Черновик / ' counter(slide, decimal-leading-zero);
+  position: absolute;
+  right: 32px;
+  bottom: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  color: var(--ink-faint);
+}
+
+.slide--values {
+  background: #0f1117;
+}
+
+.values__iris {
+  position: absolute;
+  z-index: -1;
+  width: 580px;
+  height: 580px;
+  right: -80px;
+  top: -130px;
+  opacity: 0.8;
+}
+
+.slide--values h2 {
+  max-width: 800px;
+  margin-top: 25px;
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 66px;
+  font-weight: 530;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.values__lead {
+  margin-top: 24px;
+  font-size: 21px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.values__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: auto;
+}
+
+.values__grid article {
+  padding: 22px 24px 24px;
+  border: 1px solid rgba(225, 238, 244, 0.16);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(223, 239, 255, 0.085), rgba(223, 239, 255, 0.025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.values__grid .step-number {
+  color: #add3cb;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.values__grid h3 {
+  font-size: 23px;
+  font-weight: 540;
+}
+
+.values__grid article > p:last-child {
+  margin-top: 12px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.values__limit {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--ink-faint);
+}
+
+.closing__link {
+  text-decoration: none;
+  margin-top: 26px;
+  font-size: 24px;
+  color: #bde9da;
+}
+
+.slide--closing .eyebrow {
+  margin-top: 12px;
+  font-size: 14px;
 }

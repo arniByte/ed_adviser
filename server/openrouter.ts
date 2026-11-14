@@ -84,23 +84,38 @@ export async function* streamChat(options: Omit<Options, 'stream'>): AsyncGenera
   const response = await request({ ...options, stream: true })
   const reader = response.body!.pipeThrough(new TextDecoderStream()).getReader()
   let buffer = ''
-  for (;;) {
-    const { done, value } = await reader.read()
-    if (done) return
-    buffer += value
-    const lines = buffer.split('\n')
-    buffer = lines.pop() ?? ''
-    for (const line of lines) {
-      if (!line.startsWith('data: ')) continue
-      const payload = line.slice(6).trim()
-      if (payload === '[DONE]') return
-      try {
-        const delta = JSON.parse(payload).choices?.[0]?.delta?.content
+  try {
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) return
+      buffer += value
+      const lines = buffer.split('\n')
+      buffer = lines.pop() ?? ''
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        const payload = line.slice(6).trim()
+        if (payload === '[DONE]') return
+        let event
+        try {
+          event = JSON.parse(payload)
+        } catch {
+          // Служебные строки потока, которые не являются JSON, пропускаем.
+          continue
+        }
+        // После заголовков провайдер сообщает о сбое отдельным событием HTTP 200.
+        if (event?.error) {
+          throw new UpstreamError(
+            String(event.error.message ?? 'Ошибка потока OpenRouter'),
+            Number(event.error.code) || 502,
+          )
+        }
+        const delta = event?.choices?.[0]?.delta?.content
         if (typeof delta === 'string' && delta) yield delta
-      } catch {
-        // Служебные строки потока, которые не являются JSON, пропускаем.
       }
     }
+  } finally {
+    await reader.cancel().catch(() => {})
+    reader.releaseLock()
   }
 }
 

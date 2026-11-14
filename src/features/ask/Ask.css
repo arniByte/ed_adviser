@@ -61,7 +61,7 @@
 }
 
 .exchange__error {
-  color: var(--warm-ink);
+  color: var(--danger-ink);
 }
 
 .exchange__after {

@@ -143,6 +143,53 @@ describe('planAsk: личная база и интернет', () => {
     expect(plan.web).toBe(true)
   })
 
+  it('ищет по новому вопросу, когда пользователь сменил тему разговора', () => {
+    const question = 'Найди в интернете правила подачи заявления на бакалавриат в МГУ в 2026 году'
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [
+        { role: 'user', content: 'Сколько часов в неделю можно работать в 17 лет?' },
+        { role: 'assistant', content: 'Не больше 35 часов в неделю.' },
+        { role: 'user', content: question },
+      ],
+    })
+    expect(plan.question).toBe(question)
+    expect(plan.previousQuestion).toBe('Сколько часов в неделю можно работать в 17 лет?')
+    expect(plan.question).not.toContain(plan.previousQuestion)
+    expect(plan.web).toBe(true)
+  })
+
+  it('передаёт короткое уточнение отдельно от предыдущего вопроса', () => {
+    const previousQuestion = 'Сколько часов в неделю можно работать в 17 лет?'
+    const question = 'А если я ещё учусь в школе?'
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [
+        { role: 'user', content: previousQuestion },
+        { role: 'assistant', content: 'Не больше 35 часов в неделю.' },
+        { role: 'user', content: question },
+      ],
+    })
+    expect(plan.question).toBe(question)
+    expect(plan.previousQuestion).toBe(previousQuestion)
+    expect(plan.cards.map((card) => card.id)).toContain('job-minors')
+  })
+
+  it('сохраняет контекст длинного уточнения со ссылкой на прежний вуз', () => {
+    const previousQuestion = 'Какие правила поступления в МГУ?'
+    const question = 'А когда там заканчивается приём документов на платное обучение?'
+    const plan = planAsk({
+      mode: 'ask',
+      turns: [
+        { role: 'user', content: previousQuestion },
+        { role: 'assistant', content: 'Требования зависят от программы.' },
+        { role: 'user', content: question },
+      ],
+    })
+    expect(plan.question).toBe(question)
+    expect(plan.previousQuestion).toBe(previousQuestion)
+  })
+
   it('добавляет профиль в системный промпт', () => {
     const text = system({
       mode: 'ask',
