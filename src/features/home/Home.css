@@ -12,6 +12,8 @@
 }
 
 .home__lead {
+  /* Высота под две строки: смена фраз не двигает всё, что ниже. */
+  min-height: 2.9em;
   max-width: 30rem;
   margin-top: 0.875rem;
   text-wrap: balance;

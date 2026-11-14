@@ -5,6 +5,7 @@ import { transcribe } from '../lib/api'
 import { useModal } from '../lib/useModal'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../lib/voice'
 import { ArrowUp, Mic } from './icons'
+import { BlurCycle } from './BlurCycle'
 import { NavButton } from './Nav'
 import { Orb } from './Orb'
 import './Composer.css'
@@ -17,6 +18,8 @@ interface Props {
   autoFocus?: boolean
   /** Прижимает поле к низу экрана. */
   docked?: boolean
+  /** Живая подсказка: «Спроси» и сменяющиеся продолжения вместо обычного placeholder. */
+  hints?: string[]
 }
 
 /** На сенсорном экране автофокус поднял бы клавиатуру поверх вопроса. */
@@ -38,6 +41,7 @@ export function Composer({
   busy = false,
   autoFocus = false,
   docked = false,
+  hints,
 }: Props) {
   const [text, setText] = useState('')
   const [voice, setVoice] = useState<Voice>({ state: 'off' })
@@ -151,13 +155,18 @@ export function Composer({
     <form className={`composer ${docked ? 'composer--docked' : ''}`} onSubmit={submit}>
       <div className="composer__row">
         <NavButton />
+        {hints && !text && (
+          <span className="composer__hint" aria-hidden="true">
+            Спроси <BlurCycle items={hints} hold={2200} />
+          </span>
+        )}
         <textarea
           ref={field}
           className="composer__field"
           rows={1}
           value={text}
           maxLength={LIMITS.messageChars}
-          placeholder={placeholder}
+          placeholder={hints ? '' : placeholder}
           aria-label={placeholder}
           autoFocus={autoFocus && HAS_KEYBOARD}
           onChange={(event) => setText(event.target.value)}

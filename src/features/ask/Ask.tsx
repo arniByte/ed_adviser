@@ -4,6 +4,7 @@ import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
 import { Mark } from '../../components/Mark'
 import { AuraMark } from '../../components/AuraMark'
+import { ASK_HINTS } from '../../components/BlurCycle'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { useProofSheet } from '../../components/ProofSheet'
@@ -206,7 +207,13 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
           <Disclaimer />
         </div>
       )}
-      <Composer docked busy={busy} placeholder="Спроси наставника…" onSubmit={onAsk} />
+      <Composer
+        docked
+        busy={busy}
+        placeholder="Спроси наставника…"
+        hints={ASK_HINTS}
+        onSubmit={onAsk}
+      />
     </main>
   )
 }

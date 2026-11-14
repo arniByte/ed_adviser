@@ -1,0 +1,25 @@
+.blur-cycle__word {
+  display: inline-block;
+  white-space: pre;
+  animation: blur-word-in 0.6s var(--ease) backwards;
+}
+
+@keyframes blur-word-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.2em);
+  }
+}
+
+.blur-cycle--out .blur-cycle__word {
+  animation: blur-word-out 0.4s var(--ease) forwards;
+}
+
+@keyframes blur-word-out {
+  to {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(-0.15em);
+  }
+}
