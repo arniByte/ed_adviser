@@ -1,0 +1,12 @@
+{
+  "mocked": true,
+  "scope": "Isolated API HTTP503 failure state only",
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "pageErrors": [],
+  "alert": "Наставник временно недоступен. Попробуй ещё раз.",
+  "canResubmit": true,
+  "resetAfterFailure": true,
+  "passed": true
+}

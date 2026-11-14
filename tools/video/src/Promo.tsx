@@ -1,4 +1,5 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { Values } from './Values'
 import {
   AbsoluteFill,
   Audio,
@@ -16,7 +17,7 @@ import {
 } from 'remotion'
 
 export const FPS = 30
-export const DURATION = 74
+export const DURATION = 82
 
 const PAPER = '#f3f3f0'
 const NIGHT = '#0c0c0f'
@@ -433,7 +434,7 @@ function Numbers() {
   )
 }
 
-/* 66–74 с: финал */
+/* 74–82 с: финал */
 function Outro() {
   const frame = useCurrentFrame()
   const { fps, durationInFrames } = useVideoConfig()
@@ -463,7 +464,8 @@ const SCENES: [number, number, () => ReactNode][] = [
   [48, 56, Memory],
   [56, 60, Voice],
   [60, 66, Numbers],
-  [66, 74, Outro],
+  [66, 74, Values],
+  [74, 82, Outro],
 ]
 
 export function Promo() {
