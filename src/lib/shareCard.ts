@@ -1,5 +1,5 @@
 /**
- * Карточки, которыми делятся: ответ наставника или свой наставник. Рисуются на холсте
+ * Карточка «своего наставника», которой делятся. Рисуются на холсте
  * в формате 4:5 — так их удобно выложить в сторис или переслать в мессенджер.
  */
 import { AURA_SIZE, paintAura, type Palette } from './aura'
@@ -112,28 +112,6 @@ function footer(context: CanvasRenderingContext2D) {
 
 async function ready() {
   await document.fonts?.ready
-}
-
-export async function answerCard(
-  question: string,
-  answer: string,
-  palette: Palette,
-): Promise<Blob> {
-  await ready()
-  const { element, context } = canvas()
-  aura(context, palette, W - 160, 200, 900)
-  mark(context, 170, 190, 160)
-  context.fillStyle = SOFT
-  context.font = '500 32px "Inter Variable", system-ui, sans-serif'
-  context.fillText('Вопрос наставнику', 90, 360)
-  context.fillStyle = INK
-  context.font = '600 50px "Inter Variable", system-ui, sans-serif'
-  const after = wrap(context, question, 90, 430, W - 180, 62, 3)
-  context.font = '400 38px "Inter Variable", system-ui, sans-serif'
-  context.fillStyle = 'rgba(18,18,20,0.86)'
-  wrap(context, answer, 90, after + 60, W - 180, 56, 12)
-  footer(context)
-  return new Promise((resolve) => element.toBlob((blob) => resolve(blob!), 'image/png'))
 }
 
 export async function mentorCard(

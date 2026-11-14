@@ -4,7 +4,8 @@ import type { ScenarioId } from '../../core/types'
 
 export type Route =
   | { view: 'home' }
-  | { view: 'ask' }
+  | { view: 'ask'; chat?: string }
+  | { view: 'chats' }
   | { view: 'train'; scenario: ScenarioId }
   | { view: 'progress' }
   | { view: 'library' }
@@ -16,8 +17,9 @@ export type Route =
 
 function parse(hash: string): Route {
   const [view, argument] = hash.replace(/^#\/?/, '').split('/')
+  if (view === 'ask') return argument ? { view, chat: argument } : { view }
   if (
-    view === 'ask' ||
+    view === 'chats' ||
     view === 'progress' ||
     view === 'library' ||
     view === 'proofs' ||
