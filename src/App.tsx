@@ -25,6 +25,9 @@ const Proofs = lazy(() => import('./features/proofs/Proofs').then((m) => ({ defa
 const Welcome = lazy(() =>
   import('./features/welcome/Welcome').then((m) => ({ default: m.Welcome })),
 )
+const MentorStudio = lazy(() =>
+  import('./features/mentor/MentorStudio').then((m) => ({ default: m.MentorStudio })),
+)
 const Values = lazy(() => import('./features/values/Values').then((m) => ({ default: m.Values })))
 
 export function App() {
@@ -100,9 +103,10 @@ export function App() {
         {route.view === 'library' && <Library />}
         {route.view === 'proofs' && <Proofs />}
         {route.view === 'values' && <Values />}
+        {route.view === 'mentor' && <MentorStudio />}
         {route.view === 'report' && <Report memory={memory} sessionId={route.session} />}
         {greet && <Welcome />}
-        {['progress', 'library', 'proofs', 'report', 'values'].includes(route.view) && (
+        {['progress', 'library', 'proofs', 'report', 'values', 'mentor'].includes(route.view) && (
           <FloatingNav />
         )}
       </Suspense>

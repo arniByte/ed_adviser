@@ -48,6 +48,19 @@ export const Globe = () => (
   </svg>
 )
 
+export const Copy = () => (
+  <svg {...base}>
+    <rect x="7" y="7" width="9" height="9" rx="2" />
+    <path d="M13 7V5.5A1.5 1.5 0 0 0 11.5 4h-6A1.5 1.5 0 0 0 4 5.5v6A1.5 1.5 0 0 0 5.5 13H7" />
+  </svg>
+)
+
+export const Share = () => (
+  <svg {...base}>
+    <path d="M10 3v9M6.5 6.5 10 3l3.5 3.5M5 10v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-5" />
+  </svg>
+)
+
 export const Close = () => (
   <svg {...base}>
     <path d="M5 5l10 10M15 5L5 15" />

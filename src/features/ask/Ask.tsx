@@ -4,6 +4,8 @@ import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
 import { Mark } from '../../components/Mark'
 import { AuraMark } from '../../components/AuraMark'
+import { useMentor } from '../../lib/mentor'
+import { ASK_HINTS } from '../../components/BlurCycle'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { useProofSheet } from '../../components/ProofSheet'
@@ -15,6 +17,7 @@ import type { AskHandler, Exchange } from '../../lib/chat'
 import { useMine } from '../../lib/mine'
 import { plural } from '../../lib/plural'
 import { useSmoothText } from '../../lib/useSmoothText'
+import { AnswerActions } from './AnswerActions'
 import './Ask.css'
 
 const STARTERS = [
@@ -106,6 +109,7 @@ function Answer({
 
       {done && (
         <div className="exchange__after">
+          <AnswerActions question={exchange.question} lead={lead} sources={cited} />
           <div className="rise">
             <Sources cards={cited} checks={exchange.found?.checks} onProof={showProof} />
           </div>
@@ -152,6 +156,7 @@ function Answer({
 }
 
 export function Ask({ exchanges, onAsk, onReset }: Props) {
+  const mentor = useMentor()
   const busy = exchanges.some((e) => e.status === 'waiting' || e.status === 'streaming')
   const latest = useRef<HTMLDivElement>(null)
   const count = exchanges.length
@@ -165,7 +170,7 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
       {count === 0 ? (
         <section className="ask__empty">
           <div className="rise">
-            <AuraMark size={112} palette="pastel" />
+            <AuraMark size={112} palette={mentor.color} />
           </div>
           <h1 className="title ask__title rise" style={{ '--i': 1 } as React.CSSProperties}>
             О чём спросить?
@@ -206,7 +211,13 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
           <Disclaimer />
         </div>
       )}
-      <Composer docked busy={busy} placeholder="Спроси наставника…" onSubmit={onAsk} />
+      <Composer
+        docked
+        busy={busy}
+        placeholder="Спроси наставника…"
+        hints={ASK_HINTS}
+        onSubmit={onAsk}
+      />
     </main>
   )
 }

@@ -2,6 +2,7 @@
  * Договор между клиентом и сервером: формат запроса, события потока
  * и разметка, которой модель делит ответ на блоки.
  */
+import type { MentorSettings } from './mentor.js'
 import type { Profile } from './profile.js'
 import type { WebCheck } from './proof.js'
 import type { Card, ScenarioId } from './types.js'
@@ -14,6 +15,8 @@ export interface ChatTurn {
 /** Общее для всех запросов: то, что пользователь рассказал о себе. */
 interface Personal {
   profile?: Profile
+  /** Настройки «своего наставника»: тон, подробность, манера, имя. */
+  mentor?: Partial<MentorSettings>
 }
 
 export interface AskRequest extends Personal {

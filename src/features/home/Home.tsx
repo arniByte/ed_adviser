@@ -1,6 +1,8 @@
 import { scenarios, zoneTitle } from '../../../core/knowledge'
 import { mastery, openMistakes, type Memory } from '../../../core/progress'
 import { AuraMark } from '../../components/AuraMark'
+import { useMentor } from '../../lib/mentor'
+import { ASK_HINTS, BlurCycle } from '../../components/BlurCycle'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
@@ -35,19 +37,29 @@ function reminder(memory: Memory) {
   }
 }
 
+/** Подзаголовок под знаком меняется, как будто наставник думает вслух. */
+const LEADS = [
+  'Отрепетируй поступление, собеседование и первый месяц на работе.',
+  'Ошибайся здесь, а не на собеседовании.',
+  'Кейс с подвохом, честный разбор и пруф у каждого факта.',
+  'Я помню, где ты споткнулся, и начну с этого.',
+  'Сначала — начерно.',
+]
+
 export function Home({ memory, onAsk }: Props) {
   const back = reminder(memory)
   const profile = useProfile()
+  const mentor = useMentor()
 
   return (
     <main className="page home">
       <h1 className="visually-hidden">Черновик — тренажёр перед настоящим</h1>
       <div className="home__hero rise">
-        <AuraMark size={184} />
+        <AuraMark size={184} palette={mentor.color} />
       </div>
 
       <p className="lead home__lead rise" style={{ '--i': 2 } as React.CSSProperties}>
-        Отрепетируй поступление, собеседование и первый месяц на работе.
+        <BlurCycle items={LEADS} hold={3600} />
       </p>
 
       {back && (
@@ -70,7 +82,7 @@ export function Home({ memory, onAsk }: Props) {
         <Disclaimer />
       </footer>
 
-      <Composer docked placeholder="Спроси наставника…" onSubmit={onAsk} />
+      <Composer docked placeholder="Спроси наставника…" hints={ASK_HINTS} onSubmit={onAsk} />
     </main>
   )
 }

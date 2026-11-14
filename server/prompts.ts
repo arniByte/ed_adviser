@@ -1,4 +1,5 @@
 import { getCard, getScenario, zoneTitle } from '../core/knowledge.js'
+import { cleanMentor, describeMentor, isDefaultMentor } from '../core/mentor.js'
 import { KIND_LABEL, type Card, type Case, type Mistake, type Scenario } from '../core/types.js'
 
 const persona = (
@@ -51,6 +52,16 @@ function cardsBlock(cards: Card[], fresh = new Set<string>()): string {
 }
 
 /** Что пользователь рассказал о себе; добавляется к любому системному промпту. */
+/** Настройки «своего наставника» — короткий блок в конце системного промпта. */
+export function mentorNote(value: unknown): string {
+  const settings = cleanMentor(value)
+  if (isDefaultMentor(settings)) return ''
+  return `
+
+Пользователь настроил наставника под себя. Следуй этому, не нарушая правил выше:
+${describeMentor(settings)}`
+}
+
 export function profileNote(description: string | undefined): string {
   if (!description) return ''
   return `

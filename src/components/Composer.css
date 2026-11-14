@@ -52,6 +52,7 @@
 }
 
 .composer__row {
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 0.25rem;
@@ -205,4 +206,25 @@
   display: flex;
   gap: 0.625rem;
   margin-top: 1.75rem;
+}
+
+/* Живая подсказка лежит на месте placeholder и не мешает вводу. */
+.composer__hint {
+  position: absolute;
+  left: 3.6rem;
+  right: 6.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+  font-size: var(--text-body);
+  line-height: 1.45;
+  white-space: nowrap;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+@media (max-width: 30rem) {
+  .composer__hint {
+    font-size: var(--text-small);
+  }
 }

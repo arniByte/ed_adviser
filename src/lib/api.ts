@@ -2,6 +2,7 @@ import { LIMITS, type MentorRequest, type StreamEvent } from '../../core/protoco
 import type { WebCheck } from '../../core/proof'
 import type { Card } from '../../core/types'
 import { getMine } from './mine'
+import { getMentor } from './mentor'
 import { getProfile } from './profile'
 
 export interface Found {
@@ -42,16 +43,18 @@ export async function askMentor(request: MentorRequest, handlers: Handlers): Pro
     request.mode === 'ask' ? WEB_TIMEOUT_MS : TIMEOUT_MS,
   )
   const profile = getProfile() ?? undefined
+  const mentor = getMentor()
   const personal: MentorRequest =
     request.mode === 'ask'
       ? {
           ...request,
           profile,
+          mentor,
           mine: getMine()
             .slice(0, LIMITS.mineCards)
             .map((item) => item.card),
         }
-      : { ...request, profile }
+      : { ...request, profile, mentor }
   const abort = () => controller.abort(handlers.signal?.reason)
   if (handlers.signal?.aborted) abort()
   else handlers.signal?.addEventListener('abort', abort, { once: true })

@@ -16,6 +16,10 @@ const count = (id: string) => cases.filter((c) => c.scenario === id).length
 export function ScenarioDeck({ first }: { first?: ScenarioId }) {
   const track = useRef<HTMLDivElement>(null)
   const [current, setCurrent] = useState(0)
+  const currentRef = useRef(0)
+  currentRef.current = current
+  // Перетаскивание мышью: насколько сдвинули — чтобы отличить жест от клика.
+  const drag = useRef({ active: false, startX: 0, startScroll: 0, moved: 0 })
 
   useEffect(() => {
     const element = track.current!
@@ -50,27 +54,103 @@ export function ScenarioDeck({ first }: { first?: ScenarioId }) {
     update()
     element.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
+
+    // Колесо мыши листает по одной карточке; у края колоды прокрутка достаётся странице.
+    let lastWheel = 0
+    const onWheel = (event: WheelEvent) => {
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+      const step = Math.sign(delta)
+      const next = currentRef.current + step
+      if (!step || next < 0 || next >= scenarios.length) return
+      event.preventDefault()
+      const now = performance.now()
+      if (now - lastWheel < 420) return
+      lastWheel = now
+      center(next)
+    }
+    element.addEventListener('wheel', onWheel, { passive: false })
     return () => {
       cancelAnimationFrame(frame)
       element.removeEventListener('scroll', schedule)
+      element.removeEventListener('wheel', onWheel)
       window.removeEventListener('resize', schedule)
     }
   }, [first])
 
-  const goTo = (index: number) => {
-    const card = track.current!.children[index] as HTMLElement
-    card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+  const goTo = (index: number) => center(index)
+
+  // Сдвиг только ленты, без прокрутки страницы.
+  function center(index: number) {
+    const element = track.current
+    const card = element?.children[index] as HTMLElement | undefined
+    if (!element || !card) return
+    element.scrollTo({
+      left: card.offsetLeft + card.offsetWidth / 2 - element.clientWidth / 2,
+      behavior: 'smooth',
+    })
+  }
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return
+    const element = track.current!
+    drag.current = {
+      active: true,
+      startX: event.clientX,
+      startScroll: element.scrollLeft,
+      moved: 0,
+    }
+  }
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const state = drag.current
+    if (!state.active) return
+    const element = track.current!
+    state.moved = Math.max(state.moved, Math.abs(event.clientX - state.startX))
+    if (state.moved > 4) {
+      element.classList.add('deck__track--dragging')
+      element.scrollLeft = state.startScroll - (event.clientX - state.startX)
+    }
+  }
+  const endDrag = () => {
+    const state = drag.current
+    if (!state.active) return
+    state.active = false
+    const element = track.current!
+    if (state.moved > 4) {
+      element.classList.remove('deck__track--dragging')
+      center(currentRef.current)
+    }
+  }
+  // Клик по боковой карточке сначала выводит её в центр; клик после перетаскивания — не клик.
+  const onCardClick = (index: number) => (event: React.MouseEvent) => {
+    if (drag.current.moved > 4) {
+      event.preventDefault()
+      drag.current.moved = 0
+      return
+    }
+    if (index !== currentRef.current) {
+      event.preventDefault()
+      center(index)
+    }
   }
 
   return (
     <nav className="deck" aria-label="Сценарии тренажёра">
-      <div ref={track} className="deck__track">
+      <div
+        ref={track}
+        className="deck__track"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        onDragStart={(event) => event.preventDefault()}
+      >
         {scenarios.map((scenario, index) => (
           <a
             key={scenario.id}
             className="deck__card"
             href={`#/train/${scenario.id}`}
             aria-current={index === current ? 'true' : undefined}
+            onClick={onCardClick(index)}
           >
             <Aura
               className="deck__aura"
