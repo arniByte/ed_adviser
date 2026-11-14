@@ -7,7 +7,7 @@ import './AuraMark.css'
 export function AuraMark({ size, palette = 'thermal' }: { size: number; palette?: Palette }) {
   return (
     <div className="aura-mark" style={{ width: size, height: size }}>
-      <Aura className="aura-mark__glow" palette={palette} round bands={6} />
+      <Aura className="aura-mark__glow" palette={palette} round bands={0} fps={12} />
       <Mark size={size} />
     </div>
   )
