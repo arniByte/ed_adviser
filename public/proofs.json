@@ -1,35 +1,80 @@
 {
  "version": 1,
  "scheme": "sha256; leaf = H(\"leaf:\" + canonical JSON); node = H(\"node:\" + left + right)",
- "root": "2ae71bdccbda8c49e04933039b80509905773e93f05a0b9401db8c128305ff20",
- "builtAt": "2026-11-13",
+ "root": "e6c1c55b0174b088775e3f867c7a6c39cc8a7dbf0e555aa6c26ec960eb7b9c7a",
+ "builtAt": "2026-11-14",
  "cards": {
+  "adm-achievements-weights": {
+   "hash": "b19758dd172e50a0b052288d89072ae6c545b7ddc4cfcdf78233caee6bee5703",
+   "path": [
+    [
+     "r",
+     "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf"
+    ],
+    [
+     "r",
+     "b6127c93044924045a070a60da8f4924000d1c8fb439e453abcc1afd5b4d0096"
+    ],
+    [
+     "r",
+     "b868de7e272ca5878f8ef0fcab5bdb85650f9e016f1356155776a0acfe5a6595"
+    ],
+    [
+     "r",
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "b19758dd172e50a0b052288d89072ae6c545b7ddc4cfcdf78233caee6bee5703",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-admission-quality": {
    "hash": "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf",
    "path": [
     [
-     "r",
-     "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809"
+     "l",
+     "b19758dd172e50a0b052288d89072ae6c545b7ddc4cfcdf78233caee6bee5703"
     ],
     [
      "r",
-     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
+     "b6127c93044924045a070a60da8f4924000d1c8fb439e453abcc1afd5b4d0096"
     ],
     [
      "r",
-     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+     "b868de7e272ca5878f8ef0fcab5bdb85650f9e016f1356155776a0acfe5a6595"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -41,32 +86,77 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-bauman-dates": {
+   "hash": "4d8ae1f3013014a1060826f10cfdc151cbe88e9614241028e5c5fc425b5bb435",
+   "path": [
+    [
+     "r",
+     "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809"
+    ],
+    [
+     "l",
+     "006dbcd81053355c101afcaed3fe068c8a57284d14f6e92da1f3b97104173ad7"
+    ],
+    [
+     "r",
+     "b868de7e272ca5878f8ef0fcab5bdb85650f9e016f1356155776a0acfe5a6595"
+    ],
+    [
+     "r",
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "4d8ae1f3013014a1060826f10cfdc151cbe88e9614241028e5c5fc425b5bb435",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-choice-difficulties": {
    "hash": "12fc1460b5e80de2a63568225e26bb1e23d2f008cf0d09c3fbaac7f0a1699809",
    "path": [
     [
      "l",
-     "85197694419f8fc61c1ffb503f8552bbf9693221350c648824f80df236873cdf"
+     "4d8ae1f3013014a1060826f10cfdc151cbe88e9614241028e5c5fc425b5bb435"
+    ],
+    [
+     "l",
+     "006dbcd81053355c101afcaed3fe068c8a57284d14f6e92da1f3b97104173ad7"
     ],
     [
      "r",
-     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
+     "b868de7e272ca5878f8ef0fcab5bdb85650f9e016f1356155776a0acfe5a6595"
     ],
     [
      "r",
-     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -86,24 +176,28 @@
      "e8a6210578126bb1488ae89a8d6127dc0d8c840be12e0ceba92ffa2b050ed5a3"
     ],
     [
+     "r",
+     "0c788c8105fcc7b236e3ac7447a5fadf783b95b715a944b6efbdcf1bfe543e5a"
+    ],
+    [
      "l",
-     "07d70e81c8db8afc33a7918bf331e1065b81f828fe78f13d49d6a8c9e994cadc"
+     "00e28b0f0322459a0bf50ac5422e292d46bb627307eca47f6f235caae9fb7f1e"
     ],
     [
      "r",
-     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -123,24 +217,28 @@
      "382f2f5d88069cdad3b20fbc8fd01b4feb9ce20cbe651dfa4be8407c5dfc35bf"
     ],
     [
+     "r",
+     "0c788c8105fcc7b236e3ac7447a5fadf783b95b715a944b6efbdcf1bfe543e5a"
+    ],
+    [
      "l",
-     "07d70e81c8db8afc33a7918bf331e1065b81f828fe78f13d49d6a8c9e994cadc"
+     "00e28b0f0322459a0bf50ac5422e292d46bb627307eca47f6f235caae9fb7f1e"
     ],
     [
      "r",
-     "f78f0ae69e27eab7acac1152455cc75455bc49cfc2770b40bc2cd271565c0e98"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -157,27 +255,31 @@
    "path": [
     [
      "r",
-     "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5"
-    ],
-    [
-     "r",
-     "c13b5f5e2508dd07066bac52d49151ea19fdcca628bcd42441ac0b436a9cc3d1"
+     "1e5ca7350f3a861d133102bab3afd50a4df3982ccce1158ce087b793e664c004"
     ],
     [
      "l",
-     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
+    ],
+    [
+     "l",
+     "00e28b0f0322459a0bf50ac5422e292d46bb627307eca47f6f235caae9fb7f1e"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -189,32 +291,200 @@
     "detail": "Цитата найдена на странице"
    }
   },
-  "adm-diploma-region": {
-   "hash": "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5",
+  "adm-college-exams": {
+   "hash": "1e5ca7350f3a861d133102bab3afd50a4df3982ccce1158ce087b793e664c004",
    "path": [
     [
      "l",
      "41425b02eec8fe23202d356e45f83864fb516aa4c3aa2e1e77c4828485a0bd4c"
     ],
     [
-     "r",
-     "c13b5f5e2508dd07066bac52d49151ea19fdcca628bcd42441ac0b436a9cc3d1"
+     "l",
+     "2eac4ee349d59ac34e630048791ab8a1b56b1eb1febd6952a134bfbe0a53a18a"
     ],
     [
      "l",
-     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+     "00e28b0f0322459a0bf50ac5422e292d46bb627307eca47f6f235caae9fb7f1e"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "103b3e1d703af92a0662ec915fcf3b04e5cac3e8300f4c70bd4e30b792f3c8da"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "1e5ca7350f3a861d133102bab3afd50a4df3982ccce1158ce087b793e664c004",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-consent-deadlines": {
+   "hash": "41313d0b328abf66dc192048396d8cde2a42b857821f6f9705a5474d72f7be81",
+   "path": [
+    [
+     "r",
+     "cca86346bbd1f931c9c7b6b58f26c9b671c6c3fed65ba4894b72f35b7465ec7d"
+    ],
+    [
+     "r",
+     "2c39396dc3cefd4919017b0ce5feef34968c627e4c594c5058e6bc3753e1c690"
+    ],
+    [
+     "r",
+     "bbc97d2f297da36782d143c4dd1272fce24304f08418db7266e3dfd37a1eba75"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "41313d0b328abf66dc192048396d8cde2a42b857821f6f9705a5474d72f7be81",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-consent-withdraw": {
+   "hash": "cca86346bbd1f931c9c7b6b58f26c9b671c6c3fed65ba4894b72f35b7465ec7d",
+   "path": [
+    [
+     "l",
+     "41313d0b328abf66dc192048396d8cde2a42b857821f6f9705a5474d72f7be81"
+    ],
+    [
+     "r",
+     "2c39396dc3cefd4919017b0ce5feef34968c627e4c594c5058e6bc3753e1c690"
+    ],
+    [
+     "r",
+     "bbc97d2f297da36782d143c4dd1272fce24304f08418db7266e3dfd37a1eba75"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "cca86346bbd1f931c9c7b6b58f26c9b671c6c3fed65ba4894b72f35b7465ec7d",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-deadline-ege": {
+   "hash": "50c1054c71b51746a8cda888c30e9a6e64e2b98af4771eb69a975cdb29f30c48",
+   "path": [
+    [
+     "r",
+     "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5"
+    ],
+    [
+     "l",
+     "e0f3cd296c5debcff18d528ee9078a4f2b7d3fcaa8b93b71da86c08ceec2eecf"
+    ],
+    [
+     "r",
+     "bbc97d2f297da36782d143c4dd1272fce24304f08418db7266e3dfd37a1eba75"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "50c1054c71b51746a8cda888c30e9a6e64e2b98af4771eb69a975cdb29f30c48",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-diploma-region": {
+   "hash": "7353a7e3bc12b6798ecc1df2bc040037c3f02944739f823f00fa46d037c138a5",
+   "path": [
+    [
+     "l",
+     "50c1054c71b51746a8cda888c30e9a6e64e2b98af4771eb69a975cdb29f30c48"
+    ],
+    [
+     "l",
+     "e0f3cd296c5debcff18d528ee9078a4f2b7d3fcaa8b93b71da86c08ceec2eecf"
+    ],
+    [
+     "r",
+     "bbc97d2f297da36782d143c4dd1272fce24304f08418db7266e3dfd37a1eba75"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -226,32 +496,323 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-dorm-cost": {
+   "hash": "6f596b847b1c28da0bd60f722c10e2a27029ca7e519a5cc7edafc4688b184793",
+   "path": [
+    [
+     "r",
+     "b9bb18c86b00312b6f967468e29f451fdaba9bde8a30cbdc7c4568fc9f38fd15"
+    ],
+    [
+     "r",
+     "b3a6d19c497406036e2dd7b65ccadecc7992f4616c0c3481209c40f22e3ae012"
+    ],
+    [
+     "l",
+     "b03fd3043bd56ee97f2b011cc4bfa75bceb8061a0af58b731a54f76ecac46411"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6f596b847b1c28da0bd60f722c10e2a27029ca7e519a5cc7edafc4688b184793",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-dorm-right": {
+   "hash": "b9bb18c86b00312b6f967468e29f451fdaba9bde8a30cbdc7c4568fc9f38fd15",
+   "path": [
+    [
+     "l",
+     "6f596b847b1c28da0bd60f722c10e2a27029ca7e519a5cc7edafc4688b184793"
+    ],
+    [
+     "r",
+     "b3a6d19c497406036e2dd7b65ccadecc7992f4616c0c3481209c40f22e3ae012"
+    ],
+    [
+     "l",
+     "b03fd3043bd56ee97f2b011cc4bfa75bceb8061a0af58b731a54f76ecac46411"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "b9bb18c86b00312b6f967468e29f451fdaba9bde8a30cbdc7c4568fc9f38fd15",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-dorm-social": {
+   "hash": "6e65e52223131b88bb7a8844e31fbc0e2875189be7e823ad3e3570f5310b8057",
+   "path": [
+    [
+     "r",
+     "92c8ea4b1d6c2ed69aa709fef493331ecf34dcdef31ea891b31902fdc90073ac"
+    ],
+    [
+     "l",
+     "7164a4e632b0ebfccc1d7ac6384e9fb7f5d3c3c1a6ccfb0d6d5b0625c9e64b22"
+    ],
+    [
+     "l",
+     "b03fd3043bd56ee97f2b011cc4bfa75bceb8061a0af58b731a54f76ecac46411"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6e65e52223131b88bb7a8844e31fbc0e2875189be7e823ad3e3570f5310b8057",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-ege-minimum": {
+   "hash": "92c8ea4b1d6c2ed69aa709fef493331ecf34dcdef31ea891b31902fdc90073ac",
+   "path": [
+    [
+     "l",
+     "6e65e52223131b88bb7a8844e31fbc0e2875189be7e823ad3e3570f5310b8057"
+    ],
+    [
+     "l",
+     "7164a4e632b0ebfccc1d7ac6384e9fb7f5d3c3c1a6ccfb0d6d5b0625c9e64b22"
+    ],
+    [
+     "l",
+     "b03fd3043bd56ee97f2b011cc4bfa75bceb8061a0af58b731a54f76ecac46411"
+    ],
+    [
+     "l",
+     "d50fef90aae55cf1ccd4436901ca6ca96c6c1b81b10ce108e9e1e1644799df22"
+    ],
+    [
+     "r",
+     "10ae4459c892f009b3eabbcacaa3e8a5b63f1662071a6fa7bfc594cab5c87cbe"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "92c8ea4b1d6c2ed69aa709fef493331ecf34dcdef31ea891b31902fdc90073ac",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-five-universities": {
+   "hash": "f70590ba483bf2676d2b4d1bdcc82e746f8fb382f9b87c8d22ee0304c5612609",
+   "path": [
+    [
+     "r",
+     "4aca405a4db97a7d46b292c791055c46c5f3e8a75b7af22ba43e52baee3f4ef5"
+    ],
+    [
+     "r",
+     "bdfe83efd46cb307ac7a9ed44d60d3e9a1ff4bc361384628af55326a36cd921b"
+    ],
+    [
+     "r",
+     "8207dd00aa1fc7403cd92a9098e4c82d1208a88f46de7c76663b9e00c840ee54"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "f70590ba483bf2676d2b4d1bdcc82e746f8fb382f9b87c8d22ee0304c5612609",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-gosuslugi": {
+   "hash": "4aca405a4db97a7d46b292c791055c46c5f3e8a75b7af22ba43e52baee3f4ef5",
+   "path": [
+    [
+     "l",
+     "f70590ba483bf2676d2b4d1bdcc82e746f8fb382f9b87c8d22ee0304c5612609"
+    ],
+    [
+     "r",
+     "bdfe83efd46cb307ac7a9ed44d60d3e9a1ff4bc361384628af55326a36cd921b"
+    ],
+    [
+     "r",
+     "8207dd00aa1fc7403cd92a9098e4c82d1208a88f46de7c76663b9e00c840ee54"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "4aca405a4db97a7d46b292c791055c46c5f3e8a75b7af22ba43e52baee3f4ef5",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-gosuslugi-only": {
+   "hash": "3e2347b46232161781227d2e18c22d72dfdd408e761d54af3a986e72ab568947",
+   "path": [
+    [
+     "r",
+     "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7"
+    ],
+    [
+     "l",
+     "744bc50a2d1de35119d6ae78c2d485f5fc6736d02cb6e92d81aaf4284b02cb4f"
+    ],
+    [
+     "r",
+     "8207dd00aa1fc7403cd92a9098e4c82d1208a88f46de7c76663b9e00c840ee54"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "3e2347b46232161781227d2e18c22d72dfdd408e761d54af3a986e72ab568947",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-graduates-rating": {
    "hash": "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7",
    "path": [
     [
-     "r",
-     "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12"
+     "l",
+     "3e2347b46232161781227d2e18c22d72dfdd408e761d54af3a986e72ab568947"
     ],
     [
      "l",
-     "b5c6d4584823abf36bf27fc75ea67564af648cdb446df8f98f3c84b2dd53a0b8"
+     "744bc50a2d1de35119d6ae78c2d485f5fc6736d02cb6e92d81aaf4284b02cb4f"
+    ],
+    [
+     "r",
+     "8207dd00aa1fc7403cd92a9098e4c82d1208a88f46de7c76663b9e00c840ee54"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
     ],
     [
      "l",
-     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -263,32 +824,241 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-hse-achievements": {
+   "hash": "3bba1f814d57dbdf64dcf0bf96348570b6dccba9d5d7a7d3f7c09c418112c181",
+   "path": [
+    [
+     "r",
+     "8ef9e327982fc4bbb22b9bc736a33167a8c71749f6f3079caf7c86b87e7a829b"
+    ],
+    [
+     "r",
+     "2d8d69bdeed138a67f11f1c9f3108ba514b8a4820ca14cc60f25404417df897d"
+    ],
+    [
+     "l",
+     "a45a7d531555b22b5520f06f49c9dfb1f7dac2d15fb392c54b7aa99df45f4583"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "3bba1f814d57dbdf64dcf0bf96348570b6dccba9d5d7a7d3f7c09c418112c181",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-hse-scores": {
+   "hash": "8ef9e327982fc4bbb22b9bc736a33167a8c71749f6f3079caf7c86b87e7a829b",
+   "path": [
+    [
+     "l",
+     "3bba1f814d57dbdf64dcf0bf96348570b6dccba9d5d7a7d3f7c09c418112c181"
+    ],
+    [
+     "r",
+     "2d8d69bdeed138a67f11f1c9f3108ba514b8a4820ca14cc60f25404417df897d"
+    ],
+    [
+     "l",
+     "a45a7d531555b22b5520f06f49c9dfb1f7dac2d15fb392c54b7aa99df45f4583"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "8ef9e327982fc4bbb22b9bc736a33167a8c71749f6f3079caf7c86b87e7a829b",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-itmo-minimum": {
+   "hash": "4400bb283e590161831a06e79b3be52c205d62ea93d62aa9d3acb20f45a6a5c4",
+   "path": [
+    [
+     "r",
+     "02cd9c0823289913c4644c02e95a647850c78a963fb7b10c2183caf4ef8326d0"
+    ],
+    [
+     "l",
+     "31689368c874c75c075f6b547e70121679df6f752c29269d7909e41eb882b7de"
+    ],
+    [
+     "l",
+     "a45a7d531555b22b5520f06f49c9dfb1f7dac2d15fb392c54b7aa99df45f4583"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "4400bb283e590161831a06e79b3be52c205d62ea93d62aa9d3acb20f45a6a5c4",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-itmo-olympiads": {
+   "hash": "02cd9c0823289913c4644c02e95a647850c78a963fb7b10c2183caf4ef8326d0",
+   "path": [
+    [
+     "l",
+     "4400bb283e590161831a06e79b3be52c205d62ea93d62aa9d3acb20f45a6a5c4"
+    ],
+    [
+     "l",
+     "31689368c874c75c075f6b547e70121679df6f752c29269d7909e41eb882b7de"
+    ],
+    [
+     "l",
+     "a45a7d531555b22b5520f06f49c9dfb1f7dac2d15fb392c54b7aa99df45f4583"
+    ],
+    [
+     "r",
+     "2352aa5c2d3ec9960963f2d8fe11eaae714876a4718e10c652ae18b0b1bbce66"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "02cd9c0823289913c4644c02e95a647850c78a963fb7b10c2183caf4ef8326d0",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-itmo-rsosh-75": {
+   "hash": "96c458070c9867ac6309c5a55a9ab3f71e486ed4676b5390224b74ccd9d87c3a",
+   "path": [
+    [
+     "r",
+     "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12"
+    ],
+    [
+     "r",
+     "3ab34cbf2277f8b42f74856d7c6280da43285795874d12348b6fda566ad58684"
+    ],
+    [
+     "r",
+     "7565603ba378e8d57a638c2e11611a3907ba965c776b0acbe3f4da99fcd847d9"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "96c458070c9867ac6309c5a55a9ab3f71e486ed4676b5390224b74ccd9d87c3a",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-lists-inflated": {
    "hash": "04360ad155bb58191b1b79c5508d48be11e28d4d2363da6c0a061be52f021c12",
    "path": [
     [
      "l",
-     "5c67b9f0101ac2866236ca732f773559652ccc36c0c055bf8d9e015574f58ca7"
+     "96c458070c9867ac6309c5a55a9ab3f71e486ed4676b5390224b74ccd9d87c3a"
+    ],
+    [
+     "r",
+     "3ab34cbf2277f8b42f74856d7c6280da43285795874d12348b6fda566ad58684"
+    ],
+    [
+     "r",
+     "7565603ba378e8d57a638c2e11611a3907ba965c776b0acbe3f4da99fcd847d9"
     ],
     [
      "l",
-     "b5c6d4584823abf36bf27fc75ea67564af648cdb446df8f98f3c84b2dd53a0b8"
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
     ],
     [
      "l",
-     "6de882fc86aa5284e10341ae9dc995ecc703aee80a9e7810640df765ad74fb4a"
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
     ],
     [
      "r",
-     "07c9bedabe4db12387c3dd1034fec5109799b8cdb72d028960ab8bc10184a0b4"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -300,32 +1070,241 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-minimum-vs-pass": {
+   "hash": "214cab89dccbae4e769689ddcae65caf401c41e078bbf36a51fb54a4723ac3b6",
+   "path": [
+    [
+     "r",
+     "249f4529fa2d1d013dceea7423e7084d5bef20a02233076e1d4fe21f7f9ff621"
+    ],
+    [
+     "l",
+     "fbd56a506918115c2e3d8538022f18590a3926103940c42bfbb0205c259358ae"
+    ],
+    [
+     "r",
+     "7565603ba378e8d57a638c2e11611a3907ba965c776b0acbe3f4da99fcd847d9"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "214cab89dccbae4e769689ddcae65caf401c41e078bbf36a51fb54a4723ac3b6",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-mipt-290": {
+   "hash": "249f4529fa2d1d013dceea7423e7084d5bef20a02233076e1d4fe21f7f9ff621",
+   "path": [
+    [
+     "l",
+     "214cab89dccbae4e769689ddcae65caf401c41e078bbf36a51fb54a4723ac3b6"
+    ],
+    [
+     "l",
+     "fbd56a506918115c2e3d8538022f18590a3926103940c42bfbb0205c259358ae"
+    ],
+    [
+     "r",
+     "7565603ba378e8d57a638c2e11611a3907ba965c776b0acbe3f4da99fcd847d9"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "249f4529fa2d1d013dceea7423e7084d5bef20a02233076e1d4fe21f7f9ff621",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-msu-dvi": {
+   "hash": "6e83d85f4e4dea9e0e15e46b8d0070e7602f1507d1770b70e5fba0074a5ff04c",
+   "path": [
+    [
+     "r",
+     "77f255d17de05b4aca0fd4c268618d8fc4627e044bc85a0f08d3fe879cd62462"
+    ],
+    [
+     "r",
+     "c5e040e99f4368469c348b25477e6580d6c39c39794de74c4cea9790af44501d"
+    ],
+    [
+     "l",
+     "3f081bb7c9d0e8ce0fdef66f4d7b004bb5ecbd455bd09fc69f43cf8c99377c4b"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6e83d85f4e4dea9e0e15e46b8d0070e7602f1507d1770b70e5fba0074a5ff04c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-msu-dvi-zero": {
+   "hash": "77f255d17de05b4aca0fd4c268618d8fc4627e044bc85a0f08d3fe879cd62462",
+   "path": [
+    [
+     "l",
+     "6e83d85f4e4dea9e0e15e46b8d0070e7602f1507d1770b70e5fba0074a5ff04c"
+    ],
+    [
+     "r",
+     "c5e040e99f4368469c348b25477e6580d6c39c39794de74c4cea9790af44501d"
+    ],
+    [
+     "l",
+     "3f081bb7c9d0e8ce0fdef66f4d7b004bb5ecbd455bd09fc69f43cf8c99377c4b"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "77f255d17de05b4aca0fd4c268618d8fc4627e044bc85a0f08d3fe879cd62462",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-olympiad-benefit": {
+   "hash": "0892a65a45563847e5c43f37d15ebfd5db09f979c6c0f910ad8681e3a8874dca",
+   "path": [
+    [
+     "r",
+     "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba"
+    ],
+    [
+     "l",
+     "27c0a722fb8d4a1e72785b55224b233c1cfa924ccb90723f13fed41cf7665b3d"
+    ],
+    [
+     "l",
+     "3f081bb7c9d0e8ce0fdef66f4d7b004bb5ecbd455bd09fc69f43cf8c99377c4b"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
+    ],
+    [
+     "r",
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "0892a65a45563847e5c43f37d15ebfd5db09f979c6c0f910ad8681e3a8874dca",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-olympiad-first": {
    "hash": "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba",
    "path": [
     [
-     "r",
-     "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43"
-    ],
-    [
-     "r",
-     "36f05276de60105c375ba43892347b985048f3953634d32e1b502ec942a64a97"
-    ],
-    [
-     "r",
-     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+     "l",
+     "0892a65a45563847e5c43f37d15ebfd5db09f979c6c0f910ad8681e3a8874dca"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "27c0a722fb8d4a1e72785b55224b233c1cfa924ccb90723f13fed41cf7665b3d"
+    ],
+    [
+     "l",
+     "3f081bb7c9d0e8ce0fdef66f4d7b004bb5ecbd455bd09fc69f43cf8c99377c4b"
+    ],
+    [
+     "l",
+     "4525406250d3170ecffc63fc3258c1442a3f6408f03c2452c9b613bef2569cd9"
+    ],
+    [
+     "l",
+     "8cee31b631828340124b8dbc677d663e6d76dd54aedb9ccfcab66ad7dac0f697"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "ab3107a9190a1a522984f14b1d44c444f9793a270575c958d4cabfb285486a59"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -337,12 +1316,12 @@
     "detail": "Цитата найдена на странице"
    }
   },
-  "adm-ovp-vpp": {
-   "hash": "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43",
+  "adm-olympiad-list": {
+   "hash": "9f75c3426640c4f1d5f66cfebb33a6caa48fdc1c6894374d4bf413a129c6f48c",
    "path": [
     [
-     "l",
-     "73f9488038af10531dd30df357ce718a07b7b23a8a98d8ebc8afa143764e04ba"
+     "r",
+     "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43"
     ],
     [
      "r",
@@ -350,19 +1329,64 @@
     ],
     [
      "r",
-     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+     "d27625960ec5235fc7a47061062806e8abe765d1d7ff80bc70b66c61683b564b"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "9f75c3426640c4f1d5f66cfebb33a6caa48fdc1c6894374d4bf413a129c6f48c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-ovp-vpp": {
+   "hash": "0f5790209b025dbe025c013c269665bc1b3b13d32e3ed28b36799ad81ef23a43",
+   "path": [
+    [
+     "l",
+     "9f75c3426640c4f1d5f66cfebb33a6caa48fdc1c6894374d4bf413a129c6f48c"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "36f05276de60105c375ba43892347b985048f3953634d32e1b502ec942a64a97"
+    ],
+    [
+     "r",
+     "d27625960ec5235fc7a47061062806e8abe765d1d7ff80bc70b66c61683b564b"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -383,23 +1407,27 @@
     ],
     [
      "l",
-     "e4c9b04cbf72fc72a5af8043099e8ddc4dc7609b0ee9e2ed5a537b9b1ace8f7e"
+     "fa7f15ee3ec7053874b9081a38a7bb8ce9b186064faba45e9aa32b319b112bc9"
     ],
     [
      "r",
-     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+     "d27625960ec5235fc7a47061062806e8abe765d1d7ff80bc70b66c61683b564b"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -420,23 +1448,27 @@
     ],
     [
      "l",
-     "e4c9b04cbf72fc72a5af8043099e8ddc4dc7609b0ee9e2ed5a537b9b1ace8f7e"
+     "fa7f15ee3ec7053874b9081a38a7bb8ce9b186064faba45e9aa32b319b112bc9"
     ],
     [
      "r",
-     "f7dc8b06d7503fde1f63d0cf20c74aa0680108e7f7d88800986cd4f473620587"
+     "d27625960ec5235fc7a47061062806e8abe765d1d7ff80bc70b66c61683b564b"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -448,32 +1480,77 @@
     "detail": "Crossref: «Planned Happenstance: Constructing Unexpected Career Opportunities», Mitchell и др., 1999, Journal of Counseling & Development"
    }
   },
+  "adm-priorities-per-uni": {
+   "hash": "da3d3bb02b6e2e7d6e7a75ccaaba923b9f139933ab2a636c700453c4ae5130f0",
+   "path": [
+    [
+     "r",
+     "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa"
+    ],
+    [
+     "r",
+     "a6eccaa07c427ebda92bbb205aca000446ff55cfbb99c722975f80ab08271d28"
+    ],
+    [
+     "l",
+     "330aa77125e77b7fc88d98f45621a2d635502d4e5a6e6da942bbd9eba7ebb459"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "da3d3bb02b6e2e7d6e7a75ccaaba923b9f139933ab2a636c700453c4ae5130f0",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-priority-order": {
    "hash": "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa",
    "path": [
     [
-     "r",
-     "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9"
+     "l",
+     "da3d3bb02b6e2e7d6e7a75ccaaba923b9f139933ab2a636c700453c4ae5130f0"
     ],
     [
      "r",
-     "8ba81b1d84dd43fae5b39fd80d8aadefca1c2bbe8594e783ca097bc4884b48ae"
+     "a6eccaa07c427ebda92bbb205aca000446ff55cfbb99c722975f80ab08271d28"
     ],
     [
      "l",
-     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+     "330aa77125e77b7fc88d98f45621a2d635502d4e5a6e6da942bbd9eba7ebb459"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -489,28 +1566,32 @@
    "hash": "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9",
    "path": [
     [
-     "l",
-     "24aabf2254ccade9895c616324880ed2945e1b1f44d72216de55aad3e3105daa"
-    ],
-    [
      "r",
-     "8ba81b1d84dd43fae5b39fd80d8aadefca1c2bbe8594e783ca097bc4884b48ae"
+     "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1"
     ],
     [
      "l",
-     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+     "5d4d6c5f031c62dbdbe0bc6b407ba86284e2e72a8ae23fe32b177128fabef03c"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "330aa77125e77b7fc88d98f45621a2d635502d4e5a6e6da942bbd9eba7ebb459"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -526,28 +1607,32 @@
    "hash": "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1",
    "path": [
     [
-     "r",
-     "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19"
+     "l",
+     "ea9e923e4d3367c776670ba3e5bc79fa3ba4a862da41f1520763af340ce099a9"
     ],
     [
      "l",
-     "be62f6d6c8c6962d2264de2019f01f12fcf8bd8430984beba50b0df0bdb41bc7"
+     "5d4d6c5f031c62dbdbe0bc6b407ba86284e2e72a8ae23fe32b177128fabef03c"
     ],
     [
      "l",
-     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
+     "330aa77125e77b7fc88d98f45621a2d635502d4e5a6e6da942bbd9eba7ebb459"
+    ],
+    [
+     "r",
+     "e9bc0482b593aafc75c9efe0e698bac1f9d2458f66d3b8f5e59f12da58810d61"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
     ],
     [
      "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -563,28 +1648,32 @@
    "hash": "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19",
    "path": [
     [
-     "l",
-     "841df8ba32feb99a8bdd97c7fba76a311fd89167b1679884dcb86fe2ea9adee1"
-    ],
-    [
-     "l",
-     "be62f6d6c8c6962d2264de2019f01f12fcf8bd8430984beba50b0df0bdb41bc7"
-    ],
-    [
-     "l",
-     "215f761b595edca0211cae9c2dc17caa1c958e7ee1f159a48cfe4383d4ee7444"
-    ],
-    [
-     "l",
-     "effb2b792e85a2787f4edd87e620656acbfd438d882f25eb51493f570d846661"
+     "r",
+     "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686"
     ],
     [
      "r",
-     "32d27435fb85cc7f6aa65ae29338aeff72e858198e7db11ea56e525b49f5b2ba"
+     "20bbbe287a996a892a66941d4f509e0bf27c45e1a02a0b10270e2883984f9210"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "0525b649007ed5f22e24cedcd7de37b080216402f5c86158ad9a9e87ccaf2879"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -600,28 +1689,32 @@
    "hash": "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686",
    "path": [
     [
-     "r",
-     "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e"
+     "l",
+     "52c13d688baf70d83ce1fd93464939a8977c54ee651a19d01462b570e33f8d19"
     ],
     [
      "r",
-     "17d4a8694c3b019fe2a404bbe3522b11daeeb087d06dd4ad7f93fe60a01c4336"
+     "20bbbe287a996a892a66941d4f509e0bf27c45e1a02a0b10270e2883984f9210"
     ],
     [
      "r",
-     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
-    ],
-    [
-     "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "0525b649007ed5f22e24cedcd7de37b080216402f5c86158ad9a9e87ccaf2879"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -633,12 +1726,258 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-silence-day": {
+   "hash": "7e34e4d4f3179abac401eb7a2e1edab9105da55063f87dd9a40523e992afa1ff",
+   "path": [
+    [
+     "r",
+     "72f66842a25e33df9833cce74ba608d52174172f88c7e393a597373d732a411c"
+    ],
+    [
+     "l",
+     "c41987fd67ff285fa2104e34350df51f7a1e05497a4097b0afa01e95d8e4224a"
+    ],
+    [
+     "r",
+     "0525b649007ed5f22e24cedcd7de37b080216402f5c86158ad9a9e87ccaf2879"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "7e34e4d4f3179abac401eb7a2e1edab9105da55063f87dd9a40523e992afa1ff",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-spbu-dates": {
+   "hash": "72f66842a25e33df9833cce74ba608d52174172f88c7e393a597373d732a411c",
+   "path": [
+    [
+     "l",
+     "7e34e4d4f3179abac401eb7a2e1edab9105da55063f87dd9a40523e992afa1ff"
+    ],
+    [
+     "l",
+     "c41987fd67ff285fa2104e34350df51f7a1e05497a4097b0afa01e95d8e4224a"
+    ],
+    [
+     "r",
+     "0525b649007ed5f22e24cedcd7de37b080216402f5c86158ad9a9e87ccaf2879"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "72f66842a25e33df9833cce74ba608d52174172f88c7e393a597373d732a411c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-spbu-online": {
+   "hash": "c490ef566d16d93eb4114c445c2b74d0b5f1d5c778dbb317e4d0ffebf1772469",
+   "path": [
+    [
+     "r",
+     "2ff3f739bdefe919761d7da4d5be3146e931e3d9a796e5caa3369c87a4a3b0f6"
+    ],
+    [
+     "r",
+     "9e480c02ca6455e9937a60cdc5a88a2c99587db0c1885275406e4c7c68a34933"
+    ],
+    [
+     "l",
+     "7209001d3779d813280092a3fe1966542e154c1229979bc9f9206f977a40066b"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "c490ef566d16d93eb4114c445c2b74d0b5f1d5c778dbb317e4d0ffebf1772469",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-start-june20": {
+   "hash": "2ff3f739bdefe919761d7da4d5be3146e931e3d9a796e5caa3369c87a4a3b0f6",
+   "path": [
+    [
+     "l",
+     "c490ef566d16d93eb4114c445c2b74d0b5f1d5c778dbb317e4d0ffebf1772469"
+    ],
+    [
+     "r",
+     "9e480c02ca6455e9937a60cdc5a88a2c99587db0c1885275406e4c7c68a34933"
+    ],
+    [
+     "l",
+     "7209001d3779d813280092a3fe1966542e154c1229979bc9f9206f977a40066b"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "2ff3f739bdefe919761d7da4d5be3146e931e3d9a796e5caa3369c87a4a3b0f6",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-stipend-debt": {
+   "hash": "d6879ac7629830ce358b5cd918f0007cac8f45508c4cba525e32b9f762a05b08",
+   "path": [
+    [
+     "r",
+     "6a851924330ee2d7ff8aabdc758696b7f33c564aca457fcd2ec62282ba12f384"
+    ],
+    [
+     "l",
+     "d3b5870b86efaf5fb47efada762b998c6c7362367ff7d3dd28a4c12d66ec57b6"
+    ],
+    [
+     "l",
+     "7209001d3779d813280092a3fe1966542e154c1229979bc9f9206f977a40066b"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "d6879ac7629830ce358b5cd918f0007cac8f45508c4cba525e32b9f762a05b08",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-stipend-first": {
+   "hash": "6a851924330ee2d7ff8aabdc758696b7f33c564aca457fcd2ec62282ba12f384",
+   "path": [
+    [
+     "l",
+     "d6879ac7629830ce358b5cd918f0007cac8f45508c4cba525e32b9f762a05b08"
+    ],
+    [
+     "l",
+     "d3b5870b86efaf5fb47efada762b998c6c7362367ff7d3dd28a4c12d66ec57b6"
+    ],
+    [
+     "l",
+     "7209001d3779d813280092a3fe1966542e154c1229979bc9f9206f977a40066b"
+    ],
+    [
+     "l",
+     "320cec8ed338e5007a8dae2dfafeabf1d7d2b59b43675cff2a1018955afaef15"
+    ],
+    [
+     "r",
+     "f4fcd063e01cc4d5889d230bcf48723d46ba03efd745672e88dc65aa11281d38"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6a851924330ee2d7ff8aabdc758696b7f33c564aca457fcd2ec62282ba12f384",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-story-last-day": {
    "hash": "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e",
    "path": [
     [
-     "l",
-     "5b9a35871f4829957c779e938c0c1ee00178b7d359152b790d1afd631c4ce686"
+     "r",
+     "919a33162f0dfecfe0442f76728c2f5e6cbd09c89607c27d336f4750ea3d0b36"
     ],
     [
      "r",
@@ -646,25 +1985,70 @@
     ],
     [
      "r",
-     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+     "f7f004f520815b5249cb92c4f9f9f90fa5c07861c979a6113f79242b37928a66"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
     "kind": "quote",
     "checkedAt": "2026-11-13",
     "checkedHash": "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-target-fine": {
+   "hash": "919a33162f0dfecfe0442f76728c2f5e6cbd09c89607c27d336f4750ea3d0b36",
+   "path": [
+    [
+     "l",
+     "6201535bb21cd10ab0ff837470e5c3c4c69e7ad141b8a150ece7f15f3210f74e"
+    ],
+    [
+     "r",
+     "17d4a8694c3b019fe2a404bbe3522b11daeeb087d06dd4ad7f93fe60a01c4336"
+    ],
+    [
+     "r",
+     "f7f004f520815b5249cb92c4f9f9f90fa5c07861c979a6113f79242b37928a66"
+    ],
+    [
+     "r",
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "919a33162f0dfecfe0442f76728c2f5e6cbd09c89607c27d336f4750ea3d0b36",
     "ok": true,
     "status": 200,
     "detail": "Цитата найдена на странице"
@@ -679,23 +2063,27 @@
     ],
     [
      "l",
-     "20bab6a388cdfff0beac38d64a882d63db5916ba271aa1d703bf59b2f651949e"
+     "ed13c67a894f2375c667e625762fdc80af2176d491abeef4610b8a874b55ff45"
     ],
     [
      "r",
-     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+     "f7f004f520815b5249cb92c4f9f9f90fa5c07861c979a6113f79242b37928a66"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -716,23 +2104,27 @@
     ],
     [
      "l",
-     "20bab6a388cdfff0beac38d64a882d63db5916ba271aa1d703bf59b2f651949e"
+     "ed13c67a894f2375c667e625762fdc80af2176d491abeef4610b8a874b55ff45"
     ],
     [
      "r",
-     "246e73e5e4093c0a646dbef0fffc237d1c1b685f0e67afe09d58dd6aa0ee27ce"
+     "f7f004f520815b5249cb92c4f9f9f90fa5c07861c979a6113f79242b37928a66"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -744,32 +2136,200 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "adm-target-term": {
+   "hash": "20f1741d15caafe030f40c8b6770ab6acb1bc7be5c199754177b475d52ec78c2",
+   "path": [
+    [
+     "r",
+     "ca7dfe7cde7b279e9ac04995cb748e2130c83581823d448030239b7d94086149"
+    ],
+    [
+     "r",
+     "a00bee3fc5df1d5fa33dee236a9ea9958fc3a056916c9e593c23d58265d1be07"
+    ],
+    [
+     "l",
+     "a3013fae1f951c0a6814813f5b21c3d413d675f373602a52fcec5ba3cb459be9"
+    ],
+    [
+     "r",
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "20f1741d15caafe030f40c8b6770ab6acb1bc7be5c199754177b475d52ec78c2",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-tax-deduction": {
+   "hash": "ca7dfe7cde7b279e9ac04995cb748e2130c83581823d448030239b7d94086149",
+   "path": [
+    [
+     "l",
+     "20f1741d15caafe030f40c8b6770ab6acb1bc7be5c199754177b475d52ec78c2"
+    ],
+    [
+     "r",
+     "a00bee3fc5df1d5fa33dee236a9ea9958fc3a056916c9e593c23d58265d1be07"
+    ],
+    [
+     "l",
+     "a3013fae1f951c0a6814813f5b21c3d413d675f373602a52fcec5ba3cb459be9"
+    ],
+    [
+     "r",
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "ca7dfe7cde7b279e9ac04995cb748e2130c83581823d448030239b7d94086149",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-tax-deduction-terms": {
+   "hash": "a5a36336dd1712eee5de27eba6c26c85342acf4db4785b1c2e1b7b1f349c0136",
+   "path": [
+    [
+     "r",
+     "6f263612dc9916454c39f6fe9fbf340eeab80346f1825c3b48ccac4823d61cda"
+    ],
+    [
+     "l",
+     "03633127c37a702816b25924f38ca47f70d410f17a9ffa2301e142990c7d768d"
+    ],
+    [
+     "l",
+     "a3013fae1f951c0a6814813f5b21c3d413d675f373602a52fcec5ba3cb459be9"
+    ],
+    [
+     "r",
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "a5a36336dd1712eee5de27eba6c26c85342acf4db4785b1c2e1b7b1f349c0136",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "adm-vsosh-diploma": {
+   "hash": "6f263612dc9916454c39f6fe9fbf340eeab80346f1825c3b48ccac4823d61cda",
+   "path": [
+    [
+     "l",
+     "a5a36336dd1712eee5de27eba6c26c85342acf4db4785b1c2e1b7b1f349c0136"
+    ],
+    [
+     "l",
+     "03633127c37a702816b25924f38ca47f70d410f17a9ffa2301e142990c7d768d"
+    ],
+    [
+     "l",
+     "a3013fae1f951c0a6814813f5b21c3d413d675f373602a52fcec5ba3cb459be9"
+    ],
+    [
+     "r",
+     "bafef105e94bf788f6dcd0a561fd3cff472d057e1d50e7ad4760290cdec1ffae"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6f263612dc9916454c39f6fe9fbf340eeab80346f1825c3b48ccac4823d61cda",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "adm-want-can-need": {
    "hash": "f4f1d2137db3d4e102f9e392a5ff976a48b1a8a1a19f4c9227f908209287dd6a",
    "path": [
     [
      "r",
-     "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0"
+     "2c348b54c2fe981b02b28e0838e34dba0e86d1c2e1fd9c604b2597292254d850"
     ],
     [
      "r",
-     "16386fe55c30e77bbb0c4f2143d19a51d4f0701115850edc51d3a4f888157631"
+     "60e681501d1f0b0cf36704582169b39d39e5c2337512f9a12851549508437b86"
+    ],
+    [
+     "r",
+     "62e1e2ec20c785cb53fe1310e266ed9efbc970be5685b85210115b90ab0504cc"
     ],
     [
      "l",
-     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
-    ],
-    [
-     "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -781,8 +2341,8 @@
     "detail": "Цитата найдена на странице"
    }
   },
-  "job-contract-written": {
-   "hash": "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0",
+  "job-behavioral": {
+   "hash": "2c348b54c2fe981b02b28e0838e34dba0e86d1c2e1fd9c604b2597292254d850",
    "path": [
     [
      "l",
@@ -790,23 +2350,150 @@
     ],
     [
      "r",
-     "16386fe55c30e77bbb0c4f2143d19a51d4f0701115850edc51d3a4f888157631"
-    ],
-    [
-     "l",
-     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+     "60e681501d1f0b0cf36704582169b39d39e5c2337512f9a12851549508437b86"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "62e1e2ec20c785cb53fe1310e266ed9efbc970be5685b85210115b90ab0504cc"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "2c348b54c2fe981b02b28e0838e34dba0e86d1c2e1fd9c604b2597292254d850",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-contract-copy": {
+   "hash": "cc246ed9fbf9750f9e4556c65cd866b2fc4875e84add9d0e546a434a0a993661",
+   "path": [
+    [
+     "r",
+     "3f5cbf6f173e97092cb6b3a2b4c59a184567e938816239c2cca661f53f1c7a76"
+    ],
+    [
+     "l",
+     "3129d9f698eb01b36aabcd0dc5343d5af7c5a1d5bed6938c98d683b46c865fc5"
+    ],
+    [
+     "r",
+     "62e1e2ec20c785cb53fe1310e266ed9efbc970be5685b85210115b90ab0504cc"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "cc246ed9fbf9750f9e4556c65cd866b2fc4875e84add9d0e546a434a0a993661",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-contract-terms": {
+   "hash": "3f5cbf6f173e97092cb6b3a2b4c59a184567e938816239c2cca661f53f1c7a76",
+   "path": [
+    [
+     "l",
+     "cc246ed9fbf9750f9e4556c65cd866b2fc4875e84add9d0e546a434a0a993661"
+    ],
+    [
+     "l",
+     "3129d9f698eb01b36aabcd0dc5343d5af7c5a1d5bed6938c98d683b46c865fc5"
+    ],
+    [
+     "r",
+     "62e1e2ec20c785cb53fe1310e266ed9efbc970be5685b85210115b90ab0504cc"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "3f5cbf6f173e97092cb6b3a2b4c59a184567e938816239c2cca661f53f1c7a76",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-contract-written": {
+   "hash": "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0",
+   "path": [
+    [
+     "r",
+     "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a"
+    ],
+    [
+     "r",
+     "16d7333e08d992905bc286978b04efa00799e9cde0b6d7c8e00b6e139dec34e6"
+    ],
+    [
+     "l",
+     "4f2a6e1b7c12c3543cc1db3510a3799efe7a3038799993641ea93017240c4985"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
+    ],
+    [
+     "r",
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -822,28 +2509,32 @@
    "hash": "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a",
    "path": [
     [
-     "r",
-     "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942"
-    ],
-    [
      "l",
-     "86be520020d414d677e0a4358e204ae29ae585a9bf708f2c5ebe9667943e1e0a"
-    ],
-    [
-     "l",
-     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+     "b92fad908c547e0128ceb7c32bad5d66b04e9c364c47c6d40f39a89c53dd0de0"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
+     "16d7333e08d992905bc286978b04efa00799e9cde0b6d7c8e00b6e139dec34e6"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "4f2a6e1b7c12c3543cc1db3510a3799efe7a3038799993641ea93017240c4985"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -859,28 +2550,32 @@
    "hash": "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942",
    "path": [
     [
-     "l",
-     "b95346bf7cc303730bab3670ffdefa9ca28bc1cb1069a9314013b67990b73f7a"
+     "r",
+     "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6"
     ],
     [
      "l",
-     "86be520020d414d677e0a4358e204ae29ae585a9bf708f2c5ebe9667943e1e0a"
+     "a0cdd2729a2b3b26491011e39a92acfbaacd854676bd4dfecfc9a1260c75149c"
     ],
     [
      "l",
-     "d3c1d567edc0c0ad5291d35eac8d35ffb4b114a1436c15cc9317141bb77d612b"
+     "4f2a6e1b7c12c3543cc1db3510a3799efe7a3038799993641ea93017240c4985"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "4eda5cd75f165b3ffbee8547fc55b9bdcc8abc3a3b214eb64374d6ca90f40c43"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
-    ],
-    [
-     "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -896,28 +2591,32 @@
    "hash": "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6",
    "path": [
     [
-     "r",
-     "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb"
-    ],
-    [
-     "r",
-     "a5e394d1af2f5c6b69e20ec64f4df5e7bf89fec7386072de3de65a38f14cef42"
-    ],
-    [
-     "r",
-     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+     "l",
+     "eced87cf1bbaff61472fed06f5d1b820eb8598c826e09080e597bbcbb04f0942"
     ],
     [
      "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
+     "a0cdd2729a2b3b26491011e39a92acfbaacd854676bd4dfecfc9a1260c75149c"
     ],
     [
      "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "4f2a6e1b7c12c3543cc1db3510a3799efe7a3038799993641ea93017240c4985"
+    ],
+    [
+     "l",
+     "64e510100294eb91b38f2a8d3b2ba39c56ec736180b1af252ce6182df454a381"
+    ],
+    [
+     "l",
+     "c69b588bb39487627fb35831d665d5e975635a045b84213eb2919d74363a2801"
+    ],
+    [
+     "l",
+     "c2e4055b33dee5e0dd75d1637cdeb018aea6df59fc6b651f3bed7a686b69bcca"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "d3f1c207f2aac5176b4755eaf691478a294713d6e0ff89b3feda179656b6abfc"
     ]
    ],
    "check": {
@@ -933,28 +2632,32 @@
    "hash": "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb",
    "path": [
     [
-     "l",
-     "5ce08f619f90d6c1ae80c38963cb5acec66fd14852dba60e76bd1e3de63de1f6"
+     "r",
+     "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194"
     ],
     [
      "r",
-     "a5e394d1af2f5c6b69e20ec64f4df5e7bf89fec7386072de3de65a38f14cef42"
+     "9d8602cac13aa2c8c01ba4010e94c864ed3c13f7d9955127b5f33ae757fd8975"
     ],
     [
      "r",
-     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "3e82c244160a727361c17ccd4e1b053413a42548958709de96a6a8ff943a0300"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -970,28 +2673,32 @@
    "hash": "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194",
    "path": [
     [
-     "r",
-     "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9"
-    ],
-    [
      "l",
-     "520732acb5285c4f64dffb0f2de6ec8a3b3bb0ec382486ed1f5fde7255f3e6f4"
+     "fea3c555af254c3743b5938e18aa9b8ca8b69c452b3b3c964146ec79ddbadceb"
     ],
     [
      "r",
-     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "9d8602cac13aa2c8c01ba4010e94c864ed3c13f7d9955127b5f33ae757fd8975"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "3e82c244160a727361c17ccd4e1b053413a42548958709de96a6a8ff943a0300"
+    ],
+    [
+     "r",
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1003,38 +2710,165 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "job-minors-14": {
+   "hash": "0d1dd042d65a60bebeba70430752caff2ff22a086a2e3e713cb0681fd53c0f1c",
+   "path": [
+    [
+     "r",
+     "9a99168758ad3434ca9409307332e2b5590b6e92bbc09e0bdc669573ba745c74"
+    ],
+    [
+     "l",
+     "7411745639c7266845c1c577a9a1a1f9b402b9eedaefd550915d494543a8b24a"
+    ],
+    [
+     "r",
+     "3e82c244160a727361c17ccd4e1b053413a42548958709de96a6a8ff943a0300"
+    ],
+    [
+     "r",
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "0d1dd042d65a60bebeba70430752caff2ff22a086a2e3e713cb0681fd53c0f1c",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-minors-study": {
+   "hash": "9a99168758ad3434ca9409307332e2b5590b6e92bbc09e0bdc669573ba745c74",
+   "path": [
+    [
+     "l",
+     "0d1dd042d65a60bebeba70430752caff2ff22a086a2e3e713cb0681fd53c0f1c"
+    ],
+    [
+     "l",
+     "7411745639c7266845c1c577a9a1a1f9b402b9eedaefd550915d494543a8b24a"
+    ],
+    [
+     "r",
+     "3e82c244160a727361c17ccd4e1b053413a42548958709de96a6a8ff943a0300"
+    ],
+    [
+     "r",
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "9a99168758ad3434ca9409307332e2b5590b6e92bbc09e0bdc669573ba745c74",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "job-refusal-reason": {
    "hash": "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9",
    "path": [
     [
-     "l",
-     "59abf4df2dc6744ff8dc997fcffafe329df207af2fb10c71b8988d8d40aab194"
-    ],
-    [
-     "l",
-     "520732acb5285c4f64dffb0f2de6ec8a3b3bb0ec382486ed1f5fde7255f3e6f4"
+     "r",
+     "256d5495c49e5abbe2f9f437b839a61363adb32d0e013170a72abbe3eee97f84"
     ],
     [
      "r",
-     "1536d128ed1d43c96d9371a17f49fcc54d765c1273549d1b094a851823f91dd4"
+     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
     ],
     [
      "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "3f1c57f6af559c19ee7279b6362dae8ace6f359b342615a80b8b9de10c73771c"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
     "kind": "quote",
     "checkedAt": "2026-11-13",
     "checkedHash": "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-resume-no-experience": {
+   "hash": "256d5495c49e5abbe2f9f437b839a61363adb32d0e013170a72abbe3eee97f84",
+   "path": [
+    [
+     "l",
+     "7ff6458c0ae417da949d9d02181bb12c892c18cf6ff8586fe005023d484cc6b9"
+    ],
+    [
+     "r",
+     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
+    ],
+    [
+     "l",
+     "3f1c57f6af559c19ee7279b6362dae8ace6f359b342615a80b8b9de10c73771c"
+    ],
+    [
+     "r",
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "256d5495c49e5abbe2f9f437b839a61363adb32d0e013170a72abbe3eee97f84",
     "ok": true,
     "status": 200,
     "detail": "Цитата найдена на странице"
@@ -1048,24 +2882,28 @@
      "e0d6438b503070138f60b523f7c532fe98d1bbd6e8e75b1788ad31f19e08faf2"
     ],
     [
-     "r",
-     "5a42ebe135d993575bd88c9d8631e0e3303ffb0d9adfd9e71862c14c474de93c"
+     "l",
+     "bb156e6140aea14498d0474cdd6277bf256779198b95d512fc0f689cc44c42d3"
     ],
     [
      "l",
-     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "3f1c57f6af559c19ee7279b6362dae8ace6f359b342615a80b8b9de10c73771c"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1085,24 +2923,28 @@
      "40bf8ad757bfc6215e703a42fa3135c4f576d8227967a7568c6d9579b7c17e77"
     ],
     [
-     "r",
-     "5a42ebe135d993575bd88c9d8631e0e3303ffb0d9adfd9e71862c14c474de93c"
+     "l",
+     "bb156e6140aea14498d0474cdd6277bf256779198b95d512fc0f689cc44c42d3"
     ],
     [
      "l",
-     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "3f1c57f6af559c19ee7279b6362dae8ace6f359b342615a80b8b9de10c73771c"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dbc0cf0254d74a938d33befb78d8fe74f0da625afb8afa302750046523f62377"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1114,32 +2956,118 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "job-resume-skills": {
+   "hash": "a75dacc0ddba7b70714f3f18e8f7ab99dd0c520e10bfaedeadc7371b31e45d67",
+   "path": [
+    [
+     "r",
+     "ad79653d55952f47b784664db5272d515eb077d7dfaaae3d363bf5c5ba603965"
+    ],
+    [
+     "r",
+     "8578b7ae7e59c10b1af6a4709bcfe4df20b5b562517d8eb1f37640c6f933d510"
+    ],
+    [
+     "r",
+     "dc3a2fccf4611ff003d0d2693a3391dbe30de46d4885e8911e50bf86d222d44a"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "a75dacc0ddba7b70714f3f18e8f7ab99dd0c520e10bfaedeadc7371b31e45d67",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-resume-study": {
+   "hash": "ad79653d55952f47b784664db5272d515eb077d7dfaaae3d363bf5c5ba603965",
+   "path": [
+    [
+     "l",
+     "a75dacc0ddba7b70714f3f18e8f7ab99dd0c520e10bfaedeadc7371b31e45d67"
+    ],
+    [
+     "r",
+     "8578b7ae7e59c10b1af6a4709bcfe4df20b5b562517d8eb1f37640c6f933d510"
+    ],
+    [
+     "r",
+     "dc3a2fccf4611ff003d0d2693a3391dbe30de46d4885e8911e50bf86d222d44a"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "ad79653d55952f47b784664db5272d515eb077d7dfaaae3d363bf5c5ba603965",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "job-salary-question": {
    "hash": "ac4980ea7a27bba5983b55151a241e743fbd98495561c35216a0f46ed713b60a",
    "path": [
     [
      "r",
-     "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a"
+     "bb9af214119b8d5f3edff1547aeb1aa54765e198616207fa28999875cbbbaa76"
     ],
     [
      "l",
-     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
-    ],
-    [
-     "l",
-     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "d2345ba7b18d2a50858a327668d796a492b475eddd522cd9c1242388758ff7e2"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dc3a2fccf4611ff003d0d2693a3391dbe30de46d4885e8911e50bf86d222d44a"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1151,8 +3079,8 @@
     "detail": "Цитата найдена на странице"
    }
   },
-  "job-scam-pay-first": {
-   "hash": "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a",
+  "job-scam-card": {
+   "hash": "bb9af214119b8d5f3edff1547aeb1aa54765e198616207fa28999875cbbbaa76",
    "path": [
     [
      "l",
@@ -1160,23 +3088,109 @@
     ],
     [
      "l",
-     "a763cfa04dc2b1d1c97d27e189a67ca5becb996a469309f4794c52bb2088e82c"
-    ],
-    [
-     "l",
-     "122ee6dc8d1c1ecc29a324ae6445fb4307f9c2385df8c398da6d9756432b8777"
-    ],
-    [
-     "l",
-     "6175ae7eef08d360c6572b126e2b0290d1c7559880d50fc1f88ef9bc8a241bb1"
-    ],
-    [
-     "l",
-     "e412dfbaadf61d2b3883b0e1f991da502624e664deb6c710771a90e2fad65803"
+     "d2345ba7b18d2a50858a327668d796a492b475eddd522cd9c1242388758ff7e2"
     ],
     [
      "r",
-     "ea927157a4b7bf6db62844b002cfc333b512db13c48b2daf73052876edea55f7"
+     "dc3a2fccf4611ff003d0d2693a3391dbe30de46d4885e8911e50bf86d222d44a"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "bb9af214119b8d5f3edff1547aeb1aa54765e198616207fa28999875cbbbaa76",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-scam-money-sent": {
+   "hash": "4f1133836c2bc5f20ce64bf6b8c6009baf147ef9bb9615273394f94d80023066",
+   "path": [
+    [
+     "r",
+     "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a"
+    ],
+    [
+     "r",
+     "7761d5535faf188d75245f8d1636059ae93dc456da63e03ed1c1ce007afcd2f9"
+    ],
+    [
+     "l",
+     "90ac04af30a8f84bbfe5e4baf4d3d2cee4540d3e6aa1e317e63915b522eaa53f"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "4f1133836c2bc5f20ce64bf6b8c6009baf147ef9bb9615273394f94d80023066",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-scam-pay-first": {
+   "hash": "331b95827cbdac74f7059e9734c6b1e91136e4aafe7e7f5145f4f481c857cd3a",
+   "path": [
+    [
+     "l",
+     "4f1133836c2bc5f20ce64bf6b8c6009baf147ef9bb9615273394f94d80023066"
+    ],
+    [
+     "r",
+     "7761d5535faf188d75245f8d1636059ae93dc456da63e03ed1c1ce007afcd2f9"
+    ],
+    [
+     "l",
+     "90ac04af30a8f84bbfe5e4baf4d3d2cee4540d3e6aa1e317e63915b522eaa53f"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1188,32 +3202,77 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "job-scam-rent-card": {
+   "hash": "f504c961081ac0fa07ad7ca80615afecb6e6048a0f179d9707295326e5e1b6e6",
+   "path": [
+    [
+     "r",
+     "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038"
+    ],
+    [
+     "l",
+     "9ef53fd7187d5e432f3d2dac54a9587ed8bcb982971cc599d16569cf182bd8fc"
+    ],
+    [
+     "l",
+     "90ac04af30a8f84bbfe5e4baf4d3d2cee4540d3e6aa1e317e63915b522eaa53f"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "f504c961081ac0fa07ad7ca80615afecb6e6048a0f179d9707295326e5e1b6e6",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "job-scam-schemes": {
    "hash": "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038",
    "path": [
     [
-     "r",
-     "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240"
-    ],
-    [
-     "r",
-     "18ce5a29e987ada93470900077f291d1cd9def5407584f4c3abf72d5781341d6"
-    ],
-    [
-     "r",
-     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
-    ],
-    [
-     "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "l",
+     "f504c961081ac0fa07ad7ca80615afecb6e6048a0f179d9707295326e5e1b6e6"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "9ef53fd7187d5e432f3d2dac54a9587ed8bcb982971cc599d16569cf182bd8fc"
+    ],
+    [
+     "l",
+     "90ac04af30a8f84bbfe5e4baf4d3d2cee4540d3e6aa1e317e63915b522eaa53f"
+    ],
+    [
+     "l",
+     "1bab6381486f81eb3683fe6187fa0bcdd602bb8b345be3986dd023b43c37c872"
+    ],
+    [
+     "r",
+     "27a621fa82e434c15c0b028b9a8e6836517ca50b3bdd4db7b9e2d939fde88640"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1229,28 +3288,32 @@
    "hash": "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240",
    "path": [
     [
-     "l",
-     "54f96d8a15f61a15c4398c4e1837b4ed8671da413e2e596fe75f215f341f4038"
+     "r",
+     "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d"
     ],
     [
      "r",
-     "18ce5a29e987ada93470900077f291d1cd9def5407584f4c3abf72d5781341d6"
+     "9f91974583eb2c2f5268abc64bc2fef27a689089249ab710d5f09b40250e86f1"
     ],
     [
      "r",
-     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
+     "c7a91b6ce2310449b846a1110c852695b2f6e7a178bec1712e1618fbf7ff8a37"
     ],
     [
      "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1266,28 +3329,32 @@
    "hash": "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d",
    "path": [
     [
+     "l",
+     "ef1e654f235be090abd2a6f4154491a8ab828bc384346d76fdf98ad22a802240"
+    ],
+    [
      "r",
-     "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c"
+     "9f91974583eb2c2f5268abc64bc2fef27a689089249ab710d5f09b40250e86f1"
+    ],
+    [
+     "r",
+     "c7a91b6ce2310449b846a1110c852695b2f6e7a178bec1712e1618fbf7ff8a37"
+    ],
+    [
+     "r",
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "4ff72bf717a0db1e3cf5d8ceb6590bf54223d84de3c5a7b24132a7c0c424c83a"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
     ],
     [
      "r",
-     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
-    ],
-    [
-     "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1303,28 +3370,32 @@
    "hash": "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c",
    "path": [
     [
-     "l",
-     "93aceed54495014dac32e6af6a28cfae722eb42a90457a5839c3459709a4f76d"
-    ],
-    [
-     "l",
-     "4ff72bf717a0db1e3cf5d8ceb6590bf54223d84de3c5a7b24132a7c0c424c83a"
-    ],
-    [
      "r",
-     "ba226efc3a5e114b3d2a7571a560a0be75979545fafde274cdeb9008141c7b4e"
-    ],
-    [
-     "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "827fc32a45745fd328f555ef48d18c8cd6a3111a7a5c98f74c2dbbc311f39cbf"
+    ],
+    [
+     "r",
+     "c7a91b6ce2310449b846a1110c852695b2f6e7a178bec1712e1618fbf7ff8a37"
+    ],
+    [
+     "r",
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1340,28 +3411,32 @@
    "hash": "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55",
    "path": [
     [
-     "r",
-     "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611"
-    ],
-    [
-     "r",
-     "1794e8380b5b0ab0351aff9493eb630f4578dfc01f8bb998131f558f365ce3f0"
+     "l",
+     "41aee8a10047c7c0eb41bd283054adda4b8e77749ba9c9f97677daea70ab724c"
     ],
     [
      "l",
-     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+     "827fc32a45745fd328f555ef48d18c8cd6a3111a7a5c98f74c2dbbc311f39cbf"
     ],
     [
      "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
+     "c7a91b6ce2310449b846a1110c852695b2f6e7a178bec1712e1618fbf7ff8a37"
     ],
     [
      "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1373,32 +3448,77 @@
     "detail": "Цитата найдена на странице"
    }
   },
+  "job-star-action": {
+   "hash": "6113586f1a83533846e9cdea80c5edac2d2b9afb1d845110b53132fe69647bfd",
+   "path": [
+    [
+     "r",
+     "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611"
+    ],
+    [
+     "r",
+     "06ad25c0687bfd51aae10cdb22bfce43a8d85ce0d187467d0871f58b56274556"
+    ],
+    [
+     "l",
+     "a18a99fe156d1055fdbb0937e094e70d653bb8fcccf48dc53ed460b4303a74be"
+    ],
+    [
+     "r",
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "6113586f1a83533846e9cdea80c5edac2d2b9afb1d845110b53132fe69647bfd",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "job-strengths-facts": {
    "hash": "efd8e48adbc928c3731b2c86318a6d81bdc63dc25e44bd938ba959f423ef3611",
    "path": [
     [
      "l",
-     "808658c9ea4ce2bfa812883a983070451f7ad0cacb8e007e0609d12ec3ebdf55"
+     "6113586f1a83533846e9cdea80c5edac2d2b9afb1d845110b53132fe69647bfd"
     ],
     [
      "r",
-     "1794e8380b5b0ab0351aff9493eb630f4578dfc01f8bb998131f558f365ce3f0"
+     "06ad25c0687bfd51aae10cdb22bfce43a8d85ce0d187467d0871f58b56274556"
     ],
     [
      "l",
-     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+     "a18a99fe156d1055fdbb0937e094e70d653bb8fcccf48dc53ed460b4303a74be"
     ],
     [
      "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1415,27 +3535,31 @@
    "path": [
     [
      "r",
-     "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157"
+     "9a171cefe7730fad097d82a714426e288a2a0de76b4b5d1bcb692cf7895315af"
     ],
     [
      "l",
-     "5bb3d9724d0d9aa5e0f04945c13310cc0723e4135c463b447ea84dc6cc133e0f"
+     "56f479fa73ee088bc4e891ea28d942e0dba9b7cf1ff24e47e2b48214dad45b6a"
     ],
     [
      "l",
-     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+     "a18a99fe156d1055fdbb0937e094e70d653bb8fcccf48dc53ed460b4303a74be"
     ],
     [
      "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1447,8 +3571,8 @@
     "detail": "Crossref: «The Structured Employment Interview: Narrative and Quantitative Review of the Research Literature», Levashina и др., 2014, Personnel Psychology"
    }
   },
-  "job-weak-ties": {
-   "hash": "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157",
+  "job-study-leave": {
+   "hash": "9a171cefe7730fad097d82a714426e288a2a0de76b4b5d1bcb692cf7895315af",
    "path": [
     [
      "l",
@@ -1456,23 +3580,68 @@
     ],
     [
      "l",
-     "5bb3d9724d0d9aa5e0f04945c13310cc0723e4135c463b447ea84dc6cc133e0f"
+     "56f479fa73ee088bc4e891ea28d942e0dba9b7cf1ff24e47e2b48214dad45b6a"
     ],
     [
      "l",
-     "b74d038e33bab8fa640f98eae27baa7bfacec3a4fb06ff3aa8f328a966de5f68"
+     "a18a99fe156d1055fdbb0937e094e70d653bb8fcccf48dc53ed460b4303a74be"
     ],
     [
      "r",
-     "966acf45dfb72aa6d25921c2c957be76cb82edcf323df297b612438ea2156dfc"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "d23cd9c9a3328eb5eca5713d3530ea9e9d090ba517a194b78b96c6a8858e91c7"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "9a171cefe7730fad097d82a714426e288a2a0de76b4b5d1bcb692cf7895315af",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-weak-ties": {
+   "hash": "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157",
+   "path": [
+    [
+     "r",
+     "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c"
+    ],
+    [
+     "r",
+     "e50df632fec0afe8208d04b6ff63bb75aee4bf03ee861d0aee88b37aac73d1fe"
+    ],
+    [
+     "r",
+     "0571c250a9b547fc5f0b50ca3961200615f55d78d3cd51653a7783f18ce8cb5c"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1488,28 +3657,32 @@
    "hash": "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c",
    "path": [
     [
-     "r",
-     "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961"
+     "l",
+     "c7523c9c8cd4a6ebd3fd2a49cc79a1363886224da9e1a915060e33dcf3107157"
     ],
     [
      "r",
-     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
+     "e50df632fec0afe8208d04b6ff63bb75aee4bf03ee861d0aee88b37aac73d1fe"
     ],
     [
      "r",
-     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+     "0571c250a9b547fc5f0b50ca3961200615f55d78d3cd51653a7783f18ce8cb5c"
     ],
     [
      "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1525,34 +3698,79 @@
    "hash": "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961",
    "path": [
     [
-     "l",
-     "7f4da7ae45ebe1215605dee4864117ff6f9779fab3a5855e72e2c868ae6fd32c"
-    ],
-    [
      "r",
-     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
-    ],
-    [
-     "r",
-     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+     "5544dce2b2dc7354bc00b1c7de28521bec80a82f944f8e3095600c451a886cfc"
     ],
     [
      "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+     "2038ec6b812b4ace3d86643cf71bbba4578ab06cbf07bcf1ec4bbec01351f38c"
     ],
     [
      "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "0571c250a9b547fc5f0b50ca3961200615f55d78d3cd51653a7783f18ce8cb5c"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
     "kind": "quote",
     "checkedAt": "2026-11-13",
     "checkedHash": "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "job-yandex-internship": {
+   "hash": "5544dce2b2dc7354bc00b1c7de28521bec80a82f944f8e3095600c451a886cfc",
+   "path": [
+    [
+     "l",
+     "deedc0c22be26d4ee9014be3f1693e81a976b7819cb3512f00a8e89322ed7961"
+    ],
+    [
+     "l",
+     "2038ec6b812b4ace3d86643cf71bbba4578ab06cbf07bcf1ec4bbec01351f38c"
+    ],
+    [
+     "r",
+     "0571c250a9b547fc5f0b50ca3961200615f55d78d3cd51653a7783f18ce8cb5c"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
+     "r",
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "5544dce2b2dc7354bc00b1c7de28521bec80a82f944f8e3095600c451a886cfc",
     "ok": true,
     "status": 200,
     "detail": "Цитата найдена на странице"
@@ -1566,24 +3784,28 @@
      "196d27cba8e462621c5332e2df70e5ea95a93b29daf154dec1acb8c9fc86b3ca"
     ],
     [
+     "r",
+     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
+    ],
+    [
      "l",
-     "406195dea0f937d1b40762e0100cc61413a7fa090599451facb7ba801c1d3d91"
+     "fa7e25109a536d69e143e4ee31bfdf0bfb451d69e7b4a4d45780fbf759fc5ef2"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
     ],
     [
      "r",
-     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
     ],
     [
      "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1603,24 +3825,28 @@
      "5395de5c7bae2d2573f654c477535714b518fbf35b64708762dcf2c7f1cd0d05"
     ],
     [
+     "r",
+     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
+    ],
+    [
      "l",
-     "406195dea0f937d1b40762e0100cc61413a7fa090599451facb7ba801c1d3d91"
+     "fa7e25109a536d69e143e4ee31bfdf0bfb451d69e7b4a4d45780fbf759fc5ef2"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
     ],
     [
      "r",
-     "68a50e4e9da28a3e73d7d5131023f892909557ac06754ffb5c9f802a39002ae1"
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
     ],
     [
      "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1640,24 +3866,28 @@
      "154110ce7287b823e6c8abbba695d3f439c24657aeadd6c545cb5d9070e78c9d"
     ],
     [
+     "l",
+     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
+    ],
+    [
+     "l",
+     "fa7e25109a536d69e143e4ee31bfdf0bfb451d69e7b4a4d45780fbf759fc5ef2"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
      "r",
-     "c13accb74e84dbfcac048983d58426ca8262d3b17b335d9439763488b7e1a309"
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
     ],
     [
      "l",
-     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
-    ],
-    [
-     "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1677,24 +3907,28 @@
      "3a1cb5f7edd38a1d11ed076f6befdf28c1492c9f9c38bc10e09d7c85d14d46ed"
     ],
     [
+     "l",
+     "117ba20899149b0f3518c661c76bb37c4d6b4b9de189d2116551fa37690765fd"
+    ],
+    [
+     "l",
+     "fa7e25109a536d69e143e4ee31bfdf0bfb451d69e7b4a4d45780fbf759fc5ef2"
+    ],
+    [
+     "l",
+     "15e6cad35ffae4e608d110b00df24d93765e28eef2b43f7efe4086cf9dece6bd"
+    ],
+    [
+     "l",
+     "8c5acfed3f699878d0c1064e5b6fa2d7fd510c84fc5a3770bdedb5a76027b2f4"
+    ],
+    [
      "r",
-     "c13accb74e84dbfcac048983d58426ca8262d3b17b335d9439763488b7e1a309"
+     "9f6b81613417a29fef86633b0e5bf95e3bacc3e24c063e56246f9104fa4df6cf"
     ],
     [
      "l",
-     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
-    ],
-    [
-     "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
-    ],
-    [
-     "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1706,32 +3940,77 @@
     "detail": "Crossref: «The effects of feedback interventions on performance: A historical review, a meta-analysis, and a preliminary feedback intervention theory.», Kluger и др., 1996, Psychological Bulletin"
    }
   },
+  "onb-first-vacation": {
+   "hash": "aff06aaa4386155dca7551149abbe6845f2fa071838dda759d12ef2460fa0c2f",
+   "path": [
+    [
+     "r",
+     "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f"
+    ],
+    [
+     "r",
+     "0486c972fa44d208477d455c098f25e6c9be64fb47cf762b1a11ee159d3c863d"
+    ],
+    [
+     "r",
+     "f6faf79422fb54f293a7e980915e2baea6fc8cff9fdc666a1fc2beaecb89a593"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "aff06aaa4386155dca7551149abbe6845f2fa071838dda759d12ef2460fa0c2f",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
   "onb-four-c": {
    "hash": "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f",
    "path": [
     [
-     "r",
-     "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b"
-    ],
-    [
      "l",
-     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
-    ],
-    [
-     "l",
-     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
-    ],
-    [
-     "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+     "aff06aaa4386155dca7551149abbe6845f2fa071838dda759d12ef2460fa0c2f"
     ],
     [
      "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "0486c972fa44d208477d455c098f25e6c9be64fb47cf762b1a11ee159d3c863d"
+    ],
+    [
+     "r",
+     "f6faf79422fb54f293a7e980915e2baea6fc8cff9fdc666a1fc2beaecb89a593"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1747,28 +4026,32 @@
    "hash": "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b",
    "path": [
     [
-     "l",
-     "04b2a049c83c7d7231d7d5c73a11dc4e173e7173392b1d687cfd87410396253f"
+     "r",
+     "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9"
     ],
     [
      "l",
-     "0dfe2387c5eaf7114e571c6370fc95ce501e732cf44f05b4a787aa4bf00a6592"
-    ],
-    [
-     "l",
-     "a9d26ffb4df9d085a4e2e49a2e0559cc85d0807a010267acddddb98853fd4e63"
-    ],
-    [
-     "l",
-     "3f6f57854b4d6e6fa05cfb6f20ffae8230111f44649ab159e8b3205536d0a419"
+     "7138773a012883a3369dfe82e6c928ee2805d0af1facddb1557e197ab13e3270"
     ],
     [
      "r",
-     "17ef484e5f12eb1272dfb6bd3d486b0233c9c0fb51bcc6ea0ea9822db9a4df55"
+     "f6faf79422fb54f293a7e980915e2baea6fc8cff9fdc666a1fc2beaecb89a593"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1784,28 +4067,32 @@
    "hash": "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9",
    "path": [
     [
-     "r",
-     "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541"
-    ],
-    [
-     "r",
-     "6aac1d53c96b512fe30cc224dc3371ea70d18256ecfb5f8db5e9505b97b53a9b"
-    ],
-    [
-     "r",
-     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
-    ],
-    [
-     "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "l",
+     "000f0181e57fdb82668d9003a330df8c8d74b7c4660025a070637703dd505e6b"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "7138773a012883a3369dfe82e6c928ee2805d0af1facddb1557e197ab13e3270"
+    ],
+    [
+     "r",
+     "f6faf79422fb54f293a7e980915e2baea6fc8cff9fdc666a1fc2beaecb89a593"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1821,28 +4108,32 @@
    "hash": "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541",
    "path": [
     [
-     "l",
-     "e411ba15ad78cc597355232075c18ea0cbe460979770862a869de0f156ee7ca9"
+     "r",
+     "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b"
     ],
     [
      "r",
-     "6aac1d53c96b512fe30cc224dc3371ea70d18256ecfb5f8db5e9505b97b53a9b"
-    ],
-    [
-     "r",
-     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
-    ],
-    [
-     "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "59dbfbd569ee67849f123baed4c16b2a070828a02c10ee974859aef3bcf9011a"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "d0dc99dfe3c0a72bd1fcbf863890c3b4672548b1509137cf7dc329bc14ab26c7"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1858,28 +4149,32 @@
    "hash": "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b",
    "path": [
     [
-     "r",
-     "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e"
-    ],
-    [
      "l",
-     "fb59543f7ea217d1eaef66ddc23668b6fc00f43ccde8eab7aa2032403b46a5dc"
+     "8e3afc08eaac64513ce8233e2ecd4f4366c0c9de9616d0a1d86dde29ea56c541"
     ],
     [
      "r",
-     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+     "59dbfbd569ee67849f123baed4c16b2a070828a02c10ee974859aef3bcf9011a"
+    ],
+    [
+     "l",
+     "d0dc99dfe3c0a72bd1fcbf863890c3b4672548b1509137cf7dc329bc14ab26c7"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1895,34 +4190,79 @@
    "hash": "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e",
    "path": [
     [
-     "l",
-     "58e3eacdbf61e215c8d7a3a082897ddaaaddf7141e0dbb74aacc41cb6205d91b"
+     "r",
+     "15f5f5657f254a263cd9f66d435fbb1dc9889b07f6639daf68d1d59eb03c1fb8"
     ],
     [
      "l",
-     "fb59543f7ea217d1eaef66ddc23668b6fc00f43ccde8eab7aa2032403b46a5dc"
+     "da448200e60f7306fbe26318a1160a3a45929cb30066fd37b009941372e2145d"
+    ],
+    [
+     "l",
+     "d0dc99dfe3c0a72bd1fcbf863890c3b4672548b1509137cf7dc329bc14ab26c7"
     ],
     [
      "r",
-     "542cb459de344b8ecee865a1ef5a927cc994b45d70fb6ca94f1385e7f992b2c7"
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
     "kind": "quote",
     "checkedAt": "2026-11-13",
     "checkedHash": "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-mentoring-research": {
+   "hash": "15f5f5657f254a263cd9f66d435fbb1dc9889b07f6639daf68d1d59eb03c1fb8",
+   "path": [
+    [
+     "l",
+     "542b528757d3dd8f0eaecf4bdb7664deac02dbd1c609f3262da0285f0255c74e"
+    ],
+    [
+     "l",
+     "da448200e60f7306fbe26318a1160a3a45929cb30066fd37b009941372e2145d"
+    ],
+    [
+     "l",
+     "d0dc99dfe3c0a72bd1fcbf863890c3b4672548b1509137cf7dc329bc14ab26c7"
+    ],
+    [
+     "r",
+     "47fc866b8b66a8b059a0cc7ff9c6547b321b52689f511be61f1e6648f39a41f9"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "15f5f5657f254a263cd9f66d435fbb1dc9889b07f6639daf68d1d59eb03c1fb8",
     "ok": true,
     "status": 200,
     "detail": "Цитата найдена на странице"
@@ -1937,23 +4277,27 @@
     ],
     [
      "r",
-     "3fc12398ba5733288125c04ac12c99683521eb10f2a6841b69f1e09b4588afb6"
-    ],
-    [
-     "l",
-     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+     "14cea7381730330e8f7d736c5dd905565bd42b712f546bdcaf3cc264afea0cb0"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "02b66a8bf03f12e5cced6525dad138ebdbcda9378f552cba3dc3b3bec5cde11f"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -1974,23 +4318,27 @@
     ],
     [
      "r",
-     "3fc12398ba5733288125c04ac12c99683521eb10f2a6841b69f1e09b4588afb6"
-    ],
-    [
-     "l",
-     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+     "14cea7381730330e8f7d736c5dd905565bd42b712f546bdcaf3cc264afea0cb0"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "02b66a8bf03f12e5cced6525dad138ebdbcda9378f552cba3dc3b3bec5cde11f"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -2007,27 +4355,31 @@
    "path": [
     [
      "r",
-     "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8"
+     "e93372587b0e46eb3e168832f3be0419e51812ea191489190d9e2f897f80542f"
     ],
     [
      "l",
      "67562c4336ab1c775826f010ae5ca5eb4e62ea4e21ba02f5ea771b1b2fbfc5ac"
     ],
     [
+     "r",
+     "02b66a8bf03f12e5cced6525dad138ebdbcda9378f552cba3dc3b3bec5cde11f"
+    ],
+    [
      "l",
-     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -2039,8 +4391,8 @@
     "detail": "Цитата найдена на странице"
    }
   },
-  "onb-probation-patterns": {
-   "hash": "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8",
+  "onb-probation-no-severance": {
+   "hash": "e93372587b0e46eb3e168832f3be0419e51812ea191489190d9e2f897f80542f",
    "path": [
     [
      "l",
@@ -2051,26 +4403,112 @@
      "67562c4336ab1c775826f010ae5ca5eb4e62ea4e21ba02f5ea771b1b2fbfc5ac"
     ],
     [
+     "r",
+     "02b66a8bf03f12e5cced6525dad138ebdbcda9378f552cba3dc3b3bec5cde11f"
+    ],
+    [
      "l",
-     "de4a9bd742bef835f28559f65883fff64e8f5307ed7f33a000a2c1990914ef29"
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
     ],
     [
      "r",
-     "34f55643372ae7dab90df4643fe32f9762bb5f4e8a22abb5486299ea66ca2dff"
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "e93372587b0e46eb3e168832f3be0419e51812ea191489190d9e2f897f80542f",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-patterns": {
+   "hash": "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8",
+   "path": [
+    [
+     "r",
+     "e37f6afa91fa67db5115d2a182a5486a4f8e1e276a70f095da153573fa96a3c8"
+    ],
+    [
+     "r",
+     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+    ],
+    [
+     "l",
+     "dc7b17b677b29f597757dac88f489be2a2a51d7d427ecf696692c3a23cb5142c"
+    ],
+    [
+     "l",
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
     "kind": "quote",
     "checkedAt": "2026-11-13",
     "checkedHash": "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8",
+    "ok": true,
+    "status": 200,
+    "detail": "Цитата найдена на странице"
+   }
+  },
+  "onb-probation-sick": {
+   "hash": "e37f6afa91fa67db5115d2a182a5486a4f8e1e276a70f095da153573fa96a3c8",
+   "path": [
+    [
+     "l",
+     "02a6d487f961995f0c3cb96e387b03d3c7b8c98d75dec63960178f2cb9e7d2a8"
+    ],
+    [
+     "r",
+     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+    ],
+    [
+     "l",
+     "dc7b17b677b29f597757dac88f489be2a2a51d7d427ecf696692c3a23cb5142c"
+    ],
+    [
+     "l",
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
+     "r",
+     "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
+    ],
+    [
+     "l",
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
+    ],
+    [
+     "l",
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
+    ]
+   ],
+   "check": {
+    "kind": "quote",
+    "checkedAt": "2026-11-14",
+    "checkedHash": "e37f6afa91fa67db5115d2a182a5486a4f8e1e276a70f095da153573fa96a3c8",
     "ok": true,
     "status": 200,
     "detail": "Цитата найдена на странице"
@@ -2084,20 +4522,28 @@
      "090b2e1b309718b296f5400fcfba0d7939cb56bf3e99b21ba5826e6272cb2470"
     ],
     [
+     "l",
+     "0427804daf51ff7e6bbc9658cda3f89dd1fba779f46ea453f14d9c57caa045d2"
+    ],
+    [
+     "l",
+     "dc7b17b677b29f597757dac88f489be2a2a51d7d427ecf696692c3a23cb5142c"
+    ],
+    [
+     "l",
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
      "r",
      "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -2117,20 +4563,28 @@
      "acaf9fe47cbc325bff2136e45b94ac2ebbddf66eb2c5693a15459f3a7c864688"
     ],
     [
+     "l",
+     "0427804daf51ff7e6bbc9658cda3f89dd1fba779f46ea453f14d9c57caa045d2"
+    ],
+    [
+     "l",
+     "dc7b17b677b29f597757dac88f489be2a2a51d7d427ecf696692c3a23cb5142c"
+    ],
+    [
+     "l",
+     "cb507cac42248a3557c8804383fc95ae03ef76df18e7323c1466570371540fbc"
+    ],
+    [
      "r",
      "f6510c8867d13e74a06446898224801fa72c36113afdd8a46169d2016c784739"
     ],
     [
      "l",
-     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -2151,19 +4605,15 @@
     ],
     [
      "l",
-     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+     "6b1c33ad442d512bb757ea7060063dd4c7946f19a5c78fec432242cfbbf905d4"
     ],
     [
      "l",
-     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
@@ -2184,19 +4634,15 @@
     ],
     [
      "l",
-     "2ae468fdddb342625dc09cde0aa6713370e53cae82a5098402b4d2dd1c120e92"
+     "6b1c33ad442d512bb757ea7060063dd4c7946f19a5c78fec432242cfbbf905d4"
     ],
     [
      "l",
-     "1e3575cfe171a07e8baf1446fedd6c9f74c17bca715f11a13db4b8aa3b4e8978"
+     "0623066566dc23c9312aa601cffaade301ebb3a0c9fac0a47a9335b2f6f5aac1"
     ],
     [
      "l",
-     "65c5dabb2672980d441a699635daf43de043f215d4abd16a9ccec7dd46b768ef"
-    ],
-    [
-     "l",
-     "348604211a449c55b00e0620874872b6600b6e23df7ffd8be73ab7958c760596"
+     "b24ee3936b19d1ff7bbf07012efe2032f1b514804400feb4c8948597e5e9209c"
     ]
    ],
    "check": {
