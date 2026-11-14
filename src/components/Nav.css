@@ -170,7 +170,7 @@
   animation: nav-flyout-in 0.38s var(--ease-spring) backwards;
 }
 
-/* Невидимый мостик к меню: курсор переходит в панель, и она не закрывается. */
+/* Невидимый мостик через зазор к меню: курсор переходит в панель, и она не закрывается. */
 .nav-flyout::before {
   content: '';
   position: absolute;
@@ -178,6 +178,10 @@
   bottom: 0;
   right: 100%;
   width: 12px;
+}
+
+.nav-flyout__all {
+  align-self: end;
 }
 
 @keyframes nav-flyout-in {

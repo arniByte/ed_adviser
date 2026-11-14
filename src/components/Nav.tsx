@@ -104,12 +104,14 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
 function ChatsFlyout({
   left,
   bottom,
+  height,
   onEnter,
   onLeave,
   onPick,
 }: {
   left: number
   bottom: number
+  height: number
   onEnter: () => void
   onLeave: () => void
   onPick: (path: string) => void
@@ -118,7 +120,9 @@ function ChatsFlyout({
   return (
     <div
       className="nav-flyout glass"
-      style={{ left, bottom, '--fly-bottom': `${bottom}px` } as React.CSSProperties}
+      style={
+        { left, bottom, minHeight: height, '--fly-bottom': `${bottom}px` } as React.CSSProperties
+      }
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
     >
@@ -180,9 +184,20 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
     window.clearTimeout(closeTimer.current)
     setFlyout(window.innerHeight - (menu.current ?? row).getBoundingClientRect().bottom)
   }
-  const hideFlyout = () => {
+  const hideFlyout = (delay = 400) => {
     window.clearTimeout(closeTimer.current)
-    closeTimer.current = window.setTimeout(() => setFlyout(null), 220)
+    closeTimer.current = window.setTimeout(() => setFlyout(null), delay)
+  }
+  // Курсор, который идёт к панели по диагонали, пересекает другие пункты меню.
+  // Пока он движется вправо, панель ждёт; остановился или повернул назад — закрывается.
+  const lastX = useRef(0)
+  const aim = (event: React.PointerEvent<HTMLDivElement>) => {
+    const dx = event.clientX - lastX.current
+    lastX.current = event.clientX
+    if (flyout === null) return
+    const item = (event.target as Element).closest<HTMLElement>('.nav-menu__item')
+    if (item?.dataset.chats) window.clearTimeout(closeTimer.current)
+    else hideFlyout(dx > 0 ? 450 : 150)
   }
   useEffect(() => {
     if (!open) setFlyout(null)
@@ -302,6 +317,12 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
               role="menu"
               aria-label="Разделы"
               onKeyDown={move}
+              onPointerMove={aim}
+              onPointerLeave={(event) => {
+                // Ушёл из меню не в сторону панели — панель больше не нужна.
+                const box = menu.current?.getBoundingClientRect()
+                if (flyout !== null && box && event.clientX < box.right - 2) hideFlyout(150)
+              }}
               style={
                 {
                   left: place.left,
@@ -321,10 +342,12 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
                   aria-current={index === active ? 'page' : undefined}
                   tabIndex={index === active ? 0 : -1}
                   style={{ '--i': index } as React.CSSProperties}
-                  onPointerEnter={(event) =>
-                    section.icon === 'chats' ? showFlyout(event.currentTarget) : hideFlyout()
+                  data-chats={section.icon === 'chats' || undefined}
+                  onPointerEnter={
+                    section.icon === 'chats'
+                      ? (event) => showFlyout(event.currentTarget)
+                      : undefined
                   }
-                  onPointerLeave={section.icon === 'chats' ? hideFlyout : undefined}
                   onClick={() => {
                     dismiss()
                     go(section.path)
@@ -339,8 +362,10 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
               <ChatsFlyout
                 left={(menu.current?.getBoundingClientRect().right ?? place.left + 224) + 10}
                 bottom={flyout}
+                // Панель высотой с меню: курсор уходит вправо с любого пункта сразу в неё.
+                height={menu.current?.offsetHeight ?? 0}
                 onEnter={() => window.clearTimeout(closeTimer.current)}
-                onLeave={hideFlyout}
+                onLeave={() => hideFlyout()}
                 onPick={(path) => {
                   dismiss()
                   go(path)
