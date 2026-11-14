@@ -230,8 +230,9 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     /** Доля пути к цели за кадр — одинаковая на 30, 60 и 120 Гц. */
     let ease = (k: number) => k
     const draw = (now: number, settle = false) => {
-      const step = previousNow ? Math.min(0.05, (now - previousNow) / 1000) : 1 / 60
-      previousNow = now
+      // Метки времени rAF бывают чуть раньше performance.now(): шаг не уходит в минус.
+      const step = previousNow ? Math.min(0.05, Math.max(0, (now - previousNow) / 1000)) : 1 / 60
+      previousNow = Math.max(previousNow, now)
       ease = (k: number) => 1 - (1 - k) ** (step * 30)
       const t = (now - start) / 1000
       const target = moodRef.current === 'thinking' ? 1 : 0
@@ -277,7 +278,8 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
         let value = halo(point.r, point.angle, t, energy, small)
         if (withEyes) value = Math.max(value, eyes(point.x, point.y, face, cellNorm))
         const previous = current[point.i]
-        const next = settle ? value : previous + (value - previous) * follow
+        const raw = settle ? value : previous + (value - previous) * follow
+        const next = Number.isFinite(raw) ? Math.min(1, Math.max(0, raw)) : 0
         current[point.i] = next
         const radius = cell * 0.47 * (0.08 + 0.92 * Math.sqrt(next))
         if (radius < 0.35) continue
