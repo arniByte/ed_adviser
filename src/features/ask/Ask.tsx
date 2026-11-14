@@ -11,26 +11,11 @@ import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
 import { Globe } from '../../components/icons'
 import type { Found } from '../../lib/api'
+import type { AskHandler, Exchange } from '../../lib/chat'
 import { useMine } from '../../lib/mine'
 import { plural } from '../../lib/plural'
 import { useSmoothText } from '../../lib/useSmoothText'
 import './Ask.css'
-
-export interface Exchange {
-  id: number
-  question: string
-  /** Сырой ответ модели вместе с разметкой. */
-  raw: string
-  status: 'waiting' | 'streaming' | 'done' | 'failed'
-  error?: string
-  /** Пользователь сам попросил поискать в интернете. */
-  web?: boolean
-  /** Что наставник делает до ответа. */
-  progress?: string
-  found?: Found
-}
-
-export type AskHandler = (question: string, options?: { web?: boolean }) => void
 
 const STARTERS = [
   'Как расставить приоритеты, если боюсь не пройти на мечту?',
@@ -44,6 +29,7 @@ const STARTERS = [
 interface Props {
   exchanges: Exchange[]
   onAsk: AskHandler
+  onReset: () => void
 }
 
 const SOURCES: [string, string, string] = ['источник', 'источника', 'источников']
@@ -52,7 +38,7 @@ const PAGES: [string, string, string] = ['страницу', 'страницы',
 /** Что получилось у поиска в интернете — одной строкой под ответом. */
 function webSummary(found: Found): string {
   const n = found.cards.length
-  if (n > 0) return `Нашёл в интернете и сверил цитаты: ${n} ${plural(n, SOURCES)}`
+  if (n > 0) return `Нашёл в интернете, сверил цитаты и запомнил: ${n} ${plural(n, SOURCES)}`
   if (found.looked > 0)
     return `Открыл ${found.looked} ${plural(found.looked, PAGES)}, но цитаты не подтвердились — на них не опирался`
   return 'В интернете не нашлось страниц с подтверждаемыми фактами'
@@ -125,10 +111,19 @@ function Answer({
           </div>
           {exchange.found && (
             <p className="exchange__web caption rise">
-              <Globe /> {webSummary(exchange.found)}
+              <Globe />
+              <span>
+                {webSummary(exchange.found)}
+                {exchange.found.cards.length > 0 && (
+                  <>
+                    {' '}
+                    · <a href="#/library">моя база</a>
+                  </>
+                )}
+              </span>
             </p>
           )}
-          {!exchange.web && !usedWeb && (
+          {isLast && !exchange.web && !usedWeb && (
             <button
               className="btn btn--glass btn--small exchange__search rise"
               onClick={() => onAsk(exchange.question, { web: true })}
@@ -156,7 +151,7 @@ function Answer({
   )
 }
 
-export function Ask({ exchanges, onAsk }: Props) {
+export function Ask({ exchanges, onAsk, onReset }: Props) {
   const busy = exchanges.some((e) => e.status === 'waiting' || e.status === 'streaming')
   const latest = useRef<HTMLDivElement>(null)
   const count = exchanges.length
@@ -202,6 +197,11 @@ export function Ask({ exchanges, onAsk }: Props) {
               <Answer exchange={exchange} onAsk={onAsk} isLast={index === count - 1} />
             </div>
           ))}
+          {!busy && (
+            <button className="btn btn--glass btn--small ask__reset" onClick={onReset}>
+              Новый разговор
+            </button>
+          )}
           <Disclaimer />
         </div>
       )}

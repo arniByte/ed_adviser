@@ -226,7 +226,7 @@ a:hover {
   max-width: calc(var(--column) + var(--gutter) * 2);
   min-height: calc(100dvh - var(--bar));
   margin: 0 auto;
-  padding: 0.75rem var(--gutter) 2.5rem;
+  padding: calc(env(safe-area-inset-top) + 1.5rem) var(--gutter) 2.5rem;
   display: flex;
   flex-direction: column;
   /* backwards, а не both: после анимации у страницы не остаётся transform,
@@ -263,6 +263,11 @@ html[data-dir='back'] .page {
     transform: translateX(-2.5rem);
     filter: blur(6px);
   }
+}
+
+/* Под плавающей кнопкой разделов оставляем место, чтобы она не легла на текст. */
+html.floating-nav .page {
+  padding-bottom: 6rem;
 }
 
 html.locked {

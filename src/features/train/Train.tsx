@@ -9,6 +9,7 @@ import {
 } from '../../../core/progress'
 import type { ScenarioId } from '../../../core/types'
 import { Composer } from '../../components/Composer'
+import { FloatingNav } from '../../components/Nav'
 import { AuraMark } from '../../components/AuraMark'
 import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
@@ -131,11 +132,19 @@ export function Train({ scenario: scenarioId }: { scenario: ScenarioId }) {
         <footer className="intro__foot">
           <Disclaimer />
         </footer>
+        <FloatingNav />
       </main>
     )
   }
 
-  if (phase === 'debrief') return <Debrief scenario={scenario} records={records} />
+  if (phase === 'debrief') {
+    return (
+      <>
+        <Debrief scenario={scenario} records={records} />
+        <FloatingNav />
+      </>
+    )
+  }
 
   return (
     <main className="page train">
