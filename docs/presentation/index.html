@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../node_modules/@fontsource-variable/inter/opsz.css" />
     <link rel="stylesheet" href="../../node_modules/@fontsource-variable/unbounded/index.css" />
     <link rel="stylesheet" href="slides.css" />
+    <script src="deck.js" defer></script>
   </head>
   <body>
     <section class="slide slide--cover">
@@ -20,10 +21,10 @@
         </p>
         <p class="eyebrow">Цифровое наставничество и AI-менторство · Софтлайн Решения · Lead</p>
       </div>
-      <div class="stage">
-        <figure class="phone phone--back"><img src="img/home.jpg" alt="Главный экран" /></figure>
-        <figure class="phone phone--front"><img src="img/review.jpg" alt="Разбор ответа" /></figure>
-      </div>
+      <figure class="win win--cover">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-cover.jpg" alt="Главный экран" />
+      </figure>
     </section>
 
     <section class="slide">
@@ -85,39 +86,36 @@
     <section class="slide slide--split">
       <div class="text">
         <p class="eyebrow">Тренажёр-экзаменатор</p>
-        <h2>Четыре кейса. Отвечай как вживую</h2>
+        <h2>Кейс с подвохом. Отвечай как вживую</h2>
         <ul class="list">
           <li>Ситуация и вопрос, на котором обычно спотыкаются</li>
-          <li>Разбор проявляется по словам уже через 0,7 секунды</li>
+          <li>Разбор проявляется по словам через 0,7 секунды</li>
+          <li>Что верно, что улучшить и удачный пример</li>
           <li>Вторая попытка — наставник сравнит её с первой</li>
-          <li>Итог сессии и план из трёх шагов</li>
         </ul>
       </div>
-      <div class="fan">
-        <figure class="phone"><img src="img/case.jpg" alt="Кейс" /></figure>
-        <figure class="phone"><img src="img/review.jpg" alt="Разбор ответа" /></figure>
-        <figure class="phone"><img src="img/debrief.jpg" alt="Итог тренировки" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-review.jpg" alt="Разбор ответа" />
+      </figure>
     </section>
 
     <section class="slide slide--split">
       <div class="text">
         <p class="eyebrow">Обратная связь эксперта</p>
-        <h2>Мягко называет ошибку и показывает, как сказать иначе</h2>
+        <h2>Называет типовую ошибку и показывает, как сказать иначе</h2>
         <div class="rewrite">
-          <p class="rewrite__before">«Слабых сторон у меня нет. Ну, разве что перфекционизм».</p>
+          <p class="rewrite__before">«Ответственный, коммуникабельный, быстро обучаюсь»</p>
           <p class="rewrite__after">
-            «Мне сложно оценивать сроки: на курсовой заложил неделю, а ушло две. Теперь делю задачу
-            на части и добавляю запас».
+            «Вёл расписание и регистрацию на мероприятии факультета на 300 человек»
           </p>
         </div>
         <p class="note">20 типовых ошибок. У каждой — причина, переформулировка и источник.</p>
       </div>
-      <div class="solo">
-        <figure class="phone phone--tilt-left">
-          <img src="img/review-after.jpg" alt="Оценка и типовая ошибка" />
-        </figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-review-after.jpg" alt="Типовая ошибка и оценка" />
+      </figure>
     </section>
 
     <section class="slide slide--split">
@@ -126,15 +124,15 @@
         <h2>Отвечает по базе и показывает, откуда факт</h2>
         <ul class="list">
           <li>Понимает «собес» и «испыталку»</li>
-          <li>Цифра у фразы открывает пруф источника</li>
-          <li>Нет в базе — поищет в интернете</li>
+          <li>Цифра у фразы открывает цитату и три проверки</li>
+          <li>Нет в базе — идёт в интернет</li>
           <li>Три уточняющих вопроса продолжают разговор</li>
         </ul>
       </div>
-      <div class="pair">
-        <figure class="phone"><img src="img/ask-answer.jpg" alt="Ответ справки" /></figure>
-        <figure class="phone"><img src="img/sheet.jpg" alt="Пруф источника" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-proof.jpg" alt="Пруф источника поверх ответа" />
+      </figure>
     </section>
 
     <section class="slide slide--split slide--dark">
@@ -146,36 +144,30 @@
           <li>Маленькая модель за полсекунды решает, нужен ли поиск</li>
           <li>Поиск находит страницы и выписывает дословные цитаты</li>
           <li>Сервер сам открывает каждую страницу и ищет цитату</li>
-          <li>Подтверждённое — с отпечатком SHA-256, остальное отбрасывается</li>
+          <li>Подтверждённое получает отпечаток SHA-256, остальное отбрасывается</li>
         </ol>
-        <p class="note">
-          У сноски можно открыть цитату и результат проверки. Совпадение цитаты не заменяет чтение
-          источника.
-        </p>
       </div>
-      <div class="pair">
-        <figure class="phone">
-          <img src="img/web-answer.jpg" alt="Ответ с фактами из интернета" />
-        </figure>
-        <figure class="phone"><img src="img/web-proof.jpg" alt="Пруф найденной страницы" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-web-proof.jpg" alt="Пруф найденной в интернете страницы" />
+      </figure>
     </section>
 
     <section class="slide slide--split">
       <div class="text">
-        <p class="eyebrow">Личное</p>
+        <p class="eyebrow">Память</p>
         <h2>Знакомится и запоминает найденное</h2>
         <ul class="list">
           <li>Три вопроса при первом входе — советы под тебя</li>
-          <li>Подтверждённое в интернете само запоминается в «Мою базу»</li>
+          <li>Подтверждённое в интернете само ложится в «Мою базу»</li>
           <li>У личной базы свой корень Меркла</li>
           <li>Наставник опирается на неё в следующих ответах</li>
         </ul>
       </div>
-      <div class="pair">
-        <figure class="phone"><img src="img/welcome.jpg" alt="Знакомство" /></figure>
-        <figure class="phone"><img src="img/mybase.jpg" alt="Моя база" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-mybase.jpg" alt="Моя база" />
+      </figure>
     </section>
 
     <section class="slide">
@@ -214,21 +206,16 @@
         <p class="eyebrow">Пруф-система</p>
         <h2>Каждый факт проверяется за миллисекунды</h2>
         <ol class="flow">
-          <li>
-            <b>Цитата.</b> Скрипт находит дословную фразу на живой странице, статьи — по DOI в
-            Crossref
-          </li>
+          <li><b>Цитата.</b> Скрипт находит дословную фразу на странице, статьи — по DOI</li>
           <li><b>SHA-256.</b> Изменится буква в карточке — пруф не сойдётся, CI упадёт</li>
-          <li><b>Дерево Меркла.</b> Путь от карточки до корня, который лежит в репозитории</li>
+          <li><b>Дерево Меркла.</b> Путь от карточки до корня из репозитория</li>
         </ol>
-        <p class="note">
-          60 из 60 пруфов сходятся прямо в браузере. Агенты проверяют их по /proofs.json.
-        </p>
+        <p class="note">60 из 60 пруфов сходятся прямо в браузере.</p>
       </div>
-      <div class="pair">
-        <figure class="phone"><img src="img/sheet.jpg" alt="Пруф источника" /></figure>
-        <figure class="phone"><img src="img/proofs.jpg" alt="Проверка всей базы" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-proofs.jpg" alt="Проверка всей базы" />
+      </figure>
     </section>
 
     <section class="slide slide--split">
@@ -243,12 +230,10 @@
         </ol>
         <p class="note">Карта прогресса: размытая точка — зона, где ответы пока плавают.</p>
       </div>
-      <div class="pair">
-        <figure class="phone">
-          <img src="img/returning.jpg" alt="Главная для вернувшегося" />
-        </figure>
-        <figure class="phone"><img src="img/progress.jpg" alt="Карта прогресса" /></figure>
-      </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-progress.jpg" alt="Карта прогресса" />
+      </figure>
     </section>
 
     <section class="slide slide--split">
@@ -257,15 +242,33 @@
         <h2>Ответить вслух. Унести разбор с собой</h2>
         <ul class="list">
           <li>Голосовой ответ в любом современном браузере</li>
-          <li>Шар слушает громкость, текст можно поправить</li>
+          <li>Узор на шаре живёт от громкости голоса</li>
           <li>Разбор в PDF: итог, план, кейсы, источники</li>
           <li>Или в заметки телефона в Markdown</li>
         </ul>
       </div>
-      <div class="pair">
-        <figure class="phone"><img src="img/voice.jpg" alt="Запись голоса" /></figure>
-        <figure class="paper"><img src="img/report.jpg" alt="Разбор в PDF" /></figure>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-report.jpg" alt="Разбор тренировки" />
+      </figure>
+    </section>
+
+    <section class="slide slide--split">
+      <img class="corner__aura" src="img/aura-pastel.png" alt="" />
+      <div class="text">
+        <p class="eyebrow">Ценности</p>
+        <h2>Ценности — прямо в продукте</h2>
+        <ul class="list">
+          <li>Здесь можно ошибаться: неудачный ответ — начало работы</li>
+          <li>Ты принимаешь решение, наставник показывает варианты</li>
+          <li>У факта есть источник, у источника — пруф</li>
+          <li>Память и профиль хранятся в браузере</li>
+        </ul>
       </div>
+      <figure class="win">
+        <div class="win__bar"><i></i><i></i><i></i><span>chernovik-hellowrld.vercel.app</span></div>
+        <img src="img/w-values.jpg" alt="Экран «Ценности»" />
+      </figure>
     </section>
 
     <section class="slide">
@@ -299,36 +302,6 @@
         <p><b>$0,003</b> тренировка целиком</p>
         <p><b>CI</b> тесты, типы, сборка и пруфы</p>
       </div>
-    </section>
-
-    <section class="slide slide--dark slide--values">
-      <img class="values__iris" src="img/values-iris.svg" alt="" />
-      <p class="eyebrow">Во что мы верим</p>
-      <h2>Больше ясности.<br />Решение — за тобой.</h2>
-      <p class="values__lead">
-        Искусственный интеллект помогает подготовиться к важному разговору.<br />Твой голос и твой
-        выбор остаются твоими.
-      </p>
-      <div class="values__grid">
-        <article>
-          <p class="step-number">01 / Самостоятельность</p>
-          <h3>Учиться думать</h3>
-          <p>Сначала твой ответ, затем обратная связь и ещё одна попытка.</p>
-        </article>
-        <article>
-          <p class="step-number">02 / Проверяемость</p>
-          <h3>Видеть основания</h3>
-          <p>Открытая цитата, источник и границы проверки вместо доверия на слово.</p>
-        </article>
-        <article>
-          <p class="step-number">03 / Контроль</p>
-          <h3>Знать, где данные</h3>
-          <p>История хранится в браузере. Для ответа текст отправляется серверу и модели.</p>
-        </article>
-      </div>
-      <p class="values__limit">
-        Совет помогает подготовиться. Официальные требования вузов и работодателей проверяй у них.
-      </p>
     </section>
 
     <section class="slide slide--dark slide--closing">
