@@ -48,9 +48,32 @@ const SIZE = { width: 1280, height: 720 }
   await page.getByRole('button', { name: 'Первая работа' }).click(); await pause(900)
   await page.locator('.welcome__about').pressSequentially('3 курс, Ставрополь, ищу первую стажировку', { delay: 22 }); await pause(900)
   await page.getByRole('button', { name: /Готово/ }).click(); await pause(1200)
-  await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await page.mouse.move(640, 200); await pause(3400)
-  await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: 300, behavior: 'smooth' })); await pause(1400)
-  await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: -300, behavior: 'smooth' })); await pause(1400)
+  // Плавное движение мыши по точкам кривой: живые pointermove, как у человека.
+  const glide = async (points, ms) => {
+    const steps = Math.max(2, Math.round(ms / 45))
+    for (let k = 1; k <= steps; k++) {
+      const t = (k / steps) * (points.length - 1)
+      const i = Math.min(points.length - 2, Math.floor(t))
+      const f = t - i
+      await page.mouse.move(points[i][0] + (points[i + 1][0] - points[i][0]) * f, points[i][1] + (points[i + 1][1] - points[i][1]) * f)
+      await page.waitForTimeout(16)
+    }
+  }
+  await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await pause(2600)
+  await caption('Фон живой', 'за курсором распускаются организмы')
+  await glide([[90, 680], [160, 420], [120, 160], [260, 90], [420, 60], [860, 70], [1060, 160], [1180, 420], [1120, 650]], 3600); await pause(900)
+  await glide([[1180, 600], [1050, 300], [1200, 120]], 1400); await pause(1200)
+  await caption('Маскот', 'точки расступаются и разлетаются по клику')
+  const mark = await page.locator('.aura-mark canvas.mark').boundingBox()
+  const mx = mark.x + mark.width / 2, my = mark.y + mark.height / 2
+  await glide([[mx - 120, my - 80], [mx - 30, my - 20], [mx + 40, my + 10], [mx - 10, my + 40], [mx + 20, my - 30]], 2200)
+  await page.mouse.down(); await page.mouse.up(); await pause(1400)
+  await page.mouse.down(); await page.mouse.up(); await pause(1800)
+  await caption('Сценарии', 'колесом мыши или перетаскиванием')
+  const deck = await page.locator('.deck__track').boundingBox()
+  await glide([[mx, my + 120], [deck.x + deck.width / 2, deck.y + deck.height / 2]], 700)
+  await page.mouse.wheel(0, 120); await pause(1300); await page.mouse.wheel(0, -120); await pause(1100); await page.mouse.wheel(0, -120); await pause(1300)
+  await page.mouse.wheel(0, 120); await pause(1400)
 
   await caption('Справка', 'вопрос голосом')
   await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Справка' }).click(); await pause(2200)
@@ -128,6 +151,17 @@ const SIZE = { width: 1280, height: 720 }
   await caption('Ценности', 'ИИ помогает, решение — твоё')
   await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Ценности' }).click(); await pause(2600)
   await scrollTo('bottom', 6000); await pause(1500)
+
+  await caption('Свой наставник', 'имя, цвет, тон и подробность')
+  await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Свой наставник' }).click(); await pause(2400)
+  await page.locator('.studio__input').fill(''); await page.locator('.studio__input').pressSequentially('Арни-бот', { delay: 60 }); await pause(800)
+  await page.getByRole('radio', { name: 'Мята' }).click(); await pause(1200)
+  await scrollTo('.studio__controls', 1400); await pause(600)
+  const range = await page.locator('.studio__range').first().boundingBox()
+  await page.mouse.move(range.x + range.width * 0.5, range.y + range.height / 2); await page.mouse.down()
+  await glide([[range.x + range.width * 0.5, range.y + range.height / 2], [range.x + range.width * 0.92, range.y + range.height / 2]], 900); await page.mouse.up(); await pause(1400)
+  await page.getByRole('radio', { name: 'С юмором' }).click(); await pause(1200)
+  await scrollTo('top', 1400); await pause(2600)
 
   await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Тренажёр' }).click(); await pause(3800)
   await cdp.send('Page.stopScreencast')
