@@ -2,6 +2,7 @@ import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useSta
 import type { ChatTurn } from '../core/protocol'
 import { parseSections } from '../core/protocol'
 import { FloatingNav, sectionOf } from './components/Nav'
+import { Trail } from './components/Trail'
 import { Ask } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
@@ -88,6 +89,7 @@ export function App() {
 
   return (
     <>
+      <Trail />
       {route.view === 'home' && !greet && <Home memory={memory} onAsk={ask} />}
       {route.view === 'ask' && (
         <Ask exchanges={exchanges} onAsk={ask} onReset={() => setExchanges([])} />
