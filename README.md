@@ -90,7 +90,7 @@ npm run dev
 Проверки:
 
 ```bash
-npm test                 # 117 тестов: поиск, промпты, пруфы, поток, память, голос, защита API
+npm test                 # 118 тестов: поиск, промпты, пруфы, поток, память, голос, защита API
 npm run check:knowledge  # целостность базы
 npm run proofs:check     # пруфы совпадают с базой
 npm run build
