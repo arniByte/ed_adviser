@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { COLORS, STYLES, type MentorSettings, type MentorStyle } from '../../../core/mentor'
 import { Aura } from '../../components/Aura'
 import { AuraMark } from '../../components/AuraMark'
@@ -177,7 +177,52 @@ export function MentorStudio() {
           Сбросить
         </button>
       </div>
+
+      <FullReset />
     </main>
+  )
+}
+
+/** Всё, что Черновик хранит в браузере, лежит под одним префиксом. */
+function wipeEverything() {
+  try {
+    for (const key of Object.keys(localStorage))
+      if (key.startsWith('chernovik:')) localStorage.removeItem(key)
+    sessionStorage.clear()
+  } catch {
+    // Хранилище закрыто — после перезагрузки и так ничего не останется.
+  }
+  window.location.replace(`${window.location.pathname}#/`)
+  window.location.reload()
+}
+
+/** Красная кнопка внизу: стирает историю целиком. Срабатывает со второго нажатия. */
+function FullReset() {
+  const [asking, setAsking] = useState(false)
+  useEffect(() => {
+    if (!asking) return
+    const timer = window.setTimeout(() => setAsking(false), 4000)
+    return () => window.clearTimeout(timer)
+  }, [asking])
+
+  return (
+    <section className="studio__danger" aria-labelledby="studio-danger">
+      <h2 id="studio-danger" className="studio__danger-title">
+        Начать с нуля
+      </h2>
+      <p className="studio__danger-text">
+        Удалит все разговоры, прогресс, «Мою базу», знакомство и настройки наставника в этом
+        браузере. Вернуть их не получится.
+      </p>
+      <button
+        type="button"
+        className="btn studio__danger-button"
+        data-asking={asking}
+        onClick={() => (asking ? wipeEverything() : setAsking(true))}
+      >
+        {asking ? 'Точно? Нажми ещё раз' : 'Сбросить всё'}
+      </button>
+    </section>
   )
 }
 

@@ -199,6 +199,22 @@ describe('planAsk: личная база и интернет', () => {
     expect(text).toContain('сейчас: школа')
     expect(text).toContain('«Ставрополь»')
   })
+
+  it('не передаёт профиль, если вопрос не из целей пользователя', () => {
+    const profile = { stage: 'student' as const, goals: ['job' as const], about: 'ищу стажировку' }
+    const offTopic = system({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Когда подавать согласие на зачисление в вуз?' }],
+      profile,
+    })
+    expect(offTopic).not.toContain('ищу стажировку')
+    const onTopic = system({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
+      profile,
+    })
+    expect(onTopic).toContain('ищу стажировку')
+  })
 })
 
 describe('настройки наставника в промпте', () => {

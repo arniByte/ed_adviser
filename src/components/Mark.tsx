@@ -16,6 +16,9 @@ interface Props {
 /** Самый маленький знак — логотип: точек меньше, иначе они слипаются. */
 const SMALL = 72
 
+/** Уровни прозрачности точек: глазу хватает, а рисовать по уровням быстро. */
+const LEVELS = 12
+
 /** Поле вокруг живого знака, в долях его размера: туда разлетаются точки. */
 const PAD = 0.3
 
@@ -152,7 +155,8 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     const cell = inner / cols
     const cellNorm = 2 / cols
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const fps = small ? 24 : 30
+    // Живой знак идёт с частотой экрана, маленькому логотипу хватает 30 кадров.
+    const fps = small ? 30 : 120
 
     // Каждая точка догоняет свою цель с инерцией: формы перетекают, а не прыгают.
     const current = new Float32Array(cols * cols)
@@ -206,8 +210,8 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
           ty = (dy / distance) * reach
         }
       }
-      face.lookX += (tx - face.lookX) * 0.12
-      face.lookY += (ty - face.lookY) * 0.12
+      face.lookX += (tx - face.lookX) * ease(0.12)
+      face.lookY += (ty - face.lookY) * ease(0.12)
 
       if (now > nextBlink && blinkAt < 0) blinkAt = now
       face.open = 1
@@ -221,10 +225,18 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       }
     }
 
+    const buckets: number[][] = Array.from({ length: LEVELS }, () => [])
+    let previousNow = 0
+    /** Доля пути к цели за кадр — одинаковая на 30, 60 и 120 Гц. */
+    let ease = (k: number) => k
     const draw = (now: number, settle = false) => {
+      // Метки времени rAF бывают чуть раньше performance.now(): шаг не уходит в минус.
+      const step = previousNow ? Math.min(0.05, Math.max(0, (now - previousNow) / 1000)) : 1 / 60
+      previousNow = Math.max(previousNow, now)
+      ease = (k: number) => 1 - (1 - k) ** (step * 30)
       const t = (now - start) / 1000
       const target = moodRef.current === 'thinking' ? 1 : 0
-      energy += (target - energy) * 0.06
+      energy += (target - energy) * ease(0.06)
       if (withEyes && !motion.matches) updateFace(now)
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = ink
@@ -232,7 +244,7 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       const poke = pokeRef.current
       const burst = withEyes && poke.burstAt !== lastBurst
       lastBurst = poke.burstAt
-      const dt = 1 / fps
+      const dt = step
       for (const point of points) {
         if (!withEyes || settle) continue
         const i = point.i
@@ -259,23 +271,33 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
         offsetY[i] += speedY[i] * dt
       }
 
+      // Точки одной прозрачности рисуются одним путём: это в разы быстрее, чем fill на каждую.
+      for (const path of buckets) path.length = 0
+      const follow = ease(0.38)
       for (const point of points) {
         let value = halo(point.r, point.angle, t, energy, small)
         if (withEyes) value = Math.max(value, eyes(point.x, point.y, face, cellNorm))
         const previous = current[point.i]
-        const next = settle ? value : previous + (value - previous) * 0.38
+        const raw = settle ? value : previous + (value - previous) * follow
+        const next = Number.isFinite(raw) ? Math.min(1, Math.max(0, raw)) : 0
         current[point.i] = next
         const radius = cell * 0.47 * (0.08 + 0.92 * Math.sqrt(next))
         if (radius < 0.35) continue
-        context.globalAlpha = 0.3 + 0.7 * next
-        context.beginPath()
-        context.arc(
+        buckets[Math.min(LEVELS - 1, Math.round(next * (LEVELS - 1)))].push(
           margin + (point.x + offsetX[point.i] + 1) * 0.5 * inner,
           margin + (point.y + offsetY[point.i] + 1) * 0.5 * inner,
           radius,
-          0,
-          Math.PI * 2,
         )
+      }
+      for (let level = 0; level < LEVELS; level++) {
+        const dots = buckets[level]
+        if (!dots.length) continue
+        context.globalAlpha = 0.3 + (0.7 * level) / (LEVELS - 1)
+        context.beginPath()
+        for (let k = 0; k < dots.length; k += 3) {
+          context.moveTo(dots[k] + dots[k + 2], dots[k + 1])
+          context.arc(dots[k], dots[k + 1], dots[k + 2], 0, Math.PI * 2)
+        }
         context.fill()
       }
       context.globalAlpha = 1

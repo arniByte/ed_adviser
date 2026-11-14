@@ -64,8 +64,8 @@ describe('контекст веб-поиска', () => {
     expect(String(messages()[0].content)).toContain('не ищи факты по прежней теме')
   })
 
-  it('поиск отделяет новый вопрос от прежней темы', async () => {
-    vi.mocked(complete).mockResolvedValueOnce('[]')
+  it('поиск отделяет новый вопрос от прежней темы и делает второй заход, если пусто', async () => {
+    vi.mocked(complete).mockResolvedValueOnce('[]').mockResolvedValueOnce('[]')
     await expect(findOnWeb(question, { previousQuestion })).resolves.toEqual({
       cards: [],
       checks: {},
@@ -78,12 +78,13 @@ describe('контекст веб-поиска', () => {
     expect(String(messages()[0].content)).toContain(
       'Если текущий вопрос самодостаточен, игнорируй предыдущий',
     )
+    expect(vi.mocked(complete)).toHaveBeenCalledTimes(2)
   })
 
   it('поиск получает контекст длинного уточнения со словом «там»', async () => {
     const previousQuestion = 'Какие правила поступления в МГУ?'
     const followup = 'А когда там заканчивается приём документов на платное обучение?'
-    vi.mocked(complete).mockResolvedValueOnce('[]')
+    vi.mocked(complete).mockResolvedValueOnce('[]').mockResolvedValueOnce('[]')
     await findOnWeb(followup, { previousQuestion })
     const user = String(messages().find((message) => message.role === 'user')?.content)
     expect(user).toContain(`Текущий вопрос пользователя: «${followup}»`)

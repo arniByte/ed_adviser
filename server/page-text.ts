@@ -70,7 +70,20 @@ export const HEADERS = {
 
 /** Проверяет, что цитата дословно есть на странице: без учёта регистра и пробелов. */
 export function containsQuote(page: string, quote: string): boolean {
-  return normalize(page).toLowerCase().includes(normalize(quote).toLowerCase())
+  return loose(page).includes(loose(quote))
+}
+
+/**
+ * Текст для сравнения без оформления: только буквы и цифры через пробел. Кавычки
+ * «ёлочки» против "лапок", тире разной длины, ё и е, переносы и регистр не мешают
+ * найти фразу, а слова и их порядок должны совпасть.
+ */
+function loose(text: string): string {
+  return normalize(text)
+    .toLowerCase()
+    .replace(/ё/g, 'е')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim()
 }
 
 /** Открывает HTML-страницу с коротким таймаутом: сервер не может ждать долго. */

@@ -1,5 +1,6 @@
 import type { Found } from './api'
 import { isSaved } from './mine'
+import { createStore } from './store'
 
 export interface Exchange {
   id: number
@@ -17,8 +18,8 @@ export interface Exchange {
 
 export type AskHandler = (question: string, options?: { web?: boolean }) => void
 
-/** Разговор переживает перезагрузку: последние ответы лежат в браузере. */
-const KEY = 'chernovik:chat:v1'
+/** Ключ прежней версии: тогда разговор был один. */
+const LEGACY = 'chernovik:chat:v1'
 const KEEP = 20
 
 function cleanChat(value: unknown): Exchange[] {
@@ -59,18 +60,99 @@ function cleanChat(value: unknown): Exchange[] {
     .slice(-KEEP)
 }
 
-export function loadChat(): Exchange[] {
-  try {
-    return cleanChat(JSON.parse(localStorage.getItem(KEY) ?? '[]'))
-  } catch {
-    return []
-  }
+/**
+ * История разговоров: каждый чат — отдельная запись с заголовком по первому вопросу.
+ * Храним последние CHATS, самый свежий — первым.
+ */
+export interface Chat {
+  id: string
+  title: string
+  updatedAt: number
+  exchanges: Exchange[]
 }
 
-export function saveChat(exchanges: Exchange[]) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(cleanChat(exchanges)))
-  } catch {
-    // Приватный режим: разговор живёт до закрытия вкладки.
+const CHATS = 30
+
+export const newChatId = () =>
+  `c${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`
+
+function titleOf(exchanges: Exchange[]) {
+  const first = exchanges[0]?.question.trim().replace(/\s+/g, ' ') ?? ''
+  return first.length > 80 ? `${first.slice(0, 78).trimEnd()}…` : first
+}
+
+function cleanChats(value: unknown): Chat[] | null {
+  if (!Array.isArray(value)) return null
+  const ids = new Set<string>()
+  return value
+    .flatMap((item): Chat[] => {
+      const chat = item as Chat | null
+      if (typeof chat?.id !== 'string' || ids.has(chat.id) || !Number.isFinite(chat.updatedAt))
+        return []
+      const exchanges = cleanChat(chat.exchanges)
+      if (!exchanges.length) return []
+      ids.add(chat.id)
+      return [{ id: chat.id, title: titleOf(exchanges), updatedAt: chat.updatedAt, exchanges }]
+    })
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+    .slice(0, CHATS)
+}
+
+const chats = createStore<Chat[]>('chernovik:chats:v1', [], cleanChats)
+/** Какой разговор открыт: после перезагрузки возвращаемся в него. */
+const open = createStore<string | null>('chernovik:chat-open:v1', null, (value) =>
+  typeof value === 'string' ? value : null,
+)
+
+// Разговор из прежней версии, где чат был один, становится первым в истории.
+try {
+  const legacy = cleanChat(JSON.parse(localStorage.getItem(LEGACY) ?? 'null'))
+  if (legacy.length && !chats.get().length) {
+    const id = newChatId()
+    chats.set([{ id, title: titleOf(legacy), updatedAt: Date.now(), exchanges: legacy }])
+    open.set(id)
   }
+  localStorage.removeItem(LEGACY)
+} catch {
+  // Хранилище закрыто — переносить нечего.
+}
+
+export const getChats = chats.get
+export const useChats = chats.use
+export const findChat = (id: string) => chats.get().find((chat) => chat.id === id)
+export const openChatId = () => open.get()
+
+/** Сохраняет разговор и делает его открытым. Пустой разговор в историю не попадает. */
+export function saveChat(id: string, exchanges: Exchange[]) {
+  if (open.get() !== id) open.set(id)
+  const clean = cleanChat(exchanges)
+  const list = chats.get()
+  const before = list.find((chat) => chat.id === id)
+  if (!clean.length) {
+    if (before) chats.set(list.filter((chat) => chat !== before))
+    return
+  }
+  if (before && JSON.stringify(before.exchanges) === JSON.stringify(clean)) return
+  const chat = { id, title: titleOf(clean), updatedAt: Date.now(), exchanges: clean }
+  chats.set([chat, ...list.filter((item) => item !== before)].slice(0, CHATS))
+}
+
+/** Дописывает готовый ответ в разговор, который уже не открыт. */
+export function appendToChat(id: string, exchange: Exchange) {
+  const before = findChat(id)?.exchanges ?? []
+  const rest = before.filter((item) => item.id !== exchange.id)
+  const list = chats.get()
+  const chat = { id, title: '', updatedAt: Date.now(), exchanges: cleanChat([...rest, exchange]) }
+  chat.title = titleOf(chat.exchanges)
+  if (chat.exchanges.length)
+    chats.set([chat, ...list.filter((item) => item.id !== id)].slice(0, CHATS))
+}
+
+export function deleteChat(id: string) {
+  chats.set(chats.get().filter((chat) => chat.id !== id))
+}
+
+/** Следующий номер ответа — сквозной по всем разговорам, чтобы ответы не путались. */
+export function nextExchangeId(): number {
+  return Math.max(0, ...chats.get().flatMap((chat) => chat.exchanges.map((e) => e.id))) + 1
 }

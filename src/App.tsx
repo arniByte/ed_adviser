@@ -7,7 +7,16 @@ import { Ask } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
 import { askMentor } from './lib/api'
-import { loadChat, saveChat, type AskHandler, type Exchange } from './lib/chat'
+import {
+  appendToChat,
+  findChat,
+  newChatId,
+  nextExchangeId,
+  openChatId,
+  saveChat,
+  type AskHandler,
+  type Exchange,
+} from './lib/chat'
 import { saveToMine } from './lib/mine'
 import { useMemory } from './lib/memory'
 import { useProfile } from './lib/profile'
@@ -28,6 +37,7 @@ const Welcome = lazy(() =>
 const MentorStudio = lazy(() =>
   import('./features/mentor/MentorStudio').then((m) => ({ default: m.MentorStudio })),
 )
+const Chats = lazy(() => import('./features/chats/Chats').then((m) => ({ default: m.Chats })))
 const Values = lazy(() => import('./features/values/Values').then((m) => ({ default: m.Values })))
 
 export function App() {
@@ -36,9 +46,32 @@ export function App() {
   const profile = useProfile()
   // Пока не познакомились, главная начинается со знакомства.
   const greet = route.view === 'hello' || (route.view === 'home' && profile === null)
-  const [exchanges, setExchanges] = useState<Exchange[]>(loadChat)
-  const nextId = useRef(Math.max(0, ...exchanges.map((e) => e.id)) + 1)
-  useEffect(() => saveChat(exchanges), [exchanges])
+  const [chatId, setChatId] = useState(() => {
+    const open = openChatId()
+    return open && findChat(open) ? open : newChatId()
+  })
+  const [exchanges, setExchanges] = useState<Exchange[]>(() => findChat(chatId)?.exchanges ?? [])
+  const nextId = useRef(nextExchangeId())
+  const openChat = useRef(chatId)
+  openChat.current = chatId
+  useEffect(() => saveChat(chatId, exchanges), [chatId, exchanges])
+
+  // Ссылка #/ask/<id> из раздела «Чаты» открывает старый разговор.
+  const wanted = route.view === 'ask' ? route.chat : undefined
+  useEffect(() => {
+    if (!wanted) return
+    const chat = findChat(wanted)
+    if (chat && wanted !== openChat.current) {
+      setChatId(chat.id)
+      setExchanges(chat.exchanges)
+    }
+    window.history.replaceState(null, '', '#/ask')
+  }, [wanted])
+
+  const startChat = useCallback(() => {
+    setChatId(newChatId())
+    setExchanges([])
+  }, [])
 
   // Страница въезжает с той стороны, где стоит её вкладка.
   const tab = sectionOf(route)
@@ -54,8 +87,26 @@ export function App() {
   const ask: AskHandler = useCallback(
     async (question, options) => {
       const id = nextId.current++
-      const patch = (change: Partial<Exchange>) =>
-        setExchanges((list) => list.map((e) => (e.id === id ? { ...e, ...change } : e)))
+      const chat = chatId
+      let current: Exchange = {
+        id,
+        question,
+        raw: '',
+        status: 'waiting',
+        web: options?.web === true,
+      }
+      const patch = (change: Partial<Exchange>) => {
+        current = { ...current, ...change }
+        // Пока ждали ответ, человек мог открыть другой разговор: готовый ответ уходит в свой.
+        // Если в разговор вернулись, пока ответ ещё писался, ответ дописывается в конец.
+        if (openChat.current === chat)
+          setExchanges((list) =>
+            list.some((e) => e.id === id)
+              ? list.map((e) => (e.id === id ? current : e))
+              : [...list, current],
+          )
+        else if (current.status === 'done') appendToChat(chat, current)
+      }
 
       const turns: ChatTurn[] = exchanges
         .filter((e) => e.status === 'done')
@@ -66,8 +117,8 @@ export function App() {
         ])
       turns.push({ role: 'user', content: question })
 
-      const web = options?.web === true
-      setExchanges((list) => [...list, { id, question, raw: '', status: 'waiting', web }])
+      const web = current.web === true
+      setExchanges((list) => [...list, current])
       go('/ask')
       try {
         const raw = await askMentor(
@@ -87,28 +138,27 @@ export function App() {
         patch({ status: 'failed', error: (error as Error).message })
       }
     },
-    [exchanges],
+    [chatId, exchanges],
   )
 
   return (
     <>
       <Trail />
       {route.view === 'home' && !greet && <Home memory={memory} onAsk={ask} />}
-      {route.view === 'ask' && (
-        <Ask exchanges={exchanges} onAsk={ask} onReset={() => setExchanges([])} />
-      )}
+      {route.view === 'ask' && <Ask exchanges={exchanges} onAsk={ask} onReset={startChat} />}
       {route.view === 'train' && <Train key={route.scenario} scenario={route.scenario} />}
       <Suspense fallback={<main className="page" />}>
         {route.view === 'progress' && <Progress memory={memory} />}
         {route.view === 'library' && <Library />}
         {route.view === 'proofs' && <Proofs />}
         {route.view === 'values' && <Values />}
+        {route.view === 'chats' && <Chats current={chatId} onNew={startChat} />}
         {route.view === 'mentor' && <MentorStudio />}
         {route.view === 'report' && <Report memory={memory} sessionId={route.session} />}
         {greet && <Welcome />}
-        {['progress', 'library', 'proofs', 'report', 'values', 'mentor'].includes(route.view) && (
-          <FloatingNav />
-        )}
+        {['progress', 'library', 'proofs', 'report', 'values', 'mentor', 'chats'].includes(
+          route.view,
+        ) && <FloatingNav />}
       </Suspense>
     </>
   )

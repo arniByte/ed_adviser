@@ -1,5 +1,7 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { createPortal } from 'react-dom'
+import { useChats } from '../lib/chat'
+import { chatCover, chatSize, chatWhen } from '../lib/chatLook'
 import { go, useRoute, type Route } from '../lib/route'
 import { Mark } from './Mark'
 import './Nav.css'
@@ -7,6 +9,7 @@ import './Nav.css'
 const SECTIONS = [
   { path: '/', title: 'Тренажёр', icon: 'train' },
   { path: '/ask', title: 'Справка', icon: 'ask' },
+  { path: '/chats', title: 'Чаты', icon: 'chats' },
   { path: '/progress', title: 'Прогресс', icon: 'progress' },
   { path: '/library', title: 'База', icon: 'library' },
   { path: '/mentor', title: 'Свой наставник', icon: 'mentor' },
@@ -18,16 +21,18 @@ export function sectionOf(route: Route): number {
   switch (route.view) {
     case 'ask':
       return 1
+    case 'chats':
+      return 2
     case 'progress':
     case 'report':
-      return 2
+      return 3
     case 'library':
     case 'proofs':
-      return 3
-    case 'mentor':
       return 4
-    case 'values':
+    case 'mentor':
       return 5
+    case 'values':
+      return 6
     default:
       return 0
   }
@@ -44,6 +49,13 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
     ),
     // Облачко реплики: вопрос наставнику.
     ask: <path d="M4 5.5h12v7.5H9l-3.5 3v-3H4z" />,
+    // Две реплики друг за другом: история разговоров.
+    chats: (
+      <>
+        <path d="M3 4h9.5v6H7l-2.5 2.2V10H3z" />
+        <path d="M15 7.5h2v6.5h-1.5v2.2L13 14H8.5v-1.5" />
+      </>
+    ),
     // Три точки разной резкости, как на карте прогресса.
     progress: (
       <>
@@ -86,6 +98,72 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
 }
 
 /**
+ * Панель недавних разговоров: выезжает сбоку от меню, пока курсор над «Чатами».
+ * На телефоне её нет — пункт ведёт на страницу со всеми разговорами.
+ */
+function ChatsFlyout({
+  left,
+  bottom,
+  height,
+  onEnter,
+  onLeave,
+  onPick,
+}: {
+  left: number
+  bottom: number
+  height: number
+  onEnter: () => void
+  onLeave: () => void
+  onPick: (path: string) => void
+}) {
+  const chats = useChats()
+  return (
+    <div
+      className="nav-flyout glass"
+      style={
+        { left, bottom, minHeight: height, '--fly-bottom': `${bottom}px` } as React.CSSProperties
+      }
+      onPointerEnter={onEnter}
+      onPointerLeave={onLeave}
+    >
+      <p className="nav-flyout__head caption">Недавние разговоры</p>
+      {chats.length === 0 ? (
+        <p className="nav-flyout__empty">
+          Пока пусто. Спроси наставника в справке — разговор появится здесь.
+        </p>
+      ) : (
+        <ul className="nav-flyout__list">
+          {chats.map((chat, index) => (
+            <li key={chat.id} style={{ '--i': Math.min(index, 8) } as React.CSSProperties}>
+              <button
+                type="button"
+                className="nav-flyout__chat"
+                tabIndex={-1}
+                onClick={() => onPick(`/ask/${chat.id}`)}
+              >
+                <img src={chatCover(chat.id)} alt="" aria-hidden="true" />
+                <span className="nav-flyout__title">{chat.title}</span>
+                <span className="nav-flyout__meta">
+                  {chatWhen(chat.updatedAt)} · {chatSize(chat.exchanges.length)}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <button
+        type="button"
+        className="nav-flyout__all"
+        tabIndex={-1}
+        onClick={() => onPick('/chats')}
+      >
+        Все разговоры
+      </button>
+    </div>
+  )
+}
+
+/**
  * Вся навигация — одна кнопка со знаком. Меню раскрывается над ней стеклянной
  * карточкой, подложка переезжает к выбранному разделу.
  */
@@ -97,6 +175,34 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
   const button = useRef<HTMLButtonElement>(null)
   const menu = useRef<HTMLDivElement>(null)
   const menuId = useId()
+  const [flyout, setFlyout] = useState<number | null>(null)
+  const closeTimer = useRef(0)
+  const canHover = () => window.matchMedia('(hover: hover) and (min-width: 36rem)').matches
+  const showFlyout = (row: HTMLElement) => {
+    // Панель стоит на одном уровне с низом меню и растёт вверх, сколько позволяет экран.
+    if (!canHover()) return
+    window.clearTimeout(closeTimer.current)
+    setFlyout(window.innerHeight - (menu.current ?? row).getBoundingClientRect().bottom)
+  }
+  const hideFlyout = (delay = 400) => {
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(() => setFlyout(null), delay)
+  }
+  // Курсор, который идёт к панели по диагонали, пересекает другие пункты меню.
+  // Пока он движется вправо, панель ждёт; остановился или повернул назад — закрывается.
+  const lastX = useRef(0)
+  const aim = (event: React.PointerEvent<HTMLDivElement>) => {
+    const dx = event.clientX - lastX.current
+    lastX.current = event.clientX
+    if (flyout === null) return
+    const item = (event.target as Element).closest<HTMLElement>('.nav-menu__item')
+    if (item?.dataset.chats) window.clearTimeout(closeTimer.current)
+    else hideFlyout(dx > 0 ? 450 : 150)
+  }
+  useEffect(() => {
+    if (!open) setFlyout(null)
+  }, [open])
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
 
   const dismiss = () => {
     setOpen(false)
@@ -134,7 +240,9 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
       }
       if (
         event.target instanceof Node &&
-        (menu.current?.contains(event.target) || button.current?.contains(event.target))
+        (menu.current?.contains(event.target) ||
+          button.current?.contains(event.target) ||
+          (event.target instanceof Element && event.target.closest('.nav-flyout')))
       )
         return
       setOpen(false)
@@ -209,6 +317,12 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
               role="menu"
               aria-label="Разделы"
               onKeyDown={move}
+              onPointerMove={aim}
+              onPointerLeave={(event) => {
+                // Ушёл из меню не в сторону панели — панель больше не нужна.
+                const box = menu.current?.getBoundingClientRect()
+                if (flyout !== null && box && event.clientX < box.right - 2) hideFlyout(150)
+              }}
               style={
                 {
                   left: place.left,
@@ -228,6 +342,12 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
                   aria-current={index === active ? 'page' : undefined}
                   tabIndex={index === active ? 0 : -1}
                   style={{ '--i': index } as React.CSSProperties}
+                  data-chats={section.icon === 'chats' || undefined}
+                  onPointerEnter={
+                    section.icon === 'chats'
+                      ? (event) => showFlyout(event.currentTarget)
+                      : undefined
+                  }
                   onClick={() => {
                     dismiss()
                     go(section.path)
@@ -238,6 +358,20 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
                 </button>
               ))}
             </div>
+            {flyout !== null && (
+              <ChatsFlyout
+                left={(menu.current?.getBoundingClientRect().right ?? place.left + 224) + 10}
+                bottom={flyout}
+                // Панель высотой с меню: курсор уходит вправо с любого пункта сразу в неё.
+                height={menu.current?.offsetHeight ?? 0}
+                onEnter={() => window.clearTimeout(closeTimer.current)}
+                onLeave={() => hideFlyout()}
+                onPick={(path) => {
+                  dismiss()
+                  go(path)
+                }}
+              />
+            )}
           </>,
           document.body,
         )}
