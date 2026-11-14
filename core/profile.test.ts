@@ -26,3 +26,34 @@ describe('профиль', () => {
     )
   })
 })
+
+import { cleanMentor, describeMentor, isDefaultMentor } from './mentor.js'
+
+describe('свой наставник', () => {
+  it('отбрасывает неизвестное и обрезает имя', () => {
+    const m = cleanMentor({
+      name: '  Ментор   Миша '.padEnd(40, 'а'),
+      color: 'neon',
+      tone: 3,
+      style: 'rude',
+    })
+    expect(m.name.length).toBe(24)
+    expect(m.color).toBe('thermal')
+    expect(m.tone).toBe(1)
+    expect(m.style).toBe('warm')
+  })
+
+  it('стандартные настройки не меняют промпт', () => {
+    expect(isDefaultMentor(cleanMentor({}))).toBe(true)
+  })
+
+  it('строгий короткий наставник описан для модели', () => {
+    const text = describeMentor(
+      cleanMentor({ name: 'Арни', tone: 0.9, depth: 0.1, style: 'business' }),
+    )
+    expect(text).toContain('«Арни»')
+    expect(text).toContain('строгий')
+    expect(text).toContain('короче')
+    expect(text).toContain('деловая')
+  })
+})

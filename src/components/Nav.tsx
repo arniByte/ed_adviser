@@ -9,6 +9,7 @@ const SECTIONS = [
   { path: '/ask', title: 'Справка', icon: 'ask' },
   { path: '/progress', title: 'Прогресс', icon: 'progress' },
   { path: '/library', title: 'База', icon: 'library' },
+  { path: '/mentor', title: 'Свой наставник', icon: 'mentor' },
   { path: '/values', title: 'Ценности', icon: 'values' },
 ] as const
 
@@ -23,8 +24,10 @@ export function sectionOf(route: Route): number {
     case 'library':
     case 'proofs':
       return 3
-    case 'values':
+    case 'mentor':
       return 4
+    case 'values':
+      return 5
     default:
       return 0
   }
@@ -55,6 +58,14 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
       <>
         <rect x="4" y="7" width="12" height="9" rx="2" />
         <path d="M6 4.5h8" />
+      </>
+    ),
+    // Ползунки: настройка наставника.
+    mentor: (
+      <>
+        <path d="M4 6h12M4 14h12" />
+        <circle cx="8" cy="6" r="1.8" fill="currentColor" />
+        <circle cx="13" cy="14" r="1.8" fill="currentColor" />
       </>
     ),
     values: <path d="M10 17S3 12.7 3 7.8a3.8 3.8 0 0 1 7-2 3.8 3.8 0 0 1 7 2c0 4.9-7 9.2-7 9.2Z" />,

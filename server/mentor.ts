@@ -9,6 +9,7 @@ import {
   caseContext,
   debriefPrompt,
   probeContext,
+  mentorNote,
   profileNote,
   reviewPrompt,
 } from './prompts.js'
@@ -119,6 +120,7 @@ export interface AskPlan {
   previousQuestion?: string
   scenario?: ScenarioId
   profile?: string
+  mentor?: unknown
   cards: Card[]
   /** Идти ли в интернет: попросили явно или базе почти нечего сказать. */
   web: boolean
@@ -143,6 +145,7 @@ export function planAsk(body: AskRequest): AskPlan {
     previousQuestion: questions.at(-2)?.content,
     scenario,
     profile: profileOf(body),
+    mentor: body.mentor,
     cards,
     web: body.web === true || WEB_WORDS.test(question) || cards.length < 2,
   }
@@ -157,7 +160,10 @@ export function prepareAsk(plan: AskPlan, found?: Card[]): Prepared {
     messages: [
       {
         role: 'system',
-        content: askPrompt(scenario, cards, found !== undefined) + profileNote(plan.profile),
+        content:
+          askPrompt(scenario, cards, found !== undefined) +
+          profileNote(plan.profile) +
+          mentorNote(plan.mentor),
       },
       ...plan.history,
     ],
@@ -219,7 +225,9 @@ function prepareReview(body: Extract<MentorRequest, { mode: 'review' }>): Prepar
             ...base,
             previous,
             knownMistakes: known.filter((m) => caseMistakes.has(m.id)),
-          }) + profileNote(profileOf(body)),
+          }) +
+          profileNote(profileOf(body)) +
+          mentorNote(body.mentor),
       },
       { role: 'user', content: framedAnswer(answer) },
     ],
@@ -242,7 +250,11 @@ function prepareDebrief(body: Extract<MentorRequest, { mode: 'debrief' }>): Prep
   return {
     cards: [],
     messages: [
-      { role: 'system', content: debriefPrompt(scenario, results) + profileNote(profileOf(body)) },
+      {
+        role: 'system',
+        content:
+          debriefPrompt(scenario, results) + profileNote(profileOf(body)) + mentorNote(body.mentor),
+      },
       { role: 'user', content: 'Подведи итог тренировки.' },
     ],
     maxTokens: OUTPUT_BUDGET.debrief,

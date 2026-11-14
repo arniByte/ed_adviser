@@ -1,6 +1,7 @@
 import { scenarios, zoneTitle } from '../../../core/knowledge'
 import { mastery, openMistakes, type Memory } from '../../../core/progress'
 import { AuraMark } from '../../components/AuraMark'
+import { useMentor } from '../../lib/mentor'
 import { ASK_HINTS, BlurCycle } from '../../components/BlurCycle'
 import { Composer } from '../../components/Composer'
 import { Disclaimer } from '../../components/Disclaimer'
@@ -48,12 +49,13 @@ const LEADS = [
 export function Home({ memory, onAsk }: Props) {
   const back = reminder(memory)
   const profile = useProfile()
+  const mentor = useMentor()
 
   return (
     <main className="page home">
       <h1 className="visually-hidden">Черновик — тренажёр перед настоящим</h1>
       <div className="home__hero rise">
-        <AuraMark size={184} />
+        <AuraMark size={184} palette={mentor.color} />
       </div>
 
       <p className="lead home__lead rise" style={{ '--i': 2 } as React.CSSProperties}>

@@ -200,3 +200,15 @@ describe('planAsk: личная база и интернет', () => {
     expect(text).toContain('«Ставрополь»')
   })
 })
+
+describe('настройки наставника в промпте', () => {
+  it('попадают в системный промпт справки', () => {
+    const text = system({
+      mode: 'ask',
+      turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
+      mentor: { name: 'Арни', tone: 0.9 },
+    })
+    expect(text).toContain('Пользователь настроил наставника')
+    expect(text).toContain('«Арни»')
+  })
+})
