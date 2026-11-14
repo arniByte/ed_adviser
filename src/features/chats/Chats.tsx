@@ -59,7 +59,7 @@ function ChatCard({
   )
 }
 
-/** Все разговоры с наставником: открыть старый или начать новый. */
+/** Все разговоры: открыть старый или начать новый. */
 export function Chats({ current, onNew }: Props) {
   const chats = useChats()
 
@@ -88,8 +88,8 @@ export function Chats({ current, onNew }: Props) {
 
       {chats.length === 0 ? (
         <p className="lead chats__empty rise" style={{ '--i': 3 } as React.CSSProperties}>
-          Здесь появятся разговоры со справкой. Спроси наставника о поступлении, первой работе или
-          испытательном сроке — разговор сохранится в браузере.
+          Здесь появятся твои разговоры. Спроси о поступлении, первой работе или о чём угодно —
+          разговор сохранится в браузере.
         </p>
       ) : (
         <ul className="chats__list">

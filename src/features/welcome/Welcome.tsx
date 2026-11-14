@@ -1,94 +1,338 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { INTERESTS, INTEREST_CHARS, MAX_INTERESTS } from '../../../core/interests'
 import { scenarios } from '../../../core/knowledge'
 import { STAGES, type Profile, type Stage } from '../../../core/profile'
+import { LIMITS } from '../../../core/protocol'
 import type { ScenarioId } from '../../../core/types'
 import { AuraMark } from '../../components/AuraMark'
-import { ArrowRight } from '../../components/icons'
-import { LIMITS } from '../../../core/protocol'
+import { ArrowRight, Close, Mic } from '../../components/icons'
+import { Mark } from '../../components/Mark'
+import { transcribe } from '../../lib/api'
 import { getProfile, saveProfile } from '../../lib/profile'
 import { go } from '../../lib/route'
+import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../../lib/voice'
 import './Welcome.css'
 
 const STAGE_IDS = Object.keys(STAGES) as Stage[]
+const KNOWN = new Set(INTERESTS.flatMap((group) => group.items))
+
+/** Чип, который парит: у каждого свой период, поэтому облако не качается строем. */
+function Chip({
+  pressed,
+  index,
+  onClick,
+  children,
+  className = '',
+  badge,
+}: {
+  pressed: boolean
+  index: number
+  onClick: () => void
+  children: React.ReactNode
+  className?: string
+  badge?: number
+}) {
+  return (
+    <button
+      type="button"
+      className={`welcome__chip ${className}`}
+      aria-pressed={pressed}
+      style={{ '--j': index % 7, '--i': index } as React.CSSProperties}
+      onClick={onClick}
+    >
+      {children}
+      {badge ? <span className="welcome__badge">{badge}</span> : null}
+    </button>
+  )
+}
+
+/** Поле «своё»: появляется по клику, добавляет интерес по Enter. */
+function Own({ onAdd, label = 'Своё' }: { onAdd: (value: string) => void; label?: string }) {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
+  const add = () => {
+    if (value.trim()) onAdd(value.trim())
+    setValue('')
+    setOpen(false)
+  }
+  if (!open)
+    return (
+      <button
+        type="button"
+        className="welcome__chip welcome__chip--own"
+        onClick={() => setOpen(true)}
+      >
+        + {label}
+      </button>
+    )
+  return (
+    <input
+      autoFocus
+      className="welcome__own"
+      value={value}
+      maxLength={INTEREST_CHARS}
+      placeholder="Например, скейт"
+      aria-label="Свой интерес"
+      onChange={(event) => setValue(event.target.value)}
+      onBlur={add}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') add()
+        if (event.key === 'Escape') {
+          setValue('')
+          setOpen(false)
+        }
+      }}
+    />
+  )
+}
 
 /**
- * Знакомство: три коротких вопроса, каждый появляется после ответа на предыдущий.
- * Ответы остаются в браузере и уходят на сервер только вместе с вопросом наставнику.
+ * Знакомство: кто ты, что впереди, что тебе интересно и что ещё добавить — текстом
+ * или голосом. Интересы уходят в промпт: из них Черновик берёт примеры и сравнения.
+ * Всё остаётся в браузере и отправляется на сервер только вместе с вопросом.
  */
 export function Welcome() {
   const initial = getProfile() ?? {}
   const [stage, setStage] = useState<Stage | undefined>(initial.stage)
   const [goals, setGoals] = useState<ScenarioId[]>(initial.goals ?? [])
+  const [interests, setInterests] = useState<string[]>(initial.interests ?? [])
+  const [open, setOpen] = useState<string[]>(() =>
+    INTERESTS.filter((group) => group.items.some((item) => initial.interests?.includes(item))).map(
+      (group) => group.id,
+    ),
+  )
   const [about, setAbout] = useState(initial.about ?? '')
+  const [recording, setRecording] = useState<Recording | null>(null)
+  const [hearing, setHearing] = useState(false)
+  const [voiceNote, setVoiceNote] = useState('')
+  const stopTimer = useRef(0)
+  const recordingRef = useRef<Recording | null>(null)
+  recordingRef.current = recording
 
-  const toggle = (id: ScenarioId) =>
+  useEffect(
+    () => () => {
+      window.clearTimeout(stopTimer.current)
+      recordingRef.current?.cancel()
+    },
+    [],
+  )
+
+  const toggleGoal = (id: ScenarioId) =>
     setGoals((list) => (list.includes(id) ? list.filter((g) => g !== id) : [...list, id]))
+  const toggleGroup = (id: string) =>
+    setOpen((list) => (list.includes(id) ? list.filter((g) => g !== id) : [...list, id]))
+  const toggleInterest = (item: string) =>
+    setInterests((list) =>
+      list.includes(item)
+        ? list.filter((i) => i !== item)
+        : list.length < MAX_INTERESTS
+          ? [...list, item]
+          : list,
+    )
+  const addOwn = (item: string) =>
+    setInterests((list) =>
+      list.some((i) => i.toLowerCase() === item.toLowerCase()) || list.length >= MAX_INTERESTS
+        ? list
+        : [...list, item],
+    )
+
+  const stopVoice = async () => {
+    window.clearTimeout(stopTimer.current)
+    const current = recordingRef.current
+    if (!current) return
+    setRecording(null)
+    setHearing(true)
+    try {
+      const text = (await transcribe(await current.stop())).trim()
+      if (text) setAbout((value) => `${value.trim()} ${text}`.trim().slice(0, LIMITS.aboutChars))
+      setVoiceNote(text ? '' : 'Ничего не расслышал. Попробуй ещё раз.')
+    } catch {
+      setVoiceNote('Не получилось распознать запись. Можно написать текстом.')
+    } finally {
+      setHearing(false)
+    }
+  }
+
+  const startVoice = async () => {
+    setVoiceNote('')
+    try {
+      const next = await startRecording()
+      setRecording(next)
+      stopTimer.current = window.setTimeout(() => void stopVoice(), MAX_SECONDS * 1000)
+    } catch {
+      setVoiceNote('Микрофон недоступен. Можно написать текстом.')
+    }
+  }
 
   const finish = (profile: Profile) => {
+    recordingRef.current?.cancel()
     saveProfile(profile)
     go('/')
   }
 
+  const own = interests.filter((item) => !KNOWN.has(item))
+  const left = LIMITS.aboutChars - about.length
+
   return (
     <main className="page welcome">
-      <div className="rise">
-        <AuraMark size={150} palette="pastel" />
+      <div className="welcome__mark rise" data-listening={!!recording}>
+        <AuraMark
+          size={196}
+          palette="pastel"
+          listen={recording?.level}
+          mood={hearing ? 'thinking' : undefined}
+        />
       </div>
       <h1 className="title welcome__title rise" style={{ '--i': 1 } as React.CSSProperties}>
-        Привет! Я Черновик
+        {recording ? 'Слушаю тебя' : hearing ? 'Записываю…' : 'Привет! Я Черновик'}
       </h1>
       <p className="lead welcome__lead rise" style={{ '--i': 2 } as React.CSSProperties}>
-        Расскажи пару слов о себе — подстрою советы под тебя.
+        Давай познакомимся — тогда советы и примеры будут про тебя, а не про среднего абитуриента.
       </p>
 
       <section className="welcome__step rise" style={{ '--i': 3 } as React.CSSProperties}>
         <h2 className="welcome__question">Кто ты сейчас?</h2>
         <div className="welcome__chips">
-          {STAGE_IDS.map((id) => (
-            <button
-              key={id}
-              className="btn btn--glass btn--small welcome__chip"
-              aria-pressed={stage === id}
-              onClick={() => setStage(id)}
-            >
+          {STAGE_IDS.map((id, index) => (
+            <Chip key={id} index={index} pressed={stage === id} onClick={() => setStage(id)}>
               {STAGES[id]}
-            </button>
+            </Chip>
           ))}
         </div>
       </section>
 
       {stage && (
-        <section className="welcome__step rise">
+        <section className="welcome__step welcome__step--in">
           <h2 className="welcome__question">Что впереди?</h2>
           <div className="welcome__chips">
-            {scenarios.map((scenario) => (
-              <button
+            {scenarios.map((scenario, index) => (
+              <Chip
                 key={scenario.id}
-                className="btn btn--glass btn--small welcome__chip"
-                aria-pressed={goals.includes(scenario.id)}
-                onClick={() => toggle(scenario.id)}
+                index={index + 2}
+                pressed={goals.includes(scenario.id)}
+                onClick={() => toggleGoal(scenario.id)}
               >
                 {scenario.title}
-              </button>
+              </Chip>
             ))}
           </div>
         </section>
       )}
 
       {stage && goals.length > 0 && (
-        <section className="welcome__step rise">
+        <section className="welcome__step welcome__step--in">
+          <h2 className="welcome__question">Что тебе интересно?</h2>
+          <p className="caption welcome__hint">
+            Нажми на тему — раскроются варианты. Из них Черновик будет брать примеры.
+          </p>
+          <div className="welcome__chips">
+            {INTERESTS.map((group, index) => {
+              const chosen = group.items.filter((item) => interests.includes(item)).length
+              return (
+                <Chip
+                  key={group.id}
+                  index={index}
+                  className="welcome__chip--group"
+                  pressed={open.includes(group.id)}
+                  badge={chosen}
+                  onClick={() => toggleGroup(group.id)}
+                >
+                  {group.title}
+                </Chip>
+              )
+            })}
+            <Own onAdd={addOwn} />
+          </div>
+
+          {INTERESTS.filter((group) => open.includes(group.id)).map((group) => (
+            <div key={group.id} className="welcome__branch">
+              <p className="caption welcome__branch-title">{group.title}</p>
+              <div className="welcome__chips">
+                {group.items.map((item, index) => (
+                  <Chip
+                    key={item}
+                    index={index}
+                    className="welcome__chip--leaf"
+                    pressed={interests.includes(item)}
+                    onClick={() => toggleInterest(item)}
+                  >
+                    {item}
+                  </Chip>
+                ))}
+                <Own onAdd={addOwn} />
+              </div>
+            </div>
+          ))}
+
+          {own.length > 0 && (
+            <div className="welcome__chips welcome__mine">
+              {own.map((item, index) => (
+                <Chip
+                  key={item}
+                  index={index}
+                  className="welcome__chip--leaf"
+                  pressed
+                  onClick={() => toggleInterest(item)}
+                >
+                  {item} <Close />
+                </Chip>
+              ))}
+            </div>
+          )}
+          <p className="caption" aria-live="polite">
+            {interests.length > 0
+              ? `Выбрано ${interests.length} из ${MAX_INTERESTS}`
+              : 'Можно выбрать до двенадцати'}
+          </p>
+        </section>
+      )}
+
+      {stage && goals.length > 0 && (
+        <section className="welcome__step welcome__step--in">
           <h2 className="welcome__question" id="welcome-about">
-            Пара слов о себе <span className="caption">— по желанию</span>
+            Добавить что-то ещё
           </h2>
-          <textarea
-            aria-labelledby="welcome-about"
-            className="welcome__about"
-            rows={3}
-            maxLength={LIMITS.aboutChars}
-            value={about}
-            placeholder="Например: 11 класс, Ставрополь, люблю биологию, боюсь собеседований"
-            onChange={(event) => setAbout(event.target.value)}
-          />
+          <div className="welcome__field" data-recording={!!recording}>
+            <textarea
+              aria-labelledby="welcome-about"
+              className="welcome__about"
+              rows={3}
+              maxLength={LIMITS.aboutChars}
+              value={about}
+              placeholder="Город, класс или курс, чего хочешь и что пугает. Можно сказать голосом"
+              onChange={(event) => setAbout(event.target.value)}
+            />
+            <div className="welcome__field-bar">
+              {recording || hearing ? (
+                <span className="welcome__listener">
+                  <Mark
+                    size={36}
+                    listen={recording?.level}
+                    mood={hearing ? 'thinking' : undefined}
+                  />
+                  <span className="caption">{recording ? 'Слушаю…' : 'Записываю…'}</span>
+                </span>
+              ) : (
+                <span className="caption" data-low={left < 40}>
+                  {about.length} / {LIMITS.aboutChars}
+                </span>
+              )}
+              {canRecord() && (
+                <button
+                  type="button"
+                  className="welcome__mic"
+                  data-on={!!recording}
+                  disabled={hearing}
+                  aria-label={recording ? 'Остановить запись' : 'Сказать голосом'}
+                  onClick={() => void (recording ? stopVoice() : startVoice())}
+                >
+                  <Mic />
+                  {recording ? 'Готово' : hearing ? 'Слушаю…' : 'Голосом'}
+                </button>
+              )}
+            </div>
+          </div>
+          {voiceNote && <p className="caption welcome__note">{voiceNote}</p>}
           <p className="caption">Без имени и контактов: ответы хранятся только в этом браузере.</p>
         </section>
       )}
@@ -96,8 +340,8 @@ export function Welcome() {
       <div className="welcome__actions rise" style={{ '--i': 4 } as React.CSSProperties}>
         <button
           className="btn btn--primary"
-          disabled={!stage}
-          onClick={() => finish({ stage, goals, about })}
+          disabled={!stage || !!recording || hearing}
+          onClick={() => finish({ stage, goals, interests, about })}
         >
           Готово <ArrowRight />
         </button>

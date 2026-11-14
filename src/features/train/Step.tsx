@@ -169,7 +169,7 @@ export function Step({ item, position, total, attempts }: Props) {
 
       {followup && attempts.length === 1 && (
         <section className="step__followup rise">
-          <p className="caption">Наставник уточняет</p>
+          <p className="caption">Черновик уточняет</p>
           <p className="step__followup-text">{followup}</p>
         </section>
       )}

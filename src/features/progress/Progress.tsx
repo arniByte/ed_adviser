@@ -28,6 +28,7 @@ export function Progress({ memory }: { memory: Memory }) {
   const about = [
     profile?.stage && STAGES[profile.stage],
     ...(profile?.goals ?? []).map((id) => getScenario(id)?.title),
+    ...(profile?.interests ?? []).slice(0, 4),
   ].filter(Boolean)
 
   const erase = () => {
@@ -41,7 +42,7 @@ export function Progress({ memory }: { memory: Memory }) {
         Размытая точка — зона, где ответы пока плавают. Тренируешься — она обретает резкость.
       </p>
       <p className="caption progress__about rise" style={{ '--i': 2 } as React.CSSProperties}>
-        {about.length > 0 ? `О тебе: ${about.join(' · ')}` : 'Наставник пока не знает о тебе'} ·{' '}
+        {about.length > 0 ? `О тебе: ${about.join(' · ')}` : 'Черновик пока не знает о тебе'} ·{' '}
         <a href="#/hello">{about.length > 0 ? 'изменить' : 'рассказать'}</a>
       </p>
 

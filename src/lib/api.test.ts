@@ -134,7 +134,7 @@ describe('поток ответа наставника', () => {
     vi.stubGlobal('fetch', fetch)
     for (let index = 0; index < 2; index++)
       await expect(askMentor(request, { onText: vi.fn() })).rejects.toThrow(
-        'Не получилось связаться с наставником.',
+        'Не получилось связаться с Черновиком.',
       )
   })
 })

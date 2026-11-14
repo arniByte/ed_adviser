@@ -2,6 +2,7 @@
  * Что пользователь рассказал о себе при знакомстве. Хранится только в его браузере
  * и уходит на сервер вместе с вопросом, чтобы наставник подстраивал примеры и тон.
  */
+import { INTEREST_CHARS, MAX_INTERESTS } from './interests.js'
 import { LIMITS } from './protocol.js'
 import { isScenarioId } from './knowledge.js'
 import type { ScenarioId } from './types.js'
@@ -20,7 +21,9 @@ export interface Profile {
   stage?: Stage
   /** Что впереди: сценарии, с которых начать. */
   goals?: ScenarioId[]
-  /** Пара слов о себе своими словами: город, интересы, что тревожит. */
+  /** Интересы из дерева на знакомстве и свои: примеры подбираются из них. */
+  interests?: string[]
+  /** Что ещё человек добавил о себе текстом или голосом: город, цели, что тревожит. */
   about?: string
 }
 
@@ -37,9 +40,22 @@ export function cleanProfile(value: unknown): Profile | undefined {
   const profile: Profile = {}
   if (typeof raw.stage === 'string' && raw.stage in STAGES) profile.stage = raw.stage as Stage
   if (Array.isArray(raw.goals)) profile.goals = raw.goals.filter(isScenarioId).slice(0, 3)
+  if (Array.isArray(raw.interests)) {
+    const interests = [
+      ...new Set(
+        raw.interests
+          .filter((item): item is string => typeof item === 'string')
+          .map((item) => item.trim().replace(/\s+/g, ' ').slice(0, INTEREST_CHARS))
+          .filter(Boolean),
+      ),
+    ].slice(0, MAX_INTERESTS)
+    if (interests.length) profile.interests = interests
+  }
   if (typeof raw.about === 'string' && raw.about.trim())
     profile.about = raw.about.trim().slice(0, LIMITS.aboutChars)
-  return profile.stage || profile.goals?.length || profile.about ? profile : undefined
+  return profile.stage || profile.goals?.length || profile.interests || profile.about
+    ? profile
+    : undefined
 }
 
 /** Профиль одной строкой для системного промпта. */
@@ -48,6 +64,7 @@ export function describeProfile(profile: Profile): string {
   if (profile.stage) parts.push(`сейчас: ${STAGES[profile.stage].toLowerCase()}`)
   if (profile.goals?.length)
     parts.push(`впереди: ${profile.goals.map((g) => GOAL_TEXT[g]).join(', ')}`)
+  if (profile.interests?.length) parts.push(`интересы: ${profile.interests.join(', ')}`)
   if (profile.about) parts.push(`о себе: «${profile.about}»`)
   return parts.join('; ')
 }

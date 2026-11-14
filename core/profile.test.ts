@@ -20,9 +20,33 @@ describe('профиль', () => {
     expect(cleanProfile('строка')).toBeUndefined()
   })
 
+  it('чистит интересы: без дублей, пустых и длинных, не больше двенадцати', () => {
+    const profile = cleanProfile({
+      interests: [
+        'Баскетбол',
+        ' баскетбол ',
+        'Баскетбол',
+        '',
+        7,
+        'a'.repeat(50),
+        ...'абвгдежзийклмн',
+      ],
+    })
+    expect(profile?.interests?.[0]).toBe('Баскетбол')
+    expect(profile?.interests?.[2]).toHaveLength(32)
+    expect(profile?.interests).toHaveLength(12)
+  })
+
   it('описывается одной строкой для промпта', () => {
-    expect(describeProfile({ stage: 'student', goals: ['job'], about: 'люблю данные' })).toBe(
-      'сейчас: студент; впереди: поиск первой работы; о себе: «люблю данные»',
+    expect(
+      describeProfile({
+        stage: 'student',
+        goals: ['job'],
+        interests: ['Баскетбол', 'Minecraft'],
+        about: 'люблю данные',
+      }),
+    ).toBe(
+      'сейчас: студент; впереди: поиск первой работы; интересы: Баскетбол, Minecraft; о себе: «люблю данные»',
     )
   })
 })

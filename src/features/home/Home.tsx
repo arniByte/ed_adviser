@@ -82,7 +82,7 @@ export function Home({ memory, onAsk }: Props) {
         <Disclaimer />
       </footer>
 
-      <Composer docked placeholder="Спроси наставника…" hints={ASK_HINTS} onSubmit={onAsk} />
+      <Composer docked placeholder="Спроси о чём угодно…" hints={ASK_HINTS} onSubmit={onAsk} />
     </main>
   )
 }

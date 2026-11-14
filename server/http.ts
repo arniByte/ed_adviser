@@ -29,5 +29,5 @@ export function errorResponse(error: unknown): Response {
   if (error instanceof UpstreamError && error.status === 429) {
     return json({ error: 'Наставник сейчас перегружен. Попробуй через минуту.' }, 503)
   }
-  return json({ error: 'Не получилось связаться с наставником. Попробуй ещё раз.' }, 502)
+  return json({ error: 'Не получилось связаться с Черновиком. Попробуй ещё раз.' }, 502)
 }

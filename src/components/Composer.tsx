@@ -153,43 +153,46 @@ export function Composer({
 
   return (
     <form className={`composer ${docked ? 'composer--docked' : ''}`} onSubmit={submit}>
-      <div className="composer__row">
+      <div className="composer__wrap">
+        {/* Кнопка разделов стоит отдельно от поля: её видно и легко нажать. */}
         <NavButton />
-        {hints && !text && (
-          <span className="composer__hint" aria-hidden="true">
-            Спроси <BlurCycle items={hints} hold={2200} />
-          </span>
-        )}
-        <textarea
-          ref={field}
-          className="composer__field"
-          rows={1}
-          value={text}
-          maxLength={LIMITS.messageChars}
-          placeholder={hints ? '' : placeholder}
-          aria-label={placeholder}
-          autoFocus={autoFocus && HAS_KEYBOARD}
-          onChange={(event) => setText(event.target.value)}
-          onKeyDown={onKeyDown}
-        />
-        {canRecord() && (
+        <div className="composer__row">
+          {hints && !text && (
+            <span className="composer__hint" aria-hidden="true">
+              Спроси <BlurCycle items={hints} hold={2200} />
+            </span>
+          )}
+          <textarea
+            ref={field}
+            className="composer__field"
+            rows={1}
+            value={text}
+            maxLength={LIMITS.messageChars}
+            placeholder={hints ? '' : placeholder}
+            aria-label={placeholder}
+            autoFocus={autoFocus && HAS_KEYBOARD}
+            onChange={(event) => setText(event.target.value)}
+            onKeyDown={onKeyDown}
+          />
+          {canRecord() && (
+            <button
+              type="button"
+              className="composer__button"
+              onClick={listen}
+              aria-label="Ответить голосом"
+            >
+              <Mic />
+            </button>
+          )}
           <button
-            type="button"
-            className="composer__button"
-            onClick={listen}
-            aria-label="Ответить голосом"
+            type="submit"
+            className="composer__button composer__button--send"
+            disabled={busy || !text.trim()}
+            aria-label="Отправить"
           >
-            <Mic />
+            <ArrowUp />
           </button>
-        )}
-        <button
-          type="submit"
-          className="composer__button composer__button--send"
-          disabled={busy || !text.trim()}
-          aria-label="Отправить"
-        >
-          <ArrowUp />
-        </button>
+        </div>
       </div>
       {problem && (
         <p className="composer__problem" role="alert">
