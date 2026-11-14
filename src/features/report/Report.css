@@ -169,6 +169,9 @@
 
   body::before,
   .topbar,
+  .nav-float,
+  .nav-backdrop,
+  .nav-menu,
   .report__tools,
   .doc__sources svg {
     display: none;

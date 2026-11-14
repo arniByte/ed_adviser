@@ -9,6 +9,7 @@ export type Route =
   | { view: 'progress' }
   | { view: 'library' }
   | { view: 'proofs' }
+  | { view: 'values' }
   | { view: 'report'; session: string }
   | { view: 'hello' }
 
@@ -19,6 +20,7 @@ function parse(hash: string): Route {
     view === 'progress' ||
     view === 'library' ||
     view === 'proofs' ||
+    view === 'values' ||
     view === 'hello'
   )
     return { view }

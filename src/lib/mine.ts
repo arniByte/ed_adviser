@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { isScenarioId } from '../../core/knowledge'
 import { buildTree, leafHash, type WebCheck } from '../../core/proof'
 import type { Card } from '../../core/types'
 import { createStore } from './store'
@@ -13,12 +14,28 @@ export interface Saved {
   check: WebCheck
 }
 
-const isSaved = (value: unknown): value is Saved => {
+export const isSaved = (value: unknown): value is Saved => {
   const item = value as Saved | null
+  const card = item?.card
+  const source = card?.source
   return (
-    typeof item?.card?.id === 'string' &&
-    item.card.id.startsWith('web-') &&
-    typeof item.check?.hash === 'string'
+    typeof card?.id === 'string' &&
+    /^web-[0-9a-f]{10}$/.test(card.id) &&
+    card.kind === 'web' &&
+    isScenarioId(card.scenario) &&
+    typeof card.zone === 'string' &&
+    typeof card.title === 'string' &&
+    typeof card.text === 'string' &&
+    typeof source?.title === 'string' &&
+    typeof source.publisher === 'string' &&
+    typeof source.url === 'string' &&
+    /^https?:\/\/\S+$/.test(source.url) &&
+    (source.quote === undefined || typeof source.quote === 'string') &&
+    (source.year === undefined || Number.isFinite(source.year)) &&
+    typeof item?.check?.hash === 'string' &&
+    /^[0-9a-f]{64}$/.test(item.check.hash) &&
+    typeof item.check.checkedAt === 'string' &&
+    Number.isFinite(Date.parse(item.check.checkedAt))
   )
 }
 
@@ -32,7 +49,7 @@ export const useMine = store.use
 export const isMine = (id: string) => store.get().some((item) => item.card.id === id)
 
 export function saveToMine(card: Card, check: WebCheck) {
-  if (isMine(card.id)) return
+  if (!isSaved({ card, check }) || isMine(card.id)) return
   store.set([{ card, check }, ...store.get()])
 }
 

@@ -77,10 +77,11 @@ export function Welcome() {
 
       {stage && goals.length > 0 && (
         <section className="welcome__step rise">
-          <h2 className="welcome__question">
+          <h2 className="welcome__question" id="welcome-about">
             Пара слов о себе <span className="caption">— по желанию</span>
           </h2>
           <textarea
+            aria-labelledby="welcome-about"
             className="welcome__about"
             rows={3}
             maxLength={LIMITS.aboutChars}

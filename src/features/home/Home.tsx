@@ -41,6 +41,7 @@ export function Home({ memory, onAsk }: Props) {
 
   return (
     <main className="page home">
+      <h1 className="visually-hidden">Черновик — тренажёр перед настоящим</h1>
       <div className="home__hero rise">
         <AuraMark size={184} />
       </div>

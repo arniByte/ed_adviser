@@ -25,23 +25,31 @@ const smoothstep = (a: number, b: number, x: number) => {
 const angleGap = (a: number, b: number) => Math.atan2(Math.sin(a - b), Math.cos(a - b))
 
 /**
- * Ореол: мягкое кольцо у края круга. В покое оно медленно дышит, по нему тихо
- * бегут переливы; когда наставник думает, по кольцу кругом идёт яркая дуга.
+ * Две волны обходят живой контур кольца, а рябь расходится от центра.
+ * На маленьком знаке контур шире, чтобы движение читалось без мелких деталей.
  */
-function halo(x: number, y: number, t: number, energy: number) {
-  const r = Math.hypot(x, y)
-  if (r > 1) return 0
-  const angle = Math.atan2(y, x)
-  const breath = 0.03 * Math.sin(t * 1.1)
-  const shimmer = 0.5 + 0.5 * Math.sin(angle * 3 - t * 0.7 + Math.sin(t * 0.4) * 1.5)
-  const ring = Math.exp(-(((r - 0.78 - breath) / 0.13) ** 2)) * (0.6 + 0.4 * shimmer)
+function halo(r: number, angle: number, t: number, energy: number, small: boolean) {
+  const breath = Math.sin(t * 1.05) * (small ? 0.065 : 0.045)
+  const contour =
+    0.76 + breath + Math.sin(angle * 3 - t * 0.75) * 0.04 + Math.cos(angle * 5 + t) * 0.02
+  const ring = Math.exp(-(((r - contour) / (small ? 0.18 : 0.12)) ** 2))
+  const orbit = Math.exp(-((angleGap(angle, t * 0.9) / 0.65) ** 2))
+  const returnWave = Math.exp(-((angleGap(angle, -t * 0.6 + Math.PI) / 0.9) ** 2))
+  const ripple = (0.5 + 0.5 * Math.cos(r * 14 - t * 2.2 + Math.sin(angle * 2 - t * 0.4))) ** 4
+  const rim = smoothstep(0.35, 0.6, r) * (1 - smoothstep(0.9, 1, r))
   const sweep =
     energy *
-    Math.exp(-((angleGap(angle, t * 3.2) / 0.7) ** 2)) *
+    Math.exp(-((angleGap(angle, t * 2.4) / 0.7) ** 2)) *
     Math.exp(-(((r - 0.8) / 0.2) ** 2))
   // Внутри круга — едва заметное зерно, чтобы лицо держалось на сетке, а не в пустоте.
   const ground = 0.05 * (1 - smoothstep(0.6, 0.95, r))
-  return Math.min(1, Math.max(ground, ring * (0.85 - 0.25 * energy) + sweep * 0.9))
+  return Math.min(
+    1,
+    Math.max(
+      ground,
+      ring * (0.24 + orbit * 0.68 + returnWave * 0.35) + ripple * rim * 0.24 + sweep * 0.65,
+    ),
+  )
 }
 
 /** Куда смотреть: на поле ввода, пока в нём печатают, иначе — на курсор. */
@@ -129,17 +137,18 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     const cell = canvas.width / cols
     const cellNorm = 2 / cols
     const withEyes = withFace && !small
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const fps = small ? 15 : 45
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const fps = small ? 24 : 30
 
     // Каждая точка догоняет свою цель с инерцией: формы перетекают, а не прыгают.
     const current = new Float32Array(cols * cols)
-    const points: { x: number; y: number; i: number }[] = []
+    const points: { x: number; y: number; r: number; angle: number; i: number }[] = []
     for (let row = 0; row < cols; row++) {
       for (let col = 0; col < cols; col++) {
         const x = ((col + 0.5) / cols) * 2 - 1
         const y = ((row + 0.5) / cols) * 2 - 1
-        if (x * x + y * y <= 1) points.push({ x, y, i: row * cols + col })
+        if (x * x + y * y <= 1)
+          points.push({ x, y, r: Math.hypot(x, y), angle: Math.atan2(y, x), i: row * cols + col })
       }
     }
 
@@ -196,12 +205,12 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       const t = (now - start) / 1000
       const target = moodRef.current === 'thinking' ? 1 : 0
       energy += (target - energy) * 0.06
-      if (withEyes) updateFace(now)
+      if (withEyes && !motion.matches) updateFace(now)
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = ink
 
       for (const point of points) {
-        let value = halo(point.x, point.y, t, energy)
+        let value = halo(point.r, point.angle, t, energy, small)
         if (withEyes) value = Math.max(value, eyes(point.x, point.y, face, cellNorm))
         const previous = current[point.i]
         const next = settle ? value : previous + (value - previous) * 0.38
@@ -230,7 +239,7 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     }
     const run = () => {
       cancelAnimationFrame(frame)
-      if (still) return draw(start + 1200, true)
+      if (motion.matches) return draw(start + 1200, true)
       if (visible && !document.hidden) frame = requestAnimationFrame(loop)
     }
     const observer = new IntersectionObserver(([entry]) => {
@@ -239,6 +248,7 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     })
     observer.observe(canvas)
     document.addEventListener('visibilitychange', run)
+    motion.addEventListener('change', run)
     draw(start, true)
     run()
 
@@ -246,6 +256,7 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       cancelAnimationFrame(frame)
       observer.disconnect()
       document.removeEventListener('visibilitychange', run)
+      motion.removeEventListener('change', run)
       if (withEyes && --listeners === 0) {
         window.removeEventListener('pointermove', onPointer)
         document.removeEventListener('input', onInput, true)

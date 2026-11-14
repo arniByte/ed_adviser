@@ -20,7 +20,7 @@ export function Aura({ className = '', fps = 24, ...options }: Props) {
     canvas.height = AURA_SIZE
     const context = canvas.getContext('2d')!
     const image = context.createImageData(AURA_SIZE, AURA_SIZE)
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const start = performance.now() - (optionsRef.current.seed ?? 0) * 7000
     let frame = 0
     let last = 0
@@ -38,7 +38,7 @@ export function Aura({ className = '', fps = 24, ...options }: Props) {
     }
     const run = () => {
       cancelAnimationFrame(frame)
-      if (still) return draw(start + 4000)
+      if (motion.matches) return draw(start + 4000)
       if (visible && !document.hidden) frame = requestAnimationFrame(loop)
     }
     const observer = new IntersectionObserver(([entry]) => {
@@ -47,12 +47,14 @@ export function Aura({ className = '', fps = 24, ...options }: Props) {
     })
     observer.observe(canvas)
     document.addEventListener('visibilitychange', run)
+    motion.addEventListener('change', run)
     draw(performance.now())
     run()
     return () => {
       cancelAnimationFrame(frame)
       observer.disconnect()
       document.removeEventListener('visibilitychange', run)
+      motion.removeEventListener('change', run)
     }
   }, [fps])
 

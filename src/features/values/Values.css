@@ -1,0 +1,145 @@
+.values__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9rem;
+  align-items: center;
+  column-gap: 1.5rem;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.values__hero > .caption {
+  grid-column: 1;
+  margin-bottom: 1.25rem;
+}
+
+.values__hero h1 {
+  grid-column: 1;
+  letter-spacing: -0.045em;
+}
+
+.values__orbit {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65),
+    0 18px 40px -24px rgba(120, 110, 210, 0.4);
+}
+
+.values__orbit .aura {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.12);
+}
+
+.values__orbit-core {
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow:
+    0 0 14px 3px rgba(255, 255, 255, 0.8),
+    inset 0 1px 12px rgba(135, 120, 200, 0.12);
+}
+
+.values__lead {
+  grid-column: 1 / -1;
+  max-width: 31rem;
+  margin-top: 1.25rem;
+}
+
+.values__principles {
+  border-top: 1px solid var(--line-strong);
+}
+
+.values__principle {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.values__number {
+  padding-top: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.values__title {
+  font-size: var(--text-read);
+  font-weight: 560;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.values__text {
+  margin-top: 0.5rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.values__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+  font-size: var(--text-small);
+  font-weight: 560;
+}
+
+.values__link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.values__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-top: 2rem;
+}
+
+.values__closing {
+  max-width: 15rem;
+  font-size: var(--text-read);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+@media (max-width: 35rem) {
+  .values__hero {
+    grid-template-columns: minmax(0, 1fr) 5.5rem;
+    align-items: start;
+    gap: 0 1rem;
+    padding-top: 0.5rem;
+  }
+
+  .values__hero > .caption {
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .values__orbit {
+    grid-row: 1;
+  }
+
+  .values__hero h1 {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+  }
+
+  .values__principle {
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+}

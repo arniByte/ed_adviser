@@ -5,6 +5,7 @@ import { KIND_LABEL, type Card } from '../../core/types'
 import { getMine, saveToMine, useMine, useMineRoot } from '../lib/mine'
 import { proveCard, type ProofResult } from '../lib/proofs'
 import { plural } from '../lib/plural'
+import { useModal } from '../lib/useModal'
 import { Check, Close, External } from './icons'
 import './ProofSheet.css'
 
@@ -41,7 +42,7 @@ export function ProofSheet({ card, check: given, onClose }: Props) {
   const [result, setResult] = useState<ProofResult | null>(null)
   const [failed, setFailed] = useState(false)
   const [shown, setShown] = useState(0)
-  const close = useRef<HTMLButtonElement>(null)
+  const dialog = useRef<HTMLElement>(null)
   const mine = useMine()
   const mineRoot = useMineRoot()
   const saved = mine.some((item) => item.card.id === card.id)
@@ -73,18 +74,7 @@ export function ProofSheet({ card, check: given, onClose }: Props) {
     return () => clearTimeout(timer)
   }, [result, shown])
 
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKey)
-    document.documentElement.classList.add('locked')
-    close.current?.focus({ preventScroll: true })
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.documentElement.classList.remove('locked')
-    }
-  }, [onClose])
+  useModal(dialog, true, onClose)
 
   const check = result?.check
   const fresh = !!result && result.verdict !== 'changed'
@@ -151,20 +141,17 @@ export function ProofSheet({ card, check: given, onClose }: Props) {
   return createPortal(
     <div className="sheet-backdrop" onClick={onClose}>
       <section
+        ref={dialog}
         className="sheet glass"
         role="dialog"
         aria-modal="true"
         aria-label={`Пруф карточки «${card.title}»`}
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
         <header className="sheet__head">
           <p className="caption">Пруф источника</p>
-          <button
-            ref={close}
-            className="btn btn--glass btn--icon"
-            onClick={onClose}
-            aria-label="Закрыть"
-          >
+          <button className="btn btn--glass btn--icon" onClick={onClose} aria-label="Закрыть">
             <Close />
           </button>
         </header>

@@ -188,6 +188,7 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
         </section>
       ) : (
         <div className="ask__thread">
+          <h1 className="visually-hidden">Разговор с наставником</h1>
           {exchanges.map((exchange, index) => (
             <div
               key={exchange.id}

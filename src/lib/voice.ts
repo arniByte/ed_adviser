@@ -18,60 +18,108 @@ export const canRecord = () =>
   !!navigator.mediaDevices?.getUserMedia &&
   typeof MediaRecorder !== 'undefined'
 
-export async function startRecording(): Promise<Recording> {
+export async function startRecording(signal?: AbortSignal): Promise<Recording> {
+  signal?.throwIfAborted()
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 },
   })
-  const context = new AudioContext()
-  // Safari создаёт контекст приостановленным, если между нажатием и созданием была пауза.
-  void context.resume()
-  const analyser = context.createAnalyser()
-  analyser.fftSize = 512
-  context.createMediaStreamSource(stream).connect(analyser)
-  const samples = new Float32Array(analyser.fftSize)
-
-  const recorder = new MediaRecorder(stream)
-  const chunks: Blob[] = []
-  recorder.ondataavailable = (event) => chunks.push(event.data)
-  recorder.start()
-
+  let context: AudioContext | undefined
+  let recorder: MediaRecorder | undefined
+  let released = false
   const release = () => {
+    if (released) return
+    released = true
     stream.getTracks().forEach((track) => track.stop())
-    void context.close()
+    if (context) void context.close().catch(() => {})
   }
 
-  return {
-    level() {
-      analyser.getFloatTimeDomainData(samples)
-      let sum = 0
-      for (const sample of samples) sum += sample * sample
-      // Обычная речь даёт среднеквадратичное около 0,05–0,2 — растягиваем на всю шкалу.
-      return Math.min(1, Math.sqrt(sum / samples.length) * 5)
-    },
-    stop: () =>
-      new Promise((resolve, reject) => {
-        recorder.onstop = async () => {
-          release()
+  try {
+    // Разрешение может прийти уже после ухода с экрана: микрофон сразу освобождается.
+    signal?.throwIfAborted()
+    context = new AudioContext()
+    // Safari создаёт контекст приостановленным, если между нажатием и созданием была пауза.
+    void context.resume().catch(() => {})
+    const analyser = context.createAnalyser()
+    analyser.fftSize = 512
+    context.createMediaStreamSource(stream).connect(analyser)
+    const samples = new Float32Array(analyser.fftSize)
+    const media = (recorder = new MediaRecorder(stream))
+    const chunks: Blob[] = []
+    let stopped: Promise<string> | undefined
+    let rejectStop: ((reason: unknown) => void) | undefined
+
+    const cleanup = () => {
+      signal?.removeEventListener('abort', cancel)
+      release()
+    }
+    const cancel = () => {
+      media.onstop = null
+      media.ondataavailable = null
+      media.onerror = null
+      try {
+        if (media.state !== 'inactive') media.stop()
+      } finally {
+        cleanup()
+        rejectStop?.(new DOMException('Запись отменена', 'AbortError'))
+      }
+    }
+    media.ondataavailable = (event) => chunks.push(event.data)
+    media.onerror = () => {
+      cleanup()
+      rejectStop?.(new Error('Запись прервалась. Попробуй ещё раз.'))
+    }
+    media.start()
+    signal?.addEventListener('abort', cancel, { once: true })
+
+    return {
+      level() {
+        if (released) return 0
+        analyser.getFloatTimeDomainData(samples)
+        let sum = 0
+        for (const sample of samples) sum += sample * sample
+        // Обычная речь даёт среднеквадратичное около 0,05–0,2 — растягиваем на всю шкалу.
+        return Math.min(1, Math.sqrt(sum / samples.length) * 5)
+      },
+      stop() {
+        if (stopped) return stopped
+        if (released || media.state === 'inactive')
+          return Promise.reject(new Error('Запись прервалась. Попробуй ещё раз.'))
+        stopped = new Promise((resolve, reject) => {
+          rejectStop = reject
+          media.onstop = async () => {
+            cleanup()
+            try {
+              resolve(await toWavBase64(new Blob(chunks, { type: media.mimeType })))
+            } catch (error) {
+              reject(error)
+            }
+          }
           try {
-            resolve(await toWavBase64(new Blob(chunks, { type: recorder.mimeType })))
+            media.stop()
           } catch (error) {
+            cleanup()
             reject(error)
           }
-        }
-        recorder.stop()
-      }),
-    cancel() {
-      recorder.onstop = null
-      if (recorder.state !== 'inactive') recorder.stop()
-      release()
-    },
+        })
+        return stopped
+      },
+      cancel,
+    }
+  } catch (error) {
+    if (recorder?.state === 'recording') recorder.stop()
+    release()
+    throw error
   }
 }
 
 async function toWavBase64(blob: Blob): Promise<string> {
   const decoder = new AudioContext()
-  const decoded = await decoder.decodeAudioData(await blob.arrayBuffer())
-  void decoder.close()
+  let decoded: AudioBuffer
+  try {
+    decoded = await decoder.decodeAudioData(await blob.arrayBuffer())
+  } finally {
+    void decoder.close().catch(() => {})
+  }
 
   const frames = Math.ceil(decoded.duration * SAMPLE_RATE)
   const offline = new OfflineAudioContext(1, frames, SAMPLE_RATE)

@@ -126,7 +126,7 @@
 }
 
 .feedback__error {
-  color: var(--warm-ink);
+  color: var(--danger-ink);
 }
 
 .block__label {

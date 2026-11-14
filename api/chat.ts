@@ -50,10 +50,13 @@ async function handle(request: Request): Promise<Response> {
       const prepared = plan ? prepareAsk(plan) : prepare(body)
       const chunks = streamChat(prepared)
       const pending = chunks.next()
+      // Сбой первого потока возможен раньше, чем маршрутизатор закончит отвечать.
+      void pending.catch(() => {})
       // Пока модель начинает отвечать, маленькая модель решает, нужен ли интернет.
-      const wanted = plan ? await needsWeb(plan.question).catch(() => false) : false
+      const wanted = plan
+        ? await needsWeb(plan.question, plan.previousQuestion).catch(() => false)
+        : false
       if (wanted && allowWebSearch(request)) {
-        pending.catch(() => {})
         void chunks.return(undefined).catch(() => {})
         web = true
       } else {

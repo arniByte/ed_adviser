@@ -116,12 +116,12 @@ export function Progress({ memory }: { memory: Memory }) {
 
       <footer className="progress__foot">
         <p className="disclaimer">
-          Прогресс и разборы хранятся только в этом браузере. На сервер уходит текст вопроса или
-          ответа — без имени, почты и других личных данных.
+          Прогресс и разборы хранятся в этом браузере. Текст вопроса или ответа и профиль передаются
+          модели. Не добавляй лишние личные сведения.
         </p>
         {hasData && (
           <button className="btn btn--glass btn--small" onClick={erase}>
-            Стереть мои данные
+            Стереть прогресс и разборы
           </button>
         )}
       </footer>

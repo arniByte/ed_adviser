@@ -1,4 +1,5 @@
 import type { Found } from './api'
+import { isSaved } from './mine'
 
 export interface Exchange {
   id: number
@@ -20,12 +21,47 @@ export type AskHandler = (question: string, options?: { web?: boolean }) => void
 const KEY = 'chernovik:chat:v1'
 const KEEP = 20
 
+function cleanChat(value: unknown): Exchange[] {
+  if (!Array.isArray(value)) return []
+  const ids = new Set<number>()
+  return value
+    .flatMap((item): Exchange[] => {
+      const exchange = item as Exchange | null
+      if (
+        exchange?.status !== 'done' ||
+        !Number.isSafeInteger(exchange.id) ||
+        exchange.id < 1 ||
+        ids.has(exchange.id) ||
+        typeof exchange.question !== 'string' ||
+        typeof exchange.raw !== 'string'
+      )
+        return []
+      ids.add(exchange.id)
+      const found = exchange.found
+      const validFound =
+        found &&
+        Array.isArray(found.cards) &&
+        found.checks &&
+        Number.isSafeInteger(found.looked) &&
+        found.looked >= 0 &&
+        found.cards.every((card) => isSaved({ card, check: found.checks[card?.id] }))
+      return [
+        {
+          id: exchange.id,
+          question: exchange.question,
+          raw: exchange.raw,
+          status: 'done',
+          ...(exchange.web === true ? { web: true } : {}),
+          ...(validFound ? { found } : {}),
+        },
+      ]
+    })
+    .slice(-KEEP)
+}
+
 export function loadChat(): Exchange[] {
   try {
-    const stored = JSON.parse(localStorage.getItem(KEY) ?? '[]') as Exchange[]
-    return Array.isArray(stored)
-      ? stored.filter((e) => e?.status === 'done' && typeof e.raw === 'string')
-      : []
+    return cleanChat(JSON.parse(localStorage.getItem(KEY) ?? '[]'))
   } catch {
     return []
   }
@@ -33,8 +69,7 @@ export function loadChat(): Exchange[] {
 
 export function saveChat(exchanges: Exchange[]) {
   try {
-    const done = exchanges.filter((e) => e.status === 'done').slice(-KEEP)
-    localStorage.setItem(KEY, JSON.stringify(done.map(({ progress: _, ...rest }) => rest)))
+    localStorage.setItem(KEY, JSON.stringify(cleanChat(exchanges)))
   } catch {
     // Приватный режим: разговор живёт до закрытия вкладки.
   }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 
 import { createPortal } from 'react-dom'
 import { LIMITS } from '../../core/protocol'
 import { transcribe } from '../lib/api'
+import { useModal } from '../lib/useModal'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../lib/voice'
 import { ArrowUp, Mic } from './icons'
 import { NavButton } from './Nav'
@@ -22,7 +23,14 @@ interface Props {
 const HAS_KEYBOARD = typeof matchMedia === 'function' && matchMedia('(pointer: fine)').matches
 
 type Voice =
-  { state: 'off' } | { state: 'on'; recording: Recording; seconds: number } | { state: 'reading' }
+  | { state: 'off' | 'requesting' | 'reading' }
+  | { state: 'on'; recording: Recording; seconds: number }
+
+interface VoiceSession {
+  controller: AbortController
+  recording?: Recording
+  finishing: boolean
+}
 
 export function Composer({
   placeholder,
@@ -35,6 +43,16 @@ export function Composer({
   const [voice, setVoice] = useState<Voice>({ state: 'off' })
   const [problem, setProblem] = useState('')
   const field = useRef<HTMLTextAreaElement>(null)
+  const dialog = useRef<HTMLDivElement>(null)
+  const session = useRef<VoiceSession | null>(null)
+
+  useEffect(
+    () => () => {
+      session.current?.controller.abort()
+      session.current = null
+    },
+    [],
+  )
 
   useEffect(() => {
     const element = field.current
@@ -67,32 +85,59 @@ export function Composer({
   }
 
   const listen = async () => {
+    if (session.current) return
+    const active: VoiceSession = {
+      controller: new AbortController(),
+      finishing: false,
+    }
+    session.current = active
     setProblem('')
+    setVoice({ state: 'requesting' })
     try {
-      setVoice({ state: 'on', recording: await startRecording(), seconds: 0 })
+      active.recording = await startRecording(active.controller.signal)
+      if (session.current === active)
+        setVoice({ state: 'on', recording: active.recording, seconds: 0 })
     } catch {
-      setProblem('Нет доступа к микрофону. Разреши его в настройках браузера или ответь текстом.')
+      if (session.current === active) {
+        session.current = null
+        setVoice({ state: 'off' })
+        setProblem('Нет доступа к микрофону. Разреши его в настройках браузера или ответь текстом.')
+      }
     }
   }
 
   const finish = async () => {
-    if (voice.state !== 'on') return
+    const active = session.current
+    if (!active?.recording || active.finishing) return
+    active.finishing = true
     setVoice({ state: 'reading' })
     try {
-      const spoken = await transcribe(await voice.recording.stop())
-      if (spoken) setText((current) => [current.trim(), spoken].filter(Boolean).join(' '))
+      const audio = await active.recording.stop()
+      active.controller.signal.throwIfAborted()
+      const spoken = await transcribe(audio, active.controller.signal)
+      if (session.current !== active) return
+      if (spoken)
+        setText((current) =>
+          [current.trim(), spoken].filter(Boolean).join(' ').slice(0, LIMITS.messageChars),
+        )
       else setProblem('Не расслышал. Попробуй ещё раз, чуть ближе к микрофону.')
     } catch (error) {
-      setProblem((error as Error).message)
+      if (session.current === active) setProblem((error as Error).message)
+    } finally {
+      if (session.current === active) {
+        session.current = null
+        setVoice({ state: 'off' })
+      }
     }
-    setVoice({ state: 'off' })
-    field.current?.focus()
   }
 
   const cancel = () => {
-    if (voice.state === 'on') voice.recording.cancel()
+    session.current?.controller.abort()
+    session.current = null
     setVoice({ state: 'off' })
   }
+
+  useModal(dialog, voice.state !== 'off', cancel)
 
   // Запись сама заканчивается на пределе длины, чтобы файл точно прошёл на сервер.
   const seconds = voice.state === 'on' ? voice.seconds : 0
@@ -145,30 +190,41 @@ export function Composer({
 
       {voice.state !== 'off' &&
         createPortal(
-          <div className="voice" role="dialog" aria-label="Запись голоса">
+          <div
+            ref={dialog}
+            className="voice"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Запись голоса"
+            tabIndex={-1}
+          >
             <Orb
               className="voice__orb"
               mood={voice.state === 'on' ? 'listening' : 'thinking'}
               level={voice.state === 'on' ? voice.recording.level : undefined}
             />
             <p className="voice__status" aria-live="polite">
-              {voice.state === 'on' ? 'Говори, я слушаю' : 'Расшифровываю…'}
+              {voice.state === 'on'
+                ? 'Говори, я слушаю'
+                : voice.state === 'requesting'
+                  ? 'Разреши доступ к микрофону'
+                  : 'Расшифровываю…'}
             </p>
             <p className="caption voice__time">
               {voice.state === 'on'
                 ? `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
                 : '\u00a0'}
             </p>
-            {voice.state === 'on' && (
-              <div className="voice__actions">
-                <button type="button" className="btn btn--glass" onClick={cancel}>
-                  Отмена
-                </button>
+            <div className="voice__actions">
+              <button type="button" className="btn btn--glass" onClick={cancel}>
+                Отмена
+              </button>
+              {voice.state === 'on' && (
                 <button type="button" className="btn btn--primary" onClick={finish}>
                   Готово
                 </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>,
           document.body,
         )}

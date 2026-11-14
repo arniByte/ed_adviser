@@ -32,8 +32,14 @@ interface Candidate {
   scenario?: string
 }
 
+const QUESTION_FOCUS = `Ориентируйся только на текущий вопрос. Предыдущий вопрос используй лишь для восстановления пропущенных деталей уточнения. Если текущий вопрос самодостаточен, игнорируй предыдущий и не ищи факты по прежней теме.`
+
+const questionText = (question: string, previousQuestion?: string) =>
+  `Текущий вопрос пользователя: «${question}»${previousQuestion ? `\nПредыдущий вопрос — только контекст уточнения: «${previousQuestion}»` : ''}`
+
 const PROMPT = `Ты помогаешь наставнику для абитуриентов, студентов и начинающих сотрудников в России.
 Найди в интернете свежие факты, которые нужны, чтобы ответить на вопрос пользователя. Предпочитай официальные сайты вузов, ведомств и работодателей, затем крупные СМИ.
+${QUESTION_FOCUS}
 
 Верни только JSON-массив до 4 объектов, без пояснений:
 [{"url": "...", "title": "...", "publisher": "...", "year": 2026, "quote": "...", "fact": "...", "scenario": "admission"}]
@@ -92,16 +98,17 @@ async function toCard(item: Candidate, fallback: ScenarioId): Promise<Card> {
 }
 
 const ROUTER = `Реши, нужен ли поиск в интернете, чтобы ответить на вопрос абитуриента или начинающего специалиста.
+${QUESTION_FOCUS}
 Нужен, если вопрос называет конкретный вуз, колледж, компанию, программу или город, или спрашивает сроки, баллы, цены и цифры текущего года.
 Не нужен, если вопрос общий: как готовиться, как себя вести, что писать, какие бывают ошибки.
 Ответь одним словом: yes или no.`
 
 /** Быстрое решение маленькой модели: идти ли за фактами в интернет. */
-export async function needsWeb(question: string): Promise<boolean> {
+export async function needsWeb(question: string, previousQuestion?: string): Promise<boolean> {
   const verdict = await complete({
     messages: [
       { role: 'system', content: ROUTER },
-      { role: 'user', content: question },
+      { role: 'user', content: questionText(question, previousQuestion) },
     ],
     // Меньше 16 токенов эта модель иногда отвечает пустой строкой.
     maxTokens: 16,
@@ -113,7 +120,7 @@ export async function needsWeb(question: string): Promise<boolean> {
 
 export async function findOnWeb(
   question: string,
-  context: { scenario?: ScenarioId; profile?: string },
+  context: { scenario?: ScenarioId; profile?: string; previousQuestion?: string },
   onProgress?: (status: string) => void,
 ): Promise<Found> {
   const text = await complete({
@@ -122,7 +129,7 @@ export async function findOnWeb(
       // Вопрос подаётся как материал для поиска: иначе модель отвечает на него сама, текстом.
       {
         role: 'user',
-        content: `Вопрос пользователя: «${question}»${context.profile ? `\nО пользователе: ${context.profile}` : ''}\n\nНайди факты для ответа и верни только JSON-массив, как описано.`,
+        content: `${questionText(question, context.previousQuestion)}${context.profile ? `\nО пользователе: ${context.profile}` : ''}\n\nНайди факты для ответа и верни только JSON-массив, как описано.`,
       },
     ],
     maxTokens: 1400,
