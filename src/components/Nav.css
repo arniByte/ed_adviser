@@ -24,6 +24,15 @@
   left: max(var(--gutter), env(safe-area-inset-left));
   bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 30;
+  transition:
+    transform 0.4s var(--ease),
+    opacity 0.3s;
+}
+
+.nav-float[data-hidden='true'] {
+  transform: translateY(150%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav-button--floating {

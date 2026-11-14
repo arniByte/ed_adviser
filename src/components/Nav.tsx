@@ -159,12 +159,25 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
 
 /** На экранах без поля ввода кнопка разделов висит в углу. */
 export function FloatingNav() {
+  const [hidden, setHidden] = useState(false)
   useEffect(() => {
     document.documentElement.classList.add('floating-nav')
-    return () => document.documentElement.classList.remove('floating-nav')
+    // Листаешь вниз — кнопка уходит и не ложится на текст, вверх — возвращается.
+    let last = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      if (Math.abs(y - last) < 8) return
+      setHidden(y > last && y > 80)
+      last = y
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      document.documentElement.classList.remove('floating-nav')
+      window.removeEventListener('scroll', onScroll)
+    }
   }, [])
   return (
-    <div className="nav-float">
+    <div className="nav-float" data-hidden={hidden}>
       <NavButton floating />
     </div>
   )
