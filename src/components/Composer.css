@@ -7,7 +7,7 @@
   bottom: 0;
   z-index: 10;
   margin: 0 calc(var(--gutter) * -1);
-  padding: 1.5rem var(--gutter) max(1rem, env(safe-area-inset-bottom));
+  padding: 1.5rem var(--gutter) max(0.625rem, env(safe-area-inset-bottom));
 }
 
 /*
@@ -57,8 +57,9 @@
   gap: 0.5rem;
 }
 
+/* Кнопка стоит по центру однострочного поля (высота поля — 3.6875rem) и остаётся внизу, когда поле растёт. */
 .composer__wrap > .nav-button {
-  margin-bottom: 0.1875rem;
+  margin-bottom: calc((3.6875rem - 3rem) / 2);
 }
 
 .composer__row {

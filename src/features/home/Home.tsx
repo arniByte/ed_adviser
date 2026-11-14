@@ -4,7 +4,6 @@ import { AuraMark } from '../../components/AuraMark'
 import { useMentor } from '../../lib/mentor'
 import { ASK_HINTS, BlurCycle } from '../../components/BlurCycle'
 import { Composer } from '../../components/Composer'
-import { Disclaimer } from '../../components/Disclaimer'
 import { ArrowRight } from '../../components/icons'
 import { useProfile } from '../../lib/profile'
 import { ScenarioDeck } from './ScenarioDeck'
@@ -77,10 +76,6 @@ export function Home({ memory, onAsk }: Props) {
       <div className="home__deck rise" style={{ '--i': 3 } as React.CSSProperties}>
         <ScenarioDeck first={profile?.goals?.[0]} />
       </div>
-
-      <footer className="home__footer">
-        <Disclaimer />
-      </footer>
 
       <Composer docked placeholder="Спроси о чём угодно…" hints={ASK_HINTS} onSubmit={onAsk} />
     </main>

@@ -22,6 +22,56 @@
   margin-top: 1.25rem;
 }
 
+/* Новый набор подсказок проявляется из размытия по очереди. */
+.ask__starter {
+  animation: ask-starter 0.55s var(--ease) backwards;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes ask-starter {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+.ask__shuffle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  font-size: var(--text-small);
+  font-weight: 560;
+  color: var(--ink-soft);
+  transition:
+    background-color var(--fast),
+    color var(--fast);
+}
+
+.ask__shuffle svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: transform 0.5s var(--ease-spring);
+}
+
+.ask__shuffle:hover {
+  background: var(--glass-strong);
+  color: var(--ink);
+}
+
+.ask__shuffle:hover svg {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ask__starter {
+    animation: none;
+  }
+}
+
 /* Подсказка-вопрос: в несколько строк, если не помещается. */
 .chip-question {
   min-height: 2.5rem;

@@ -6,6 +6,7 @@ import { useModal } from '../lib/useModal'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../lib/voice'
 import { ArrowUp, Mic } from './icons'
 import { BlurCycle } from './BlurCycle'
+import { AiNote } from './Disclaimer'
 import { NavButton } from './Nav'
 import { Orb } from './Orb'
 import './Composer.css'
@@ -199,6 +200,7 @@ export function Composer({
           {problem}
         </p>
       )}
+      {docked && <AiNote />}
 
       {voice.state !== 'off' &&
         createPortal(
