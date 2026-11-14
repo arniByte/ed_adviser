@@ -1,7 +1,7 @@
 const { chromium } = require('playwright')
 ;(async () => {
   const b = await chromium.launch()
-  const p = await b.newPage({ viewport: { width: 1280, height: 720 } })
+  const p = await (await b.newContext({ viewport: { width: 1280, height: 720 }, javaScriptEnabled: false })).newPage()
   await p.goto('file://' + process.argv[2])
   await p.evaluate(() => document.fonts.ready)
   await p.waitForTimeout(500)

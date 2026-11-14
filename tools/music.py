@@ -1,9 +1,9 @@
-"""Саундтрек ролика: 120 BPM, 74 секунды, всё синтезируется здесь же.
-Сцены меняются на сильных долях: 6, 10, 16, 30, 38, 48, 56, 60, 66 с."""
+"""Саундтрек ролика: 120 BPM, 81 секунда, всё синтезируется здесь же.
+Сцены меняются на долях: 6, 10, 17, 31, 39, 49, 56, 60, 67, 73 с."""
 import numpy as np, wave, sys
 
 SR = 44100
-DUR = 74.0
+DUR = 81.0
 N = int(SR * DUR)
 BEAT = 0.5
 rng = np.random.default_rng(7)
@@ -55,13 +55,13 @@ for bar in range(int(DUR // 4) + 1):
         for det in (-0.12, 0.0, 0.11):
             f = hz(m + 12) * 2 ** (det / 12)
             sig += 2 * ((tt * f + rng.random()) % 1) - 1
-    sig = fft_lowpass(sig, 900 if 3 <= bar <= 16 else 520)
+    sig = fft_lowpass(sig, 900 if 3 <= bar <= 17 else 520)
     sig *= env(len(tt), 0.9, 0.1, 1.0, 1.2)
     open_ = 0.55 if bar < 2 else 0.4
-    if bar >= 17: open_ = 0.5
+    if bar >= 18: open_ = 0.5
     add(sig / 14, at, open_, pan=-0.2 if bar % 2 else 0.2)
 
-def in_drums(t): return 6.0 <= t < 68.0 and not (28.0 <= t < 30.0)
+def in_drums(t): return 6.0 <= t < 75.0 and not (29.0 <= t < 31.0)
 
 # Бочка и сайдчейн
 duck = np.ones(N)
@@ -107,7 +107,7 @@ for k in range(int(DUR / BEAT)):
 pattern = [0, 2, 1, 3, 2, 1, 3, 0]
 for k in range(int(DUR / (BEAT / 2))):
     at = k * BEAT / 2
-    if not (16 <= at < 66) or (28 <= at < 30): continue
+    if not (17 <= at < 73) or (29 <= at < 31): continue
     ch = CHORDS[chord_at(at)]
     m = ch[pattern[k % 8] % len(ch)] + 24
     tt = t_(0.35)
@@ -156,15 +156,15 @@ def chime(at, gain=0.2):
 
 riser(3.0, 3.0)
 impact(6.0, 0.9)
-for at in (10, 16, 30, 38, 48, 56, 60, 66): whoosh(at, 0.8, 0.3)
-impact(16.0, 0.35); impact(38.0, 0.3); impact(66.0, 0.5)
+for at in (10, 17, 31, 39, 49, 56, 60, 67, 73): whoosh(at, 0.8, 0.3)
+impact(17.0, 0.35); impact(39.0, 0.3); impact(73.0, 0.5)
 # Слова хука появляются со щелчками
 for at in (0.5, 0.9, 1.8, 2.3, 3.4, 4.0): tick(at, 0.12, 1900)
 # Пруф: три галочки
-for at in (35.7, 36.0, 36.3): chime(at, 0.12)
+for at in (36.7, 37.0, 37.3): chime(at, 0.12)
 # Цифры
-for at in (40.0, 42.0, 44.6): tick(at, 0.22, 1700)
-for at in (60.5, 62.0, 63.5): tick(at, 0.3, 1500); chime(at + 0.02, 0.08)
+for at in (41.0, 43.0, 45.6): tick(at, 0.22, 1700)
+for at in (67.5, 69.0, 70.5): tick(at, 0.3, 1500); chime(at + 0.02, 0.08)
 
 # Сайдчейн на пэд и бас целиком (простое приближение) и ревер
 L *= duck; R *= duck

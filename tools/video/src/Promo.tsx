@@ -1,5 +1,4 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
-import { Values } from './Values'
 import {
   AbsoluteFill,
   Audio,
@@ -17,7 +16,7 @@ import {
 } from 'remotion'
 
 export const FPS = 30
-export const DURATION = 82
+export const DURATION = 81
 
 const PAPER = '#f3f3f0'
 const NIGHT = '#0c0c0f'
@@ -146,15 +145,16 @@ function Grain({ dark = false }: { dark?: boolean }) {
   )
 }
 
-/* Телефон в перспективе: рамка, стекло и живая запись экрана. */
-function Phone({
+/*
+ * Окно приложения: плоское и крупное, текст в нём читается с экрана. Въезжает
+ * сбоку из лёгкого поворота и размытия, затем стоит ровно и едва покачивается.
+ */
+function Window({
   clip,
   from = 0,
   rate = 1,
   x = 0,
   y = 0,
-  width = 396,
-  turn = [-26, -12],
   enter = 'right',
 }: {
   clip: string
@@ -162,50 +162,49 @@ function Phone({
   rate?: number
   x?: number
   y?: number
-  width?: number
-  turn?: [number, number]
   enter?: 'right' | 'left' | 'up'
 }) {
   const frame = useCurrentFrame()
-  const { fps, durationInFrames } = useVideoConfig()
-  const p = spring({ frame, fps, config: { damping: 18, mass: 1.1, stiffness: 70 } })
-  const drift = interpolate(frame, [0, durationInFrames], turn)
-  const float = Math.sin(frame / 38) * 10
-  const dx = enter === 'right' ? 900 : enter === 'left' ? -900 : 0
-  const dy = enter === 'up' ? 900 : 0
-  const height = width * (1688 / 780)
+  const { fps } = useVideoConfig()
+  const p = spring({ frame, fps, config: { damping: 22, mass: 1, stiffness: 80 } })
+  const float = Math.sin(frame / 45) * 5
+  const dx = enter === 'right' ? 260 : enter === 'left' ? -260 : 0
+  const dy = enter === 'up' ? 260 : 0
+  const width = 880
+  const height = Math.round(width * (446 / 480))
   return (
     <div
       style={{
         position: 'absolute',
         left: '50%',
         top: '50%',
-        width: width + 28,
-        marginLeft: -(width + 28) / 2 + x,
-        marginTop: -(height + 28) / 2 + y,
-        perspective: 2400,
+        width,
+        marginLeft: -width / 2 + x,
+        marginTop: -(height + 40) / 2 + y,
+        perspective: 2200,
       }}
     >
       <div
         style={{
-          padding: 14,
-          borderRadius: 78,
-          background: 'linear-gradient(145deg, #45454c, #0b0b0e 38%, #2a2a30 80%, #0b0b0e)',
-          boxShadow: '0 4px 8px rgba(0,0,0,0.18), 0 90px 120px -50px rgba(10,10,20,0.7)',
-          transform: `translate(${(1 - p) * dx}px, ${(1 - p) * dy + float}px) rotateY(${drift + (1 - p) * (enter === 'left' ? 50 : -50)}deg) rotateX(${6 + (1 - p) * 12}deg) rotateZ(${enter === 'left' ? 2 : -2}deg)`,
-          transformStyle: 'preserve-3d',
-          opacity: Math.min(1, p * 1.6),
+          borderRadius: 30,
+          overflow: 'hidden',
+          background: '#fff',
+          boxShadow: '0 0 0 1px rgba(18,18,20,0.07), 0 4px 10px rgba(18,18,20,0.06), 0 60px 110px -50px rgba(18,18,20,0.55)',
+          transform: `translate(${(1 - p) * dx}px, ${(1 - p) * dy + float}px) rotateY(${(1 - p) * (enter === 'left' ? 14 : -14)}deg) scale(${0.94 + 0.06 * p})`,
+          filter: `blur(${(1 - p) * 12}px)`,
+          opacity: Math.min(1, p * 1.5),
         }}
       >
-        <div style={{ position: 'relative', borderRadius: 64, overflow: 'hidden', width, height, background: PAPER }}>
-          <OffthreadVideo src={staticFile(`clips/${clip}.mp4`)} startFrom={s(from)} playbackRate={rate} muted style={{ width: '100%', height: '100%' }} />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: `linear-gradient(${115 + drift}deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.08) 100%)`,
-            }}
-          />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: 40, padding: '0 18px', background: 'rgba(250,250,248,0.97)', borderBottom: '1px solid rgba(18,18,20,0.06)' }}>
+          {[0, 1, 2].map((i) => (
+            <span key={i} style={{ width: 13, height: 13, borderRadius: 7, background: 'rgba(18,18,20,0.14)' }} />
+          ))}
+          <span style={{ flex: 1, marginRight: 60, textAlign: 'center', fontFamily: TEXT, fontSize: 16, color: 'rgba(18,18,20,0.45)' }}>
+            chernovik-hellowrld.vercel.app
+          </span>
+        </div>
+        <div style={{ width, height, background: PAPER }}>
+          <OffthreadVideo src={staticFile(`wclips/${clip}.mp4`)} startFrom={s(from)} playbackRate={rate} muted style={{ width: '100%', height: '100%' }} />
         </div>
       </div>
     </div>
@@ -226,7 +225,7 @@ function Scene({ dark = false, children }: { dark?: boolean; children: ReactNode
   )
 }
 
-const Left = ({ children, top = 330, width = 940 }: { children: ReactNode; top?: number; width?: number }) => (
+const Left = ({ children, top = 330, width = 720 }: { children: ReactNode; top?: number; width?: number }) => (
   <div style={{ position: 'absolute', left: 150, top, width, display: 'grid', gap: 26 }}>{children}</div>
 )
 
@@ -282,11 +281,11 @@ function Scenarios() {
       <Glow name="aura-pastel.png" size={1500} x={-560} y={240} opacity={0.55} />
       <Left top={300}>
         <Eyebrow>Три сценария</Eyebrow>
-        <Words text="Поступление." at={0.3} size={92} />
-        <Words text="Первая работа." at={0.7} size={92} />
-        <Words text="Первый месяц." at={1.1} size={92} />
+        <Words text="Поступление." at={0.3} size={70} />
+        <Words text="Первая работа." at={0.7} size={70} />
+        <Words text="Первый месяц." at={1.1} size={70} />
       </Left>
-      <Phone clip="home" from={0.6} rate={1.1} x={470} y={10} />
+      <Window clip="home" from={0.8} rate={1.6} x={420} />
     </Scene>
   )
 }
@@ -296,19 +295,19 @@ function Review() {
   return (
     <Scene>
       <Glow name="aura-thermal.png" size={1500} x={560} y={-200} opacity={0.42} spin={-6} />
-      <Phone clip="answer" from={1.2} rate={1.15} x={-430} y={20} turn={[22, 12]} enter="left" />
-      <div style={{ position: 'absolute', left: 1010, top: 330, width: 780, display: 'grid', gap: 26 }}>
+      <Window clip="answer" from={1.0} rate={1.12} x={-420} enter="left" />
+      <div style={{ position: 'absolute', left: 1080, top: 320, width: 700, display: 'grid', gap: 26 }}>
         <Sequence durationInFrames={s(5)} layout="none">
           <Eyebrow>Тренажёр</Eyebrow>
-          <Words text="Кейс с подвохом. Отвечай как вживую." at={0.3} out={4.6} size={84} />
+          <Words text="Кейс с подвохом. Отвечай как вживую." at={0.3} out={4.6} size={76} />
         </Sequence>
         <Sequence from={s(5)} durationInFrames={s(4.6)} layout="none">
           <Eyebrow>Разбор</Eyebrow>
-          <Words text="Первые слова — через 0,7 секунды." at={0.2} out={4.2} size={84} />
+          <Words text="Первые слова — через 0,7 секунды." at={0.2} out={4.2} size={76} />
         </Sequence>
         <Sequence from={s(9.6)} layout="none">
           <Eyebrow>Как у эксперта</Eyebrow>
-          <Words text="Что верно. Что улучшить. Как сказать лучше." at={0.2} size={84} />
+          <Words text="Что верно. Что улучшить. Как сказать лучше." at={0.2} size={76} />
         </Sequence>
       </div>
     </Scene>
@@ -322,7 +321,7 @@ function Check({ text, at }: { text: string; at: number }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 22, opacity: p, transform: `translateX(${(1 - p) * -40}px)`, filter: `blur(${(1 - p) * 10}px)` }}>
       <span style={{ display: 'grid', placeItems: 'center', width: 52, height: 52, borderRadius: 26, background: 'rgba(130,222,196,0.2)', color: '#82dec4', fontSize: 30, transform: `scale(${0.6 + 0.4 * p})` }}>✓</span>
-      <span style={{ fontFamily: TEXT, fontSize: 38, fontWeight: 500, color: '#f4f3ef', letterSpacing: '-0.015em' }}>{text}</span>
+      <span style={{ fontFamily: TEXT, fontSize: 34, fontWeight: 500, color: '#f4f3ef', letterSpacing: '-0.015em' }}>{text}</span>
     </div>
   )
 }
@@ -332,11 +331,11 @@ function Proofs() {
   return (
     <Scene dark>
       <Glow name="aura-mint.png" size={1600} x={-520} y={360} opacity={0.5} spin={10} />
-      <Phone clip="ask" from={0.6} rate={1.42} x={480} y={10} />
+      <Window clip="ask" from={0.6} rate={1.2} x={420} />
       <Left top={250}>
         <Eyebrow dark>Справка</Eyebrow>
-        <Words text="У каждого факта —" at={0.3} size={88} color="#f4f3ef" />
-        <Words text="пруф." at={0.8} size={88} color="#82dec4" />
+        <Words text="У каждого факта —" at={0.3} size={78} color="#f4f3ef" />
+        <Words text="пруф." at={0.8} size={78} color="#82dec4" />
         <div style={{ display: 'grid', gap: 18, marginTop: 40 }}>
           <Check text="Цитата найдена в источнике" at={5.7} />
           <Check text="Отпечаток SHA-256 сошёлся" at={6.0} />
@@ -354,15 +353,15 @@ function Web() {
       <Glow name="aura-thermal.png" size={1600} x={-520} y={300} opacity={0.5} spin={10} />
       <Left top={250}>
         <Eyebrow>Интернет с пруфами</Eyebrow>
-        <Words text="Нет в базе —" at={0.3} size={88} />
-        <Words text="найдёт и докажет." at={0.8} size={88} />
+        <Words text="Нет в базе —" at={0.3} size={78} />
+        <Words text="найдёт и докажет." at={0.8} size={78} />
         <div style={{ display: 'grid', gap: 18, marginTop: 40 }}>
           <Step text="Ищет в интернете" at={2.0} />
           <Step text="Сам открывает каждую страницу" at={4.0} />
           <Step text="Оставляет только найденные цитаты" at={6.6} />
         </div>
       </Left>
-      <Phone clip="web" from={1.0} rate={2.25} x={480} y={10} />
+      <Window clip="web" from={1.0} rate={1.8} x={420} />
     </Scene>
   )
 }
@@ -374,7 +373,7 @@ function Step({ text, at }: { text: string; at: number }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 22, opacity: p, transform: `translateX(${(1 - p) * -40}px)`, filter: `blur(${(1 - p) * 10}px)` }}>
       <span style={{ display: 'grid', placeItems: 'center', width: 52, height: 52, borderRadius: 26, background: INK, color: '#fff', fontSize: 28, transform: `scale(${0.6 + 0.4 * p})` }}>✓</span>
-      <span style={{ fontFamily: TEXT, fontSize: 38, fontWeight: 500, color: INK, letterSpacing: '-0.015em' }}>{text}</span>
+      <span style={{ fontFamily: TEXT, fontSize: 34, fontWeight: 500, color: INK, letterSpacing: '-0.015em' }}>{text}</span>
     </div>
   )
 }
@@ -384,11 +383,11 @@ function Memory() {
   return (
     <Scene>
       <Glow name="aura-pastel.png" size={1500} x={560} y={300} opacity={0.5} spin={-8} />
-      <Phone clip="memory" from={0.4} rate={1.4} x={-430} y={10} turn={[22, 12]} enter="left" />
-      <div style={{ position: 'absolute', left: 1010, top: 340, width: 790, display: 'grid', gap: 26 }}>
+      <Window clip="memory" from={0.6} rate={1.7} x={-420} enter="left" />
+      <div style={{ position: 'absolute', left: 1080, top: 340, width: 700, display: 'grid', gap: 26 }}>
         <Eyebrow>Адаптивность</Eyebrow>
-        <Words text="Помнит, где ты споткнулся," at={0.3} size={84} />
-        <Words text="и начинает с этого." at={1.0} size={84} color="rgba(18,18,20,0.5)" />
+        <Words text="Помнит, где ты споткнулся," at={0.3} size={64} />
+        <Words text="и начинает с этого." at={1.0} size={64} color="rgba(18,18,20,0.5)" />
       </div>
     </Scene>
   )
@@ -403,7 +402,7 @@ function Voice() {
         <Eyebrow>Голос</Eyebrow>
         <Words text="Отвечай вслух." at={0.2} size={104} />
       </Left>
-      <Phone clip="voice" from={3.0} rate={1.0} x={470} y={10} enter="up" />
+      <Window clip="voice" from={3.0} rate={1.0} x={420} enter="up" />
     </Scene>
   )
 }
@@ -420,7 +419,22 @@ function Stat({ value, label, at }: { value: string; label: string; at: number }
   )
 }
 
-/* 60–66 с: цифры */
+/* 60–67 с: ценности — новый экран приложения */
+function ValuesScene() {
+  return (
+    <Scene>
+      <Glow name="aura-pastel.png" size={1500} x={-560} y={260} opacity={0.55} spin={-10} />
+      <Left top={300}>
+        <Eyebrow>Ценности</Eyebrow>
+        <Words text="ИИ помогает." at={0.3} size={76} />
+        <Words text="Решение — твоё." at={0.8} size={76} color="rgba(18,18,20,0.5)" />
+      </Left>
+      <Window clip="values" from={0.6} rate={1.5} x={420} />
+    </Scene>
+  )
+}
+
+/* 67–73 с: цифры */
 function Numbers() {
   return (
     <Scene dark>
@@ -434,7 +448,7 @@ function Numbers() {
   )
 }
 
-/* 74–82 с: финал */
+/* 73–81 с: финал */
 function Outro() {
   const frame = useCurrentFrame()
   const { fps, durationInFrames } = useVideoConfig()
@@ -457,15 +471,15 @@ function Outro() {
 const SCENES: [number, number, () => ReactNode][] = [
   [0, 6, Hook],
   [6, 10, Title],
-  [10, 16, Scenarios],
-  [16, 30, Review],
-  [30, 38, Proofs],
-  [38, 48, Web],
-  [48, 56, Memory],
+  [10, 17, Scenarios],
+  [17, 31, Review],
+  [31, 39, Proofs],
+  [39, 49, Web],
+  [49, 56, Memory],
   [56, 60, Voice],
-  [60, 66, Numbers],
-  [66, 74, Values],
-  [74, 82, Outro],
+  [60, 67, ValuesScene],
+  [67, 73, Numbers],
+  [73, 81, Outro],
 ]
 
 export function Promo() {

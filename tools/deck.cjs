@@ -3,7 +3,7 @@ const { chromium } = require('playwright')
 ;(async () => {
   const [src, pdf, shots] = process.argv.slice(2)
   const browser = await chromium.launch()
-  const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
+  const page = await (await browser.newContext({ viewport: { width: 1280, height: 720 }, javaScriptEnabled: false })).newPage()
   await page.goto('file://' + src)
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(600)

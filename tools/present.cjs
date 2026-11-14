@@ -1,0 +1,11 @@
+const { chromium } = require('playwright')
+;(async () => {
+  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1600, height: 900 } })
+  const errors = []; p.on('pageerror', (e) => errors.push(e.message))
+  await p.goto('file:///home/user/ed_adviser/docs/presentation/index.html#4'); await p.evaluate(() => document.fonts.ready)
+  await p.waitForTimeout(250); await p.screenshot({ path: 'out/pr-mid.png' })
+  await p.waitForTimeout(1500); await p.screenshot({ path: 'out/pr-end.png' })
+  await p.keyboard.press('ArrowRight'); await p.waitForTimeout(1600)
+  console.log(await p.evaluate(() => location.hash), errors.join('\n') || 'no errors')
+  await b.close()
+})()

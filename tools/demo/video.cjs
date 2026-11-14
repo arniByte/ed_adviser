@@ -125,6 +125,10 @@ const SIZE = { width: 1280, height: 720 }
   await page.getByRole('link', { name: 'как это работает' }).click(); await pause(2400)
   await page.getByRole('button', { name: 'Проверить всю базу' }).click(); await pause(3600)
 
+  await caption('Ценности', 'ИИ помогает, решение — твоё')
+  await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Ценности' }).click(); await pause(2600)
+  await scrollTo('bottom', 6000); await pause(1500)
+
   await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Тренажёр' }).click(); await pause(3800)
   await cdp.send('Page.stopScreencast')
   const end = Date.now() / 1000
