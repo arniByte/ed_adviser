@@ -11,8 +11,8 @@ import { complete, MODELS } from './openrouter.js'
 import { containsQuote, fetchHtml } from './page-text.js'
 
 /** Сколько страниц читает поиск: больше — дороже и дольше, а пруфов не прибавляется. */
-const RESULTS = 4
-const MAX_CARDS = 3
+const RESULTS = 6
+const MAX_CARDS = 4
 const PAGE_TIMEOUT_MS = 7000
 
 export interface Found {
@@ -99,8 +99,9 @@ async function toCard(item: Candidate, fallback: ScenarioId): Promise<Card> {
 
 const ROUTER = `Реши, нужен ли поиск в интернете, чтобы ответить на вопрос абитуриента или начинающего специалиста.
 ${QUESTION_FOCUS}
-Нужен, если вопрос называет конкретный вуз, колледж, компанию, программу или город, или спрашивает сроки, баллы, цены и цифры текущего года.
-Не нужен, если вопрос общий: как готовиться, как себя вести, что писать, какие бывают ошибки.
+Нужен, если для ответа нужен любой конкретный факт: вуз, колледж, компания, программа, город, специальность, перечень, сроки, даты, баллы, цены, контакты, правила этого года. Уточнение к прошлому вопросу о конкретном месте тоже требует поиска.
+Не нужен, только если вопрос про навыки и поведение: как готовиться, как себя вести, что сказать, что писать в резюме, какие бывают ошибки.
+Сомневаешься — отвечай yes.
 Ответь одним словом: yes или no.`
 
 /** Быстрое решение маленькой модели: идти ли за фактами в интернет. */
@@ -118,53 +119,81 @@ export async function needsWeb(question: string, previousQuestion?: string): Pro
   return verdict.toLowerCase().startsWith('y')
 }
 
-export async function findOnWeb(
-  question: string,
-  context: { scenario?: ScenarioId; profile?: string; previousQuestion?: string },
-  onProgress?: (status: string) => void,
-): Promise<Found> {
+/** Один заход поиска: модель находит страницы и цитаты, сервер проверяет каждую. */
+async function searchOnce(
+  query: string,
+  pages: Map<string, Promise<string | null>>,
+): Promise<{ confirmed: Candidate[]; looked: number }> {
   const text = await complete({
     messages: [
       { role: 'system', content: PROMPT },
       // Вопрос подаётся как материал для поиска: иначе модель отвечает на него сама, текстом.
       {
         role: 'user',
-        content: `${questionText(question, context.previousQuestion)}${context.profile ? `\nО пользователе: ${context.profile}` : ''}\n\nНайди факты для ответа и верни только JSON-массив, как описано.`,
+        content: `${query}\n\nНайди факты для ответа и верни только JSON-массив, как описано.`,
       },
     ],
-    maxTokens: 1400,
+    maxTokens: 1800,
     temperature: 0.2,
     webResults: RESULTS,
   })
   const candidates = parseCandidates(text)
-  if (candidates.length > 0) onProgress?.(`Сверяю цитаты на страницах: ${candidates.length}`)
-
-  // Каждую страницу открываем один раз, даже если с неё несколько цитат.
-  const pages = new Map<string, Promise<string | null>>()
+  const open = (url: string) => fetchHtml(url, PAGE_TIMEOUT_MS)
+  // Каждую страницу открываем один раз; сетевой сбой — повод для одного повтора.
   const page = (url: string) => {
     if (!pages.has(url))
       pages.set(
         url,
-        fetchHtml(url, PAGE_TIMEOUT_MS).catch(() => null),
+        open(url).catch(() => open(url).catch(() => null)),
       )
     return pages.get(url)!
   }
-  const confirmed = await Promise.all(
+  const checked = await Promise.all(
     candidates.map(async (item) => {
       const body = await page(item.url)
       return body && containsQuote(body, item.quote) ? item : null
     }),
   )
+  return {
+    confirmed: checked.filter((item): item is Candidate => item !== null),
+    looked: candidates.length,
+  }
+}
+
+export async function findOnWeb(
+  question: string,
+  context: { scenario?: ScenarioId; profile?: string; previousQuestion?: string },
+  onProgress?: (status: string) => void,
+): Promise<Found> {
+  const about = context.profile ? `\nО пользователе: ${context.profile}` : ''
+  const pages = new Map<string, Promise<string | null>>()
+  let { confirmed, looked } = await searchOnce(
+    questionText(question, context.previousQuestion) + about,
+    pages,
+  )
+  if (looked > 0) onProgress?.(`Сверяю цитаты на страницах: ${looked}`)
+
+  // Ничего не подтвердилось — второй заход: шире, с опорой на официальные сайты.
+  if (confirmed.length === 0) {
+    onProgress?.('Ищу ещё, на официальных сайтах')
+    const retry = await searchOnce(
+      `${questionText(question, context.previousQuestion)}${about}
+Первый поиск не дал страниц с дословно подтверждаемыми фразами. Ищи шире: официальные сайты вузов, колледжей и ведомств, страницы приёмных комиссий, правила приёма, разделы «Абитуриентам» и «Сведения об образовательной организации». Цитату копируй только из основного текста страницы, не из меню.`,
+      pages,
+    )
+    confirmed = retry.confirmed
+    looked += retry.looked
+  }
 
   const checkedAt = new Date().toISOString()
   const cards: Card[] = []
   const checks: Record<string, WebCheck> = {}
   for (const item of confirmed) {
-    if (!item || cards.length >= MAX_CARDS) continue
+    if (cards.length >= MAX_CARDS) break
     const card = await toCard(item, context.scenario ?? 'admission')
     if (checks[card.id]) continue
     cards.push(card)
     checks[card.id] = { hash: await leafHash(card), checkedAt }
   }
-  return { cards, checks, looked: candidates.length }
+  return { cards, checks, looked }
 }
