@@ -100,7 +100,7 @@ const smoothScroll = (page, to, ms) => page.evaluate(async ([to, ms]) => {
   await clip('web', async (page) => {
     await page.goto('http://localhost:5173/#/ask')
     await page.waitForTimeout(900)
-    await page.locator('.composer__field').pressSequentially('хочу поступить в мпгу в ставрополе, что нужно сделать?', { delay: 30 })
+    await page.locator('.composer__field').pressSequentially('Когда начинается приём документов в МГУ на бакалавриат?', { delay: 30 })
     await page.locator('.composer__field').press('Enter')
     await page.waitForSelector('.exchange__after', { timeout: 90000 })
     await page.waitForTimeout(600)
@@ -108,18 +108,17 @@ const smoothScroll = (page, to, ms) => page.evaluate(async ([to, ms]) => {
     await page.waitForTimeout(400)
     await page.locator('button.cite').first().click()
     await page.waitForTimeout(2600)
-    await page.getByRole('button', { name: 'Сохранить в мою базу' }).click()
-    await page.waitForTimeout(1600)
+    await page.waitForTimeout(1200)
   })
 
   await clip('memory', async (page) => {
     await page.goto('http://localhost:5173/')
     await page.waitForTimeout(2600)
-    await page.locator('.tabs__tab', { hasText: 'Прогресс' }).click()
+    await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Прогресс' }).click()
     await page.waitForTimeout(2200)
     await smoothScroll(page, 360, 2200)
     await page.waitForTimeout(600)
-    await page.locator('.tabs__tab', { hasText: 'База' }).click()
+    await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'База' }).click()
     await page.waitForTimeout(2400)
   }, { state: true })
 

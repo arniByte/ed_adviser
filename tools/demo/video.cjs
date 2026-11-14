@@ -28,7 +28,7 @@ const SIZE = { width: 1280, height: 720 }
   await page.goto('http://localhost:5173/')
   await page.addStyleTag({ content: `
     html { font-size: 118%; }
-    #demo-caption { position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 200; height: 3.5rem; display: flex; align-items: center; gap: 10px; white-space: nowrap; font: 500 14px/1 'Inter Variable', system-ui, sans-serif; letter-spacing: -0.005em; color: rgba(17,17,19,.6); transition: opacity .4s; }
+    #demo-caption { pointer-events: none; position: fixed; bottom: 6.5rem; top: auto; left: 50%; transform: translateX(-50%); z-index: 200; height: 2.5rem; padding: 0 1rem; border-radius: 999px; background: rgba(255,255,255,.7); backdrop-filter: blur(12px); display: flex; align-items: center; gap: 10px; white-space: nowrap; font: 500 14px/1 'Inter Variable', system-ui, sans-serif; letter-spacing: -0.005em; color: rgba(17,17,19,.6); transition: opacity .4s; }
     #demo-caption b { color: #121214; font-weight: 600; }
     #demo-caption b:not(:last-child)::after { content: '—'; margin-left: 10px; font-weight: 400; color: rgba(18,18,20,.35); }` })
   await page.evaluate(() => { const el = document.createElement('div'); el.id = 'demo-caption'; document.body.append(el) })
@@ -53,7 +53,7 @@ const SIZE = { width: 1280, height: 720 }
   await page.evaluate(() => document.querySelector('.deck__track').scrollBy({ left: -300, behavior: 'smooth' })); await pause(1400)
 
   await caption('Справка', 'вопрос голосом')
-  await page.locator('.tabs__tab', { hasText: 'Справка' }).click(); await pause(2200)
+  await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Справка' }).click(); await pause(2200)
   await page.getByRole('button', { name: 'Ответить голосом' }).click(); await pause(5600)
   await page.getByRole('button', { name: 'Готово' }).click()
   await page.waitForFunction(() => document.querySelector('.composer__field')?.value.length > 10, null, { timeout: 30000 }); await pause(1500)
@@ -66,13 +66,13 @@ const SIZE = { width: 1280, height: 720 }
   await scrollTo('.sources', 1800); await page.locator('.sources__head').click(); await pause(2600)
 
   await caption('Интернет', 'нет в базе — найдёт и проверит цитаты')
-  await type('Хочу поступить в МПГУ в Ставрополе. Что для этого нужно сделать?')
+  await type('Найди в интернете, когда начинается приём документов в МГУ на бакалавриат')
   await page.waitForFunction(() => document.querySelectorAll('.exchange__after').length === 2, null, { timeout: 90000 }); await pause(1500)
   await scrollTo('.ask__anchor:nth-child(2)', 1600); await pause(3000)
   await caption('Пруф из интернета', 'сервер нашёл цитату на странице')
   await page.locator('.ask__anchor:nth-child(2) button.cite').first().click(); await pause(4200)
-  await caption('Моя база', 'сохраняем — наставник будет опираться дальше')
-  await page.getByRole('button', { name: 'Сохранить в мою базу' }).click().catch(() => log('no save button')); await pause(2200)
+  await caption('Память', 'подтверждённое запомнено в «Мою базу»')
+  await pause(1200)
   await page.keyboard.press('Escape'); await pause(800)
 
   await caption('Тренажёр', 'сценарий «Первая работа»')
@@ -121,11 +121,11 @@ const SIZE = { width: 1280, height: 720 }
   await page.locator('a.row[href^="#/report/"]').first().click(); await pause(3200); await scrollTo('.doc__case', 2600); await pause(2400); await scrollTo('.doc__sources', 4200); await pause(2600)
 
   await caption('Пруфы', 'проверка всей базы')
-  await page.locator('.tabs__tab', { hasText: 'База' }).click(); await pause(3200)
+  await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'База' }).click(); await pause(3200)
   await page.getByRole('link', { name: 'как это работает' }).click(); await pause(2400)
   await page.getByRole('button', { name: 'Проверить всю базу' }).click(); await pause(3600)
 
-  await caption('Черновик', 'сначала — начерно'); await page.locator('.tabs__tab', { hasText: 'Тренажёр' }).click(); await pause(3800)
+  await caption('Черновик', 'AI-тренажёр для абитуриента и стажёра'); await page.mouse.wheel(0, -200); await page.waitForTimeout(600); await page.locator('.nav-button').first().click(); await page.waitForTimeout(700); await page.getByRole('menuitem', { name: 'Тренажёр' }).click(); await pause(3800)
   await cdp.send('Page.stopScreencast')
   const end = Date.now() / 1000
   await context.close(); await browser.close()

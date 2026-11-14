@@ -1,0 +1,12 @@
+const { chromium } = require('playwright')
+;(async () => {
+  const b = await chromium.launch()
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, storageState: 'demo/state-web.json' })
+  const p = await c.newPage()
+  await p.goto('http://localhost:5173/#/library'); await p.waitForTimeout(1500)
+  await p.screenshot({ path: 'demo/hi/mybase.png' })
+  await p.evaluate(() => scrollTo(0, 700)); await p.waitForTimeout(400)
+  await p.locator('.entry .proof-badge').first().click(); await p.waitForTimeout(1600)
+  await p.screenshot({ path: 'demo/hi/sheet.png' })
+  await b.close(); console.log('ok')
+})()
