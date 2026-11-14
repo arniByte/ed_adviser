@@ -8,11 +8,11 @@ import './Nav.css'
 
 const SECTIONS = [
   { path: '/', title: 'Тренажёр', icon: 'train' },
-  { path: '/ask', title: 'Справка', icon: 'ask' },
+  { path: '/ask', title: 'Общение', icon: 'ask' },
   { path: '/chats', title: 'Чаты', icon: 'chats' },
   { path: '/progress', title: 'Прогресс', icon: 'progress' },
-  { path: '/library', title: 'База', icon: 'library' },
-  { path: '/mentor', title: 'Свой наставник', icon: 'mentor' },
+  { path: '/library', title: 'Знания', icon: 'library' },
+  { path: '/mentor', title: 'Кастом', icon: 'mentor' },
   { path: '/values', title: 'Ценности', icon: 'values' },
 ] as const
 
@@ -47,7 +47,7 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
         <circle cx="10" cy="10" r="2.5" />
       </>
     ),
-    // Облачко реплики: вопрос наставнику.
+    // Облачко реплики: общение.
     ask: <path d="M4 5.5h12v7.5H9l-3.5 3v-3H4z" />,
     // Две реплики друг за другом: история разговоров.
     chats: (
@@ -72,7 +72,7 @@ function Icon({ name }: { name: (typeof SECTIONS)[number]['icon'] }) {
         <path d="M6 4.5h8" />
       </>
     ),
-    // Ползунки: настройка наставника.
+    // Ползунки: кастом.
     mentor: (
       <>
         <path d="M4 6h12M4 14h12" />
@@ -129,7 +129,7 @@ function ChatsFlyout({
       <p className="nav-flyout__head caption">Недавние разговоры</p>
       {chats.length === 0 ? (
         <p className="nav-flyout__empty">
-          Пока пусто. Спроси наставника в справке — разговор появится здесь.
+          Пока пусто. Спроси что-нибудь в «Общении» — разговор появится здесь.
         </p>
       ) : (
         <ul className="nav-flyout__list">
@@ -303,7 +303,7 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
           }
         }}
       >
-        <Mark size={floating ? 30 : 26} eyes={false} />
+        <Mark size={floating ? 30 : 28} eyes={false} tint />
       </button>
       {open &&
         place &&

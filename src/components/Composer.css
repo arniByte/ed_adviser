@@ -51,8 +51,20 @@
   opacity: 0.8;
 }
 
+.composer__wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.composer__wrap > .nav-button {
+  margin-bottom: 0.1875rem;
+}
+
 .composer__row {
   position: relative;
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: flex-end;
   gap: 0.25rem;
@@ -80,7 +92,7 @@
   flex: 1;
   min-width: 0;
   max-height: 11rem;
-  padding: 0.625rem 0;
+  padding: 0.625rem 0 0.625rem 0.6875rem;
   border: 0;
   outline: 0;
   resize: none;
@@ -211,7 +223,7 @@
 /* Живая подсказка лежит на месте placeholder и не мешает вводу. */
 .composer__hint {
   position: absolute;
-  left: 3.6rem;
+  left: 1.1rem;
   right: 6.2rem;
   top: 50%;
   transform: translateY(-50%);

@@ -98,7 +98,7 @@ export function ProofSheet({ card, check: given, onClose }: Props) {
             title: saved ? 'Карточка в твоей базе' : 'Пока не в твоей базе',
             detail: saved
               ? `Корень твоей базы ${mineRoot ? shortHash(mineRoot) : '…'}`
-              : 'Сохрани — и наставник будет опираться на неё дальше',
+              : 'Сохрани — и Черновик будет опираться на неё дальше',
             state: saved ? 'ok' : 'wait',
           },
         ]

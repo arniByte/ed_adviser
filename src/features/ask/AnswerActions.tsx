@@ -30,9 +30,14 @@ export function AnswerActions({
 
   return (
     <div className="answer-actions">
-      <button type="button" className="answer-actions__button" onClick={copy}>
+      <button
+        type="button"
+        className="answer-actions__button"
+        onClick={copy}
+        aria-label={done ? 'Скопировано' : 'Скопировать ответ'}
+        title={done ? 'Скопировано' : 'Скопировать ответ'}
+      >
         {done ? <Check /> : <Copy />}
-        {done ? 'Скопировано' : 'Скопировать'}
       </button>
     </div>
   )

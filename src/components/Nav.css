@@ -1,28 +1,48 @@
 .nav-button {
+  position: relative;
   flex: none;
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.18));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.7));
   box-shadow:
     inset 0 1px 0 #fff,
     inset 0 -1px 1px rgba(60, 50, 85, 0.14),
-    0 2px 6px rgba(17, 17, 19, 0.06);
+    0 6px 18px -8px rgba(110, 90, 200, 0.45);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   transition:
     transform var(--fast) var(--ease),
-    background-color var(--fast),
     box-shadow var(--fast);
+}
+
+/* Пастельное кольцо медленно вращается: кнопку замечают, но она не кричит. */
+.nav-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 50%;
+  background: conic-gradient(#b9a7ff, #ffb3d6, #ffd2a8, #a8ecd2, #a9d1ff, #b9a7ff);
+  animation: nav-ring 8s linear infinite;
+}
+
+@keyframes nav-ring {
+  to {
+    rotate: 1turn;
+  }
 }
 
 .nav-button:hover,
 .nav-button[aria-expanded='true'] {
-  background-color: rgba(201, 184, 255, 0.35);
+  transform: scale(1.06);
   box-shadow:
     inset 0 1px 0 #fff,
     inset 0 -1px 1px rgba(60, 50, 85, 0.14),
-    0 0 0 3px rgba(201, 184, 255, 0.22);
+    0 0 0 4px rgba(201, 184, 255, 0.3),
+    0 10px 24px -8px rgba(110, 90, 200, 0.55);
 }
 
 .nav-button:active {
@@ -54,12 +74,12 @@
 .nav-button--floating {
   width: 3.5rem;
   height: 3.5rem;
-  background: var(--glass-strong);
 }
 
-.nav-button--floating:hover,
-.nav-button--floating[aria-expanded='true'] {
-  background: var(--glass-strong);
+@media (prefers-reduced-motion: reduce) {
+  .nav-button::before {
+    animation: none;
+  }
 }
 
 /* Меню растёт из кнопки: снизу вверх, с лёгкой пружиной. */

@@ -113,7 +113,8 @@ function Answer({
           <div className="rise">
             <Sources cards={cited} checks={exchange.found?.checks} onProof={showProof} />
           </div>
-          {exchange.found && (
+          {/* Сам ходил в интернет и ничего не нашёл — не шумим; попросил человек — отчитываемся. */}
+          {exchange.found && (exchange.found.cards.length > 0 || exchange.web) && (
             <p className="exchange__web caption rise">
               <Globe />
               <span>
@@ -193,7 +194,7 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
         </section>
       ) : (
         <div className="ask__thread">
-          <h1 className="visually-hidden">Разговор с наставником</h1>
+          <h1 className="visually-hidden">Общение с Черновиком</h1>
           {exchanges.map((exchange, index) => (
             <div
               key={exchange.id}
@@ -214,7 +215,7 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
       <Composer
         docked
         busy={busy}
-        placeholder="Спроси наставника…"
+        placeholder="Спроси о чём угодно…"
         hints={ASK_HINTS}
         onSubmit={onAsk}
       />

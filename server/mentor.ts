@@ -63,7 +63,9 @@ function mistakesByIds(ids: unknown): Mistake[] {
 function profileOf(body: { profile?: unknown }, topic?: ScenarioId): string | undefined {
   const profile = cleanProfile(body.profile)
   if (!profile) return undefined
-  if (topic && profile.goals?.length && !profile.goals.includes(topic)) return undefined
+  // Вопрос не из его целей: этап и цели не передаём, а интересы оставляем — из них берутся примеры.
+  if (topic && profile.goals?.length && !profile.goals.includes(topic))
+    return profile.interests?.length ? describeProfile({ interests: profile.interests }) : undefined
   return describeProfile(profile)
 }
 
@@ -154,7 +156,9 @@ export function planAsk(body: AskRequest): AskPlan {
     profile: profileOf(body, scenario ?? base[0]?.scenario),
     mentor: body.mentor,
     cards,
-    web: body.web === true || WEB_WORDS.test(question) || cards.length < 2,
+    // Сразу в интернет — только по явной просьбе. Остальное решает маршрутизатор:
+    // пустая база ещё не значит, что нужен поиск (бытовой вопрос, болтовня).
+    web: body.web === true || WEB_WORDS.test(question),
   }
 }
 

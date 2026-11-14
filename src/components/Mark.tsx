@@ -11,6 +11,10 @@ interface Props {
   eyes?: boolean
   className?: string
   label?: string
+  /** Пока человек говорит: громкость от 0 до 1. Знак слушает и дышит в такт голосу. */
+  listen?: () => number
+  /** Точки в пастельных цветах по кругу — так знак-кнопку видно на светлом фоне. */
+  tint?: boolean
 }
 
 /** Самый маленький знак — логотип: точек меньше, иначе они слипаются. */
@@ -124,7 +128,17 @@ function eyes(x: number, y: number, face: Face, cell: number) {
  * смотрят в поле, пока ты печатаешь, бегают, пока наставник думает, моргают
  * и улыбаются при наведении.
  */
-export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '', label }: Props) {
+export function Mark({
+  size,
+  mood = 'idle',
+  eyes: withFace = true,
+  className = '',
+  label,
+  listen,
+  tint = false,
+}: Props) {
+  const listenRef = useRef(listen)
+  listenRef.current = listen
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const moodRef = useRef<MarkMood>(mood)
   const hoverRef = useRef(false)
@@ -149,7 +163,15 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
     const margin = Math.round(inner * pad)
     canvas.width = inner + margin * 2
     canvas.height = inner + margin * 2
-    const ink = getComputedStyle(canvas).color
+    let ink: string | CanvasGradient = getComputedStyle(canvas).color
+    if (tint && 'createConicGradient' in context) {
+      const c = canvas.width / 2
+      const gradient = context.createConicGradient(-Math.PI / 2, c, c)
+      ;['#8b7cf6', '#ec6fae', '#f59e5b', '#3fbf95', '#5aa7f0', '#8b7cf6'].forEach((color, i, all) =>
+        gradient.addColorStop(i / (all.length - 1), color),
+      )
+      ink = gradient
+    }
     // Сетка частая: из неё должны собираться глаза.
     const cols = small ? 9 : Math.max(21, Math.round(size / 6)) | 1
     const cell = inner / cols
@@ -192,10 +214,14 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
 
     const updateFace = (now: number) => {
       const mood = hoverRef.current ? 'happy' : moodRef.current
-      face.happy = mood === 'happy'
+      face.happy = mood === 'happy' || !!listenRef.current
       let tx = 0
       let ty = 0
-      if (mood === 'thinking') {
+      if (listenRef.current) {
+        // Слушает: смотрит на собеседника и чуть кивает.
+        tx = Math.sin(now / 900) * 0.15
+        ty = 0.15 + Math.sin(now / 330) * 0.12
+      } else if (mood === 'thinking') {
         tx = Math.sin(now / 420) * 0.9
         ty = -0.4
       } else {
@@ -235,8 +261,14 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       previousNow = Math.max(previousNow, now)
       ease = (k: number) => 1 - (1 - k) ** (step * 30)
       const t = (now - start) / 1000
-      const target = moodRef.current === 'thinking' ? 1 : 0
-      energy += (target - energy) * ease(0.06)
+      const voice = listenRef.current?.()
+      const target =
+        voice !== undefined
+          ? Math.min(1, 0.25 + voice * 2.5)
+          : moodRef.current === 'thinking'
+            ? 1
+            : 0
+      energy += (target - energy) * ease(voice !== undefined ? 0.25 : 0.06)
       if (withEyes && !motion.matches) updateFace(now)
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = ink
@@ -334,7 +366,7 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
         document.removeEventListener('input', onInput, true)
       }
     }
-  }, [size, withFace])
+  }, [size, withFace, tint])
 
   const hover = (value: boolean) => () => {
     hoverRef.current = value

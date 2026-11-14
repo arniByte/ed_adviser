@@ -201,13 +201,19 @@ describe('planAsk: личная база и интернет', () => {
   })
 
   it('не передаёт профиль, если вопрос не из целей пользователя', () => {
-    const profile = { stage: 'student' as const, goals: ['job' as const], about: 'ищу стажировку' }
+    const profile = {
+      stage: 'student' as const,
+      goals: ['job' as const],
+      interests: ['Баскетбол'],
+      about: 'ищу стажировку',
+    }
     const offTopic = system({
       mode: 'ask',
       turns: [{ role: 'user', content: 'Когда подавать согласие на зачисление в вуз?' }],
       profile,
     })
     expect(offTopic).not.toContain('ищу стажировку')
+    expect(offTopic).toContain('интересы: Баскетбол')
     const onTopic = system({
       mode: 'ask',
       turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
@@ -224,7 +230,7 @@ describe('настройки наставника в промпте', () => {
       turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
       mentor: { name: 'Арни', tone: 0.9 },
     })
-    expect(text).toContain('Пользователь настроил наставника')
+    expect(text).toContain('Пользователь сам настроил')
     expect(text).toContain('«Арни»')
   })
 })

@@ -39,6 +39,6 @@ it('обрабатывает ранний сбой наставника, пок�
   const result = await response
   expect(result.status).toBe(502)
   await expect(result.json()).resolves.toEqual({
-    error: 'Не получилось связаться с наставником. Попробуй ещё раз.',
+    error: 'Не получилось связаться с Черновиком. Попробуй ещё раз.',
   })
 })

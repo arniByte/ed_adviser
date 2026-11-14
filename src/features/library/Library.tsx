@@ -37,7 +37,7 @@ export function Library() {
 
   return (
     <main className="page library">
-      <h1 className="display rise">База знаний</h1>
+      <h1 className="display rise">Знания</h1>
       <p className="lead library__lead rise" style={{ '--i': 1 } as React.CSSProperties}>
         {cards.length} {plural(cards.length, ['карточка', 'карточки', 'карточек'])} из {sourceCount}{' '}
         {sourceCount % 10 === 1 && sourceCount % 100 !== 11
