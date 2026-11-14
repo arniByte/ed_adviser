@@ -212,7 +212,7 @@
 .composer__hint {
   position: absolute;
   left: 3.6rem;
-  right: 7rem;
+  right: 6.2rem;
   top: 50%;
   transform: translateY(-50%);
   overflow: hidden;
@@ -221,4 +221,10 @@
   white-space: nowrap;
   color: var(--ink-faint);
   pointer-events: none;
+}
+
+@media (max-width: 30rem) {
+  .composer__hint {
+    font-size: var(--text-small);
+  }
 }
