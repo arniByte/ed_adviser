@@ -60,8 +60,9 @@ export type StreamEvent =
 
 export const LIMITS = {
   messageChars: 2000,
-  turns: 12,
-  bodyBytes: 64_000,
+  /** Восемь прошлых обменов и текущий вопрос: разговор помнится, а запрос остаётся лёгким. */
+  turns: 17,
+  bodyBytes: 120_000,
   mineCards: 24,
   aboutChars: 300,
   audioBytes: 3_500_000,

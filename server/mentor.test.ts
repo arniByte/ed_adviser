@@ -200,26 +200,21 @@ describe('planAsk: личная база и интернет', () => {
     expect(text).toContain('«Ставрополь»')
   })
 
-  it('не передаёт профиль, если вопрос не из целей пользователя', () => {
+  it('передаёт весь профиль при любом вопросе: Черновик помнит, что ему рассказали', () => {
     const profile = {
       stage: 'student' as const,
       goals: ['job' as const],
       interests: ['Баскетбол'],
       about: 'ищу стажировку',
     }
-    const offTopic = system({
+    const text = system({
       mode: 'ask',
       turns: [{ role: 'user', content: 'Когда подавать согласие на зачисление в вуз?' }],
       profile,
     })
-    expect(offTopic).not.toContain('ищу стажировку')
-    expect(offTopic).toContain('интересы: Баскетбол')
-    const onTopic = system({
-      mode: 'ask',
-      turns: [{ role: 'user', content: 'Что писать в резюме без опыта?' }],
-      profile,
-    })
-    expect(onTopic).toContain('ищу стажировку')
+    expect(text).toContain('ищу стажировку')
+    expect(text).toContain('интересы: Баскетбол')
+    expect(text).toContain('впереди: поиск первой работы')
   })
 })
 
