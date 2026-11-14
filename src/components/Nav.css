@@ -1,3 +1,10 @@
+@property --nav-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Кнопка разделов — белая таблетка с пастельным кольцом, которое медленно вращается. */
 .nav-button {
   position: relative;
   flex: none;
@@ -5,33 +12,32 @@
   place-items: center;
   width: 3rem;
   height: 3rem;
+  border: 2px solid transparent;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.7));
+  background:
+    linear-gradient(145deg, #fff, #f6f4fb) padding-box,
+    conic-gradient(
+        from var(--nav-angle),
+        #b9a7ff,
+        #ffb3d6,
+        #ffd2a8,
+        #a8ecd2,
+        #a9d1ff,
+        #b9a7ff
+      )
+      border-box;
   box-shadow:
     inset 0 1px 0 #fff,
-    inset 0 -1px 1px rgba(60, 50, 85, 0.14),
     0 6px 18px -8px rgba(110, 90, 200, 0.45);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  animation: nav-ring 8s linear infinite;
   transition:
     transform var(--fast) var(--ease),
     box-shadow var(--fast);
 }
 
-/* Пастельное кольцо медленно вращается: кнопку замечают, но она не кричит. */
-.nav-button::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  z-index: -1;
-  border-radius: 50%;
-  background: conic-gradient(#b9a7ff, #ffb3d6, #ffd2a8, #a8ecd2, #a9d1ff, #b9a7ff);
-  animation: nav-ring 8s linear infinite;
-}
-
 @keyframes nav-ring {
   to {
-    rotate: 1turn;
+    --nav-angle: 360deg;
   }
 }
 
@@ -77,8 +83,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-button::before {
+  .nav-button {
     animation: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .composer .nav-button {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 }
 
