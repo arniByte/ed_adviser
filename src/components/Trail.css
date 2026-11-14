@@ -1,0 +1,14 @@
+/* Слой следа лежит под контентом, но над бумагой: картинки видны только на пустом фоне. */
+.trail {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.trail img {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
