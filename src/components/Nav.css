@@ -155,7 +155,9 @@
   position: fixed;
   z-index: 81;
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   width: 19rem;
+  max-height: calc(100dvh - var(--fly-bottom) - 0.75rem);
   padding: 0.5rem;
   border-radius: 1.5rem;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(245, 243, 250, 0.93));
@@ -198,7 +200,7 @@
 }
 
 .nav-flyout__list {
-  max-height: min(19rem, calc(100dvh - 8rem));
+  max-height: 19rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   list-style: none;

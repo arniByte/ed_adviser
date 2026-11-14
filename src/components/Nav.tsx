@@ -118,7 +118,7 @@ function ChatsFlyout({
   return (
     <div
       className="nav-flyout glass"
-      style={{ left, bottom }}
+      style={{ left, bottom, '--fly-bottom': `${bottom}px` } as React.CSSProperties}
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
     >
@@ -173,11 +173,12 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
   const menuId = useId()
   const [flyout, setFlyout] = useState<number | null>(null)
   const closeTimer = useRef(0)
-  const canHover = () => window.matchMedia('(hover: hover) and (min-width: 40rem)').matches
+  const canHover = () => window.matchMedia('(hover: hover) and (min-width: 36rem)').matches
   const showFlyout = (row: HTMLElement) => {
+    // Панель стоит на одном уровне с низом меню и растёт вверх, сколько позволяет экран.
     if (!canHover()) return
     window.clearTimeout(closeTimer.current)
-    setFlyout(window.innerHeight - row.getBoundingClientRect().bottom - 6)
+    setFlyout(window.innerHeight - (menu.current ?? row).getBoundingClientRect().bottom)
   }
   const hideFlyout = () => {
     window.clearTimeout(closeTimer.current)
