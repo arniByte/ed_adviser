@@ -13,16 +13,35 @@ interface Props {
   label?: string
 }
 
-/** Самый маленький знак — логотип в шапке: точек меньше, иначе они слипаются. */
+/** Самый маленький знак — логотип: точек меньше, иначе они слипаются. */
 const SMALL = 72
 
-/** Высота волны в точке круга, от 0 до 1. Край круга мягко растворяется. */
-function wave(x: number, y: number, t: number, energy: number) {
+const smoothstep = (a: number, b: number, x: number) => {
+  const k = Math.min(1, Math.max(0, (x - a) / (b - a)))
+  return k * k * (3 - 2 * k)
+}
+
+/** Разность углов, приведённая к −π…π. */
+const angleGap = (a: number, b: number) => Math.atan2(Math.sin(a - b), Math.cos(a - b))
+
+/**
+ * Ореол: мягкое кольцо у края круга. В покое оно медленно дышит, по нему тихо
+ * бегут переливы; когда наставник думает, по кольцу кругом идёт яркая дуга.
+ */
+function halo(x: number, y: number, t: number, energy: number) {
   const r = Math.hypot(x, y)
+  if (r > 1) return 0
   const angle = Math.atan2(y, x)
-  const ripple = Math.sin(r * 8 - t * (1.4 + energy * 2.6) + 1.1 * Math.sin(angle * 2 + t * 0.35))
-  const fade = 1 - Math.max(0, (r - 0.72) / 0.28) ** 2
-  return Math.max(0, (0.5 + 0.5 * ripple) * fade)
+  const breath = 0.03 * Math.sin(t * 1.1)
+  const shimmer = 0.5 + 0.5 * Math.sin(angle * 3 - t * 0.7 + Math.sin(t * 0.4) * 1.5)
+  const ring = Math.exp(-(((r - 0.78 - breath) / 0.13) ** 2)) * (0.6 + 0.4 * shimmer)
+  const sweep =
+    energy *
+    Math.exp(-((angleGap(angle, t * 3.2) / 0.7) ** 2)) *
+    Math.exp(-(((r - 0.8) / 0.2) ** 2))
+  // Внутри круга — едва заметное зерно, чтобы лицо держалось на сетке, а не в пустоте.
+  const ground = 0.05 * (1 - smoothstep(0.6, 0.95, r))
+  return Math.min(1, Math.max(ground, ring * (0.85 - 0.25 * energy) + sweep * 0.9))
 }
 
 /** Куда смотреть: на поле ввода, пока в нём печатают, иначе — на курсор. */
@@ -46,11 +65,52 @@ function lookTarget(): { x: number; y: number } | null {
   return gaze.pointer ? gaze : null
 }
 
+interface Face {
+  /** Смещение взгляда, от −1 до 1. */
+  lookX: number
+  lookY: number
+  /** Насколько открыты глаза: 1 — открыты, 0 — закрыты. */
+  open: number
+  happy: boolean
+}
+
 /**
- * Знак — круг из точек, по которому бегут волны, и два глаза. Глаза следят за курсором,
- * смотрят в поле, пока ты печатаешь, бегают, пока наставник думает, и улыбаются при наведении.
+ * Глаза — не рисунок поверх, а форма, которую принимают те же точки сетки: внутри
+ * овала глаза точка вырастает до полной, в блике — гаснет. Двигаются глаза — точки
+ * перетекают за ними; моргают — овал сплющивается, и точки сжимаются.
  */
-export function Mark({ size, mood = 'idle', eyes = true, className = '', label }: Props) {
+function eyes(x: number, y: number, face: Face, cell: number) {
+  let value = 0
+  for (const side of [-1, 1]) {
+    const cx = side * 0.29 + face.lookX * 0.12
+    const cy = -0.04 + face.lookY * 0.09
+    const dx = x - cx
+    const dy = y - cy
+    if (face.happy) {
+      // Улыбка глазами: дуга, выгнутая вверх.
+      const arc = Math.abs(Math.hypot(dx, dy - 0.1) - 0.14)
+      const upper = dy - 0.1 < 0.01 ? 1 : 0
+      value = Math.max(value, upper * (1 - smoothstep(0.03, 0.07, arc)))
+      continue
+    }
+    const a = 0.14
+    const b = Math.max(0.035, 0.25 * face.open)
+    const d = (dx / a) ** 2 + (dy / b) ** 2
+    let eye = 1 - smoothstep(0.7, 1.15, d)
+    // Блик — одна погасшая точка у верхнего края.
+    const glint = Math.hypot(dx + 0.035 - face.lookX * 0.02, dy + b * 0.42)
+    if (face.open > 0.7 && glint < cell * 0.75) eye *= 0.05
+    value = Math.max(value, eye)
+  }
+  return value
+}
+
+/**
+ * Знак — круг из точек: ореол у края и лицо в середине. Глаза следят за курсором,
+ * смотрят в поле, пока ты печатаешь, бегают, пока наставник думает, моргают
+ * и улыбаются при наведении.
+ */
+export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '', label }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const moodRef = useRef<MarkMood>(mood)
   const hoverRef = useRef(false)
@@ -64,11 +124,24 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
     canvas.height = Math.round(size * ratio)
     const ink = getComputedStyle(canvas).color
     const small = size < SMALL
-    const cols = small ? 9 : Math.max(15, Math.round(size / 9))
-    const cell = (size * ratio) / cols
-    const withEyes = eyes && !small
+    // Сетка частая: из неё должны собираться глаза.
+    const cols = small ? 9 : Math.max(21, Math.round(size / 6)) | 1
+    const cell = canvas.width / cols
+    const cellNorm = 2 / cols
+    const withEyes = withFace && !small
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const fps = small ? 15 : 40
+    const fps = small ? 15 : 45
+
+    // Каждая точка догоняет свою цель с инерцией: формы перетекают, а не прыгают.
+    const current = new Float32Array(cols * cols)
+    const points: { x: number; y: number; i: number }[] = []
+    for (let row = 0; row < cols; row++) {
+      for (let col = 0; col < cols; col++) {
+        const x = ((col + 0.5) / cols) * 2 - 1
+        const y = ((row + 0.5) / cols) * 2 - 1
+        if (x * x + y * y <= 1) points.push({ x, y, i: row * cols + col })
+      }
+    }
 
     if (withEyes && listeners++ === 0) {
       window.addEventListener('pointermove', onPointer, { passive: true })
@@ -80,24 +153,18 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
     let frame = 0
     let last = 0
     const start = performance.now()
-    // Взгляд догоняет цель с инерцией, моргание — по своему таймеру.
-    const look = { x: 0, y: 0 }
+    const face: Face = { lookX: 0, lookY: 0, open: 1, happy: false }
     let nextBlink = start + 1800
     let blinkAt = -1
 
-    const R = canvas.width / 2
-    const eyeGap = R * 0.26
-    const eyeW = R * 0.1
-    const eyeH = R * 0.2
-    const eyeY = -R * 0.04
-
-    const drawEyes = (now: number) => {
-      const current = hoverRef.current ? 'happy' : moodRef.current
+    const updateFace = (now: number) => {
+      const mood = hoverRef.current ? 'happy' : moodRef.current
+      face.happy = mood === 'happy'
       let tx = 0
       let ty = 0
-      if (current === 'thinking') {
-        tx = Math.sin(now / 380) * 0.9
-        ty = -0.35
+      if (mood === 'thinking') {
+        tx = Math.sin(now / 420) * 0.9
+        ty = -0.4
       } else {
         const target = lookTarget()
         if (target) {
@@ -110,91 +177,49 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
           ty = (dy / distance) * reach
         }
       }
-      look.x += (tx - look.x) * 0.14
-      look.y += (ty - look.y) * 0.14
+      face.lookX += (tx - face.lookX) * 0.12
+      face.lookY += (ty - face.lookY) * 0.12
 
       if (now > nextBlink && blinkAt < 0) blinkAt = now
-      let open = 1
+      face.open = 1
       if (blinkAt >= 0) {
-        const k = (now - blinkAt) / 160
-        open = k < 1 ? Math.abs(1 - 2 * k) * 0.9 + 0.1 : 1
+        const k = (now - blinkAt) / 220
+        face.open = k < 1 ? Math.abs(1 - 2 * k) : 1
         if (k >= 1) {
           blinkAt = -1
-          nextBlink = now + 2600 + Math.random() * 3200
-        }
-      }
-
-      // Глаза собраны из точек вдвое мельче основных: тот же язык, что у всего знака.
-      context.globalAlpha = 1
-      context.fillStyle = ink
-      const step = cell / 2
-      const dot = step * 0.42
-      const ox = look.x * R * 0.1
-      const oy = look.y * R * 0.08
-      const put = (x: number, y: number) => {
-        context.beginPath()
-        context.arc(x, y, dot, 0, Math.PI * 2)
-        context.fill()
-      }
-      for (const side of [-1, 1]) {
-        const cx = R + side * eyeGap + ox
-        const cy = R + eyeY + oy
-        if (current === 'happy') {
-          // Улыбающиеся глаза — дуги из точек.
-          const radius = eyeW * 1.3
-          for (let a = Math.PI * 1.12; a <= Math.PI * 1.88; a += step / radius) {
-            put(cx + Math.cos(a) * radius, cy + eyeH * 0.3 + Math.sin(a) * radius)
-          }
-          continue
-        }
-        const w = eyeW * 1.2
-        const h = Math.max(step * 0.6, eyeH * 1.05 * open)
-        // К краю точки мельче: глаз читается круглым, а не квадратом из пикселей.
-        for (let y = -h; y <= h + 0.01; y += step) {
-          for (let x = -w; x <= w + 0.01; x += step) {
-            const edge = (x / w) ** 2 + (y / h) ** 2
-            if (edge > 1) continue
-            context.beginPath()
-            context.arc(cx + x, cy + y, dot * (1 - 0.45 * edge), 0, Math.PI * 2)
-            context.fill()
-          }
-        }
-        // Блик — светлая точка у верхнего края; при моргании прячется.
-        if (open > 0.6) {
-          context.fillStyle = 'rgba(255, 255, 255, 0.9)'
-          context.beginPath()
-          context.arc(cx - w * 0.3 + look.x * w * 0.2, cy - h * 0.42, dot * 1.15, 0, Math.PI * 2)
-          context.fill()
-          context.fillStyle = ink
+          nextBlink = now + 2600 + Math.random() * 3400
         }
       }
     }
 
-    const draw = (now: number) => {
+    const draw = (now: number, settle = false) => {
       const t = (now - start) / 1000
       const target = moodRef.current === 'thinking' ? 1 : 0
-      energy += (target - energy) * 0.08
+      energy += (target - energy) * 0.06
+      if (withEyes) updateFace(now)
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = ink
 
-      for (let row = 0; row < cols; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = ((col + 0.5) / cols) * 2 - 1
-          const y = ((row + 0.5) / cols) * 2 - 1
-          if (x * x + y * y > 1) continue
-          // Вокруг глаз — тихое поле, чтобы взгляд читался.
-          if (withEyes && ((Math.abs(x) - 0.26) / 0.2) ** 2 + ((y + 0.04) / 0.3) ** 2 < 1) continue
-          const value = wave(x, y, t, energy)
-          const radius = (0.12 + 0.88 * value) * cell * 0.44
-          if (radius < 0.4) continue
-          context.globalAlpha = 0.28 + 0.72 * value
-          context.beginPath()
-          context.arc((col + 0.5) * cell, (row + 0.5) * cell, radius, 0, Math.PI * 2)
-          context.fill()
-        }
+      for (const point of points) {
+        let value = halo(point.x, point.y, t, energy)
+        if (withEyes) value = Math.max(value, eyes(point.x, point.y, face, cellNorm))
+        const previous = current[point.i]
+        const next = settle ? value : previous + (value - previous) * 0.38
+        current[point.i] = next
+        const radius = cell * 0.47 * (0.08 + 0.92 * Math.sqrt(next))
+        if (radius < 0.35) continue
+        context.globalAlpha = 0.3 + 0.7 * next
+        context.beginPath()
+        context.arc(
+          (point.x + 1) * 0.5 * canvas.width,
+          (point.y + 1) * 0.5 * canvas.height,
+          radius,
+          0,
+          Math.PI * 2,
+        )
+        context.fill()
       }
-
-      if (withEyes) drawEyes(now)
+      context.globalAlpha = 1
     }
 
     const loop = (now: number) => {
@@ -205,7 +230,7 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
     }
     const run = () => {
       cancelAnimationFrame(frame)
-      if (still) return draw(start + 1200)
+      if (still) return draw(start + 1200, true)
       if (visible && !document.hidden) frame = requestAnimationFrame(loop)
     }
     const observer = new IntersectionObserver(([entry]) => {
@@ -214,7 +239,7 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
     })
     observer.observe(canvas)
     document.addEventListener('visibilitychange', run)
-    draw(start)
+    draw(start, true)
     run()
 
     return () => {
@@ -226,7 +251,7 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
         document.removeEventListener('input', onInput, true)
       }
     }
-  }, [size, eyes])
+  }, [size, withFace])
 
   const hover = (value: boolean) => () => {
     hoverRef.current = value
