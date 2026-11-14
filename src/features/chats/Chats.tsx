@@ -11,7 +11,17 @@ interface Props {
   onNew: () => void
 }
 
-function ChatCard({ chat, index, open }: { chat: Chat; index: number; open: boolean }) {
+function ChatCard({
+  chat,
+  index,
+  open,
+  onDelete,
+}: {
+  chat: Chat
+  index: number
+  open: boolean
+  onDelete: () => void
+}) {
   // Удаление в два касания: первое спрашивает, второе удаляет.
   const [asking, setAsking] = useState(false)
   useEffect(() => {
@@ -41,7 +51,7 @@ function ChatCard({ chat, index, open }: { chat: Chat; index: number; open: bool
         className="chat-card__delete"
         data-asking={asking}
         aria-label={asking ? 'Точно удалить разговор' : `Удалить разговор «${chat.title}»`}
-        onClick={() => (asking ? deleteChat(chat.id) : setAsking(true))}
+        onClick={() => (asking ? onDelete() : setAsking(true))}
       >
         {asking ? 'Удалить?' : <Close />}
       </button>
@@ -84,7 +94,17 @@ export function Chats({ current, onNew }: Props) {
       ) : (
         <ul className="chats__list">
           {chats.map((chat, index) => (
-            <ChatCard key={chat.id} chat={chat} index={index} open={chat.id === current} />
+            <ChatCard
+              key={chat.id}
+              chat={chat}
+              index={index}
+              open={chat.id === current}
+              onDelete={() => {
+                deleteChat(chat.id)
+                // Удалили открытый разговор — справка начинается с чистого листа.
+                if (chat.id === current) onNew()
+              }}
+            />
           ))}
         </ul>
       )}

@@ -98,8 +98,13 @@ export function App() {
       const patch = (change: Partial<Exchange>) => {
         current = { ...current, ...change }
         // Пока ждали ответ, человек мог открыть другой разговор: готовый ответ уходит в свой.
+        // Если в разговор вернулись, пока ответ ещё писался, ответ дописывается в конец.
         if (openChat.current === chat)
-          setExchanges((list) => list.map((e) => (e.id === id ? current : e)))
+          setExchanges((list) =>
+            list.some((e) => e.id === id)
+              ? list.map((e) => (e.id === id ? current : e))
+              : [...list, current],
+          )
         else if (current.status === 'done') appendToChat(chat, current)
       }
 
