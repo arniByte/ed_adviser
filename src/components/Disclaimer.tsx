@@ -7,3 +7,8 @@ export function Disclaimer() {
     </p>
   )
 }
+
+/** Короткая оговорка одной строкой — под полем ввода. */
+export function AiNote() {
+  return <p className="ai-note">Черновик — ИИ и может ошибаться. Важное сверяй с источником.</p>
+}

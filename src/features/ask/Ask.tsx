@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getCard } from '../../../core/knowledge'
 import { citedIds, parseSections } from '../../../core/protocol'
 import type { Card } from '../../../core/types'
@@ -6,8 +6,10 @@ import { Mark } from '../../components/Mark'
 import { AuraMark } from '../../components/AuraMark'
 import { useMentor } from '../../lib/mentor'
 import { ASK_HINTS } from '../../components/BlurCycle'
+import { Shuffle } from '../../components/icons'
+import { useProfile } from '../../lib/profile'
+import { pickStarters } from '../../lib/starters'
 import { Composer } from '../../components/Composer'
-import { Disclaimer } from '../../components/Disclaimer'
 import { useProofSheet } from '../../components/ProofSheet'
 import { RichText } from '../../components/RichText'
 import { Sources } from '../../components/Sources'
@@ -19,15 +21,6 @@ import { plural } from '../../lib/plural'
 import { useSmoothText } from '../../lib/useSmoothText'
 import { AnswerActions } from './AnswerActions'
 import './Ask.css'
-
-const STARTERS = [
-  'Как расставить приоритеты, если боюсь не пройти на мечту?',
-  'Что писать в резюме без опыта?',
-  'Меня спросят про слабые стороны. Что отвечать?',
-  'Как понять, что вакансия — развод?',
-  'Что спросить у руководителя в первый день?',
-  'Могут ли уволить на испытательном сроке?',
-]
 
 interface Props {
   exchanges: Exchange[]
@@ -158,6 +151,9 @@ function Answer({
 
 export function Ask({ exchanges, onAsk, onReset }: Props) {
   const mentor = useMentor()
+  const profile = useProfile()
+  const [starters, setStarters] = useState(() => pickStarters(profile))
+  const [round, setRound] = useState(0)
   const busy = exchanges.some((e) => e.status === 'waiting' || e.status === 'streaming')
   const latest = useRef<HTMLDivElement>(null)
   const count = exchanges.length
@@ -177,20 +173,30 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
             О чём спросить?
           </h1>
           <p className="caption rise" style={{ '--i': 2 } as React.CSSProperties}>
-            Отвечаю по базе и по интернету, у каждого факта есть пруф
+            О поступлении, работе или о чём угодно. У фактов будет пруф
           </p>
-          <div className="ask__starters">
-            {STARTERS.map((question, index) => (
+          <div key={round} className="ask__starters">
+            {starters.map((question, index) => (
               <button
                 key={question}
-                className="btn btn--glass btn--small chip-question rise"
-                style={{ '--i': 3 + index } as React.CSSProperties}
+                className="btn btn--glass btn--small chip-question ask__starter"
+                style={{ '--i': index } as React.CSSProperties}
                 onClick={() => onAsk(question)}
               >
                 {question}
               </button>
             ))}
           </div>
+          <button
+            type="button"
+            className="ask__shuffle"
+            onClick={() => {
+              setStarters((list) => pickStarters(profile, list))
+              setRound((n) => n + 1)
+            }}
+          >
+            <Shuffle /> Другие вопросы
+          </button>
         </section>
       ) : (
         <div className="ask__thread">
@@ -209,7 +215,6 @@ export function Ask({ exchanges, onAsk, onReset }: Props) {
               Новый разговор
             </button>
           )}
-          <Disclaimer />
         </div>
       )}
       <Composer

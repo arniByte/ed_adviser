@@ -312,6 +312,17 @@ html.locked {
   text-wrap: balance;
 }
 
+.ai-note {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .rows {
   border-top: 1px solid var(--line);
 }

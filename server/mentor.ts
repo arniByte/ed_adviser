@@ -55,18 +55,10 @@ function mistakesByIds(ids: unknown): Mistake[] {
   return Array.isArray(ids) ? ids.map((id) => getMistake(String(id))).filter(present) : []
 }
 
-/**
- * Профиль из запроса одной строкой, если пользователь что-то о себе рассказал.
- * Если тема вопроса не из его целей, профиль не передаём: иначе модель притягивает
- * его к ответу («раз ты ищешь стажировку…»), даже когда спрашивают о другом.
- */
-function profileOf(body: { profile?: unknown }, topic?: ScenarioId): string | undefined {
+/** Профиль из запроса одной строкой, если пользователь что-то о себе рассказал. */
+function profileOf(body: { profile?: unknown }): string | undefined {
   const profile = cleanProfile(body.profile)
-  if (!profile) return undefined
-  // Вопрос не из его целей: этап и цели не передаём, а интересы оставляем — из них берутся примеры.
-  if (topic && profile.goals?.length && !profile.goals.includes(topic))
-    return profile.interests?.length ? describeProfile({ interests: profile.interests }) : undefined
-  return describeProfile(profile)
+  return profile && describeProfile(profile)
 }
 
 const WEB_ID = /^web-[0-9a-f]{10}$/
@@ -152,8 +144,7 @@ export function planAsk(body: AskRequest): AskPlan {
     question,
     previousQuestion: questions.at(-2)?.content,
     scenario,
-    // Тема вопроса — сценарий самой близкой карточки базы.
-    profile: profileOf(body, scenario ?? base[0]?.scenario),
+    profile: profileOf(body),
     mentor: body.mentor,
     cards,
     // Сразу в интернет — только по явной просьбе. Остальное решает маршрутизатор:

@@ -105,7 +105,7 @@ describe('поток ответа наставника', () => {
       },
     }
     personal.cards = Array.from({ length: LIMITS.mineCards }, () => card)
-    const turns = Array.from({ length: 8 }, (_, index) => ({
+    const turns = Array.from({ length: 24 }, (_, index) => ({
       role: index % 2 ? ('assistant' as const) : ('user' as const),
       content: 'а'.repeat(index % 2 ? 6000 : LIMITS.messageChars),
     }))

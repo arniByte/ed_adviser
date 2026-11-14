@@ -110,10 +110,10 @@ export function App() {
 
       const turns: ChatTurn[] = exchanges
         .filter((e) => e.status === 'done')
-        .slice(-4)
+        .slice(-8)
         .flatMap((e) => [
           { role: 'user' as const, content: e.question },
-          { role: 'assistant' as const, content: parseSections(e.raw).lead },
+          { role: 'assistant' as const, content: parseSections(e.raw).lead.slice(0, 1500) },
         ])
       turns.push({ role: 'user', content: question })
 

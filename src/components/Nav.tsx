@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom'
 import { useChats } from '../lib/chat'
 import { chatCover, chatSize, chatWhen } from '../lib/chatLook'
 import { go, useRoute, type Route } from '../lib/route'
+import { useMentor } from '../lib/mentor'
+import { Aura } from './Aura'
 import { Mark } from './Mark'
 import './Nav.css'
 
@@ -169,6 +171,7 @@ function ChatsFlyout({
  */
 export function NavButton({ floating = false }: { floating?: boolean }) {
   const route = useRoute()
+  const mentor = useMentor()
   const active = sectionOf(route)
   const [open, setOpen] = useState(false)
   const [place, setPlace] = useState<{ left: number; bottom: number } | null>(null)
@@ -214,11 +217,13 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
   useLayoutEffect(() => {
     if (!open) return
     const box = button.current!.getBoundingClientRect()
+    // Плавающая кнопка стоит по центру — и меню раскрывается над ней по центру.
+    const anchor = floating ? box.left + box.width / 2 - 112 : box.left
     setPlace({
-      left: Math.max(12, Math.min(box.left, window.innerWidth - 236)),
+      left: Math.max(12, Math.min(anchor, window.innerWidth - 236)),
       bottom: window.innerHeight - box.top + 10,
     })
-  }, [open])
+  }, [open, floating])
 
   useLayoutEffect(() => {
     if (open && place)
@@ -303,7 +308,15 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
           }
         }}
       >
-        <Mark size={floating ? 30 : 28} eyes={false} tint />
+        <Aura
+          className="nav-button__aura"
+          palette={mentor.color}
+          round
+          bands={0}
+          seed={2}
+          fps={12}
+        />
+        <Mark size={floating ? 30 : 26} eyes={false} />
       </button>
       {open &&
         place &&
@@ -313,7 +326,7 @@ export function NavButton({ floating = false }: { floating?: boolean }) {
             <div
               id={menuId}
               ref={menu}
-              className="nav-menu glass"
+              className={`nav-menu glass ${floating ? 'nav-menu--center' : ''}`}
               role="menu"
               aria-label="Разделы"
               onKeyDown={move}

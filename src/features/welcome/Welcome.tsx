@@ -11,10 +11,10 @@ import { transcribe } from '../../lib/api'
 import { getProfile, saveProfile } from '../../lib/profile'
 import { go } from '../../lib/route'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../../lib/voice'
+import { InterestSphere, type SphereNode } from './InterestSphere'
 import './Welcome.css'
 
 const STAGE_IDS = Object.keys(STAGES) as Stage[]
-const KNOWN = new Set(INTERESTS.flatMap((group) => group.items))
 
 /** Чип, который парит: у каждого свой период, поэтому облако не качается строем. */
 function Chip({
@@ -47,13 +47,27 @@ function Chip({
 }
 
 /** Поле «своё»: появляется по клику, добавляет интерес по Enter. */
-function Own({ onAdd, label = 'Своё' }: { onAdd: (value: string) => void; label?: string }) {
-  const [open, setOpen] = useState(false)
+function Own({
+  onAdd,
+  label = 'Своё',
+  autoOpen = false,
+  onClose,
+}: {
+  onAdd: (value: string) => void
+  label?: string
+  autoOpen?: boolean
+  onClose?: () => void
+}) {
+  const [open, setOpen] = useState(autoOpen)
   const [value, setValue] = useState('')
-  const add = () => {
-    if (value.trim()) onAdd(value.trim())
+  const close = () => {
     setValue('')
     setOpen(false)
+    onClose?.()
+  }
+  const add = () => {
+    if (value.trim()) onAdd(value.trim())
+    close()
   }
   if (!open)
     return (
@@ -77,10 +91,7 @@ function Own({ onAdd, label = 'Своё' }: { onAdd: (value: string) => void; la
       onBlur={add}
       onKeyDown={(event) => {
         if (event.key === 'Enter') add()
-        if (event.key === 'Escape') {
-          setValue('')
-          setOpen(false)
-        }
+        if (event.key === 'Escape') close()
       }}
     />
   )
@@ -96,11 +107,8 @@ export function Welcome() {
   const [stage, setStage] = useState<Stage | undefined>(initial.stage)
   const [goals, setGoals] = useState<ScenarioId[]>(initial.goals ?? [])
   const [interests, setInterests] = useState<string[]>(initial.interests ?? [])
-  const [open, setOpen] = useState<string[]>(() =>
-    INTERESTS.filter((group) => group.items.some((item) => initial.interests?.includes(item))).map(
-      (group) => group.id,
-    ),
-  )
+  const [level, setLevel] = useState<string | null>(null)
+  const [ownOpen, setOwnOpen] = useState(false)
   const [about, setAbout] = useState(initial.about ?? '')
   const [recording, setRecording] = useState<Recording | null>(null)
   const [hearing, setHearing] = useState(false)
@@ -119,8 +127,6 @@ export function Welcome() {
 
   const toggleGoal = (id: ScenarioId) =>
     setGoals((list) => (list.includes(id) ? list.filter((g) => g !== id) : [...list, id]))
-  const toggleGroup = (id: string) =>
-    setOpen((list) => (list.includes(id) ? list.filter((g) => g !== id) : [...list, id]))
   const toggleInterest = (item: string) =>
     setInterests((list) =>
       list.includes(item)
@@ -170,7 +176,33 @@ export function Welcome() {
     go('/')
   }
 
-  const own = interests.filter((item) => !KNOWN.has(item))
+  const group = INTERESTS.find((g) => g.id === level)
+  const nodes: SphereNode[] = group
+    ? [
+        { id: 'back', label: '← Все темы', kind: 'back' },
+        ...group.items.map((item) => ({
+          id: item,
+          label: item,
+          kind: 'item' as const,
+          selected: interests.includes(item),
+        })),
+        { id: 'own', label: '+ Своё', kind: 'own' },
+      ]
+    : [
+        ...INTERESTS.map((g) => ({
+          id: g.id,
+          label: g.title,
+          kind: 'group' as const,
+          count: g.items.filter((item) => interests.includes(item)).length,
+        })),
+        { id: 'own', label: '+ Своё', kind: 'own' },
+      ]
+  const pick = (node: SphereNode) => {
+    if (node.kind === 'group') setLevel(node.id)
+    else if (node.kind === 'back') setLevel(null)
+    else if (node.kind === 'own') setOwnOpen(true)
+    else toggleInterest(node.id)
+  }
   const left = LIMITS.aboutChars - about.length
 
   return (
@@ -223,50 +255,13 @@ export function Welcome() {
         <section className="welcome__step welcome__step--in">
           <h2 className="welcome__question">Что тебе интересно?</h2>
           <p className="caption welcome__hint">
-            Нажми на тему — раскроются варианты. Из них Черновик будет брать примеры.
+            Покрути сферу и нажми на тему — раскроются варианты. Из них Черновик берёт примеры.
           </p>
-          <div className="welcome__chips">
-            {INTERESTS.map((group, index) => {
-              const chosen = group.items.filter((item) => interests.includes(item)).length
-              return (
-                <Chip
-                  key={group.id}
-                  index={index}
-                  className="welcome__chip--group"
-                  pressed={open.includes(group.id)}
-                  badge={chosen}
-                  onClick={() => toggleGroup(group.id)}
-                >
-                  {group.title}
-                </Chip>
-              )
-            })}
-            <Own onAdd={addOwn} />
-          </div>
-
-          {INTERESTS.filter((group) => open.includes(group.id)).map((group) => (
-            <div key={group.id} className="welcome__branch">
-              <p className="caption welcome__branch-title">{group.title}</p>
-              <div className="welcome__chips">
-                {group.items.map((item, index) => (
-                  <Chip
-                    key={item}
-                    index={index}
-                    className="welcome__chip--leaf"
-                    pressed={interests.includes(item)}
-                    onClick={() => toggleInterest(item)}
-                  >
-                    {item}
-                  </Chip>
-                ))}
-                <Own onAdd={addOwn} />
-              </div>
-            </div>
-          ))}
-
-          {own.length > 0 && (
+          <InterestSphere key={level ?? 'root'} nodes={nodes} onPick={pick} />
+          {ownOpen && <Own autoOpen onAdd={addOwn} onClose={() => setOwnOpen(false)} />}
+          {interests.length > 0 && (
             <div className="welcome__chips welcome__mine">
-              {own.map((item, index) => (
+              {interests.map((item, index) => (
                 <Chip
                   key={item}
                   index={index}
