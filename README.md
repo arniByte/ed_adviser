@@ -4,7 +4,7 @@ AI-тренажёр и собеседник для абитуриента и с�
 
 Кейс «Цифровое наставничество и AI-менторство», Софтлайн Решения. Категория Lead, этапы 1–4.
 
-[Открыть приложение](https://chernovik-hellowrld.vercel.app) · [Ролик, 1:21](docs/media/promo.mp4) · [Демо, 5 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
+[Открыть приложение](https://chernovik-hellowrld.vercel.app) · [Ролик, 1:21](docs/media/promo.mp4) · [Демо, 6,5 мин](docs/media/demo.mp4) · [Презентация](docs/presentation.pdf) · [Архитектура](docs/architecture.md) · [База знаний](docs/knowledge-base.md)
 
 Если сайт не открывается, включи VPN или прокси: хостинг Vercel доступен не во всех сетях.
 
