@@ -124,38 +124,48 @@ export function Mark({ size, mood = 'idle', eyes = true, className = '', label }
         }
       }
 
+      // Глаза собраны из точек вдвое мельче основных: тот же язык, что у всего знака.
       context.globalAlpha = 1
       context.fillStyle = ink
-      context.strokeStyle = ink
+      const step = cell / 2
+      const dot = step * 0.42
       const ox = look.x * R * 0.1
       const oy = look.y * R * 0.08
+      const put = (x: number, y: number) => {
+        context.beginPath()
+        context.arc(x, y, dot, 0, Math.PI * 2)
+        context.fill()
+      }
       for (const side of [-1, 1]) {
         const cx = R + side * eyeGap + ox
         const cy = R + eyeY + oy
-        context.beginPath()
         if (current === 'happy') {
-          // Улыбающиеся глаза — дуги вверх.
-          context.lineWidth = eyeW * 0.8
-          context.lineCap = 'round'
-          context.arc(cx, cy + eyeH * 0.25, eyeW * 1.15, Math.PI * 1.15, Math.PI * 1.85)
-          context.stroke()
-        } else {
-          context.ellipse(cx, cy, eyeW, eyeH * open, 0, 0, Math.PI * 2)
-          context.fill()
-          // Блик делает взгляд живым; при моргании прячется.
-          if (open > 0.6) {
-            context.fillStyle = 'rgba(255, 255, 255, 0.85)'
-            context.beginPath()
-            context.arc(
-              cx - eyeW * 0.3 + look.x * eyeW * 0.25,
-              cy - eyeH * 0.42,
-              eyeW * 0.32,
-              0,
-              Math.PI * 2,
-            )
-            context.fill()
-            context.fillStyle = ink
+          // Улыбающиеся глаза — дуги из точек.
+          const radius = eyeW * 1.3
+          for (let a = Math.PI * 1.12; a <= Math.PI * 1.88; a += step / radius) {
+            put(cx + Math.cos(a) * radius, cy + eyeH * 0.3 + Math.sin(a) * radius)
           }
+          continue
+        }
+        const w = eyeW * 1.2
+        const h = Math.max(step * 0.6, eyeH * 1.05 * open)
+        // К краю точки мельче: глаз читается круглым, а не квадратом из пикселей.
+        for (let y = -h; y <= h + 0.01; y += step) {
+          for (let x = -w; x <= w + 0.01; x += step) {
+            const edge = (x / w) ** 2 + (y / h) ** 2
+            if (edge > 1) continue
+            context.beginPath()
+            context.arc(cx + x, cy + y, dot * (1 - 0.45 * edge), 0, Math.PI * 2)
+            context.fill()
+          }
+        }
+        // Блик — светлая точка у верхнего края; при моргании прячется.
+        if (open > 0.6) {
+          context.fillStyle = 'rgba(255, 255, 255, 0.9)'
+          context.beginPath()
+          context.arc(cx - w * 0.3 + look.x * w * 0.2, cy - h * 0.42, dot * 1.15, 0, Math.PI * 2)
+          context.fill()
+          context.fillStyle = ink
         }
       }
     }

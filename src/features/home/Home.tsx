@@ -45,9 +45,6 @@ export function Home({ memory, onAsk }: Props) {
         <AuraMark size={184} />
       </div>
 
-      <h1 className="display home__title rise" style={{ '--i': 1 } as React.CSSProperties}>
-        Сначала — начерно
-      </h1>
       <p className="lead home__lead rise" style={{ '--i': 2 } as React.CSSProperties}>
         Отрепетируй поступление, собеседование и первый месяц на работе.
       </p>
@@ -68,13 +65,11 @@ export function Home({ memory, onAsk }: Props) {
         <ScenarioDeck first={profile?.goals?.[0]} />
       </div>
 
-      <div className="home__ask rise" style={{ '--i': 6 } as React.CSSProperties}>
-        <Composer placeholder="Спроси наставника что угодно…" onSubmit={onAsk} />
-      </div>
-
       <footer className="home__footer">
         <Disclaimer />
       </footer>
+
+      <Composer docked placeholder="Спроси наставника…" onSubmit={onAsk} />
     </main>
   )
 }

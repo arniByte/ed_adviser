@@ -104,3 +104,7 @@
 .thinking {
   animation: word-in 0.5s var(--ease) backwards;
 }
+
+.ask__reset {
+  justify-self: center;
+}

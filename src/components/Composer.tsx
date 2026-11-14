@@ -4,6 +4,7 @@ import { LIMITS } from '../../core/protocol'
 import { transcribe } from '../lib/api'
 import { canRecord, MAX_SECONDS, startRecording, type Recording } from '../lib/voice'
 import { ArrowUp, Mic } from './icons'
+import { NavButton } from './Nav'
 import { Orb } from './Orb'
 import './Composer.css'
 
@@ -104,6 +105,7 @@ export function Composer({
   return (
     <form className={`composer ${docked ? 'composer--docked' : ''}`} onSubmit={submit}>
       <div className="composer__row">
+        <NavButton />
         <textarea
           ref={field}
           className="composer__field"

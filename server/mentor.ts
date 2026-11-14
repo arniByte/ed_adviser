@@ -109,6 +109,9 @@ function matchMine(query: string, mine: Card[]): Card[] {
     .map((hit) => hit.card)
 }
 
+/** Пользователь сам просит искать в сети — тогда поиск идёт без раздумий. */
+const WEB_WORDS = /интернет|в сети|онлайн|гугл|поищи|загугли/i
+
 export interface AskPlan {
   history: ChatTurn[]
   question: string
@@ -137,7 +140,8 @@ export function planAsk(body: AskRequest): AskPlan {
     scenario,
     profile: profileOf(body),
     cards,
-    web: body.web === true || cards.length < 2,
+    web:
+      body.web === true || WEB_WORDS.test(history[history.length - 1].content) || cards.length < 2,
   }
 }
 

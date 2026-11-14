@@ -1,11 +1,13 @@
-import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { ChatTurn } from '../core/protocol'
 import { parseSections } from '../core/protocol'
-import { tabOf, TopBar } from './components/TopBar'
-import { Ask, type AskHandler, type Exchange } from './features/ask/Ask'
+import { FloatingNav, sectionOf } from './components/Nav'
+import { Ask } from './features/ask/Ask'
 import { Home } from './features/home/Home'
 import { Train } from './features/train/Train'
 import { askMentor } from './lib/api'
+import { loadChat, saveChat, type AskHandler, type Exchange } from './lib/chat'
+import { saveToMine } from './lib/mine'
 import { useMemory } from './lib/memory'
 import { useProfile } from './lib/profile'
 import { go, useRoute } from './lib/route'
@@ -29,11 +31,12 @@ export function App() {
   const profile = useProfile()
   // Пока не познакомились, главная начинается со знакомства.
   const greet = route.view === 'hello' || (route.view === 'home' && profile === null)
-  const [exchanges, setExchanges] = useState<Exchange[]>([])
-  const nextId = useRef(1)
+  const [exchanges, setExchanges] = useState<Exchange[]>(loadChat)
+  const nextId = useRef(Math.max(0, ...exchanges.map((e) => e.id)) + 1)
+  useEffect(() => saveChat(exchanges), [exchanges])
 
   // Страница въезжает с той стороны, где стоит её вкладка.
-  const tab = tabOf(route)
+  const tab = sectionOf(route)
   const lastTab = useRef(tab)
   useLayoutEffect(() => {
     const root = document.documentElement
@@ -66,7 +69,11 @@ export function App() {
           { mode: 'ask', turns, web },
           {
             onStatus: (progress) => patch({ progress }),
-            onFound: (found) => patch({ found }),
+            onFound: (found) => {
+              patch({ found })
+              // Подтверждённое наставник запоминает сам: оно пойдёт в следующие ответы.
+              for (const card of found.cards) saveToMine(card, found.checks[card.id])
+            },
             onText: (text) => patch({ raw: text, status: 'streaming' }),
           },
         )
@@ -80,9 +87,10 @@ export function App() {
 
   return (
     <>
-      <TopBar route={route} />
       {route.view === 'home' && !greet && <Home memory={memory} onAsk={ask} />}
-      {route.view === 'ask' && <Ask exchanges={exchanges} onAsk={ask} />}
+      {route.view === 'ask' && (
+        <Ask exchanges={exchanges} onAsk={ask} onReset={() => setExchanges([])} />
+      )}
       {route.view === 'train' && <Train key={route.scenario} scenario={route.scenario} />}
       <Suspense fallback={<main className="page" />}>
         {route.view === 'progress' && <Progress memory={memory} />}
@@ -90,6 +98,7 @@ export function App() {
         {route.view === 'proofs' && <Proofs />}
         {route.view === 'report' && <Report memory={memory} sessionId={route.session} />}
         {greet && <Welcome />}
+        {['progress', 'library', 'proofs', 'report'].includes(route.view) && <FloatingNav />}
       </Suspense>
     </>
   )
