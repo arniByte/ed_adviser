@@ -144,3 +144,15 @@
   width: 1.375rem;
   background: var(--ink);
 }
+
+.deck__track--dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .deck__track {
+    cursor: grab;
+  }
+}

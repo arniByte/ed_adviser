@@ -16,6 +16,9 @@ interface Props {
 /** Самый маленький знак — логотип: точек меньше, иначе они слипаются. */
 const SMALL = 72
 
+/** Поле вокруг живого знака, в долях его размера: туда разлетаются точки. */
+const PAD = 0.3
+
 const smoothstep = (a: number, b: number, x: number) => {
   const k = Math.min(1, Math.max(0, (x - a) / (b - a)))
   return k * k * (3 - 2 * k)
@@ -122,26 +125,43 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const moodRef = useRef<MarkMood>(mood)
   const hoverRef = useRef(false)
+  // Курсор над знаком (в долях радиуса) и последний клик — для разлёта точек.
+  const pokeRef = useRef<{ x: number; y: number; inside: boolean; burstAt: number }>({
+    x: 0,
+    y: 0,
+    inside: false,
+    burstAt: -1,
+  })
   moodRef.current = mood
 
   useEffect(() => {
     const canvas = canvasRef.current!
     const context = canvas.getContext('2d')!
     const ratio = Math.min(window.devicePixelRatio || 1, 2)
-    canvas.width = Math.round(size * ratio)
-    canvas.height = Math.round(size * ratio)
-    const ink = getComputedStyle(canvas).color
     const small = size < SMALL
+    const withEyes = withFace && !small
+    // У живого знака холст шире самого круга: разлетевшимся точкам есть куда лететь.
+    const pad = withEyes ? PAD : 0
+    const inner = Math.round(size * ratio)
+    const margin = Math.round(inner * pad)
+    canvas.width = inner + margin * 2
+    canvas.height = inner + margin * 2
+    const ink = getComputedStyle(canvas).color
     // Сетка частая: из неё должны собираться глаза.
     const cols = small ? 9 : Math.max(21, Math.round(size / 6)) | 1
-    const cell = canvas.width / cols
+    const cell = inner / cols
     const cellNorm = 2 / cols
-    const withEyes = withFace && !small
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const fps = small ? 24 : 30
 
     // Каждая точка догоняет свою цель с инерцией: формы перетекают, а не прыгают.
     const current = new Float32Array(cols * cols)
+    // Смещение и скорость каждой точки: пружина тянет её обратно на место сетки.
+    const offsetX = new Float32Array(cols * cols)
+    const offsetY = new Float32Array(cols * cols)
+    const speedX = new Float32Array(cols * cols)
+    const speedY = new Float32Array(cols * cols)
+    let lastBurst = -1
     const points: { x: number; y: number; r: number; angle: number; i: number }[] = []
     for (let row = 0; row < cols; row++) {
       for (let col = 0; col < cols; col++) {
@@ -209,6 +229,36 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = ink
 
+      const poke = pokeRef.current
+      const burst = withEyes && poke.burstAt !== lastBurst
+      lastBurst = poke.burstAt
+      const dt = 1 / fps
+      for (const point of points) {
+        if (!withEyes || settle) continue
+        const i = point.i
+        let fx = -140 * offsetX[i] - 13 * speedX[i]
+        let fy = -140 * offsetY[i] - 13 * speedY[i]
+        const dx = point.x + offsetX[i] - poke.x
+        const dy = point.y + offsetY[i] - poke.y
+        const distance = Math.hypot(dx, dy) || 0.001
+        // Курсор расталкивает ближние точки, как палец воду.
+        if (poke.inside && distance < 0.5) {
+          const push = 340 * (1 - distance / 0.5) ** 2
+          fx += (dx / distance) * push
+          fy += (dy / distance) * push
+        }
+        // Клик — взрыв: всем точкам толчок от места клика, ближним сильнее.
+        if (burst) {
+          const kick = 8 * Math.max(0.3, 1.3 - distance) * (0.7 + Math.random() * 0.6)
+          speedX[i] += (dx / distance) * kick + (Math.random() - 0.5) * 1.2
+          speedY[i] += (dy / distance) * kick + (Math.random() - 0.5) * 1.2
+        }
+        speedX[i] += fx * dt
+        speedY[i] += fy * dt
+        offsetX[i] += speedX[i] * dt
+        offsetY[i] += speedY[i] * dt
+      }
+
       for (const point of points) {
         let value = halo(point.r, point.angle, t, energy, small)
         if (withEyes) value = Math.max(value, eyes(point.x, point.y, face, cellNorm))
@@ -220,8 +270,8 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
         context.globalAlpha = 0.3 + 0.7 * next
         context.beginPath()
         context.arc(
-          (point.x + 1) * 0.5 * canvas.width,
-          (point.y + 1) * 0.5 * canvas.height,
+          margin + (point.x + offsetX[point.i] + 1) * 0.5 * inner,
+          margin + (point.y + offsetY[point.i] + 1) * 0.5 * inner,
           radius,
           0,
           Math.PI * 2,
@@ -266,18 +316,39 @@ export function Mark({ size, mood = 'idle', eyes: withFace = true, className = '
 
   const hover = (value: boolean) => () => {
     hoverRef.current = value
+    pokeRef.current.inside = value
   }
+  // Координаты курсора в долях радиуса круга (центр — 0, край — 1).
+  const locate = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    const box = event.currentTarget.getBoundingClientRect()
+    pokeRef.current.x = ((event.clientX - box.left) / box.width - 0.5) * 2 * (1 + 2 * PAD)
+    pokeRef.current.y = ((event.clientY - box.top) / box.height - 0.5) * 2 * (1 + 2 * PAD)
+  }
+  const live = withFace && size >= SMALL
 
   return (
     <canvas
       ref={canvasRef}
       className={`mark ${className}`}
-      style={{ width: size, height: size }}
+      style={
+        live
+          ? { width: size * (1 + 2 * PAD), height: size * (1 + 2 * PAD), margin: -size * PAD }
+          : { width: size, height: size }
+      }
       role={label ? 'img' : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
       onPointerEnter={hover(true)}
       onPointerLeave={hover(false)}
+      onPointerMove={live ? locate : undefined}
+      onPointerDown={
+        live
+          ? (event) => {
+              locate(event)
+              pokeRef.current.burstAt = performance.now()
+            }
+          : undefined
+      }
     />
   )
 }
